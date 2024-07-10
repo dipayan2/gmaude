@@ -9,7 +9,7 @@ In order to run Maude-NPA one needs to do the following steps. All of these step
 2. Open a terminal in the parent folder containing the downloaded files.
 3. Launch Maude with `./MaudeRuntime/maude.linux64`.
 4. Load the Maude-NPA file with `load maude-npa.maude`.
-5. Load one of the examples in folder **Maude-NPA_examples**.
+5. Load one of the examples in folder **Examples_Maude-NPA**.
 
 Everything in one line: `./MaudeRuntime/maude.linux64 maude-npa.maude EXAMPLE`, where `EXAMPLE` is the path to the example (*protocol.maude* file) you want to execute.
 
