@@ -1,0 +1,36 @@
+# started on Fri Jul  5 10:17:59 2024
+
+
+ Performance counter stats for './runscript.sh 100':
+
+         35,351.56 msec task-clock                       #    1.000 CPUs utilized             
+               415      context-switches                 #   11.739 /sec                      
+                 0      cpu-migrations                   #    0.000 /sec                      
+           708,310      page-faults                      #   20.036 K/sec                     
+   167,509,478,779      cpu_core/cycles/                 #    4.738 GHz                       
+     <not counted>      cpu_atom/cycles/                                                        (0.00%)
+   456,475,332,214      cpu_core/instructions/           #    2.73  insn per cycle            
+     <not counted>      cpu_atom/instructions/                                                  (0.00%)
+    91,889,698,482      cpu_core/branches/               #    2.599 G/sec                     
+     <not counted>      cpu_atom/branches/                                                      (0.00%)
+       719,937,156      cpu_core/branch-misses/          #    0.78% of all branches           
+     <not counted>      cpu_atom/branch-misses/                                                 (0.00%)
+             TopdownL1 (cpu_core)                 #      9.3 %  tma_backend_bound      
+                                                  #     11.6 %  tma_bad_speculation    
+                                                  #     36.6 %  tma_frontend_bound     
+                                                  #     42.5 %  tma_retiring           
+   129,941,262,886      L1-dcache-loads                  #    3.676 G/sec                     
+     <not counted>      L1-dcache-loads                                                         (0.00%)
+     4,834,604,922      L1-dcache-load-misses            #    3.72% of all L1-dcache accesses 
+   <not supported>      L1-dcache-load-misses                                                 
+       146,504,635      LLC-loads                        #    4.144 M/sec                     
+     <not counted>      LLC-loads                                                               (0.00%)
+         5,652,869      LLC-load-misses                  #    3.86% of all L1-icache accesses 
+     <not counted>      LLC-load-misses                                                         (0.00%)
+
+      35.359632605 seconds time elapsed
+
+      34.217189000 seconds user
+       1.137558000 seconds sys
+
+

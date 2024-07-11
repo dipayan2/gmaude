@@ -1,0 +1,32 @@
+# started on Fri Jul  5 11:07:49 2024
+
+
+ Performance counter stats for 'CPU(s) 1,2':
+
+         35,298.07 msec cpu-clock                        #    2.000 CPUs utilized             
+             2,022      context-switches                 #   57.284 /sec                      
+                 6      cpu-migrations                   #    0.170 /sec                      
+           354,445      page-faults                      #   10.041 K/sec                     
+    83,693,264,082      cpu_core/cycles/                 #    2.371 GHz                       
+   <not supported>      cpu_atom/cycles/                                                      
+   228,412,662,775      cpu_core/instructions/           #    2.73  insn per cycle            
+   <not supported>      cpu_atom/instructions/                                                
+    45,979,033,778      cpu_core/branches/               #    1.303 G/sec                     
+   <not supported>      cpu_atom/branches/                                                    
+       360,354,662      cpu_core/branch-misses/          #    0.78% of all branches           
+   <not supported>      cpu_atom/branch-misses/                                               
+             TopdownL1 (cpu_core)                 #      9.1 %  tma_backend_bound      
+                                                  #     11.5 %  tma_bad_speculation    
+                                                  #     36.7 %  tma_frontend_bound     
+                                                  #     42.7 %  tma_retiring           
+    65,021,434,410      L1-dcache-loads                  #    1.842 G/sec                     
+   <not supported>      L1-dcache-loads                                                       
+     2,418,745,733      L1-dcache-load-misses            #    3.72% of all L1-dcache accesses 
+   <not supported>      L1-dcache-load-misses                                                 
+        73,166,750      LLC-loads                        #    2.073 M/sec                     
+   <not supported>      LLC-loads                                                             
+         2,814,473      LLC-load-misses                  #    3.85% of all L1-icache accesses 
+   <not supported>      LLC-load-misses                                                       
+
+      17.649371972 seconds time elapsed
+
