@@ -1,3 +1,0 @@
-#define USE_YICES2 /**/
-testing Yices2
-PASS smtTest (exit status: 0)
