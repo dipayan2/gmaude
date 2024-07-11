@@ -52,6 +52,7 @@ SearchState::hasCondition(const PreEquation* preEqn)
   //
   //	First test most likely to fail so we do it first.
   //
+  printf("Has Conditions \n");
   return preEqn->hasCondition() && !(getFlags() & IGNORE_CONDITION);
 }
 
@@ -95,6 +96,7 @@ SearchState::~SearchState()
 bool
 SearchState::findFirstSolution(const PreEquation* preEqn, LhsAutomaton* automaton)
 {
+  printf("first Solution \n");
   delete matchingSubproblem;
   matchingSubproblem = 0;
   DagNode* subject = getDagNode();
@@ -127,6 +129,7 @@ SearchState::findFirstSolution(const PreEquation* preEqn, LhsAutomaton* automato
 bool
 SearchState::findNextSolution()
 {
+   printf("findNextSolution \n");
   if (hasCondition(preEquation))
     {
       return preEquation->checkCondition(false,

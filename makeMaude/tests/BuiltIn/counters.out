@@ -185,6 +185,7 @@ rewrites: 13
 result List: 0 0 1 1 2 2 3 3
 ==========================================
 search in COUNTER-TEST4 : f(4) =>* L:List .
+first Solution 
 
 No solution.
 states: 1  rewrites: 5
