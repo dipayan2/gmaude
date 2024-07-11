@@ -14,3 +14,10 @@ In order to run Maude-NPA one needs to do the following steps. All of these step
 Everything in one line: `./MaudeRuntime/maude.linux64 maude-npa.maude EXAMPLE`, where `EXAMPLE` is the path to the example (*protocol.maude* file) you want to execute.
 
 If you want Maude to close at the end you need to make sure that at the end of the example there is a `q`.
+
+#BuildOurOwn MAUDE
+1. Go to makeMAUDE
+2. Run these commands in order ` ./configure --with-yices2=yes --with-cvc4=no` , `make` , `make check`
+3. The runtime is in `src/Main` named **maude**
+4. Copy it to a new name `maude.mycopy` and then run `strip maude.mycopy`
+5. We can now look at some of the code flow and the file access
