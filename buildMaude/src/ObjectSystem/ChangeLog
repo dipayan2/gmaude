@@ -1,0 +1,2506 @@
+2024-05-10  Steven Eker  <eker@pup>
+
+	* streamManagerSymbol.cc (StreamManagerSymbol::nonblockingGetLine):
+	allow \n to be backslashed for continuation lines
+
+===================================Maude161===========================================
+
+2024-04-10  Steven Eker  <eker@pup>
+
+	* timeActions.cc (TimeManagerSymbol::getTimeSinceEpoch): use
+	double for tv_sec on platforms where long is less than 8 bytes
+
+2024-04-08  Steven Eker  <eker@pup>
+
+	* timeActions.cc (TimeManagerSymbol::getTimeSinceEpoch): put
+	timeValue.tv_sec into an Index variable so that the mpz_class
+	constructor is defined for 32-bit targets; this will cause a
+	problem for 32-bit platforms in 2038 if they are still supported
+
+===================================Maude160===========================================
+
+2024-01-22  Steven Eker  <eker@pup>
+
+	* directoryActions.cc (DirectoryManagerSymbol::getDirectoryEntry):
+	use lstat() rather than stat() to handle the DT_UNKNOWN case, just
+	in case we are looking at a symbolic link. The comment said that
+	we needed to call lstat() but actually we were calling stat().
+	Comment rewritten to make the issue clear
+
+===================================Maude156===========================================
+
+2023-11-02  Steven Eker  <eker@pup>
+
+	* configSymbol.cc (ConfigSymbol::ruleRewrite): enforce
+	portals for external rewriting
+
+2023-11-01  Steven Eker  <eker@pup>
+
+	* configSymbol.cc (ConfigSymbol::addPortals): fix bug where we
+	were using the same name for the data member and argument
+
+2023-10-26  Steven Eker  <eker@pup>
+
+	* configSymbol.cc (ConfigSymbol::addPortals): added
+	(ConfigSymbol::ruleRewrite): check for portal symbols
+
+	* configSymbol.hh (class ConfigSymbol): added decl for
+	addPortals(); added data member portalSymbols
+
+2023-05-19  Steven Eker  <eker@pup>
+
+	* prngManagerSymbol.hh (class PrngManagerSymbol): updated decls for
+	getSeed32(), getSeed64()
+
+	* prngActions.cc (PrngManagerSymbol::getSeed64): uint64_t ->
+	uint_fast64_t
+	(PrngManagerSymbol::getSeed32): uint32_t -> uint_fast32_t
+	(PrngManagerSymbol::setSeed): uint32_t -> uint_fast32_t,
+	uint64_t -> uint_fast64_t
+	(PrngManagerSymbol::getNext): uint64_t -> uint_fast64_t
+
+===================================Maude150===========================================
+
+2023-05-12  Steven Eker  <eker@pup>
+
+	* prngActions.cc (PrngManagerSymbol::getNext): use makeNatDag64()
+
+2023-05-11  Steven Eker  <eker@pup>
+
+	* prngActions.cc (PrngManagerSymbol::createPrng): return after
+	calling errorReply()
+	(PrngManagerSymbol::createPrng): rename algorithms to MT32 and MT64
+	(PrngManagerSymbol::errorReply): added DebugInfo()
+	(PrngManagerSymbol::createPrng): added DebugInfo()s
+
+2023-05-10  Steven Eker  <eker@pup>
+
+	* objectSystem.hh: added class PrngManagerSymbol
+
+	* prngActions.cc: created
+
+	* prngSignature.cc: added deletePrngMsg and deletedPrngMsg
+
+	* prngManagerSymbol.cc: created
+
+2023-05-09  Steven Eker  <eker@pup>
+
+	* prngSignature.cc: created
+
+	* prngManagerSymbol.hh: created
+
+===================================Maude149===========================================
+
+2023-03-29  Steven Eker  <eker@pup>
+
+	* objectSystemRewritingContext.hh (class ObjectSystemRewritingContext):
+	use DagNode::LessThan for ObjectMap and MessageMap
+	(class ObjectSystemRewritingContext): deleted struct dagNodeLt
+
+2023-03-27  Steven Eker  <eker@pup>
+
+	* directoryOutcomes.cc (DirectoryManagerSymbol::openedDirectoryReply):
+	don't use preallocate ctor
+
+	* timeActions.cc (TimeManagerSymbol::createdTimerReply): don't
+	use preallocate ctor
+
+	* processOutcomes.cc (ProcessManagerSymbol::exitedReply): don't
+	use preallocate ctor
+
+	* processActions.cc (ProcessManagerSymbol::createProcess): don't
+	use preallocate ctor
+
+	* fileOutcomes.cc (FileManagerSymbol::openedFileReply): don't use
+	preallocate ctor
+
+	* socketOutcomes.cc (SocketManagerSymbol::createdSocketReply)
+	(SocketManagerSymbol::acceptedClientReply): don't use preallocate
+	ctor
+
+===================================Maude144===========================================
+
+2023-03-10  Steven Eker  <eker@pup>
+
+	* streamManagerSymbol.cc (StreamManagerSymbol::interruptHandler):
+	added dummy if statement to keep gcc quiet
+
+2021-06-08  Steven Eker  <eker2@eker10>
+
+	* directoryOutcomes.cc
+	(DirectoryManagerSymbol::gotDirectoryEntryReply): fix bug where
+	reply was length 3 rather than 4
+
+2021-04-28  Steven Eker  <eker2@eker10>
+
+	* directoryManagerSymbol.hh (class DirectoryManagerSymbol): added
+	decl for removeDirectory()
+
+	* directoryManagerSymbol.cc
+	(DirectoryManagerSymbol::handleManagerMessage): use
+	removeDirectory()
+
+	* directoryActions.cc (DirectoryManagerSymbol::removeDirectory):
+	added
+
+	* directoryManagerSymbol.hh (class DirectoryManagerSymbol): added
+	decl for makeDirectory()
+
+	* directoryActions.cc (DirectoryManagerSymbol::makeDirectory):
+	added
+
+	* directoryManagerSymbol.cc
+	(DirectoryManagerSymbol::handleManagerMessage): use makeDirectory()
+
+	* directoryManagerSymbol.hh (class DirectoryManagerSymbol): remove
+	dummy cleanUp() implementation
+
+	* directoryActions.cc (DirectoryManagerSymbol::getDirectoryEntry):
+	handle other cases
+	(DirectoryManagerSymbol::handleSymbolicLink): added
+	(DirectoryManagerSymbol::cleanUp): added
+
+	* directoryManagerSymbol.hh (class DirectoryManagerSymbol):
+	updated decl for getOpenDirectory()
+
+	* directoryActions.cc (DirectoryManagerSymbol::getOpenDirectory):
+	pass back OpenDirectory* rather than DIR*
+	(DirectoryManagerSymbol::getDirectoryEntry): use new
+	getOpenDirectory() semantics
+	(DirectoryManagerSymbol::closeDirectory): use new
+	getOpenDirectory() semantics
+	(DirectoryManagerSymbol::openDirectory): store path with trailing
+	/ so we can get path to whatever we find in directory
+
+	* directoryManagerSymbol.hh (class DirectoryManagerSymbol): added
+	struct OpenDirectory; DirectoryMap now maps to OpenDirectory
+	rather than DIR*
+
+2021-04-27  Steven Eker  <eker2@eker10>
+
+	* objectSystem.hh: added DirectoryManagerSymbol and
+	TimeManagerSymbol
+
+	* directoryManagerSymbol.cc
+	(DirectoryManagerSymbol::handleMessage): use getDirectoryEntry()
+	and closeDirectory()
+	(DirectoryManagerSymbol::handleManagerMessage): use
+	openDirectory()
+
+	* directoryManagerSymbol.hh (class DirectoryManagerSymbol): added
+	decls for getOpenDirectory(), openDirectory(),
+	getDirectoryEntry(), closeDirectory(), errorReply(),
+	openedDirectoryReply(), gotDirectoryEntryReply()
+
+	* directoryOutcomes.cc: created
+
+	* directoryActions.cc: created
+
+	* directorySignature.cc: endOfDirectoryEntrySymbol ->
+	endOfDirectorySymbol; getDirectoryEntryMsg needs to be a
+	FreeSymbol
+
+	* directoryManagerSymbol.cc: created
+
+2021-04-26  Steven Eker  <eker2@eker10>
+
+	* directorySignature.cc: created
+
+	* directoryManagerSymbol.hh: created
+
+2021-04-21  Steven Eker  <eker2@eker10>
+
+	* fileActions.cc (FileManagerSymbol::makeLink): get Bad link name
+	and Bad target file name error replies the right way around
+
+2021-04-20  Steven Eker  <eker2@eker10>
+
+	* fileActions.cc (FileManagerSymbol::makeLink): implmented
+
+	* fileSignature.cc: added hardSymbol, symbolicSymbol
+
+	* fileManagerSymbol.hh (class FileManagerSymbol): added decl for
+	makeLink()
+
+	* fileActions.cc (FileManagerSymbol::makeLink): added stub
+
+	* fileManagerSymbol.cc (FileManagerSymbol::handleManagerMessage):
+	handle makeLinkMsg
+
+	* fileSignature.cc: fix bug where closedFileMsg was specified as
+	having 3 arguments; added makeLinkMsg/madeLinkMsg
+
+===================================Maude136===========================================
+
+2021-04-08  Steven Eker  <eker2@eker10>
+
+	* streamManagerSymbol.cc
+	(StreamManagerSymbol::nonblockingGetLine): use interrupt Hander
+	for SIGINT and SIGTERM in the non-tecla case
+
+	* streamManagerSymbol.hh (class StreamManagerSymbol): added decl
+	for interruptHandler()
+
+	* streamManagerSymbol.cc
+	(StreamManagerSymbol::nonblockingGetLine): restore default SIGINT
+	handling if tecla is not being used
+	(StreamManagerSymbol::interruptHandler): added
+
+2021-04-07  Steven Eker  <eker2@eker10>
+
+	* streamManagerSymbol.cc (StreamManagerSymbol::cleanUpManager):
+	added
+	(StreamManagerSymbol::nonblockingGetLine): call
+	requestCleanUpOnDestruction(
+	(StreamManagerSymbol::cleanUpManager): replace DebugAlways() with
+	DebugInfo()
+
+	* streamManagerSymbol.hh (class StreamManagerSymbol): added decl
+	for cleanUpManager()
+
+	* objectSystemRewritingContext.hh
+	(ObjectSystemRewritingContext::requestCleanUpOnDestruction): added
+
+	* objectSystemRewritingContext.cc (~ObjectSystemRewritingContext):
+	call cleanUpManager() on each ExternalObjectManagerSymbol that has
+	requested a clean up callback
+
+	* objectSystemRewritingContext.hh (class
+	ObjectSystemRewritingContext): added typedef ManagerSet and data
+	member managersNeedingCleanUp
+
+	* externalObjectManagerSymbol.cc
+	(ExternalObjectManagerSymbol::cleanUpManager): added
+
+	* externalObjectManagerSymbol.hh (class
+	ExternalObjectManagerSymbol): added decl for cleanUpManager()
+
+	* streamManagerSymbol.cc
+	(StreamManagerSymbol::handleManagerMessage): added DebugEnter()
+
+	* streamManagerSymbol.hh (class StreamManagerSymbol): updated decl
+	for finishUp()
+	(class StreamManagerSymbol): deleted data members
+	lastGetLineMessage, objectContext, incomingText, childPid, pipeFd
+
+	* streamManagerSymbol.cc
+	(StreamManagerSymbol::StreamManagerSymbol): don't init
+	objectContext, childPid, pipeFd
+
+	* objectSystemRewritingContext.cc (ObjectSystemRewritingContext):
+	changed DebugEntry() to DebugEnter()
+
+	* streamManagerSymbol.hh (class StreamManagerSymbol): deleted decl
+	for clearVariables(); added decl for findPendingGetLine()
+
+	* streamManagerSymbol.cc
+	(StreamManagerSymbol::nonblockingGetLine): fill out entry in
+	pendingGetLines()
+	(StreamManagerSymbol::doHungUp): check pendingGetLines rather than
+	objectContext
+	(StreamManagerSymbol::doHungUp): pass PendingGetLineMap::iterator
+	rather than in to finishUp()
+	(StreamManagerSymbol::clearVariables): deleted
+	(StreamManagerSymbol::doRead): use pendingGetLines; pass
+	PendingGetLineMap::iterator to finishUp()
+	(StreamManagerSymbol::findPendingGetLine): added
+	(StreamManagerSymbol::cancelGetLine): rewritten to use
+	pendingGetLines
+
+	* streamManagerSymbol.hh (class StreamManagerSymbol): added struct
+	PendingGetLine, typedef PendingGetLineMap and data member
+	pendingGetLines
+
+2021-04-06  Steven Eker  <eker2@eker10>
+
+	* objectSystemRewritingContext.cc (ObjectSystemRewritingContext):
+	replaced commented out DebugAdvisory() with DebugEntry()
+
+2021-04-05  Steven Eker  <eker2@eker10>
+
+	* timeActions.cc (TimeManagerSymbol::stopTimer): don't produce a
+	reply if the timer is already stopped
+
+2021-04-02  Steven Eker  <eker2@eker10>
+
+	* streamManagerSymbol.cc (StreamManagerSymbol::getLine): check
+	IO_Manager::safeToAccessStdin() before accessing stdin
+	(StreamManagerSymbol::write): check
+	IO_Manager::safeToAccessStdout()/IO_Manager::safeToAccessStderr()
+
+2021-03-31  Steven Eker  <eker2@eker10>
+
+	* streamManagerSymbol.cc (StreamManagerSymbol::clearVariables):
+	added
+	(StreamManagerSymbol::finishUp): use clearVariables()
+	(StreamManagerSymbol::cancelGetLine): added
+	(StreamManagerSymbol::StreamManagerSymbol): initialize
+	objectContext, childPid, pipeFd
+	(StreamManagerSymbol::handleManagerMessage): handle
+	cancelGetLineMsg
+
+	* streamManagerSymbol.hh (class StreamManagerSymbol): added data
+	members childPid and pipeFd
+
+	* streamManagerSymbol.cc
+	(StreamManagerSymbol::nonblockingGetLine): use errorReply()
+	(StreamManagerSymbol::makeNonblockingPipe): use errorReply()
+	(StreamManagerSymbol::getLine): use errorReply()
+	(StreamManagerSymbol::write): use use errorReply() (2 places)
+
+	* streamManagerSymbol.hh (class StreamManagerSymbol): added decl
+	for errorReply()
+
+	* streamManagerSymbol.cc (StreamManagerSymbol::errorReply): added
+
+	* streamSignature.cc: added cancelGetLineMsg, canceledGetLineMsg,
+	streamErrorMsg
+
+2021-03-30  Steven Eker  <eker2@eker10>
+
+	* streamManagerSymbol.cc
+	(StreamManagerSymbol::nonblockingGetLine): call
+	resetStdoutWrapping()
+
+2021-03-29  Steven Eker  <eker2@eker10>
+
+	* streamManagerSymbol.cc
+	(StreamManagerSymbol::nonblockingGetLine): use usingTecla()
+	(StreamManagerSymbol::nonblockingGetLine): call setStdinOwner() as
+	a static function
+	(StreamManagerSymbol::nonblockingGetLine): call setStdinOwner() as
+	a static function
+
+2021-03-26  Steven Eker  <eker2@eker10>
+
+	* streamManagerSymbol.cc
+	(StreamManagerSymbol::nonblockingGetLine): block SIGINT before
+	testing interruptSeen() so we don't miss one
+
+2021-03-24  Steven Eker  <eker2@eker10>
+
+	* streamManagerSymbol.hh (class StreamManagerSymbol): deleted data
+	member childPid
+
+	* streamManagerSymbol.cc (StreamManagerSymbol::doRead):
+	reorganized nested if statements
+	(StreamManagerSymbol::nonblockingGetLine): handle the case that a
+	control-C arrives before tecla installs its own handler
+	(StreamManagerSymbol::nonblockingGetLine): call setStdinOwner()
+	(StreamManagerSymbol::finishUp): use waitUntilSafeToAccessStdin()
+	to wait for child to exit
+	(StreamManagerSymbol::nonblockingGetLine): use while() loop so we
+	don't end up write()ing 0 characters
+	(StreamManagerSymbol::nonblockingGetLine): don't record childPid
+
+	* streamManagerSymbol.hh (class StreamManagerSymbol): deleted data
+	member readEnd
+
+	* streamManagerSymbol.cc
+	(StreamManagerSymbol::nonblockingGetLine): no need to save readEnd
+
+	* streamManagerSymbol.hh (class StreamManagerSymbol): updated decl
+	for finishUp()
+
+	* streamManagerSymbol.cc
+	(StreamManagerSymbol::nonblockingGetLine): use
+	makeNonblockingPipe(); check for fork() failure
+	(StreamManagerSymbol::nonblockingGetLine): rearrange the outer
+	loop so we don't write() 0 characters
+	(StreamManagerSymbol::finishUp): added
+	(StreamManagerSymbol::doHungUp): added
+	(StreamManagerSymbol::doHungUp, StreamManagerSymbol::doRead): pass
+	fd to finishUp
+	(StreamManagerSymbol::finishUp): take fd argument
+
+	* streamManagerSymbol.hh (class StreamManagerSymbol): added decl
+	for makeNonblockingPipe()
+
+	* streamManagerSymbol.cc
+	(ProcessManagerSymbol::makeNonblockingPipe): added
+
+	* processActions.cc (ProcessManagerSymbol::makeCloseOnExitPipe):
+	use WRITE_END
+	(ProcessManagerSymbol::makeCloseOnExitPipe)
+	(ProcessManagerSymbol::makeNonblockingSocketPair): added comments
+	about which set of flags is being modified
+
+	* streamManagerSymbol.cc (StreamManagerSymbol::doRead): use
+	childPid
+	(StreamManagerSymbol::nonblockingGetLine): set up asynchronous
+	read of pipe
+
+	* streamManagerSymbol.hh (class StreamManagerSymbol): pid data
+	member renamed to childPid
+
+2021-03-23  Steven Eker  <eker2@eker10>
+
+	* streamManagerSymbol.hh (class StreamManagerSymbol): added decl
+	for doRead()
+
+	* streamManagerSymbol.cc (StreamManagerSymbol::getLine): use
+	nonblockingGetLine()
+	(StreamManagerSymbol::doRead): added
+
+	* streamManagerSymbol.hh (class StreamManagerSymbol): added decl
+	for nonblockingGetLine()
+
+	* streamManagerSymbol.cc
+	(StreamManagerSymbol::nonblockingGetLine): added
+
+	* processActions.cc (ProcessManagerSymbol::makeCloseOnExitPipe):
+	use READ_END, WRITE_END
+	(ProcessManagerSymbol::createProcess): use READ_END, WRITE_END
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): delete enum
+	Sizes now that we get READ_BUFFER_SIZE from PseudoThread
+
+	* streamManagerSymbol.hh (class StreamManagerSymbol): derive from
+	PseudoThread
+
+	* pseudoThread.hh (class PseudoThread): moved enum Communications
+	here
+
+2021-03-22  Steven Eker  <eker2@eker10>
+
+	* streamManagerSymbol.cc (StreamManagerSymbol::getLine): rewritten
+	to do getLineFromStdin() in a separate process if stdin is a
+	terminal
+
+2021-03-09  Steven Eker  <eker2@eker10>
+
+	* timeActions.cc (TimeManagerSymbol::deleteTimer): fix bug where
+	we were not deleting the timer from the context which would cause
+	a subsequent crash when the context was deleted
+
+===================================Maude135===========================================
+
+2021-03-08  Steven Eker  <eker2@eker10>
+
+	* timeActions.cc (TimeManagerSymbol::makeDate): fix off-by-one in
+	day of the month
+
+2021-03-05  Steven Eker  <eker2@eker10>
+
+	* timeActions.cc (TimeManagerSymbol::startTimer): insist that
+	nanoseconds > 0
+	(TimeManagerSymbol::deleteTimer): added DebugInfo()
+
+2021-03-04  Steven Eker  <eker2@eker10>
+
+	* timeManagerSymbol.hh (class TimeManagerSymbol): added decls for
+	stopTimer(), deleteTimer()
+
+	* timeActions.cc (TimeManagerSymbol::stopTimer): added
+	(TimeManagerSymbol::deleteTimer): added
+
+	* timeManagerSymbol.cc (TimeManagerSymbol::handleMessage): handle
+	stopTimerMsg and deleteTimerMsg
+
+	* timeActions.cc (TimeManagerSymbol::createTimer): clear
+	callbackRequestTime
+
+	* timeManagerSymbol.cc (TimeManagerSymbol::doCallback): handle
+	periodic mode
+
+	* timeActions.cc (TimeManagerSymbol::startTimer): use
+	callbackRequestTime rather than callbackTime
+
+	* timeManagerSymbol.hh (class TimeManagerSymbol): replace
+	callbackTime with callbackRequestTime in struct Timer
+
+	* timeManagerSymbol.cc (TimeManagerSymbol::cleanUp): implemented
+
+	* timeManagerSymbol.hh (class TimeManagerSymbol): added decl for
+	getTimer()
+
+	* timeActions.cc (TimeManagerSymbol::getTimer): added
+
+	* pseudoThread.cc (PseudoThread::eventLoop): clear block flag if
+	we handled an event to ensure we exit
+	(PseudoThread::eventLoop): restructured
+	(PseudoThread::eventLoop): added DebugInfo()s
+
+	* objectSystemRewritingContext.cc
+	(ObjectSystemRewritingContext::externalRewrite): only break on
+	NOTHING_PENDING if not EVENT_HANDLED
+
+	* pseudoThread.cc (PseudoThread::eventLoop): && not & for
+	callbacksPending && block
+
+2021-03-03  Steven Eker  <eker2@eker10>
+
+	* timeManagerSymbol.hh (class TimeManagerSymbol): added decl for
+	doCallback()
+
+	* timeManagerSymbol.cc (TimeManagerSymbol::handleMessage): handle
+	startTimerMsg
+	(TimeManagerSymbol::doCallback): added
+
+	* timeManagerSymbol.hh (class TimeManagerSymbol): added decls for
+	getMode(), startTimer()
+
+	* timeActions.cc (TimeManagerSymbol::startTimer): added
+	(TimeManagerSymbol::getMode): added
+
+	* timeManagerSymbol.hh (class TimeManagerSymbol): added decls for
+	findUnusedId(), createdTimerReply(), createTimer()
+
+	* timeActions.cc (TimeManagerSymbol::findUnusedId)
+	(TimeManagerSymbol::createdTimerReply)
+	(TimeManagerSymbol::createTimer): added
+
+	* timeManagerSymbol.cc (TimeManagerSymbol::handleManagerMessage):
+	handle createTimerMsg
+
+	* timeManagerSymbol.hh (class TimeManagerSymbol): added struct
+	Timer, typedef TimerMap, data member timerMap
+
+	* pseudoThread.hh (class PseudoThread): added decl for
+	cancelCallback()
+
+	* pseudoThread.cc (PseudoThread::eventLoop): check callbackMap and
+	use new processCallbacks() semantics
+	(PseudoThread::cancelCallback): added
+
+	* pseudoThread.hh (class PseudoThread): new struct
+	CallbackRequest; added typedef CallbackMap; deleted typedef
+	CallbackQueue; added typedef CallbackHandle
+	(class PseudoThread): updated decl for requestCallback()
+	(class PseudoThread): updated decl for processCallbacks()
+	(class PseudoThread): added static data member callbackMap;
+	deleted static data member callBackQueue
+	(class PseudoThread): updated decl for doCallback()
+	(PseudoThread::CallbackRequest::CallbackRequest): rewritten
+	(PseudoThread::CallbackRequest::operator): deleted
+
+	* pseudoThread.cc (PseudoThread::requestCallback): rewritten
+	(PseudoThread::processCallbacks): rewritten
+	(PseudoThread::doCallback): now takes clientData argument
+
+2021-03-02  Steven Eker  <eker2@eker10>
+
+	* timeActions.cc (TimeManagerSymbol::getTimeSinceEpoch): use
+	clock_gettime() rather then gettimeofday()
+
+	* timeSignature.cc: added createTimerMsg, createdTimerMsg,
+	startTimerMsg, startedTimerMsg, timeOutMsg, deleteTimerMsg,
+	deletedTimerMsg, stopTimerMsg, stoppedTimerMsg
+
+	* timeActions.cc (TimeManagerSymbol::getDateAndTime): use
+	getScaledSignedInt64() to avoid wrap-around of nanoseconds in
+	extreme situations
+	(TimeManagerSymbol::getLocalDateAndTime): ditto
+	(TimeManagerSymbol::makeDate): do the year addition on bignums to
+	avoid wrapping in edge cases
+
+	* timeManagerSymbol.hh (class TimeManagerSymbol): added BILLION to
+	enum Special
+
+	* timeActions.cc (TimeManagerSymbol::getLocalDateAndTime): added
+	(TimeManagerSymbol::makeTimeZoneInfo): added
+
+	* timeManagerSymbol.cc (TimeManagerSymbol::handleManagerMessage):
+	handle getDateAndTimeMsg
+
+	* timeSignature.cc: added getLocalDateAndTimeMsg,
+	gotLocalDateAndTimeMsg
+
+	* timeManagerSymbol.hh (class TimeManagerSymbol): deleted decl for
+	getTimeZone(); added decls for makeDate(), makeTime()
+
+	* timeActions.cc (TimeManagerSymbol::makeTime): added
+	(TimeManagerSymbol::makeDate): added
+
+	* timeManagerSymbol.hh (class TimeManagerSymbol): added enum
+	Special
+
+	* timeActions.cc (TimeManagerSymbol::getDateAndTime): rewritten
+	for new convention
+	(TimeManagerSymbol::getTimeZone): deleted
+
+	* timeSignature.cc: added dateSymbol, timeSymbol,
+	timeZoneInfoSymbol; deleted dateAndTimeSymbol, utcSymbol,
+	localSymbol
+
+2021-03-01  Steven Eker  <eker2@eker10>
+
+	* timeSignature.cc: created
+
+	* timeManagerSymbol.cc: created
+
+	* timeManagerSymbol.hh: created
+
+	* timeActions.cc: created
+
+	* fileManagerSymbol.cc (FileManagerSymbol::handleManagerMessage):
+	restrutured if statement
+
+===================================Maude134===========================================
+
+2021-02-17  Steven Eker  <eker2@eker10>
+
+	* remainder.cc (ConfigSymbol::Remainder::markReachableNodes): use
+	range-based for loop instead of FOR_EACH_CONST()
+
+	* objectSystemRewritingContext.cc (~ObjectSystemRewritingContext):
+	use range-based for loop instead of FOR_EACH_CONST(); get rid of
+	check for empty
+	(ObjectSystemRewritingContext::markReachableNodes): use
+	range-based for loop instead of FOR_EACH_CONST() (3 places)
+
+	* objectMap.cc (ConfigSymbol::MessageQueue::markReachableNodes):
+	use range-based for loop instead of FOR_EACH_CONST()
+	(ConfigSymbol::ObjectMap::markReachableNodes): use range-based for
+	loop instead of FOR_EACH_CONST()
+	(ConfigSymbol::ObjectMap::dump): use range-based for loop instead
+	of FOR_EACH_CONST() (2 places)
+
+	* configSymbol.cc (ConfigSymbol::ruleRewrite): use range-based for
+	loop instead of FOR_EACH_CONST(); turned commented out prints into
+	DebugInfo()s
+	(ConfigSymbol::ConfigSymbol): deleted commented out print
+	statement
+
+2021-02-16  Steven Eker  <eker2@eker10>
+
+	* fileManagerSymbol.hh (class FileManagerSymbol): added decl for
+	removeFile()
+
+	* fileSignature.cc: added removeFileMsg and removedFileMsg
+
+	* fileManagerSymbol.cc (FileManagerSymbol::handleManagerMessage):
+	handle removeFileMsg
+
+	* fileActions.cc (FileManagerSymbol::write): missing else
+	(FileManagerSymbol::removeFile): added
+
+2021-02-15  Steven Eker  <eker2@eker10>
+
+	* fileManagerSymbol.cc (FileManagerSymbol::handleManagerMessage)
+	(FileManagerSymbol::handleMessage): turn commented out cerr <<
+	statements into DebugInfo()s
+
+	* fileManagerSymbol.hh (class FileManagerSymbol): updated decls
+	for openFile(), write(), flush(), getLine(), getChars(),
+	getPosition(), setPosition(), closeFile()
+
+	* fileManagerSymbol.cc (FileManagerSymbol::handleMessage):
+	restructured now that action functions no longer return bool
+	(FileManagerSymbol::handleManagerMessage): restructured now that
+	openFile() no longer returns bool
+
+	* fileActions.cc (FileManagerSymbol::openFile): accept all
+	messages; added error replies for bad file name and bad mode
+	(FileManagerSymbol::write): accept all messages; added error
+	replies for bad characters and file not open for writing
+	(FileManagerSymbol::flush): accept all messages; added error reply
+	for file not open for writing
+	(FileManagerSymbol::getLine): accept all messages; added error
+	reply for file not open for reading
+	(FileManagerSymbol::getChars): accept all messages; added error
+	replies for bad number of chars and file not open for reading
+	(FileManagerSymbol::setPosition): accept all messages; added error
+	replies for bad offset and bad base
+	(FileManagerSymbol::openFile, FileManagerSymbol::write)
+	(FileManagerSymbol::flush, FileManagerSymbol::getLine)
+	(FileManagerSymbol::getChars, FileManagerSymbol::getPosition)
+	(FileManagerSymbol::setPosition, FileManagerSymbol::closeFile):
+	return void rather than bool
+
+===================================Maude133===========================================
+
+2021-02-04  Steven Eker  <eker2@eker10>
+
+	* pseudoThread-pselect.cc (PseudoThread::processFds): fix bug
+	where we were assuming that active fds were linked in ascending
+	order when they are not and so we were computing the wrong maxFd
+
+2020-10-05  Steven Eker  <eker2@eker10>
+
+	* processOutcomes.cc (ProcessManagerSymbol::exitedReply): don't do
+	a find() unless we need it for the Assert() to avoid compiler
+	warning
+
+	* processStuff.cc (ProcessManagerSymbol::doChildExit): use
+	DebugSave for exitPid to avoid compiler warning
+
+===================================Maude131===========================================
+
+2020-07-13  Steven Eker  <eker2@eker10>
+
+	* socketAsync.cc (SocketManagerSymbol::doRead): ditto
+
+	* socketStuff.cc (SocketManagerSymbol::receive): only return 0
+	characters once; on a second receive() we revert to legacy
+	behavior and close the socket to minimize backwards
+	incompatibility
+
+	* socketManagerSymbol.cc
+	(SocketManagerSymbol::ActiveSocket::ActiveSocket): clear seenEOF
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added data
+	member seenEOF to struct ActiveSocket
+
+	* socketAsync.cc (SocketManagerSymbol::doRead): ditto
+
+	* socketStuff.cc (SocketManagerSymbol::receive): handle 0
+	characters read(), i.e. EOF, by returning 0 characters rather
+	than closing the socket
+
+2020-07-09  Steven Eker  <eker2@eker10>
+
+	* fileActions.cc (FileManagerSymbol::openFile): check allowFiles
+	flag before opening file
+
+	* fileManagerSymbol.cc: init allowFiles
+
+	* processActions.cc (ProcessManagerSymbol::createProcess):
+	noExecute -> allowProcesses
+
+	* processManagerSymbol.cc: noExecute -> allowProcesses
+
+	* processManagerSymbol.hh (ProcessManagerSymbol::setNoExecute):
+	becomes setAllowProcesses
+	(class ProcessManagerSymbol): noExecute -> allowProcesses
+
+	* fileManagerSymbol.hh (FileManagerSymbol::setAllowFiles): added
+	(class FileManagerSymbol): added data member allowFiles
+
+===================================Maude129===========================================
+
+2020-05-19  Steven Eker  <eker2@eker10>
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): updated
+	decl for makeNonblockingSocketPair(); remove unused #defines
+
+	* processActions.cc
+	(ProcessManagerSymbol::makeNonblockingSocketPair): handle readOnly
+	flag
+	(ProcessManagerSymbol::createProcess): pass readOnly flag (2
+	places)
+
+	* socketStuff.cc (SocketManagerSymbol::send): do a shutdown() when
+	asked to send empty string
+	(SocketManagerSymbol::send): make shutdown socket readOnly; check
+	for shutdown() error
+
+2020-05-08  Steven Eker  <eker2@eker10>
+
+	* socketStuff.cc (SocketManagerSymbol::getPort): replace magic
+	number with MAX_PORT_NUMBER
+	(SocketManagerSymbol::createServerTcpSocket): use ::bind() to
+	avoid std::bind() in C++1x
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added
+	MAX_PORT_NUMBER
+
+	* processActions.cc (ProcessManagerSymbol::createProcess): added
+	IssueAdvisory()s in the return false cases
+	(ProcessManagerSymbol::waitForExit): added IssueAdvisory() for
+	extra waitForExit() message
+	(ProcessManagerSymbol::waitForExit): added IssueAdvisory() for
+	missing process
+	(ProcessManagerSymbol::signalProcess): added IssueAdvisory()s for
+	missing process and malformed message
+
+	* pseudoThread.cc (PseudoThread::doRead, PseudoThread::doWrite)
+	(PseudoThread::doError, PseudoThread::doCallback)
+	(PseudoThread::doHungUp): Assert() -> CantHappen()
+
+	* socketAsync.cc (SocketManagerSymbol::doRead): only clear
+	WAITING_TO_READ flag in normal case
+	(SocketManagerSymbol::doRead): clear WAITING_TO_ACCEPT flag;
+	updated comment; use CantHappen() rather than Assert()
+
+	* socketStuff.cc (SocketManagerSymbol::acceptClient): updated
+	comment
+	(SocketManagerSymbol::send): added Assert() that we actually have
+	characters to send
+
+	* pseudoThread-pselect.cc (PseudoThread::processFds): split off
+	record of child events into childEvent; added Assert()
+
+	* pseudoThread-ppoll.cc (PseudoThread::processFds): split off
+	record of child events into childEvent so that Assert() is correct
+
+2020-05-07  Steven Eker  <eker2@eker10>
+
+	* processActions.cc (ProcessManagerSymbol::createProcess): don't
+	disallow close on sockets
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): deleted
+	decl for managedSocketDisconnected()
+
+	* processStuff.cc
+	(ProcessManagerSymbol::managedSocketDisconnected): deleted
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): updated decl
+	for manageSocket()
+
+	* socketManagerSymbol.cc
+	(SocketManagerSymbol::ActiveSocket::ActiveSocket): don't clear
+	client member
+
+	* socketManagerClient.hh: deleted
+
+	* processManagerSymbol.hh: don't derive from SocketManagerClient
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): deleted decl
+	for closeManagedSocket(); made closedSocketReply() private again
+	(class SocketManagerSymbol): delete client member from
+	ActiveSocket
+
+	* processActions.cc (ProcessManagerSymbol::createProcess): don't
+	pass this to manageSocket() (2 places)
+
+	* socketManagerSymbol.cc
+	(SocketManagerSymbol::closeManagedSocket): deleted
+	(SocketManagerSymbol::manageSocket): don't take client since we're
+	no longer going to make callbacks
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added decl
+	for handleException()
+
+	* socketAsync.cc (SocketManagerSymbol::handleException): added
+	(SocketManagerSymbol::doHungUp, SocketManagerSymbol::doError):
+	reimplemented using handleException
+
+	* socketStuff.cc (SocketManagerSymbol::receive): don't bother
+	with client->managedSocketDisconnected()
+
+	* socketAsync.cc (SocketManagerSymbol::doRead): don't bother
+	with client->managedSocketDisconnected()
+	(SocketManagerSymbol::doRead): deleted commented out code
+
+	* socketStuff.cc (SocketManagerSymbol::cleanUp): always close
+	socket here
+
+	* processStuff.cc (ProcessManagerSymbol::cleanUp): don't close
+	sockets here
+
+	* processOutcomes.cc (ProcessManagerSymbol::exitedReply): don't
+	close sockets because there could still be characters to read
+
+	* socketStuff.cc (SocketManagerSymbol::cleanUp): delete textArray
+	just in case we had a pending write
+
+	* socketAsync.cc (SocketManagerSymbol::doWrite):  clear
+	WAITING_TO_WRITE, send socketError() and delete textArray in error
+	case
+	(SocketManagerSymbol::doWrite): Assert() that we don't get a would
+	block error; Assert() that we didn't send 0 characters
+	(SocketManagerSymbol::doWrite): changed Assert() to CantHappen()
+
+	* socketStuff.cc (SocketManagerSymbol::send): delete textArray in
+	error case
+
+	* socketAsync.cc (SocketManagerSymbol::doWrite): only clear
+	WAITING_TO_WRITE flag rather than all flags if last character sent
+
+	* socketStuff.cc (SocketManagerSymbol::send): generate
+	socketError() message on a write() error rather than closing the
+	socket or passing the problem to
+	client->managedSocketDisconnected()
+
+2020-05-06  Steven Eker  <eker2@eker10>
+
+	* socketManagerSymbol.cc
+	(SocketManagerSymbol::closeManagedSocket): DebugAlways() ->
+	DebugEnter()
+
+	* processStuff.cc
+	(ProcessManagerSymbol::managedSocketDisconnected): DebugAlways()
+	-> DebugEnter()
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol):
+	disconnected() -> managedSocketDisconnected()
+
+	* socketAsync.cc (SocketManagerSymbol::doHungUp): use
+	managedSocketDisconnected()
+
+	* socketManagerSymbol.cc
+	(SocketManagerSymbol::closeManagedSocket): don't bother with
+	clearFlags() if nothing is pending
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): deleted decl
+	for unmanageSocket()
+
+	* socketManagerSymbol.cc (SocketManagerSymbol::unmanageSocket):
+	deleted
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): make
+	closedSocketReply() public
+
+	* processStuff.cc
+	(ProcessManagerSymbol::managedSocketDisconnected): was
+	disconnected(); use closedSocketReply() instead of
+	closedManagedSocket() (2 places)
+
+	* processManagerSymbol.hh: added #defines IO_SOCKET_CLOSE_MSG,
+	ERR_SOCKET_CLOSE_MSG
+
+	* socketAsync.cc (SocketManagerSymbol::doRead): use
+	managedSocketDisconnected()
+	(SocketManagerSymbol::doWrite): use managedSocketDisconnected()
+	(SocketManagerSymbol::doError): use managedSocketDisconnected()
+
+	* socketStuff.cc (SocketManagerSymbol::send): use
+	managedSocketDisconnected()
+	(SocketManagerSymbol::receive): use managedSocketDisconnected() (2
+	places)
+
+	* socketManagerClient.hh (class SocketManagerClient):
+	disconnected() becomes managedSocketDisconnected() and gets a
+	message argument
+
+2020-05-05  Steven Eker  <eker2@eker10>
+
+	* socketManagerSymbol.cc
+	(SocketManagerSymbol::closeManagedSocket): added Assert()
+
+	* socketOutcomes.cc (SocketManagerSymbol::closedSocketReply):
+	removed commented out disconnect() code
+
+	* socketManagerClient.hh (class SocketManagerClient): updated decl
+	for disconnected()
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): updated
+	decl for disconnected()
+
+	* processStuff.cc (ProcessManagerSymbol::cleanUp): check for the
+	case that one or both sockets make already have been closed by the
+	disconnected() callback
+
+	* processOutcomes.cc (ProcessManagerSymbol::exitedReply): check
+	for the case that one or both sockets make already have been
+	closed by the disconnected() callback
+
+	* processStuff.cc (ProcessManagerSymbol::disconnected): take
+	context argument and just close the socket gracefully
+
+	* socketStuff.cc (SocketManagerSymbol::send): call disconnected()
+	rather than closeSocketReply() if managing the socket on behalf of
+	a client
+	(SocketManagerSymbol::receive): fixed incorrect comment
+	(SocketManagerSymbol::receive): call disconnected() rather than
+	closeSocketReply() if managing the socket on behalf of a client
+
+	* socketAsync.cc (SocketManagerSymbol::doRead)
+	(SocketManagerSymbol::doWrite): call disconnected() rather than
+	closeSocketReply() if managing the socket on behalf of a client
+	(SocketManagerSymbol::doError, SocketManagerSymbol::doHungUp):
+	call disconnected() rather than closeSocketReply() if managing the
+	socket on behalf of a client
+
+	* pseudoThread.cc (PseudoThread::clearFlags): added comment
+
+	* pseudoThread-pselect.cc (PseudoThread::processFds): symmetric
+	change
+
+	* pseudoThread-ppoll.cc (PseudoThread::processFds): check
+	info.flags before each callback because an earlier callback might
+	have cleared them
+
+2020-05-04  Steven Eker  <eker2@eker10>
+
+	* processActions.cc (ProcessManagerSymbol::makeCloseOnExitPipe):
+	simplified
+	(ProcessManagerSymbol::makeNonblockingSocketPair): set the
+	close-on-execute flag on the parent file descriptor so it isn't
+	leaked into future children
+
+	* socketStuff.cc (SocketManagerSymbol::createClientTcpSocket):
+	lastMessage -> lastWriteMessage; originalContext -> objectContext
+	(SocketManagerSymbol::acceptClient): lastMessage ->
+	lastReadMessage; originalContext -> objectContext
+	(SocketManagerSymbol::send): lastMessage -> lastWriteMessage;
+	originalContext -> objectContext
+	(SocketManagerSymbol::receive): lastMessage -> lastReadMessage;
+	originalContext -> objectContext
+	(SocketManagerSymbol::setNonblockingFlag): also set the
+	close-on-execute flag to avoid leaking file descriptor into child
+
+	* socketManagerSymbol.cc
+	(SocketManagerSymbol::closeManagedSocket): use lastWriteMessage or
+	lastReadMessage depending on state;
+
+	* socketAsync.cc (SocketManagerSymbol::doRead): lastMessage ->
+	lastReadMessage; originalContext -> objectContext
+	(SocketManagerSymbol::doWrite): lastMessage -> lastWriteMessage;
+	originalContext -> objectContext
+	(SocketManagerSymbol::doError, SocketManagerSymbol::doError): use
+	lastWriteMessage or lastReadMessage depending on state;
+	originalContext -> objectContext
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol):
+	originalContext -> objectContext; lastMessage split into
+	lastReadMessage and lastWriteMessage so we can wait both
+	to read and to write for duplex operation of socket
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): added decl
+	for makeCloseOnExitPipe(); added
+	(class ProcessManagerSymbol): added enum SpecialValues
+
+	* processActions.cc (ProcessManagerSymbol::createProcess): use
+	makeCloseOnExitPipe() to detect child failure
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): updated
+	decl for errorReply()
+
+	* processOutcomes.cc (ProcessManagerSymbol::errorReply): take
+	Rope&
+
+	* processActions.cc (ProcessManagerSymbol::makeCloseOnExitPipe):
+	added
+
+2020-05-01  Steven Eker  <eker2@eker10>
+
+	* processOutcomes.cc (ProcessManagerSymbol::exitedReply): use
+	closeManagedSocket() rather then unmanageSocket()
+
+	* socketAsync.cc (SocketManagerSymbol::doError)
+	(SocketManagerSymbol::doHungUp): use DebugInfo()
+
+	* socketAsync.cc (SocketManagerSymbol::doRead)
+	(SocketManagerSymbol::doWrite): use DebugInfo()
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added decl
+	for closeManagedSocket()
+
+	* socketManagerSymbol.cc
+	(SocketManagerSymbol::closeManagedSocket): added
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added FIXME
+	notices since it looks like sharing lastMessage and
+	originalContext between waits for send and receive is a bug
+
+	* pseudoThread-ppoll.cc (PseudoThread::processFds): do
+	dispatchChildRequests() first because this can change the active
+	file descriptors
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): added decl
+	for makeNonblockingSocketPair()
+
+	* processActions.cc
+	(ProcessManagerSymbol::makeNonblockingSocketPair): added
+	(ProcessManagerSymbol::createProcess): use
+	makeNonblockingSocketPair() (2 places)
+
+2020-04-30  Steven Eker  <eker2@eker10>
+
+	* pseudoThread-pselect.cc: created
+
+	* processActions.cc (ProcessManagerSymbol::createProcess):
+	generate errorReply() if socketpair() or fcntl() calls fail
+	(ProcessManagerSymbol::createProcess): check that request is well
+	formed before checking if process creation is allowed; handle
+	disallowed case with errorReply(); downgrade warning to an
+	advisory
+	(ProcessManagerSymbol::createProcess): handle failed fork() with
+	errorReply()
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): added decl
+	for errorReply()
+
+	* processOutcomes.cc (ProcessManagerSymbol::errorReply): added
+
+2020-04-29  Steven Eker  <eker2@eker10>
+
+	* pseudoThread-ppoll.cc (PseudoThread::processFds): avoid race
+	condition by just restoring SIGCHLD and not callers normalSet
+
+	* pseudoThread.hh (class PseudoThread): updated decl for
+	processFds()
+	(class PseudoThread): updated decl for processCallbacks()
+
+	* pseudoThread-ppoll.cc (PseudoThread::processFds): take const
+	timespec*
+
+	* pseudoThread.hh (class PseudoThread): added static data member
+	zeroTime
+
+	* pseudoThread.cc (PseudoThread::eventLoop): rewritten
+
+	* pseudoThread.hh (PseudoThread::getTime): deleted
+	(PseudoThread::CallbackRequest::CallbackRequest): take const timespec*
+
+	* pseudoThread.cc (PseudoThread::processCallbacks): use
+	clock_gettime() rather than getTime()
+	(PseudoThread::processCallbacks): new semantics
+
+	* pseudoThread.hh (PseudoThread::CallbackRequest::operator<): use
+	timespec
+
+	* pseudoThread.cc (PseudoThread::requestCallback): take const
+	timespec*
+
+	* pseudoThread.hh (class PseudoThread): requestCallback now uses
+	timespec*
+	(class PseudoThread): CallbackRequest notBefore field is now a
+	timespec
+
+	* processOutcomes.cc (ProcessManagerSymbol::exitedReply): added
+	Assert()
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): made
+	getSignalNumber() and getSignalName() static
+
+	* processActions.cc (ProcessManagerSymbol::getChildProcess)
+	(ProcessManagerSymbol::createProcess)
+	(ProcessManagerSymbol::checkStringList)
+	(ProcessManagerSymbol::makeStringArray)
+	(ProcessManagerSymbol::waitForExit, MACRO)
+	(ProcessManagerSymbol::signalProcess): moved here
+
+	* processStuff.cc (ProcessManagerSymbol::cleanUp): be robust
+	against waitpid() exiting due to a signal
+	(ProcessManagerSymbol::cleanUp): erase the ChildProcess from
+	childProcesses
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): cleaned up
+	struct ChildProcess
+
+	* processStuff.cc: originalContext -> waitContext
+
+	* processManagerSymbol.hh: originalContext -> waitContext
+
+	* processStuff.cc (ProcessManagerSymbol::cleanUp): make sure
+	to cancel any child exit callback request
+
+2020-04-28  Steven Eker  <eker2@eker10>
+
+	* pseudoThread-ppoll.cc (PseudoThread::processFds): don't write
+	into timeOutAt
+
+	* pseudoThread.cc (PseudoThread::doTimeOut): deleted
+	(PseudoThread::wantTo): don't take timeOutAt arg
+
+	* pseudoThread.hh (class PseudoThread): updated decl for wantTo()
+	(class PseudoThread): deleted timeOutAt from struct FD_Info
+	(class PseudoThread): deleted decl for doTimeOut()
+
+	* pseudoThread-ppoll.cc (PseudoThread::processFds): moved here
+	(PseudoThread::processFds): don't handle timeouts on fds; don't
+	need them for Maude
+
+2020-04-27  Steven Eker  <eker2@eker10>
+
+	* processStuff.cc (ProcessManagerSymbol::waitForExit): check for
+	second waitForExit() for the same process
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): updated comment
+	(ProcessManagerSymbol::ChildProcess::ChildProcess): added in order
+	to ensure originalContext is zero'd
+
+2020-04-24  Steven Eker  <eker2@eker9>
+
+	* supportedSignals.cc: added many more signals
+
+	* processOutcomes.cc (ProcessManagerSymbol::getSignalName): added
+
+	* processStuff.cc (ProcessManagerSymbol::waitForExit): pass
+	terminatingSignal by 1's complement
+	(ProcessManagerSymbol::doChildExit): pass terminatingSignal by 1's
+	complement
+
+	* processOutcomes.cc (ProcessManagerSymbol::exitedReply): moved
+	here
+
+	* processStuff.cc (ProcessManagerSymbol::exitedReply): use
+	normalExitSymbol, terminatedBySignal
+
+	* processSignature.cc: added normalExitSymbol and
+	terminatedBySignalSymbol; deleted minusSymbol
+
+	* processStuff.cc (ProcessManagerSymbol::createProcess): respect
+	noExecute flag
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): static
+	data member noExecute
+
+2020-04-23  Steven Eker  <eker2@eker9>
+
+	* processStuff.cc (ProcessManagerSymbol::doChildExit): don't need
+	to cancelChildExitCallback() since these are automatically removed
+	on delivery
+	(ProcessManagerSymbol::waitForExit): pass - terminating signal to
+	exitedReply()
+	(ProcessManagerSymbol::doChildExit): ditto
+
+	* pseudoThreadSignal.cc (PseudoThread::sigchldHandler): handle
+	CLD_KILLED and CLD_DUMPED cases
+
+	* pseudoThread.hh (class PseudoThread): updated decl for
+	processFds()
+
+	* pseudoThread.cc (PseudoThread::processFds): take and use
+	normalSet in the blocking case
+	(PseudoThread::eventLoop): pass normalSet to processFds()
+
+	* processManagerSymbol.cc (ProcessManagerSymbol::handleMessage):
+	call signalProcess()
+
+	* supportedSignals.cc: created
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): added decls
+	for signalProcess(), getSignalNumber()
+
+	* processStuff.cc (ProcessManagerSymbol::getSignalNumber): added
+	(ProcessManagerSymbol::signalProcess): added
+	(ProcessManagerSymbol::createProcess): added comment
+
+2020-04-22  Steven Eker  <eker2@eker9>
+
+	* objectSystemRewritingContext.cc
+	(ObjectSystemRewritingContext::externalRewrite): restructured loop
+
+	* pseudoThread.hh (class PseudoThread): updated decl for
+	eventLoop()
+
+	* objectSystemRewritingContext.hh (class
+	ObjectSystemRewritingContext): added decl for interleave()
+
+	* objectSystemRewritingContext.cc
+	(ObjectSystemRewritingContext::externalRewrite): remove EXT_BIAS
+	hack since it looks like we never used it for anything
+	(ObjectSystemRewritingContext::externalRewrite): call
+	blockAndHandleInterrupts(); restore normal interrupt mask before
+	bailing; pass normal interrupt mask to eventLoop()
+	(ObjectSystemRewritingContext::interleave): added to hold inner
+	loop
+	(ObjectSystemRewritingContext::externalRewrite): rewritten using
+	interleave()
+
+	* processSignature.cc: added minusSymbol
+
+2020-04-21  Steven Eker  <eker2@eker9>
+
+	* pseudoThread.cc (PseudoThread::processFds): use ppoll() to avoid
+	occasional race condition.
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): added decl
+	for doChildExit()
+
+	* processStuff.cc (ProcessManagerSymbol::doChildExit): added
+	(ProcessManagerSymbol::waitForExit): save context if we are
+	waiting for a callback
+
+	* pseudoThread.cc (PseudoThread::eventLoop): call processFds()
+	if there are pending childRequests
+
+	* pseudoThread.hh (class PseudoThread): updated decl for
+	dispatchChildRequests()
+
+	* pseudoThreadSignal.cc (PseudoThread::dispatchChildRequests):
+	return a flag to say if we did a callback
+
+	* pseudoThread.cc (PseudoThread::processFds): call
+	dispatchChildRequests()
+
+	* pseudoThreadSignal.cc (PseudoThread::dispatchChildRequests):
+	clear exitedFlag
+
+2020-04-20  Steven Eker  <eker2@eker9>
+
+	* pseudoThreadSignal.cc (PseudoThread::cancelChildExitCallback):
+	fix bug where we we're incrementing i
+
+	* processStuff.cc (ProcessManagerSymbol::exitedReply): clean up
+	sockets
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added decl
+	for unmanageSocket()
+
+	* socketManagerSymbol.cc (SocketManagerSymbol::unmanageSocket):
+	added
+
+	* processStuff.cc (ProcessManagerSymbol::exitedReply): close
+	sockets and remove external object for process
+
+	* processManagerSymbol.cc (ProcessManagerSymbol::handleMessage):
+	need to return the value from waitForExit()
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): added decl
+	for exitedReply()
+
+	* processStuff.cc (ProcessManagerSymbol::exitedReply): added
+	(ProcessManagerSymbol::waitForExit): call exitedReply() (2 places)
+
+2020-04-17  Steven Eker  <eker2@eker9>
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): derive
+	from PseudoThread, added decl for waitForExit()
+
+	* processStuff.cc (ProcessManagerSymbol::waitForExit): added
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): added
+	member waitMessage to struct ChildProcess
+
+	* processManagerSymbol.cc (ProcessManagerSymbol::handleMessage):
+	handle waitForExit()
+
+	* pseudoThread.hh (class PseudoThread): added decl for
+	cancelChildExitCallback()
+
+	* pseudoThreadSignal.cc (PseudoThread::monitorChild): becomes
+	requestChildExitCallback()
+	(PseudoThread::dispatchChildRequests): need to contract
+	childRequests Vector
+	(PseudoThread::cancelChildExitCallback): added
+
+	* pseudoThread.hh: CallBack -> Callback everywhere
+	(class PseudoThread): monitorChild() -> requestChildExitCallback()
+
+	* pseudoThread.cc: CallBack -> Callback everywhere
+
+2020-04-16  Steven Eker  <eker2@eker9>
+
+	* pseudoThread.hh (class PseudoThread): added struct ChildRequest
+	(class PseudoThread): added data members childRequests,
+	installedSigchldHandler, exitedFlag
+	(class PseudoThread): added decls for doChildExited(),
+	monitorChild(), dispatchChildRequests()
+
+	* pseudoThreadSignal.cc: created
+
+	* processSignature.cc: added signaledProcessMsg, waitForExitMsg
+
+2020-04-15  Steven Eker  <eker2@eker9>
+
+	* socketOutcomes.cc (SocketManagerSymbol::closedSocketReply): call
+	disconnected() for sockets we're managing on behalf of a client
+
+	* processStuff.cc (ProcessManagerSymbol::createProcess): pass
+	this to manageSocket() (2 places)
+	(ProcessManagerSymbol::disconnected): added
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): derive
+	from SocketManagerClient
+	(class ProcessManagerSymbol): added decl for disconnected()
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): updated
+	decl for manageSocket()
+
+	* socketManagerSymbol.cc
+	(SocketManagerSymbol::ActiveSocket::ActiveSocket): initialize
+	client field
+	(SocketManagerSymbol::manageSocket): handle client argument
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added
+	client member to struct ActiveSocket
+
+	* socketManagerClient.hh (class SocketManagerClient): created
+
+2020-04-10  Steven Eker  <eker2@eker9>
+
+	* processStuff.cc (ProcessManagerSymbol::cleanUp): kill() and
+	waitpid() to make sure the child is dead and remove it's zombie
+
+	* objectSystem.hh: added classes SocketManagerSymbol,
+	FileManagerSymbol, StreamManagerSymbol, ProcessManagerSymbol
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): use pid_t
+	rather than int for ProcessMap
+
+2020-04-09  Steven Eker  <eker2@eker9>
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): added decl
+	for getChildProcess()
+
+	* processStuff.cc (ProcessManagerSymbol::cleanUp): partly
+	implemented
+	(ProcessManagerSymbol::createProcess): make ChildProcess
+	record
+	(ProcessManagerSymbol::createProcess): pass disallowClose=true to
+	manageSocket() calls
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): added
+	ioSocket, errSocket members to struct ChildProcess
+
+	* processStuff.cc (ProcessManagerSymbol::getChildProcess): added
+
+	* socketStuff.cc (SocketManagerSymbol::cleanUp): don't close
+	sockets with disallowClose flag set
+	(SocketManagerSymbol::closeSocket): don't accept closeSocket()
+	message if disallowClose flag is set
+	(SocketManagerSymbol::send): dont accept send() message if
+	readOnly flag is set
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added
+	disallowClose, readOnly flags to ActiveSocket
+
+	* socketManagerSymbol.cc
+	(SocketManagerSymbol::ActiveSocket::ActiveSocket): initialize
+	disallowClose, readOnly flags
+	(SocketManagerSymbol::manageSocket): set out disallowClose,
+	readOnly flags
+
+2020-04-02  Steven Eker  <eker2@eker9>
+
+	* socketStuff.cc (SocketManagerSymbol::receive): added check
+	for EWOULDBLOCK and comment explaining why we do this
+	(SocketManagerSymbol::createClientTcpSocket): added comment
+	to explain why nonblocking is critical for input as well as
+	output
+
+2020-04-01  Steven Eker  <eker2@eker9>
+
+	* processStuff.cc (ProcessManagerSymbol::createProcess): pass
+	context to manageSocket()
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): updated
+	decl for manageSocket()
+
+	* socketManagerSymbol.cc (SocketManagerSymbol::manageSocket):
+	implemented
+	(SocketManagerSymbol::manageSocket): need to register socket
+	as an external object
+	(SocketManagerSymbol::manageSocket): need to take context
+	argument
+
+	* processStuff.cc (ProcessManagerSymbol::createProcess): added
+	DebugAdvisory() for replyMsg
+
+2020-03-31  Steven Eker  <eker2@eker9>
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): updated
+	decl for makeStringArray()
+
+	* processStuff.cc (ProcessManagerSymbol::makeStringArray):
+	revert to making a separate string for array[0] due to
+	const correctness
+	(ProcessManagerSymbol::createProcess): pass executableArg
+	to makeStringArray()
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added
+	decl for manageSocket()
+
+	* processStuff.cc (ProcessManagerSymbol::makeStringArray):
+	don't both with constness for allocating array
+
+	* socketManagerSymbol.cc (SocketManagerSymbol::manageSocket):
+	added stub
+
+2020-03-30  Steven Eker  <eker2@eker9>
+
+	* processStuff.cc (ProcessManagerSymbol::createProcess): use
+	makeStringArray()
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): added
+	decl for makeStringArray()
+
+	* processStuff.cc (ProcessManagerSymbol::createProcess):
+	check options arg
+	(makeStringArray): added
+
+	* processSignature.cc: added emptyProcessOptionSetSymbol
+
+2020-03-27  Steven Eker  <eker2@eker9>
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol):
+	adde decl for checkStringList()
+
+	* processStuff.cc (ProcessManagerSymbol::checkStringList):
+	added
+	(ProcessManagerSymbol::createProcess): use checkStringList()
+
+2020-03-26  Steven Eker  <eker2@eker9>
+
+	* processStuff.cc (ProcessManagerSymbol::createProcess): check
+	that the executable arg is actually a string
+
+	* processManagerSymbol.hh (class ProcessManagerSymbol): added
+	decl for createProcess()
+
+	* processManagerSymbol.cc
+	(ProcessManagerSymbol::handleManagerMessage): call createProcess()
+
+	* processSignature.cc: added nilStringListSymbol,
+	stringListSymbol
+
+2020-03-25  Steven Eker  <eker2@eker9>
+
+	* processStuff.cc (ProcessManagerSymbol::cleanUp): added stub
+
+	* processManagerSymbol.cc:
+	(ProcessManagerSymbol::attachData)
+	(ProcessManagerSymbol::attachSymbol)
+	(ProcessManagerSymbol::copyAttachments)
+	(ProcessManagerSymbol::getDataAttachments)
+	(ProcessManagerSymbol::getSymbolAttachments)
+	(ProcessManagerSymbol::handleManagerMessage)
+	(ProcessManagerSymbol::handleMessage): added
+
+	* processStuff.cc (ProcessManagerSymbol::createProcess): moved
+	here
+
+	* processManagerSymbol.cc (ProcessManagerSymbol::createProcess):
+	parent side of ioSocket must be nonblocking
+
+	* socketStuff.cc (SocketManagerSymbol::setNonblockingFlag):
+	simplified
+
+2020-03-24  Steven Eker  <eker2@eker9>
+
+	* processManagerSymbol.cc: created
+
+	* processSignature.cc: created
+
+2020-03-20  Steven Eker  <eker2@eker9>
+
+	* processManagerSymbol.hh: created
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): deleted
+	commented out crope text
+
+===================================Maude128a===========================================
+
+2020-03-05  Steven Eker  <eker2@eker9>
+
+	* socketOutcomes.cc (SocketManagerSymbol::closedSocketReply): fix
+	bug where closing a socket that was waiting for something
+	leaves a dead active fd in PseudoThread
+
+	* socketStuff.cc (SocketManagerSymbol::cleanUp): added
+	and clarified comments
+	(SocketManagerSymbol::send): deleted commented out code
+	(SocketManagerSymbol::receive): deleted commneted out code
+	(SocketManagerSymbol::send): cleaned up comments
+
+	* pseudoThread.cc (PseudoThread::processFds): update Assert()
+	message with something more explanatory.
+	(PseudoThread::processFds): deleted commented out code
+	(PseudoThread::processCallBacks): cleaned up comments
+	(PseudoThread::processFds): cleaned up comments
+
+===================================Maude128===========================================
+
+2019-12-04  Steven Eker  <eker@mu>
+
+	* fileActions.cc (getOpenFile): use DebugSave() to avoid unused variable
+	warning when Assert() is compiled out
+
+2019-12-03  Steven Eker  <eker@mu>
+
+	* configSymbol.cc (ruleRewrite): use safeCastNonNull<>() (4 places)
+	(retrieveObject): use safeCastNonNull<>()
+
+===================================Maude127===========================================
+
+2019-11-27  Rubén Rubio  <rubenrub@ucm.es>
+
+	* fileActions.cc (write): fixed memory leak (textArray)
+
+2019-07-25  Steven Eker  <eker@mu>
+
+	* configSymbol.cc (compileRules): added comments
+	(checkArgs): add comments including explanation of why this isn't
+	a bug despite static analyzer finding.
+
+===================================Maude123===========================================
+
+2018-10-09  Steven Eker  <eker@install.csl.sri.com>
+
+	* configSymbol.cc (ruleRewrite): pass subject = 0 to
+	tracePreRuleRewrite() in fake rewrite cases.
+
+
+2018-07-30  Steven Eker  <eker@install.csl.sri.com>
+
+	* objectSystemRewritingContext.cc (externalRewrite): support
+	EXT_BIAS as a temporary hack
+
+	* socketManagerSymbol.hh (PseudoThread): increased READ_BUFFER_SIZE
+	to 208K
+
+===================================Maude118===========================================
+
+2018-07-06  Steven Eker  <eker@install.csl.sri.com>
+
+	* streamManagerSymbol.cc (getLine): use getLineFromStdin()
+
+2018-05-31  Steven Eker  <eker@install.csl.sri.com>
+
+	* configSymbol.cc (compileRules): call resetRules() for safety
+
+	* objectSystemRewritingContext.cc (offerMessageExternally): turned
+	commented out print statement into DebugAdvisory()
+
+	* socketManagerSymbol.cc (handleManagerMessage, handleMessage): turned
+	commented out print statement into DebugAdvisory()
+
+	* configSymbol.cc (ruleRewrite): turned commented out print statement
+	into DebugAdvisory()
+
+2018-05-29  Steven Eker  <eker@install.csl.sri.com>
+
+	* objectSystemRewritingContext.hh (RewritingContext): added decl
+	for externalRewrite()
+
+	* objectSystemRewritingContext.cc (externalRewrite): added
+
+2018-05-24  Steven Eker  <eker@install.csl.sri.com>
+
+	* pseudoThread.hh (P): added NOTHING_HAPPENED to enum ReturnStatus
+	(P): updated decl for eventLoop()
+
+	* pseudoThread.cc (processFds): support wait = 0 for non-blocking
+	poll of active file descriptors
+	(eventLoop): take block argument
+
+===================================Maude117===========================================
+
+2017-08-18  Steven Eker  <eker@install.csl.sri.com>
+
+	* configSymbol.cc (ruleRewrite): added comments to explain
+	the tricky tracing code
+	(ruleRewrite): fake rewrites when tracing in the single subterm
+	case and in the ConfigSymbol went away/not leftOver rules
+	case
+
+2017-08-17  Steven Eker  <eker@install.csl.sri.com>
+
+	* configSymbol.cc (ruleRewrite): do tracePostRuleRewrite()
+	after successful objMsgRewrite()
+	(objMsgRewrite): don't do tracePostRuleRewrite() here
+	since we don't have a context with the new dag
+
+===================================Maude115===========================================
+
+2017-08-02  Steven Eker  <eker@install.csl.sri.com>
+
+	* fileManagerSymbol.hh (ExternalObjectManagerSymbol): updated
+	decl for getOpenFile()
+
+	* fileActions.cc (write, flush, getLine, getChars, getPosition)
+	(setPosition, closeFile): deleted no open file object advisory
+	since this should be able to happen
+	(getOpenFile): added a CantHappen()
+	(getOpenFile): rewritten to use Asserts()
+	(write, flush, getLine, getChars, getPosition, setPosition)
+	(closeFile, cleanUp): use new getOpenFile() convention
+
+2017-08-01  Steven Eker  <eker@install.csl.sri.com>
+
+	* fileSignature.cc: deleted stdinSymbol, stdoutSymbol,
+	stderrSymbol
+
+	* fileActions.cc (getLine): added comment about EOF case
+	(getLine): don't handle STDIN_FILENO
+	(openFile): don't handle stdin/stdout/stderr
+	(write): don't handle STDOUT_FILENO/STDERR_FILENO
+	(flush): don't handle STDOUT_FILENO/STDERR_FILENO
+	(getPosition): don't check STD_STREAM()
+	(setPosition): don't check STD_STREAM()
+	(closeFile): don't check STD_STREAM()
+	(cleanUp): don't check STD_STREAM()
+
+2017-07-31  Steven Eker  <eker@install.csl.sri.com>
+
+	* streamManagerSymbol.cc (write): flush cout
+	(getLine): implemented
+	(gotLineReply): added
+
+2017-07-28  Steven Eker  <eker@install.csl.sri.com>
+
+	* streamManagerSymbol.cc: created
+
+	* streamSignature.cc: created
+
+	* fileSignature.cc: deleted unboundedSymbol
+
+	* streamManagerSymbol.hh: created
+
+2017-07-27  Steven Eker  <eker@install.csl.sri.com>
+
+	* fileActions.cc (openFile): handle stdin
+	(getLine): handle stdin
+
+2017-07-26  Steven Eker  <eker@install.csl.sri.com>
+
+	* fileActions.cc (cleanUp): don't close standard streams
+	(closeFile): don't close standard streams
+	(setPosition): don't fseek() in standard streams
+	(getPosition): don't ftell() in standard streams
+	(flush): handle stdout, stderr
+
+	* fileSignature.cc: added stdin, stdout, stderr
+
+	* fileActions.cc (write): handle stdout, stderr
+	(openFile): handle stdout, stderr
+
+	* fileManagerSymbol.hh (ExternalObjectManagerSymbol): deleted
+	decls for  wroteMsgReply(), flushedReply(), closedFileReply()
+
+	* fileOutcomes.cc (flushedReply, closedFileReply, wroteMsgReply): deleted
+
+	* fileActions.cc (write): use trivialReply() instead of
+	wroteMsgReply()
+	(flush): use trivialReply() instead of flushedReply()
+	(closeFile): use trivialReply() instead of closedFileReply()
+
+2017-07-25  Steven Eker  <eker@install.csl.sri.com>
+
+	* fileActions.cc (getLine): do seek if lastOpWasWrite
+	(getChars): do seek if lastOpWasWrite
+	(setPosition): clear lastOpWasWrite
+
+	* fileManagerSymbol.hh (ExternalObjectManagerSymbol): added
+	decl for checkModeExt()
+
+	* fileActions.cc (checkModeExt): added
+	(getMode): use checkModeExt()
+
+	* fileManagerSymbol.hh (ExternalObjectManagerSymbol): added
+	decl for getMode()
+
+	* fileActions.cc (setPosition): use
+	MinusSymbol::getSignedInt64()
+	(getChars): no need to check for -ve nr chars to read
+	(getMode): added
+	(openFile): use getMode
+
+	* fileSignature.cc: added minusSymbol
+
+	* fileManagerSymbol.cc (handleMessage): handle
+	setPositionMsg
+
+	* fileManagerSymbol.hh (ExternalObjectManagerSymbol): added
+	decls for getBase(), setPosition()
+
+	* externalObjectManagerSymbol.cc (trivialReply): added
+
+	* externalObjectManagerSymbol.hh (FreeSymbol): added decl
+	for trivialReply
+
+	* fileActions.cc (getBase, setPosition): added
+
+	* fileSignature.cc: added startSymbol, currentSymbol,
+	endSymbol
+
+2017-07-24  Steven Eker  <eker@install.csl.sri.com>
+
+	* fileManagerSymbol.cc (handleMessage): handle
+	getPositionMsg
+
+	* fileManagerSymbol.hh (ExternalObjectManagerSymbol): added
+	decls for getPosition(), positionGotReply()
+
+	* fileOutcomes.cc (positionGotReply): added
+
+	* fileActions.cc (getPosition): added
+
+2017-07-21  Steven Eker  <eker@install.csl.sri.com>
+
+	* fileManagerSymbol.cc (handleMessage): handle getChars
+	message
+
+	* fileManagerSymbol.hh (ExternalObjectManagerSymbol): added
+	decls for getChars(), gotCharsReply()
+
+	* fileActions.cc (getChars): added
+
+	* fileOutcomes.cc (gotCharsReply): added
+
+	* fileActions.cc (closeFile): call deleteExternalObject()
+
+	* fileStuff.cc: becomes fileActions.cc
+
+	* fileManagerSymbol.hh (ExternalObjectManagerSymbol): added
+	decls for getLine(), gotLineReply()
+
+	* fileOutcomes.cc (gotLineReply): added
+
+	* fileStuff.cc (getLine): added
+
+	* fileManagerSymbol.cc (handleMessage): handle getLineMsg
+
+2017-07-20  Steven Eker  <eker@install.csl.sri.com>
+
+	* fileManagerSymbol.hh (ExternalObjectManagerSymbol): added
+	decls for flush(), flushedReply()
+
+	* fileOutcomes.cc (flushedReply): added
+
+	* fileStuff.cc (cleanUp): implemented
+	(flush): added
+
+	* fileManagerSymbol.cc (handleMessage): handle flushMsg
+
+	* fileStuff.cc (closeFile): added
+
+	* fileOutcomes.cc (closeFileReply): added
+
+	* fileManagerSymbol.cc (handleMessage): handle writeMsg,
+	closeFileMsg
+
+	* socketStuff.cc (getActiveSocket): remove duplicate call
+	to find()
+
+	* fileManagerSymbol.hh (ExternalObjectManagerSymbol): added
+	decls for getOpenFile(), getText(), write(), wroteMsgReply()
+
+	* fileOutcomes.cc (wroteMsgReply): added
+
+	* fileStuff.cc (getOpenFile): added
+	(write): added
+	(getText): added
+
+	* fileManagerSymbol.hh (ExternalObjectManagerSymbol): added
+	struct OpenFile, typedef FileMap, data member openFiles
+
+	* fileOutcomes.cc (openedFile): added
+
+	* fileManagerSymbol.hh (ExternalObjectManagerSymbol): added
+	decls for openFile(), errorReply()
+
+	* fileStuff.cc: created
+
+	* fileOutcomes.cc: created
+
+2017-07-19  Steven Eker  <eker@install.csl.sri.com>
+
+	* fileSignature.cc: added flushMsg, flushedMsg
+
+2017-07-18  Steven Eker  <eker@install.csl.sri.com>
+
+	* fileManagerSymbol.cc: created
+
+	* socketManagerSymbol.cc: code cleaning
+
+	* fileManagerSymbol.hh: created
+
+	* fileSignature.cc: created
+
+===================================Maude115===========================================
+
+2015-12-24  Steven Eker  <eker@ape.csl.sri.com>
+
+	* objectMap.cc (dagNodeLt): made dagNodeLt::operator() const
+
+	* configSymbol.hh (ACU_Symbol): made symbolLt::operator() const
+
+	* objectSystemRewritingContext.hh (RewritingContext): made
+	dagNodeLt::operator() const
+
+2015-12-18  Steven Eker  <eker@ape.csl.sri.com>
+
+	* socketStuff.cc (createClientTcpSocket): use
+	makeZeroTerminatedString()
+	(send): use empty()
+	(send): use makeZeroTerminatedString() member function
+	(send): use length() rather than size()
+
+	* socketOutcomes.cc (receivedMsgReply): crope -> Rope
+
+	* socketStuff.cc: crope -> Rope
+
+	* socketManagerSymbol.hh: crope -> Rope
+
+===================================Maude108a===========================================
+
+2014-02-06  Steven Eker  <eker@ape.csl.sri.com>
+
+	* pseudoThread.cc (processCallBacks): added comment
+	(eventLoop): fix a bug where we were putting wait in a shadowing
+	variable
+
+===================================Maude100a===========================================
+
+2012-11-09  Steven Eker  <eker@ape.csl.sri.com>
+
+	* pseudoThread.cc (processFds): update idea of time after poll() call
+	(eventLoop): rewritten so we can never return 0; we loop until we
+	handle an event, get interrupted or there are no pending call backs
+
+	* pseudoThread.hh (P): added comments explaining the arguments to
+	public member functions; removed default argument value for
+	requestCallBack()
+	(CallBackRequest, <): moved out of class declaration
+
+2012-11-08  Steven Eker  <eker@ape.csl.sri.com>
+
+	* pseudoThread.cc (processFds): fix bugs where we were writing
+	wrong thing into info.flags in POLLIN and POLLOUT cases; code
+	cleaning
+
+2012-10-19  Steven Eker  <eker@ape.csl.sri.com>
+
+	* socketManagerSymbol.hh (PseudoThread): updated decl for
+	getActiveSocket()
+
+	* socketStuff.cc (getActiveSocket): pass back pointer to
+	ActiveSocket object
+	(acceptClient): use ActiveSocket pointer
+	(send): use ActiveSocket pointer
+	(receive): use ActiveSocket pointer
+	(closeSocket, cleanUp): pass extra argument to getActiveSocket
+
+	* socketOutcomes.cc (acceptedClientReply): don't set state here
+
+	* socketStuff.cc (acceptClient): set state on new accept socket here
+
+	* socketAsync.cc (doWrite): set state after call to createdSocketReply()
+	(doRead): set state on new accept socket here
+
+	* socketOutcomes.cc (createdSocketReply): don't set state here
+
+	* socketStuff.cc (createServerTcpSocket): changed comment on line
+	that sets state
+	(createClientTcpSocket): set state here rather than rely on
+	createdSocketReply()
+
+	* socketAsync.cc (doRead): commented out superfluous access of
+	activeSockets
+
+2012-10-16  Steven Eker  <eker@ape.csl.sri.com>
+
+	* socketManagerSymbol.cc (ActiveSocket): added in order to fix a
+	bug that we were implicitly deleting (via map) ActiveSockets with
+	an uninitialized textArray field
+
+	* socketManagerSymbol.hh (PseudoThread): added decl for explicit
+	ActiveSocket ctor
+
+===================================Maude96b===========================================
+
+2011-12-31  Steven Eker  <eker@rho>
+
+	* socketManagerSymbol.cc (ActiveSocket): added
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): replace text with textArray in struct
+	ActiveSocket
+
+	* socketStuff.cc (SocketManagerSymbol::send): fix bug where we were extracting a c_str() from
+	a rope that then went out of scope, potentially before we were finished with the const char*
+	from c_str()
+	(SocketManagerSymbol::send): check errno == EWOULDBLOCK for POSIX compliance
+
+===================================Maude95c===========================================
+
+2009-01-29  Steven Eker  <eker@goo.csl.sri.com>
+
+	* socketManagerSymbol.cc (attachData, attachSymbol, copyAttachments)
+	(getDataAttachments, getSymbolAttachments): call
+	ExternalObjectManagerSymbol functions rather the FreeSymbol
+	functions
+
+===================================Maude92===========================================
+
+2008-09-11  Steven Eker  <eker@goo.csl.sri.com>
+
+	* socketAsync.cc (doError, doWrite): added #ifdef NO_ASSERT to
+	avoid compiler warning
+
+	* socketStuff.cc (createClientTcpSocket): delete decl of unused
+	domain variable
+
+===================================Maude91a===========================================
+
+2005-04-29  Steven Eker  <eker@goo.csl.sri.com>
+
+	* socketStuff.cc (createClientTcpSocket, createServerTcpSocket)
+	(acceptClient, send, receive, closeSocket): most DebugAdvisory()s
+	turned into IssueAdvisory()s
+
+2005-04-15  Steven Eker  <eker@goo.csl.sri.com>
+
+	* socketStuff.cc (receive): added extra DebugAdvisory()
+
+===================================Maude86a===========================================
+
+2005-03-15  Steven Eker  <eker@goo.csl.sri.com>
+
+	* socketStuff.cc (createServerTcpSocket): set SO_REUSEADDR flag
+
+2005-03-14  Steven Eker  <eker@goo.csl.sri.com>
+
+	* socketStuff.cc (createServerTcpSocket): make DebugAdvisory()
+	more elaborate
+
+	* objectSystemRewritingContext.cc (ObjectSystemRewritingContext):
+	added DebugAdvisory() to check for server sockets not being closed
+	after ^C
+
+===================================Maude86===========================================
+
+2004-12-23  Steven Eker  <eker@goo.csl.sri.com>
+
+	* socketAsync.cc (doError): use getsockopt() for more accurate
+	error message
+
+	* socketStuff.cc (send): don't accept 0 length sends
+	(send): don't accept send unless socket is in a suitable state
+	(receive): don't accept receive unless socket is in a suitable
+	state
+
+2004-12-22  Steven Eker  <eker@goo.csl.sri.com>
+
+	* socketAsync.cc (doWrite): new closedSocketReply() convention
+	(doRead): new closedSocketReply() convention
+	(doError): new closedSocketReply() convention
+	(doHungUp): new closedSocketReply() convention
+
+	* socketStuff.cc (getDomain): deleted
+	(send): new closedSocketReply() convention
+	(receive): new closedSocketReply() convention
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): updated decl
+	for closedSocketReply()
+	(class SocketManagerSymbol): deleted decl for getDomain()
+
+	* socketOutcomes.cc (closedSocketReply): handle errorMessage arg
+
+	* socketStuff.cc (createClientTcpSocket): new message format
+	(createServerTcpSocket): new message format, check that backlog > 0
+
+	* socketSignature.cc: updated decls for createClientTcpSocketMsg,
+	createServer, TcpSocketMsg, receiveMsg, closedSocketMsg
+
+	* socketAsync.cc (doRead): handle accept case
+
+	* socketStuff.cc (createClientTcpSocket): use setonblockingFlag()
+	(createServerTcpSocket): use setNonblockingFlag()
+	(acceptClient): use setNonblockingFlag()
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added decl
+	for setNonblockingFlag()
+
+	* socketStuff.cc (setNonblockingFlag): added
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added decl
+	for acceptedClientReply()
+
+	* socketOutcomes.cc (acceptedClientReply): added
+
+2004-12-21  Steven Eker  <eker@goo.csl.sri.com>
+
+	* socketStuff.cc (acceptClient): implemented
+
+	* socketSignature.cc (MACRO): updated decls for
+	createServerTcpSocketMsg and acceptedClientMsg
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added
+	LISTENING and WAITING_TO_ACCEPT to enum SocketState
+
+	* socketStuff.cc (createServerTcpSocket): implemented
+
+	* socketAsync.cc (doError): implemented
+	(doHungUp): implemented
+
+	* socketStuff.cc (cleanUp): call PseudoThread::clearFlags()
+
+2004-12-20  Steven Eker  <eker@goo.csl.sri.com>DebugAdvisory()
+
+	* socketStuff.cc (receive): handle async read
+	(send): hande async write
+	(createClientTcpSocket): allow nonblocking sockets
+
+	* socketAsync.cc (doWrite): handle async write
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added decl
+	for sentMsgReply()
+
+	* socketOutcomes.cc (sentMsgReply): added
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added text,
+	unsent and nrUnsent members to struct ActiveSocket
+
+	* socketAsync.cc (doRead): handle error and zero byte cases by
+	closing socket
+
+	* socketStuff.cc (receive): use strerror() in place of
+	sys_errlist[]
+	(createClientTcpSocket): DebugAdvisory() for unexpected connect()
+	error
+	(createClientTcpSocket): added DebugAdvisory() for declined
+	message
+	(closeSocket): added DebugAdvisory() for declined message
+	(receive): added DebugAdvisory() for declined message
+	(send): added DebugAdvisory() for declined message
+	(acceptClient, createServerTcpSocket): added DebugAdvisory() for
+	declined message
+	(createClientTcpSocket): added more DebugAdvisory()s
+
+2004-12-17  Steven Eker  <eker@goo.csl.sri.com>
+
+	* socketStuff.cc (receive): handle interrupts during read()
+	(receive): treat unrecognized error messages as a far end close
+
+	* socketAsync.cc (doRead): implemented
+
+	* socketStuff.cc (receive): use closedSocketReply()
+	(closeSocket): use closedSocketReply()
+
+	* socketOutcomes.cc (closedSocketReply): added
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added enum Sizes
+
+	* socketStuff.cc (receive): use receivedMsgReply()
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added decl
+	for receivedMsgReply()
+
+	* socketOutcomes.cc (receivedMsgReply): added
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added
+	NOMINAL, WAITING_TO_READ, WAITING_TO_WRITE to enum SocketState,
+	removed READY_TO_SEND
+
+2004-12-16  Steven Eker  <eker@goo.csl.sri.com>
+
+	* socketAsync.cc (doWrite): handle async connects
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added
+	WAITING_TO_CONNECT to enum SocketState
+
+	* socketAsync.cc (doRead, doWrite, doError, doHungUp): moved here
+
+	* socketStuff.cc (createClientTcpSocket): use createdSocketReply()
+	(createClientTcpSocket): don't accept badly formed messages
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added decl
+	for createdSocketReply()
+
+	* socketOutcomes.cc (errorReply): moved here
+	(createdSocketReply): addded
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added
+	lastMessage and context fields to struct ActiveSocket
+
+2004-12-06  Steven Eker  <eker@goo.csl.sri.com>
+
+	* socketStuff.cc: include netinet/in.h
+
+2004-10-08  Steven Eker  <eker@goo.csl.sri.com>
+
+	* pseudoThread.cc: added #include <errno.h>
+
+2004-08-03  Steven Eker  <eker@goo.csl.sri.com>
+
+	* configSymbol.cc (ruleRewrite): only do external stuff if mode is
+	external; put check for incoming external messages in second loop
+	rather than first
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added decl
+	for 2nd closeSocket()
+
+	* socketStuff.cc (closeSocket): added 2nd version
+	(closeSocket): use other closeSocket()
+	(receive): handle far end closed
+
+2004-08-02  Steven Eker  <eker@goo.csl.sri.com>
+
+	* objectSystemRewritingContext.cc (~ObjectSystemRewritingContext):
+	added
+
+	* objectSystemRewritingContext.hh (class
+	ObjectSystemRewritingContext): adde decl for dtor
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added decl
+	for cleanUp()
+
+	* socketStuff.cc (closeSocket): erase closed socket from
+	activeSockets
+
+	* externalObjectManagerSymbol.hh (class
+	ExternalObjectManagerSymbol): added decl for cleanUp()
+
+	* socketStuff.cc (closeSocket): fixed bug where we were sending
+	back sentMsg
+
+2004-07-30  Steven Eker  <eker@goo.csl.sri.com>
+
+	* objectSystemRewritingContext.cc (getExternalMessages): added
+	(offerMessageExternally): added
+
+	* objectSystemRewritingContext.hh (class
+	ObjectSystemRewritingContext): added decls for
+	getExternalMessages() and offerMessageExternally()
+
+	* configSymbol.cc (ruleRewrite): call getExternalMessages() and
+	offerMessageExternally()
+
+	* objectSystem.hh: added ExternalObjectManagerSymbol
+
+	* socketStuff.cc (closeSocket): use deleteExternalObject()
+	(createClientTcpSocket): use addExternalObject()
+
+	* objectSystemRewritingContext.hh (class
+	ObjectSystemRewritingContext): added decls for
+	addExternalObject(), deleteExternalObject()
+
+	* objectSystemRewritingContext.cc (markReachableNodes): rewritten
+	(addExternalObject): added
+	(deleteExternalObject): added
+
+	* objectSystemRewritingContext.hh (class
+	ObjectSystemRewritingContext): turned class MessageMap into a typedef
+	(class ObjectSystemRewritingContext): added typedef for ObjectSet
+	and data member externalObjects; added decl for
+	markReachableNodes(); messageMap becomes incomingMessages
+
+2004-07-29  Steven Eker  <eker@goo.csl.sri.com>
+
+	* objectSystemRewritingContext.cc (markReachableNodes): added
+
+	* objectSystemRewritingContext.hh (class
+	ObjectSystemRewritingContext): added class MessageMap and
+	dagNodeLt()
+
+	* objectSystemRewritingContext.cc: created
+
+	* externalObjectManagerSymbol.hh (class
+	ExternalObjectManagerSymbol): updated decls for use
+	ObjectSystemRewritingContext&
+
+	* socketStuff.cc (errorReply): implemented
+
+	* objectSystemRewritingContext.hh (class
+	ObjectSystemRewritingContext): added deck for bufferMessage()
+	(bufferMessage): added stub
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): updated many
+	declarations
+
+	* socketStuff.cc (createClientTcpSocket): take
+	ObjectSystemRewritingContext&
+	(createServerTcpSocket): take ObjectSystemRewritingContext&
+	(acceptClient): take ObjectSystemRewritingContext&
+	(send): take ObjectSystemRewritingContext&
+	(receive): take ObjectSystemRewritingContext&
+	(closeSocket): take ObjectSystemRewritingContext&
+
+	* socketManagerSymbol.cc (handleManagerMessage): take
+	ObjectSystemRewritingContext&
+	(handleMessage): take ObjectSystemRewritingContext&
+
+2004-07-28  Steven Eker  <eker@goo.csl.sri.com>
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added decls
+	for getText() and getActiveSocket()
+
+	* socketStuff.cc (getActiveSocket): added
+	(getText): added
+
+2004-07-23  Steven Eker  <eker@goo.csl.sri.com>
+
+	* pseudoThread.cc (doCallBack): added
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): derive from
+	PseudoThread
+	(class SocketManagerSymbol): added enum SocketState, struct
+	ActiveSocket, typedef SocketMap, data member activeSockets
+
+	* socketStuff.cc (getDomain): added
+
+	* pseudoThread.cc (processCallBacks): rewritten
+
+	* pseudoThread.hh (class PseudoThread): updated decls for
+	processCallBacks() and processFds()
+
+	* pseudoThread.cc (eventLoop): rewritten
+	(processFds): rewritten
+
+	* pseudoThread.hh (class PseudoThread): added enum ReturnStatus;
+	updated decl for eventLoop()
+
+2004-07-21  Steven Eker  <eker@goo.csl.sri.com>
+
+	* pseudoThread.hh: created
+
+	* pseudoThread.cc: created
+
+2004-07-14  Steven Eker  <eker@goo.csl.sri.com>
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added decls
+	for getProtocol(), getPort(), errorReply()
+
+	* socketManagerSymbol.cc (handleManagerMessage): added
+
+	* externalObjectManagerSymbol.hh (class
+	ExternalObjectManagerSymbol): added decl for handleManangerMessage()
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added decls
+	for createClientTcpSocket(), createServerTcpSocket(),
+	acceptClient(), send(), receive(), closeSocket()
+
+	* socketStuff.cc: created
+
+	* socketManagerSymbol.cc (handleMessage): added
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): derive from
+	ExternalObjectManagerSymbol
+
+	* socketManagerSymbol.cc (SocketManagerSymbol): call
+	ExternalObjectManagerSymbol()
+
+	* externalObjectManagerSymbol.cc: created
+
+	* externalObjectManagerSymbol.hh: created
+
+2004-07-13  Steven Eker  <eker@goo.csl.sri.com>
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): added decls
+	for getDataAttachments() and getSymbolAttachments()
+
+	* socketManagerSymbol.cc (getDataAttachments): added
+	(getSymbolAttachments): added
+
+2004-07-12  Steven Eker  <eker@goo.csl.sri.com>
+
+	* socketManagerSymbol.cc (attachTerm): deleted
+	(copyAttachments): added
+
+	* socketManagerSymbol.hh (class SocketManagerSymbol): deleted decl
+	for attachTerm(); added decl for copyAttachments()
+
+	* socketManagerSymbol.cc (SocketManagerSymbol): use
+	socketSignature.cc
+	(attachSymbol): use socketSignature.cc
+	(attachData): use NULL_DATA()
+	(attachSymbol): use BIND_SYMBOL()
+
+	* socketManagerSymbol.hh (MACRO): use socketSignature.cc
+
+	* socketSignature.cc: created
+
+	* objectSystem.hh: deleted class ExternalObjectManager
+
+	* socketManager.cc: deleted
+
+	* socketManager.hh: deleted
+
+	* externalObjectManager.cc: deleted
+
+	* externalObjectManager.hh: deleted
+
+2004-07-09  Steven Eker  <eker@goo.csl.sri.com>
+
+	* socketManagerSymbol.cc: created
+
+	* socketManagerSymbol.hh: created
+
+2004-07-07  Steven Eker  <eker@goo.csl.sri.com>
+
+	* socketManager.cc: created
+
+	* socketManager.hh: created
+
+	* objectSystem.hh: added class ExternalObjectManager
+
+2004-06-30  Steven Eker  <eker@goo.csl.sri.com>
+
+	* externalObjectManager.cc: created
+
+	* externalObjectManager.hh: created
+	
+===================================Maude84d===========================================
+
+2003-05-23  Steven Eker  <eker@goo.csl.sri.com>
+
+	* configSymbol.cc (compileRules): use isNonexec(); no longer check
+	for unbound variables
+	(ruleRewrite): added a call to tracePreRuleRewrite()
+
+2003-05-21  Steven Eker  <eker@goo.csl.sri.com>
+
+	* configSymbol.cc (ruleRewrite): use leftOverRewrite()
+
+	* configSymbol.hh (class ConfigSymbol): added decl for
+	leftOverRewrite()
+
+	* configSymbol.cc (resetRules): added
+	(compileRules): fill out leftOver
+	(objMsgRewrite): attempt rule fairness
+	(compileRules): only put rule that have no unbound variables in
+	leftOver
+	(leftOverRewrite): added
+
+	* configSymbol.hh (class ConfigSymbol): added decl for resetRules()
+
+	* configSymbol.cc (checkArgs): chech that object and message
+	patterns are stable
+	(compileRules): fill out ruleMap
+	(objMsgRewrite): take messageSymbol arg
+	(ruleRewrite): use new objMsgRewrite() semantics
+
+	* configSymbol.hh (class ConfigSymbol): added struct symbolLt and
+	struct RuleSet, typedef RuleMap and data members ruleMap and
+	leftOvers; deleted data member objMsgRules
+
+	* configSymbol.cc (ConfigSymbol): don't init mode
+	(ruleRewrite): use ObjectSystemRewritingContext
+
+	* configSymbol.hh (class ConfigSymbol): delete enum Mode, data
+	memeber mode and decl for setMode();
+	(setMode): deleted
+	(class ConfigSymbol): deleted struct AutomatonPair
+
+	* objectSystem.hh: added class ObjectSystemRewritingContext
+
+	* objectSystemRewritingContext.hh (class
+	ObjectSystemRewritingContext): created
+
+2003-05-20  Steven Eker  <eker@goo.csl.sri.com>
+
+	* configSymbol.cc (objMsgRewrite): use objMsgRules
+	(compileRules): use objMsgRules
+	(ruleRewrite): handle mode
+	(ruleRewrite): rewrote obj-msg recognition loop; use Asserts()
+	that DagArgumentIterators are valid; handle duplicate object more
+	gracefully
+
+	* configSymbol.hh (class ConfigSymbol): dleted data member
+	automatonPairs; added data members mode and objMsgRules
+
+2003-05-19  Steven Eker  <eker@goo.csl.sri.com>
+
+	* configSymbol.cc (ruleRewrite): rewritten using objMsgRewrite()
+	and retrieveObject()
+
+	* configSymbol.hh (class ConfigSymbol): added decls for
+	objMsgRewrite() and retrieveObject()
+	(class ConfigSymbol): added enum Mode
+
+	* configSymbol.cc (objMsgRewrite): added
+	(retrieveObject): added
+
+	* remainder.cc: created
+
+	* configSymbol.cc (ConfigSymbol): pass useTree = false to
+	ACU_Symbol()
+
+	* objectMap.cc: moved ObjectMap decls here
+	(dump): added
+
+	* configSymbol.cc (markReachableNodes): use FOR_EACH_CONST()
+	(markReachableNodes): use FOR_EACH_CONST()
+
+===================================Maude80a===========================================
+
+2003-02-25  Steven Eker  <eker@goo.csl.sri.com>
+
+	* configSymbol.cc: removed #pragma
+	(checkArgs): updated Assert()
+
+	* configSymbol.hh: removed #pragma
+	
+===================================Maude79===========================================
+
+2001-04-20  Steven Eker  <eker@goo.csl.sri.com>
+
+	* configSymbol.hh (class ConfigSymbol): added struct MessageQueue,
+	struct dagNodeLt, class ObjectMap
+	(class ConfigSymbol): added struct AutomatonPair and data member
+	automatonPairs
+
+	* configSymbol.cc (checkArgs): added
+
+2001-04-17  Steven Eker  <eker@goo.csl.sri.com>
+
+	* configSymbol.hh: created
+
+	* objectSystem.hh: created
+

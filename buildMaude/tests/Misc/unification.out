@@ -1,0 +1,4925 @@
+==========================================
+unify in TEST : f(X:Nat, Y:Nat) ^ B:NzNat =? A:NzNat ^ f(Y:Nat, Z:Nat) .
+
+Unifier 1
+X:Nat --> #1:Nat
+Y:Nat --> #2:NzNat
+B:NzNat --> f(#2:NzNat, #3:Nat)
+A:NzNat --> f(#1:Nat, #2:NzNat)
+Z:Nat --> #3:Nat
+
+Unifier 2
+X:Nat --> #1:NzNat
+Y:Nat --> #2:Nat
+B:NzNat --> f(#2:Nat, #3:NzNat)
+A:NzNat --> f(#1:NzNat, #2:Nat)
+Z:Nat --> #3:NzNat
+==========================================
+unify [100] in NAT : X:Nat + X:Nat + Y:Nat =? A:Nat + B:Nat + C:Nat .
+
+Unifier 1
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat + #6:Nat + #8:Nat
+Y:Nat --> #4:Nat + #7:Nat + #9:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat + #5:Nat + #6:Nat + #7:Nat
+C:Nat --> #3:Nat + #6:Nat + #8:Nat + #8:Nat + #9:Nat
+
+Unifier 2
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat + #6:Nat + #8:Nat
+Y:Nat --> #4:Nat + #7:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat + #5:Nat + #6:Nat + #7:Nat
+C:Nat --> #3:Nat + #6:Nat + #8:Nat + #8:Nat
+
+Unifier 3
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat + #6:Nat
+Y:Nat --> #4:Nat + #7:Nat + #8:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat + #5:Nat + #6:Nat + #7:Nat
+C:Nat --> #3:Nat + #6:Nat + #8:Nat
+
+Unifier 4
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat + #6:Nat
+Y:Nat --> #4:Nat + #7:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat + #5:Nat + #6:Nat + #7:Nat
+C:Nat --> #3:Nat + #6:Nat
+
+Unifier 5
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat + #6:Nat + #7:Nat
+Y:Nat --> #4:Nat + #8:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat + #5:Nat + #6:Nat
+C:Nat --> #3:Nat + #6:Nat + #7:Nat + #7:Nat + #8:Nat
+
+Unifier 6
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat + #6:Nat + #7:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #1:Nat + #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #3:Nat + #5:Nat + #5:Nat + #6:Nat
+C:Nat --> #4:Nat + #6:Nat + #7:Nat + #7:Nat
+
+Unifier 7
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat + #6:Nat
+Y:Nat --> #4:Nat + #7:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat + #5:Nat + #6:Nat
+C:Nat --> #3:Nat + #6:Nat + #7:Nat
+
+Unifier 8
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat + #6:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #1:Nat + #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #3:Nat + #5:Nat + #5:Nat + #6:Nat
+C:Nat --> #4:Nat + #6:Nat
+
+Unifier 9
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat + #7:Nat
+Y:Nat --> #4:Nat + #6:Nat + #8:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat + #5:Nat + #6:Nat
+C:Nat --> #3:Nat + #7:Nat + #7:Nat + #8:Nat
+
+Unifier 10
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat + #7:Nat
+Y:Nat --> #4:Nat + #6:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat + #5:Nat + #6:Nat
+C:Nat --> #3:Nat + #7:Nat + #7:Nat
+
+Unifier 11
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat
+Y:Nat --> #4:Nat + #6:Nat + #7:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat + #5:Nat + #6:Nat
+C:Nat --> #3:Nat + #7:Nat
+
+Unifier 12
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat
+Y:Nat --> #4:Nat + #6:Nat
+A:Nat --> #1:Nat + #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #3:Nat + #5:Nat + #5:Nat + #6:Nat
+C:Nat --> #1:Nat
+
+Unifier 13
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat + #6:Nat
+Y:Nat --> #4:Nat + #7:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat + #5:Nat
+C:Nat --> #3:Nat + #6:Nat + #6:Nat + #7:Nat
+
+Unifier 14
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat + #6:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #1:Nat + #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #3:Nat + #5:Nat + #5:Nat
+C:Nat --> #4:Nat + #6:Nat + #6:Nat
+
+Unifier 15
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat
+Y:Nat --> #4:Nat + #6:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat + #5:Nat
+C:Nat --> #3:Nat + #6:Nat
+
+Unifier 16
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #1:Nat + #2:Nat + #3:Nat + #3:Nat + #4:Nat
+B:Nat --> #4:Nat + #5:Nat + #5:Nat
+C:Nat --> #2:Nat
+
+Unifier 17
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat + #7:Nat
+Y:Nat --> #4:Nat + #6:Nat + #8:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat + #6:Nat
+C:Nat --> #3:Nat + #5:Nat + #7:Nat + #7:Nat + #8:Nat
+
+Unifier 18
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat + #7:Nat
+Y:Nat --> #4:Nat + #6:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat + #6:Nat
+C:Nat --> #3:Nat + #5:Nat + #7:Nat + #7:Nat
+
+Unifier 19
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat
+Y:Nat --> #4:Nat + #6:Nat + #7:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat + #6:Nat
+C:Nat --> #3:Nat + #5:Nat + #7:Nat
+
+Unifier 20
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat
+Y:Nat --> #4:Nat + #6:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat + #6:Nat
+C:Nat --> #3:Nat + #5:Nat
+
+Unifier 21
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat + #6:Nat
+Y:Nat --> #4:Nat + #7:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat
+C:Nat --> #3:Nat + #5:Nat + #6:Nat + #6:Nat + #7:Nat
+
+Unifier 22
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat + #6:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #1:Nat + #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #3:Nat + #5:Nat
+C:Nat --> #4:Nat + #5:Nat + #6:Nat + #6:Nat
+
+Unifier 23
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat
+Y:Nat --> #4:Nat + #6:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat
+C:Nat --> #3:Nat + #5:Nat + #6:Nat
+
+Unifier 24
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #1:Nat + #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #3:Nat + #5:Nat
+C:Nat --> #4:Nat + #5:Nat
+
+Unifier 25
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #6:Nat
+Y:Nat --> #4:Nat + #5:Nat + #7:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat
+C:Nat --> #3:Nat + #6:Nat + #6:Nat + #7:Nat
+
+Unifier 26
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #6:Nat
+Y:Nat --> #4:Nat + #5:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat
+C:Nat --> #3:Nat + #6:Nat + #6:Nat
+
+Unifier 27
+X:Nat --> #1:Nat + #2:Nat + #3:Nat
+Y:Nat --> #4:Nat + #5:Nat + #6:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #5:Nat
+C:Nat --> #3:Nat + #6:Nat
+
+Unifier 28
+X:Nat --> #1:Nat + #2:Nat + #3:Nat
+Y:Nat --> #4:Nat + #5:Nat
+A:Nat --> #1:Nat + #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #3:Nat + #5:Nat
+C:Nat --> #1:Nat
+
+Unifier 29
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat
+Y:Nat --> #4:Nat + #6:Nat
+A:Nat --> #1:Nat + #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #1:Nat
+C:Nat --> #3:Nat + #5:Nat + #5:Nat + #6:Nat
+
+Unifier 30
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #1:Nat + #2:Nat + #3:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat
+C:Nat --> #4:Nat + #5:Nat + #5:Nat
+
+Unifier 31
+X:Nat --> #1:Nat + #2:Nat + #3:Nat
+Y:Nat --> #4:Nat + #5:Nat
+A:Nat --> #1:Nat + #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #1:Nat
+C:Nat --> #3:Nat + #5:Nat
+
+Unifier 32
+X:Nat --> #2:Nat + #3:Nat + #4:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #1:Nat + #2:Nat + #3:Nat + #4:Nat + #4:Nat
+B:Nat --> #2:Nat
+C:Nat --> #3:Nat
+
+Unifier 33
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #4:Nat + #5:Nat + #7:Nat
+Y:Nat --> #6:Nat + #8:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat + #4:Nat + #5:Nat + #6:Nat
+C:Nat --> #3:Nat + #5:Nat + #7:Nat + #7:Nat + #8:Nat
+
+Unifier 34
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat + #6:Nat + #7:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #1:Nat + #3:Nat + #5:Nat + #5:Nat + #6:Nat
+C:Nat --> #4:Nat + #6:Nat + #7:Nat + #7:Nat
+
+Unifier 35
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #4:Nat + #5:Nat
+Y:Nat --> #6:Nat + #7:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat + #4:Nat + #5:Nat + #6:Nat
+C:Nat --> #3:Nat + #5:Nat + #7:Nat
+
+Unifier 36
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat + #6:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #1:Nat + #3:Nat + #5:Nat + #5:Nat + #6:Nat
+C:Nat --> #4:Nat + #6:Nat
+
+Unifier 37
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat + #6:Nat + #7:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #3:Nat + #5:Nat + #5:Nat + #6:Nat
+C:Nat --> #1:Nat + #4:Nat + #6:Nat + #7:Nat + #7:Nat
+
+Unifier 38
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat + #6:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #3:Nat + #5:Nat + #5:Nat + #6:Nat
+C:Nat --> #1:Nat + #4:Nat + #6:Nat
+
+Unifier 39
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #4:Nat + #6:Nat
+Y:Nat --> #5:Nat + #7:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat + #4:Nat + #5:Nat
+C:Nat --> #3:Nat + #6:Nat + #6:Nat + #7:Nat
+
+Unifier 40
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat + #6:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #1:Nat + #3:Nat + #5:Nat + #5:Nat
+C:Nat --> #4:Nat + #6:Nat + #6:Nat
+
+Unifier 41
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #4:Nat
+Y:Nat --> #5:Nat + #6:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat + #4:Nat + #5:Nat
+C:Nat --> #3:Nat + #6:Nat
+
+Unifier 42
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #3:Nat + #3:Nat + #4:Nat
+B:Nat --> #1:Nat + #4:Nat + #5:Nat + #5:Nat
+C:Nat --> #2:Nat
+
+Unifier 43
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat + #6:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #3:Nat + #5:Nat + #5:Nat
+C:Nat --> #1:Nat + #4:Nat + #6:Nat + #6:Nat
+
+Unifier 44
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #3:Nat + #5:Nat + #5:Nat
+C:Nat --> #1:Nat + #4:Nat
+
+Unifier 45
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #4:Nat + #6:Nat
+Y:Nat --> #5:Nat + #7:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat + #5:Nat
+C:Nat --> #3:Nat + #4:Nat + #6:Nat + #6:Nat + #7:Nat
+
+Unifier 46
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat + #6:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #1:Nat + #3:Nat + #5:Nat
+C:Nat --> #4:Nat + #5:Nat + #6:Nat + #6:Nat
+
+Unifier 47
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #4:Nat
+Y:Nat --> #5:Nat + #6:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat + #5:Nat
+C:Nat --> #3:Nat + #4:Nat + #6:Nat
+
+Unifier 48
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #1:Nat + #3:Nat + #5:Nat
+C:Nat --> #4:Nat + #5:Nat
+
+Unifier 49
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat + #6:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #3:Nat + #5:Nat
+C:Nat --> #1:Nat + #4:Nat + #5:Nat + #6:Nat + #6:Nat
+
+Unifier 50
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #3:Nat + #5:Nat
+C:Nat --> #1:Nat + #4:Nat + #5:Nat
+
+Unifier 51
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat
+Y:Nat --> #4:Nat + #6:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat
+C:Nat --> #3:Nat + #5:Nat + #5:Nat + #6:Nat
+
+Unifier 52
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #1:Nat + #3:Nat
+C:Nat --> #4:Nat + #5:Nat + #5:Nat
+
+Unifier 53
+X:Nat --> #1:Nat + #2:Nat + #3:Nat
+Y:Nat --> #4:Nat + #5:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat
+C:Nat --> #3:Nat + #5:Nat
+
+Unifier 54
+X:Nat --> #2:Nat + #3:Nat + #4:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #3:Nat + #3:Nat + #4:Nat
+B:Nat --> #1:Nat + #4:Nat
+C:Nat --> #2:Nat
+
+Unifier 55
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #3:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat
+C:Nat --> #1:Nat + #4:Nat + #5:Nat + #5:Nat
+
+Unifier 56
+X:Nat --> #2:Nat + #3:Nat + #4:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #3:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat
+C:Nat --> #1:Nat + #4:Nat
+
+Unifier 57
+X:Nat --> #1:Nat + #2:Nat + #4:Nat + #5:Nat + #7:Nat
+Y:Nat --> #3:Nat + #6:Nat + #8:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat + #4:Nat + #5:Nat + #6:Nat
+C:Nat --> #5:Nat + #7:Nat + #7:Nat + #8:Nat
+
+Unifier 58
+X:Nat --> #1:Nat + #2:Nat + #4:Nat + #5:Nat + #7:Nat
+Y:Nat --> #3:Nat + #6:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat + #4:Nat + #5:Nat + #6:Nat
+C:Nat --> #5:Nat + #7:Nat + #7:Nat
+
+Unifier 59
+X:Nat --> #1:Nat + #2:Nat + #4:Nat + #5:Nat
+Y:Nat --> #3:Nat + #6:Nat + #7:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat + #4:Nat + #5:Nat + #6:Nat
+C:Nat --> #5:Nat + #7:Nat
+
+Unifier 60
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat
+Y:Nat --> #4:Nat + #6:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #1:Nat + #3:Nat + #5:Nat + #5:Nat + #6:Nat
+C:Nat --> #1:Nat
+
+Unifier 61
+X:Nat --> #1:Nat + #2:Nat + #4:Nat + #5:Nat + #6:Nat
+Y:Nat --> #3:Nat + #7:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat + #4:Nat + #5:Nat
+C:Nat --> #5:Nat + #6:Nat + #6:Nat + #7:Nat
+
+Unifier 62
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat + #6:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #1:Nat + #2:Nat + #2:Nat + #3:Nat
+B:Nat --> #3:Nat + #4:Nat + #4:Nat + #5:Nat
+C:Nat --> #5:Nat + #6:Nat + #6:Nat
+
+Unifier 63
+X:Nat --> #1:Nat + #2:Nat + #4:Nat + #5:Nat
+Y:Nat --> #3:Nat + #6:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat + #4:Nat + #5:Nat
+C:Nat --> #5:Nat + #6:Nat
+
+Unifier 64
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #1:Nat + #3:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #4:Nat + #5:Nat + #5:Nat
+C:Nat --> #2:Nat
+
+Unifier 65
+X:Nat --> #1:Nat + #2:Nat + #4:Nat + #6:Nat
+Y:Nat --> #3:Nat + #5:Nat + #7:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat + #4:Nat + #5:Nat
+C:Nat --> #6:Nat + #6:Nat + #7:Nat
+
+Unifier 66
+X:Nat --> #1:Nat + #2:Nat + #4:Nat + #6:Nat
+Y:Nat --> #3:Nat + #5:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat + #4:Nat + #5:Nat
+C:Nat --> #6:Nat + #6:Nat
+
+Unifier 67
+X:Nat --> #2:Nat + #3:Nat + #5:Nat
+Y:Nat --> #1:Nat + #4:Nat + #6:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #3:Nat + #5:Nat + #5:Nat + #6:Nat
+C:Nat --> #1:Nat
+
+Unifier 68
+X:Nat --> #1:Nat + #2:Nat + #4:Nat + #5:Nat
+Y:Nat --> #3:Nat + #6:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat + #4:Nat
+C:Nat --> #5:Nat + #5:Nat + #6:Nat
+
+Unifier 69
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #1:Nat + #2:Nat + #2:Nat + #3:Nat
+B:Nat --> #3:Nat + #4:Nat + #4:Nat
+C:Nat --> #5:Nat + #5:Nat
+
+Unifier 70
+X:Nat --> #2:Nat + #3:Nat + #5:Nat
+Y:Nat --> #1:Nat + #4:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #3:Nat + #5:Nat + #5:Nat
+C:Nat --> #1:Nat
+
+Unifier 71
+X:Nat --> #1:Nat + #2:Nat + #4:Nat + #6:Nat
+Y:Nat --> #3:Nat + #5:Nat + #7:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat + #5:Nat
+C:Nat --> #4:Nat + #6:Nat + #6:Nat + #7:Nat
+
+Unifier 72
+X:Nat --> #1:Nat + #2:Nat + #4:Nat + #6:Nat
+Y:Nat --> #3:Nat + #5:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat + #5:Nat
+C:Nat --> #4:Nat + #6:Nat + #6:Nat
+
+Unifier 73
+X:Nat --> #1:Nat + #2:Nat + #4:Nat
+Y:Nat --> #3:Nat + #5:Nat + #6:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat + #5:Nat
+C:Nat --> #4:Nat + #6:Nat
+
+Unifier 74
+X:Nat --> #1:Nat + #2:Nat + #3:Nat
+Y:Nat --> #4:Nat + #5:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #1:Nat + #3:Nat + #5:Nat
+C:Nat --> #1:Nat
+
+Unifier 75
+X:Nat --> #1:Nat + #2:Nat + #4:Nat + #5:Nat
+Y:Nat --> #3:Nat + #6:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat
+C:Nat --> #4:Nat + #5:Nat + #5:Nat + #6:Nat
+
+Unifier 76
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #1:Nat + #2:Nat + #2:Nat + #3:Nat
+B:Nat --> #3:Nat + #4:Nat
+C:Nat --> #4:Nat + #5:Nat + #5:Nat
+
+Unifier 77
+X:Nat --> #1:Nat + #2:Nat + #4:Nat
+Y:Nat --> #3:Nat + #5:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat
+C:Nat --> #4:Nat + #5:Nat
+
+Unifier 78
+X:Nat --> #2:Nat + #3:Nat + #4:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #1:Nat + #3:Nat + #3:Nat + #4:Nat
+B:Nat --> #2:Nat + #4:Nat
+C:Nat --> #2:Nat
+
+Unifier 79
+X:Nat --> #1:Nat + #2:Nat + #5:Nat
+Y:Nat --> #3:Nat + #4:Nat + #6:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat
+C:Nat --> #5:Nat + #5:Nat + #6:Nat
+
+Unifier 80
+X:Nat --> #1:Nat + #2:Nat + #5:Nat
+Y:Nat --> #3:Nat + #4:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat + #3:Nat
+B:Nat --> #2:Nat + #4:Nat
+C:Nat --> #5:Nat + #5:Nat
+
+Unifier 81
+X:Nat --> #2:Nat + #3:Nat
+Y:Nat --> #1:Nat + #4:Nat + #5:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat + #4:Nat
+B:Nat --> #3:Nat + #5:Nat
+C:Nat --> #1:Nat
+
+Unifier 82
+X:Nat --> #1:Nat + #2:Nat + #4:Nat
+Y:Nat --> #3:Nat + #5:Nat
+A:Nat --> #1:Nat + #2:Nat + #2:Nat + #3:Nat
+B:Nat --> #1:Nat
+C:Nat --> #4:Nat + #4:Nat + #5:Nat
+
+Unifier 83
+X:Nat --> #2:Nat + #3:Nat + #4:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #1:Nat + #2:Nat + #3:Nat + #3:Nat
+B:Nat --> #2:Nat
+C:Nat --> #4:Nat + #4:Nat
+
+Unifier 84
+X:Nat --> #1:Nat + #3:Nat
+Y:Nat --> #2:Nat + #4:Nat
+A:Nat --> #1:Nat + #3:Nat + #3:Nat + #4:Nat
+B:Nat --> #1:Nat
+C:Nat --> #2:Nat
+
+Unifier 85
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #4:Nat + #6:Nat
+Y:Nat --> #5:Nat + #7:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat
+B:Nat --> #2:Nat + #3:Nat + #3:Nat + #4:Nat + #5:Nat
+C:Nat --> #4:Nat + #6:Nat + #6:Nat + #7:Nat
+
+Unifier 86
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat + #6:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat
+B:Nat --> #1:Nat + #3:Nat + #4:Nat + #4:Nat + #5:Nat
+C:Nat --> #5:Nat + #6:Nat + #6:Nat
+
+Unifier 87
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #4:Nat
+Y:Nat --> #5:Nat + #6:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat
+B:Nat --> #2:Nat + #3:Nat + #3:Nat + #4:Nat + #5:Nat
+C:Nat --> #4:Nat + #6:Nat
+
+Unifier 88
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #3:Nat + #3:Nat + #4:Nat
+B:Nat --> #1:Nat + #2:Nat + #4:Nat + #5:Nat + #5:Nat
+C:Nat --> #2:Nat
+
+Unifier 89
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat + #6:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat
+B:Nat --> #3:Nat + #4:Nat + #4:Nat + #5:Nat
+C:Nat --> #1:Nat + #5:Nat + #6:Nat + #6:Nat
+
+Unifier 90
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat
+B:Nat --> #3:Nat + #4:Nat + #4:Nat + #5:Nat
+C:Nat --> #1:Nat + #5:Nat
+
+Unifier 91
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat
+Y:Nat --> #4:Nat + #6:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat
+B:Nat --> #2:Nat + #3:Nat + #3:Nat + #4:Nat
+C:Nat --> #5:Nat + #5:Nat + #6:Nat
+
+Unifier 92
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat
+B:Nat --> #1:Nat + #3:Nat + #4:Nat + #4:Nat
+C:Nat --> #5:Nat + #5:Nat
+
+Unifier 93
+X:Nat --> #2:Nat + #3:Nat + #4:Nat
+Y:Nat --> #1:Nat + #5:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat
+B:Nat --> #3:Nat + #4:Nat + #4:Nat + #5:Nat
+C:Nat --> #1:Nat
+
+Unifier 94
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat
+B:Nat --> #3:Nat + #4:Nat + #4:Nat
+C:Nat --> #1:Nat + #5:Nat + #5:Nat
+
+Unifier 95
+X:Nat --> #2:Nat + #3:Nat + #4:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat
+B:Nat --> #3:Nat + #4:Nat + #4:Nat
+C:Nat --> #1:Nat
+
+Unifier 96
+X:Nat --> #1:Nat + #2:Nat + #3:Nat + #5:Nat
+Y:Nat --> #4:Nat + #6:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat
+B:Nat --> #2:Nat + #3:Nat + #4:Nat
+C:Nat --> #3:Nat + #5:Nat + #5:Nat + #6:Nat
+
+Unifier 97
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat
+B:Nat --> #1:Nat + #3:Nat + #4:Nat
+C:Nat --> #4:Nat + #5:Nat + #5:Nat
+
+Unifier 98
+X:Nat --> #1:Nat + #2:Nat + #3:Nat
+Y:Nat --> #4:Nat + #5:Nat
+A:Nat --> #1:Nat + #1:Nat + #2:Nat
+B:Nat --> #2:Nat + #3:Nat + #4:Nat
+C:Nat --> #3:Nat + #5:Nat
+
+Unifier 99
+X:Nat --> #2:Nat + #3:Nat + #4:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #3:Nat + #3:Nat + #4:Nat
+B:Nat --> #1:Nat + #2:Nat + #4:Nat
+C:Nat --> #2:Nat
+
+Unifier 100
+X:Nat --> #2:Nat + #3:Nat + #4:Nat + #5:Nat
+Y:Nat --> #1:Nat
+A:Nat --> #2:Nat + #2:Nat + #3:Nat
+B:Nat --> #3:Nat + #4:Nat
+C:Nat --> #1:Nat + #4:Nat + #5:Nat + #5:Nat
+==========================================
+unify in CONVERSION : X:String < "foo" + Y:Char =? Z:String + string(pi) <
+    "foo" + Z:String .
+
+Unifier 1
+X:String --> #1:Char + string(pi)
+Y:Char --> #1:Char
+Z:String --> #1:Char
+==========================================
+unify in NAT : X:Nat ^ #1:Nat =? #2:Nat .
+Warning: unsafe variable name #1:Nat in unification problem.
+==========================================
+unify in TEST2 : f(f(X:Nat, Y:Nat), Z:Nat) =? f(A:Nat, B:Nat) .
+Warning: Term f(X:Nat, Y:Nat, Z:Nat) is non-ground and unification for its top
+    symbol is not currently supported.
+==========================================
+unify in TEST2 : X:Nat + f(41, 42) =? Y:Nat + f(41, 42) .
+
+Unifier 1
+X:Nat --> #1:Nat
+Y:Nat --> #1:Nat
+==========================================
+unify in ITER : s^1000000(X:OddNat) =? s^100000000001(Y:Int) .
+
+Unifier 1
+X:OddNat --> s^99999000001(#1:EvenNat)
+Y:Int --> #1:EvenNat
+==========================================
+unify in ITER : s^1000000(X:OddNat) =? s^100000000001(Y:Int + Z:Int + W:Int) .
+
+Unifier 1
+X:OddNat --> s^99999000001(#1:OddNat + (#2:OddNat + #3:EvenNat))
+W:Int --> #1:OddNat
+Z:Int --> #2:OddNat
+Y:Int --> #3:EvenNat
+
+Unifier 2
+X:OddNat --> s^99999000001(#1:OddNat + (#3:OddNat + #2:EvenNat))
+W:Int --> #1:OddNat
+Z:Int --> #2:EvenNat
+Y:Int --> #3:OddNat
+
+Unifier 3
+X:OddNat --> s^99999000001(#1:EvenNat + (#2:OddNat + #3:OddNat))
+W:Int --> #1:EvenNat
+Z:Int --> #2:OddNat
+Y:Int --> #3:OddNat
+
+Unifier 4
+X:OddNat --> s^99999000001(#1:EvenNat + (#2:EvenNat + #3:EvenNat))
+W:Int --> #1:EvenNat
+Z:Int --> #2:EvenNat
+Y:Int --> #3:EvenNat
+==========================================
+unify in AC : f(X, Y) =? f(A, B) .
+
+Unifier 1
+X --> f(#1:Foo, #3:Foo)
+Y --> f(#2:Foo, #4:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #4:Foo)
+
+Unifier 2
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #3:Foo)
+B --> #2:Foo
+
+Unifier 3
+X --> #1:Foo
+Y --> f(#2:Foo, #3:Foo)
+A --> f(#1:Foo, #3:Foo)
+B --> #2:Foo
+
+Unifier 4
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#1:Foo, #3:Foo)
+
+Unifier 5
+X --> #1:Foo
+Y --> #2:Foo
+A --> #1:Foo
+B --> #2:Foo
+
+Unifier 6
+X --> #1:Foo
+Y --> f(#2:Foo, #3:Foo)
+A --> #2:Foo
+B --> f(#1:Foo, #3:Foo)
+
+Unifier 7
+X --> #2:Foo
+Y --> #1:Foo
+A --> #1:Foo
+B --> #2:Foo
+==========================================
+unify in AC : f(X, Y) =? f(a, b) .
+
+Unifier 1
+X --> a
+Y --> b
+
+Unifier 2
+X --> b
+Y --> a
+==========================================
+unify in AC : f(X, Y) =? f(a, b, c) .
+
+Unifier 1
+X --> f(a, b)
+Y --> c
+
+Unifier 2
+X --> f(a, c)
+Y --> b
+
+Unifier 3
+X --> a
+Y --> f(b, c)
+
+Unifier 4
+X --> f(b, c)
+Y --> a
+
+Unifier 5
+X --> b
+Y --> f(a, c)
+
+Unifier 6
+X --> c
+Y --> f(a, b)
+==========================================
+match in AC : f(X, Y) <=? f(a, b, c) .
+
+Matcher 1
+X --> a
+Y --> f(b, c)
+
+Matcher 2
+X --> b
+Y --> f(a, c)
+
+Matcher 3
+X --> c
+Y --> f(a, b)
+
+Matcher 4
+X --> f(a, b)
+Y --> c
+
+Matcher 5
+X --> f(a, c)
+Y --> b
+
+Matcher 6
+X --> f(b, c)
+Y --> a
+==========================================
+unify in AC : f(X, X, Y) =? f(X, Y, Y) .
+
+Unifier 1
+X --> #1:Foo
+Y --> #1:Foo
+==========================================
+unify in AC : f(X, X, Y) =? f(X, Y) .
+No unifier.
+==========================================
+unify in AC : f(X, X, Y) =? f(A, B, C) .
+
+Unifier 1
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo, #6:Foo, #8:Foo)
+Y --> f(#4:Foo, #7:Foo, #9:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo, #5:Foo, #6:Foo, #7:Foo)
+C --> f(#3:Foo, #6:Foo, #8:Foo, #8:Foo, #9:Foo)
+
+Unifier 2
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo, #6:Foo, #8:Foo)
+Y --> f(#4:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo, #5:Foo, #6:Foo, #7:Foo)
+C --> f(#3:Foo, #6:Foo, #8:Foo, #8:Foo)
+
+Unifier 3
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo, #6:Foo)
+Y --> f(#4:Foo, #7:Foo, #8:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo, #5:Foo, #6:Foo, #7:Foo)
+C --> f(#3:Foo, #6:Foo, #8:Foo)
+
+Unifier 4
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo, #6:Foo)
+Y --> f(#4:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo, #5:Foo, #6:Foo, #7:Foo)
+C --> f(#3:Foo, #6:Foo)
+
+Unifier 5
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo, #6:Foo, #7:Foo)
+Y --> f(#4:Foo, #8:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo, #5:Foo, #6:Foo)
+C --> f(#3:Foo, #6:Foo, #7:Foo, #7:Foo, #8:Foo)
+
+Unifier 6
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo, #7:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#3:Foo, #5:Foo, #5:Foo, #6:Foo)
+C --> f(#4:Foo, #6:Foo, #7:Foo, #7:Foo)
+
+Unifier 7
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo, #6:Foo)
+Y --> f(#4:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo, #5:Foo, #6:Foo)
+C --> f(#3:Foo, #6:Foo, #7:Foo)
+
+Unifier 8
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#3:Foo, #5:Foo, #5:Foo, #6:Foo)
+C --> f(#4:Foo, #6:Foo)
+
+Unifier 9
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo, #7:Foo)
+Y --> f(#4:Foo, #6:Foo, #8:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo, #5:Foo, #6:Foo)
+C --> f(#3:Foo, #7:Foo, #7:Foo, #8:Foo)
+
+Unifier 10
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo, #7:Foo)
+Y --> f(#4:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo, #5:Foo, #6:Foo)
+C --> f(#3:Foo, #7:Foo, #7:Foo)
+
+Unifier 11
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo)
+Y --> f(#4:Foo, #6:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo, #5:Foo, #6:Foo)
+C --> f(#3:Foo, #7:Foo)
+
+Unifier 12
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo)
+Y --> f(#4:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#3:Foo, #5:Foo, #5:Foo, #6:Foo)
+C --> #1:Foo
+
+Unifier 13
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo, #6:Foo)
+Y --> f(#4:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo, #5:Foo)
+C --> f(#3:Foo, #6:Foo, #6:Foo, #7:Foo)
+
+Unifier 14
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#3:Foo, #5:Foo, #5:Foo)
+C --> f(#4:Foo, #6:Foo, #6:Foo)
+
+Unifier 15
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo)
+Y --> f(#4:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo, #5:Foo)
+C --> f(#3:Foo, #6:Foo)
+
+Unifier 16
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #3:Foo, #3:Foo, #4:Foo)
+B --> f(#4:Foo, #5:Foo, #5:Foo)
+C --> #2:Foo
+
+Unifier 17
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo, #7:Foo)
+Y --> f(#4:Foo, #6:Foo, #8:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo, #6:Foo)
+C --> f(#3:Foo, #5:Foo, #7:Foo, #7:Foo, #8:Foo)
+
+Unifier 18
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo, #7:Foo)
+Y --> f(#4:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo, #6:Foo)
+C --> f(#3:Foo, #5:Foo, #7:Foo, #7:Foo)
+
+Unifier 19
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo)
+Y --> f(#4:Foo, #6:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo, #6:Foo)
+C --> f(#3:Foo, #5:Foo, #7:Foo)
+
+Unifier 20
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo)
+Y --> f(#4:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo, #6:Foo)
+C --> f(#3:Foo, #5:Foo)
+
+Unifier 21
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo, #6:Foo)
+Y --> f(#4:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo)
+C --> f(#3:Foo, #5:Foo, #6:Foo, #6:Foo, #7:Foo)
+
+Unifier 22
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#3:Foo, #5:Foo)
+C --> f(#4:Foo, #5:Foo, #6:Foo, #6:Foo)
+
+Unifier 23
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo)
+Y --> f(#4:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo)
+C --> f(#3:Foo, #5:Foo, #6:Foo)
+
+Unifier 24
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#3:Foo, #5:Foo)
+C --> f(#4:Foo, #5:Foo)
+
+Unifier 25
+X --> f(#1:Foo, #2:Foo, #3:Foo, #6:Foo)
+Y --> f(#4:Foo, #5:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo)
+C --> f(#3:Foo, #6:Foo, #6:Foo, #7:Foo)
+
+Unifier 26
+X --> f(#1:Foo, #2:Foo, #3:Foo, #6:Foo)
+Y --> f(#4:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo)
+C --> f(#3:Foo, #6:Foo, #6:Foo)
+
+Unifier 27
+X --> f(#1:Foo, #2:Foo, #3:Foo)
+Y --> f(#4:Foo, #5:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #5:Foo)
+C --> f(#3:Foo, #6:Foo)
+
+Unifier 28
+X --> f(#1:Foo, #2:Foo, #3:Foo)
+Y --> f(#4:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#3:Foo, #5:Foo)
+C --> #1:Foo
+
+Unifier 29
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo)
+Y --> f(#4:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> #1:Foo
+C --> f(#3:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 30
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #3:Foo, #3:Foo, #4:Foo)
+B --> #2:Foo
+C --> f(#4:Foo, #5:Foo, #5:Foo)
+
+Unifier 31
+X --> f(#1:Foo, #2:Foo, #3:Foo)
+Y --> f(#4:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> #1:Foo
+C --> f(#3:Foo, #5:Foo)
+
+Unifier 32
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #3:Foo, #4:Foo, #4:Foo)
+B --> #2:Foo
+C --> #3:Foo
+
+Unifier 33
+X --> f(#1:Foo, #2:Foo, #3:Foo, #4:Foo, #5:Foo, #7:Foo)
+Y --> f(#6:Foo, #8:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo, #6:Foo)
+C --> f(#3:Foo, #5:Foo, #7:Foo, #7:Foo, #8:Foo)
+
+Unifier 34
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo, #7:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#1:Foo, #3:Foo, #5:Foo, #5:Foo, #6:Foo)
+C --> f(#4:Foo, #6:Foo, #7:Foo, #7:Foo)
+
+Unifier 35
+X --> f(#1:Foo, #2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> f(#6:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo, #6:Foo)
+C --> f(#3:Foo, #5:Foo, #7:Foo)
+
+Unifier 36
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#1:Foo, #3:Foo, #5:Foo, #5:Foo, #6:Foo)
+C --> f(#4:Foo, #6:Foo)
+
+Unifier 37
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo, #7:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#3:Foo, #5:Foo, #5:Foo, #6:Foo)
+C --> f(#1:Foo, #4:Foo, #6:Foo, #7:Foo, #7:Foo)
+
+Unifier 38
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#3:Foo, #5:Foo, #5:Foo, #6:Foo)
+C --> f(#1:Foo, #4:Foo, #6:Foo)
+
+Unifier 39
+X --> f(#1:Foo, #2:Foo, #3:Foo, #4:Foo, #6:Foo)
+Y --> f(#5:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#3:Foo, #6:Foo, #6:Foo, #7:Foo)
+
+Unifier 40
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#1:Foo, #3:Foo, #5:Foo, #5:Foo)
+C --> f(#4:Foo, #6:Foo, #6:Foo)
+
+Unifier 41
+X --> f(#1:Foo, #2:Foo, #3:Foo, #4:Foo)
+Y --> f(#5:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#3:Foo, #6:Foo)
+
+Unifier 42
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo, #3:Foo, #4:Foo)
+B --> f(#1:Foo, #4:Foo, #5:Foo, #5:Foo)
+C --> #2:Foo
+
+Unifier 43
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#3:Foo, #5:Foo, #5:Foo)
+C --> f(#1:Foo, #4:Foo, #6:Foo, #6:Foo)
+
+Unifier 44
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#3:Foo, #5:Foo, #5:Foo)
+C --> f(#1:Foo, #4:Foo)
+
+Unifier 45
+X --> f(#1:Foo, #2:Foo, #3:Foo, #4:Foo, #6:Foo)
+Y --> f(#5:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #5:Foo)
+C --> f(#3:Foo, #4:Foo, #6:Foo, #6:Foo, #7:Foo)
+
+Unifier 46
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#1:Foo, #3:Foo, #5:Foo)
+C --> f(#4:Foo, #5:Foo, #6:Foo, #6:Foo)
+
+Unifier 47
+X --> f(#1:Foo, #2:Foo, #3:Foo, #4:Foo)
+Y --> f(#5:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #5:Foo)
+C --> f(#3:Foo, #4:Foo, #6:Foo)
+
+Unifier 48
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#1:Foo, #3:Foo, #5:Foo)
+C --> f(#4:Foo, #5:Foo)
+
+Unifier 49
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#3:Foo, #5:Foo)
+C --> f(#1:Foo, #4:Foo, #5:Foo, #6:Foo, #6:Foo)
+
+Unifier 50
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#3:Foo, #5:Foo)
+C --> f(#1:Foo, #4:Foo, #5:Foo)
+
+Unifier 51
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo)
+Y --> f(#4:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 52
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#1:Foo, #3:Foo)
+C --> f(#4:Foo, #5:Foo, #5:Foo)
+
+Unifier 53
+X --> f(#1:Foo, #2:Foo, #3:Foo)
+Y --> f(#4:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo)
+
+Unifier 54
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo, #3:Foo, #4:Foo)
+B --> f(#1:Foo, #4:Foo)
+C --> #2:Foo
+
+Unifier 55
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo, #3:Foo, #4:Foo)
+B --> #2:Foo
+C --> f(#1:Foo, #4:Foo, #5:Foo, #5:Foo)
+
+Unifier 56
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo, #3:Foo, #4:Foo)
+B --> #2:Foo
+C --> f(#1:Foo, #4:Foo)
+
+Unifier 57
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo, #7:Foo)
+Y --> f(#3:Foo, #6:Foo, #8:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo, #6:Foo)
+C --> f(#5:Foo, #7:Foo, #7:Foo, #8:Foo)
+
+Unifier 58
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo, #7:Foo)
+Y --> f(#3:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo, #6:Foo)
+C --> f(#5:Foo, #7:Foo, #7:Foo)
+
+Unifier 59
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo)
+Y --> f(#3:Foo, #6:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo, #6:Foo)
+C --> f(#5:Foo, #7:Foo)
+
+Unifier 60
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo)
+Y --> f(#4:Foo, #6:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#1:Foo, #3:Foo, #5:Foo, #5:Foo, #6:Foo)
+C --> #1:Foo
+
+Unifier 61
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> f(#3:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#5:Foo, #6:Foo, #6:Foo, #7:Foo)
+
+Unifier 62
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo)
+B --> f(#3:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#5:Foo, #6:Foo, #6:Foo)
+
+Unifier 63
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo)
+Y --> f(#3:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#5:Foo, #6:Foo)
+
+Unifier 64
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #4:Foo, #5:Foo, #5:Foo)
+C --> #2:Foo
+
+Unifier 65
+X --> f(#1:Foo, #2:Foo, #4:Foo, #6:Foo)
+Y --> f(#3:Foo, #5:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#6:Foo, #6:Foo, #7:Foo)
+
+Unifier 66
+X --> f(#1:Foo, #2:Foo, #4:Foo, #6:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#6:Foo, #6:Foo)
+
+Unifier 67
+X --> f(#2:Foo, #3:Foo, #5:Foo)
+Y --> f(#1:Foo, #4:Foo, #6:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#3:Foo, #5:Foo, #5:Foo, #6:Foo)
+C --> #1:Foo
+
+Unifier 68
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo)
+Y --> f(#3:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo)
+C --> f(#5:Foo, #5:Foo, #6:Foo)
+
+Unifier 69
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo)
+B --> f(#3:Foo, #4:Foo, #4:Foo)
+C --> f(#5:Foo, #5:Foo)
+
+Unifier 70
+X --> f(#2:Foo, #3:Foo, #5:Foo)
+Y --> f(#1:Foo, #4:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#3:Foo, #5:Foo, #5:Foo)
+C --> #1:Foo
+
+Unifier 71
+X --> f(#1:Foo, #2:Foo, #4:Foo, #6:Foo)
+Y --> f(#3:Foo, #5:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #5:Foo)
+C --> f(#4:Foo, #6:Foo, #6:Foo, #7:Foo)
+
+Unifier 72
+X --> f(#1:Foo, #2:Foo, #4:Foo, #6:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #5:Foo)
+C --> f(#4:Foo, #6:Foo, #6:Foo)
+
+Unifier 73
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #5:Foo)
+C --> f(#4:Foo, #6:Foo)
+
+Unifier 74
+X --> f(#1:Foo, #2:Foo, #3:Foo)
+Y --> f(#4:Foo, #5:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#1:Foo, #3:Foo, #5:Foo)
+C --> #1:Foo
+
+Unifier 75
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo)
+Y --> f(#3:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo)
+C --> f(#4:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 76
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo)
+B --> f(#3:Foo, #4:Foo)
+C --> f(#4:Foo, #5:Foo, #5:Foo)
+
+Unifier 77
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo)
+C --> f(#4:Foo, #5:Foo)
+
+Unifier 78
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo)
+B --> f(#2:Foo, #4:Foo)
+C --> #2:Foo
+
+Unifier 79
+X --> f(#1:Foo, #2:Foo, #5:Foo)
+Y --> f(#3:Foo, #4:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo)
+C --> f(#5:Foo, #5:Foo, #6:Foo)
+
+Unifier 80
+X --> f(#1:Foo, #2:Foo, #5:Foo)
+Y --> f(#3:Foo, #4:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo)
+C --> f(#5:Foo, #5:Foo)
+
+Unifier 81
+X --> f(#2:Foo, #3:Foo)
+Y --> f(#1:Foo, #4:Foo, #5:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> f(#3:Foo, #5:Foo)
+C --> #1:Foo
+
+Unifier 82
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo)
+B --> #1:Foo
+C --> f(#4:Foo, #4:Foo, #5:Foo)
+
+Unifier 83
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #3:Foo, #3:Foo)
+B --> #2:Foo
+C --> f(#4:Foo, #4:Foo)
+
+Unifier 84
+X --> f(#1:Foo, #3:Foo)
+Y --> f(#2:Foo, #4:Foo)
+A --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo)
+B --> #1:Foo
+C --> #2:Foo
+
+Unifier 85
+X --> f(#1:Foo, #2:Foo, #3:Foo, #4:Foo, #6:Foo)
+Y --> f(#5:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#2:Foo, #3:Foo, #3:Foo, #4:Foo, #5:Foo)
+C --> f(#4:Foo, #6:Foo, #6:Foo, #7:Foo)
+
+Unifier 86
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #3:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#5:Foo, #6:Foo, #6:Foo)
+
+Unifier 87
+X --> f(#1:Foo, #2:Foo, #3:Foo, #4:Foo)
+Y --> f(#5:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#2:Foo, #3:Foo, #3:Foo, #4:Foo, #5:Foo)
+C --> f(#4:Foo, #6:Foo)
+
+Unifier 88
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#3:Foo, #3:Foo, #4:Foo)
+B --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo, #5:Foo)
+C --> #2:Foo
+
+Unifier 89
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#3:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#1:Foo, #5:Foo, #6:Foo, #6:Foo)
+
+Unifier 90
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#3:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#1:Foo, #5:Foo)
+
+Unifier 91
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo)
+Y --> f(#4:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#2:Foo, #3:Foo, #3:Foo, #4:Foo)
+C --> f(#5:Foo, #5:Foo, #6:Foo)
+
+Unifier 92
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #3:Foo, #4:Foo, #4:Foo)
+C --> f(#5:Foo, #5:Foo)
+
+Unifier 93
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> f(#1:Foo, #5:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#3:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> #1:Foo
+
+Unifier 94
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#3:Foo, #4:Foo, #4:Foo)
+C --> f(#1:Foo, #5:Foo, #5:Foo)
+
+Unifier 95
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#3:Foo, #4:Foo, #4:Foo)
+C --> #1:Foo
+
+Unifier 96
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo)
+Y --> f(#4:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#2:Foo, #3:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 97
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #3:Foo, #4:Foo)
+C --> f(#4:Foo, #5:Foo, #5:Foo)
+
+Unifier 98
+X --> f(#1:Foo, #2:Foo, #3:Foo)
+Y --> f(#4:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#2:Foo, #3:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo)
+
+Unifier 99
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#3:Foo, #3:Foo, #4:Foo)
+B --> f(#1:Foo, #2:Foo, #4:Foo)
+C --> #2:Foo
+
+Unifier 100
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#3:Foo, #4:Foo)
+C --> f(#1:Foo, #4:Foo, #5:Foo, #5:Foo)
+
+Unifier 101
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#3:Foo, #4:Foo)
+C --> f(#1:Foo, #4:Foo)
+
+Unifier 102
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#2:Foo, #3:Foo)
+C --> f(#4:Foo, #4:Foo, #5:Foo)
+
+Unifier 103
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #3:Foo)
+C --> f(#4:Foo, #4:Foo)
+
+Unifier 104
+X --> f(#2:Foo, #3:Foo)
+Y --> f(#1:Foo, #4:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#3:Foo, #4:Foo)
+C --> #1:Foo
+
+Unifier 105
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo, #3:Foo)
+B --> #2:Foo
+C --> f(#1:Foo, #4:Foo, #4:Foo)
+
+Unifier 106
+X --> f(#1:Foo, #3:Foo)
+Y --> #2:Foo
+A --> f(#1:Foo, #3:Foo, #3:Foo)
+B --> #1:Foo
+C --> #2:Foo
+
+Unifier 107
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo, #7:Foo)
+Y --> f(#3:Foo, #6:Foo, #8:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo, #5:Foo, #6:Foo)
+C --> f(#2:Foo, #5:Foo, #7:Foo, #7:Foo, #8:Foo)
+
+Unifier 108
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo, #7:Foo)
+Y --> f(#3:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo, #5:Foo, #6:Foo)
+C --> f(#2:Foo, #5:Foo, #7:Foo, #7:Foo)
+
+Unifier 109
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo)
+Y --> f(#3:Foo, #6:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo, #5:Foo, #6:Foo)
+C --> f(#2:Foo, #5:Foo, #7:Foo)
+
+Unifier 110
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo)
+Y --> f(#3:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo, #5:Foo, #6:Foo)
+C --> f(#2:Foo, #5:Foo)
+
+Unifier 111
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> f(#3:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo, #5:Foo)
+C --> f(#2:Foo, #5:Foo, #6:Foo, #6:Foo, #7:Foo)
+
+Unifier 112
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo, #5:Foo)
+C --> f(#3:Foo, #5:Foo, #6:Foo, #6:Foo)
+
+Unifier 113
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo)
+Y --> f(#3:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo, #5:Foo)
+C --> f(#2:Foo, #5:Foo, #6:Foo)
+
+Unifier 114
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo, #5:Foo)
+C --> f(#3:Foo, #5:Foo)
+
+Unifier 115
+X --> f(#1:Foo, #2:Foo, #4:Foo, #6:Foo)
+Y --> f(#3:Foo, #5:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo, #5:Foo)
+C --> f(#2:Foo, #6:Foo, #6:Foo, #7:Foo)
+
+Unifier 116
+X --> f(#1:Foo, #2:Foo, #4:Foo, #6:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo, #5:Foo)
+C --> f(#2:Foo, #6:Foo, #6:Foo)
+
+Unifier 117
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo, #5:Foo)
+C --> f(#2:Foo, #6:Foo)
+
+Unifier 118
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo, #5:Foo)
+C --> #1:Foo
+
+Unifier 119
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo)
+Y --> f(#3:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo)
+C --> f(#2:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 120
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo, #5:Foo)
+
+Unifier 121
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo)
+C --> f(#2:Foo, #5:Foo)
+
+Unifier 122
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #3:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo)
+C --> #2:Foo
+
+Unifier 123
+X --> f(#1:Foo, #2:Foo, #4:Foo, #6:Foo)
+Y --> f(#3:Foo, #5:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #5:Foo)
+C --> f(#2:Foo, #4:Foo, #6:Foo, #6:Foo, #7:Foo)
+
+Unifier 124
+X --> f(#1:Foo, #2:Foo, #4:Foo, #6:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #5:Foo)
+C --> f(#2:Foo, #4:Foo, #6:Foo, #6:Foo)
+
+Unifier 125
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #5:Foo)
+C --> f(#2:Foo, #4:Foo, #6:Foo)
+
+Unifier 126
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #5:Foo)
+C --> f(#2:Foo, #4:Foo)
+
+Unifier 127
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo)
+Y --> f(#4:Foo, #6:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> #1:Foo
+C --> f(#1:Foo, #3:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 128
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo)
+B --> #2:Foo
+C --> f(#2:Foo, #4:Foo, #5:Foo, #5:Foo)
+
+Unifier 129
+X --> f(#1:Foo, #2:Foo, #3:Foo)
+Y --> f(#4:Foo, #5:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> #1:Foo
+C --> f(#1:Foo, #3:Foo, #5:Foo)
+
+Unifier 130
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo)
+B --> #2:Foo
+C --> f(#2:Foo, #4:Foo)
+
+Unifier 131
+X --> f(#2:Foo, #3:Foo, #5:Foo)
+Y --> f(#1:Foo, #4:Foo, #6:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> #1:Foo
+C --> f(#3:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 132
+X --> f(#2:Foo, #3:Foo, #5:Foo)
+Y --> f(#1:Foo, #4:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> #1:Foo
+C --> f(#3:Foo, #5:Foo, #5:Foo)
+
+Unifier 133
+X --> f(#2:Foo, #3:Foo)
+Y --> f(#1:Foo, #4:Foo, #5:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+B --> #1:Foo
+C --> f(#3:Foo, #5:Foo)
+
+Unifier 134
+X --> f(#2:Foo, #3:Foo)
+Y --> f(#1:Foo, #4:Foo)
+A --> f(#2:Foo, #3:Foo, #3:Foo, #4:Foo)
+B --> #1:Foo
+C --> #2:Foo
+
+Unifier 135
+X --> f(#1:Foo, #2:Foo, #3:Foo, #4:Foo, #6:Foo)
+Y --> f(#5:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo, #5:Foo)
+C --> f(#2:Foo, #4:Foo, #6:Foo, #6:Foo, #7:Foo)
+
+Unifier 136
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#3:Foo, #5:Foo, #6:Foo, #6:Foo)
+
+Unifier 137
+X --> f(#1:Foo, #2:Foo, #3:Foo, #4:Foo)
+Y --> f(#5:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo, #5:Foo)
+C --> f(#2:Foo, #4:Foo, #6:Foo)
+
+Unifier 138
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#3:Foo, #5:Foo)
+
+Unifier 139
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo, #5:Foo)
+C --> f(#1:Foo, #3:Foo, #5:Foo, #6:Foo, #6:Foo)
+
+Unifier 140
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo, #5:Foo)
+C --> f(#1:Foo, #3:Foo, #5:Foo)
+
+Unifier 141
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo)
+Y --> f(#4:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> f(#2:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 142
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo, #5:Foo)
+
+Unifier 143
+X --> f(#1:Foo, #2:Foo, #3:Foo)
+Y --> f(#4:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> f(#2:Foo, #5:Foo)
+
+Unifier 144
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #4:Foo)
+C --> #2:Foo
+
+Unifier 145
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo)
+C --> f(#1:Foo, #3:Foo, #5:Foo, #5:Foo)
+
+Unifier 146
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo)
+C --> f(#1:Foo, #3:Foo)
+
+Unifier 147
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo)
+Y --> f(#4:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#3:Foo, #4:Foo)
+C --> f(#2:Foo, #3:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 148
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo)
+C --> f(#3:Foo, #4:Foo, #5:Foo, #5:Foo)
+
+Unifier 149
+X --> f(#1:Foo, #2:Foo, #3:Foo)
+Y --> f(#4:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#3:Foo, #4:Foo)
+C --> f(#2:Foo, #3:Foo, #5:Foo)
+
+Unifier 150
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo)
+C --> f(#3:Foo, #4:Foo)
+
+Unifier 151
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#3:Foo, #3:Foo, #4:Foo)
+B --> #2:Foo
+C --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo, #5:Foo)
+
+Unifier 152
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#3:Foo, #3:Foo, #4:Foo)
+B --> #2:Foo
+C --> f(#1:Foo, #2:Foo, #4:Foo)
+
+Unifier 153
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> f(#1:Foo, #5:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> #1:Foo
+C --> f(#3:Foo, #4:Foo, #4:Foo, #5:Foo)
+
+Unifier 154
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> #1:Foo
+C --> f(#3:Foo, #4:Foo, #4:Foo)
+
+Unifier 155
+X --> f(#2:Foo, #3:Foo)
+Y --> f(#1:Foo, #4:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> #1:Foo
+C --> f(#3:Foo, #4:Foo)
+
+Unifier 156
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo, #3:Foo)
+B --> #1:Foo
+C --> #2:Foo
+
+Unifier 157
+X --> f(#1:Foo, #3:Foo, #4:Foo, #6:Foo)
+Y --> f(#2:Foo, #5:Foo, #7:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo, #5:Foo)
+C --> f(#4:Foo, #6:Foo, #6:Foo, #7:Foo)
+
+Unifier 158
+X --> f(#1:Foo, #3:Foo, #4:Foo, #6:Foo)
+Y --> f(#2:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo, #5:Foo)
+C --> f(#4:Foo, #6:Foo, #6:Foo)
+
+Unifier 159
+X --> f(#1:Foo, #3:Foo, #4:Foo)
+Y --> f(#2:Foo, #5:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo, #5:Foo)
+C --> f(#4:Foo, #6:Foo)
+
+Unifier 160
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> #1:Foo
+
+Unifier 161
+X --> f(#1:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> f(#2:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> f(#4:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 162
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> f(#4:Foo, #5:Foo, #5:Foo)
+
+Unifier 163
+X --> f(#1:Foo, #3:Foo, #4:Foo)
+Y --> f(#2:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> f(#4:Foo, #5:Foo)
+
+Unifier 164
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #3:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo)
+C --> #2:Foo
+
+Unifier 165
+X --> f(#1:Foo, #3:Foo, #5:Foo)
+Y --> f(#2:Foo, #4:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> f(#5:Foo, #5:Foo, #6:Foo)
+
+Unifier 166
+X --> f(#1:Foo, #3:Foo, #5:Foo)
+Y --> f(#2:Foo, #4:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> f(#5:Foo, #5:Foo)
+
+Unifier 167
+X --> f(#2:Foo, #4:Foo)
+Y --> f(#1:Foo, #3:Foo, #5:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo, #5:Foo)
+C --> #1:Foo
+
+Unifier 168
+X --> f(#1:Foo, #3:Foo, #4:Foo)
+Y --> f(#2:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo)
+C --> f(#4:Foo, #4:Foo, #5:Foo)
+
+Unifier 169
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo)
+C --> f(#4:Foo, #4:Foo)
+
+Unifier 170
+X --> f(#2:Foo, #4:Foo)
+Y --> f(#1:Foo, #3:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#4:Foo, #4:Foo)
+C --> #1:Foo
+
+Unifier 171
+X --> f(#1:Foo, #3:Foo, #5:Foo)
+Y --> f(#2:Foo, #4:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#3:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 172
+X --> f(#1:Foo, #3:Foo, #5:Foo)
+Y --> f(#2:Foo, #4:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#3:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo, #5:Foo)
+
+Unifier 173
+X --> f(#1:Foo, #3:Foo)
+Y --> f(#2:Foo, #4:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo, #2:Foo)
+B --> f(#3:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo)
+
+Unifier 174
+X --> f(#1:Foo, #2:Foo)
+Y --> f(#3:Foo, #4:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo)
+C --> #1:Foo
+
+Unifier 175
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> #1:Foo
+C --> f(#1:Foo, #4:Foo, #4:Foo, #5:Foo)
+
+Unifier 176
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #3:Foo, #3:Foo)
+B --> #2:Foo
+C --> f(#2:Foo, #4:Foo, #4:Foo)
+
+Unifier 177
+X --> f(#1:Foo, #2:Foo)
+Y --> f(#3:Foo, #4:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> #1:Foo
+C --> f(#1:Foo, #4:Foo)
+
+Unifier 178
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #3:Foo, #3:Foo)
+B --> #2:Foo
+C --> #2:Foo
+
+Unifier 179
+X --> f(#2:Foo, #4:Foo)
+Y --> f(#1:Foo, #3:Foo, #5:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> #1:Foo
+C --> f(#4:Foo, #4:Foo, #5:Foo)
+
+Unifier 180
+X --> f(#2:Foo, #4:Foo)
+Y --> f(#1:Foo, #3:Foo)
+A --> f(#2:Foo, #2:Foo, #3:Foo)
+B --> #1:Foo
+C --> f(#4:Foo, #4:Foo)
+
+Unifier 181
+X --> #1:Foo
+Y --> f(#2:Foo, #3:Foo, #4:Foo)
+A --> f(#1:Foo, #1:Foo, #4:Foo)
+B --> #2:Foo
+C --> #3:Foo
+
+Unifier 182
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo)
+Y --> f(#4:Foo, #6:Foo)
+A --> f(#1:Foo, #1:Foo)
+B --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 183
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo)
+C --> f(#4:Foo, #5:Foo, #5:Foo)
+
+Unifier 184
+X --> f(#1:Foo, #2:Foo, #3:Foo)
+Y --> f(#4:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo)
+B --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo)
+
+Unifier 185
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#3:Foo, #3:Foo)
+B --> f(#1:Foo, #2:Foo, #4:Foo, #4:Foo)
+C --> #2:Foo
+
+Unifier 186
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> f(#1:Foo, #4:Foo, #5:Foo, #5:Foo)
+
+Unifier 187
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> f(#1:Foo, #4:Foo)
+
+Unifier 188
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo)
+B --> f(#2:Foo, #2:Foo, #3:Foo)
+C --> f(#4:Foo, #4:Foo, #5:Foo)
+
+Unifier 189
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo, #3:Foo)
+C --> f(#4:Foo, #4:Foo)
+
+Unifier 190
+X --> f(#2:Foo, #3:Foo)
+Y --> f(#1:Foo, #4:Foo)
+A --> f(#2:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> #1:Foo
+
+Unifier 191
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo)
+C --> f(#1:Foo, #4:Foo, #4:Foo)
+
+Unifier 192
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo)
+C --> #1:Foo
+
+Unifier 193
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #1:Foo)
+B --> f(#2:Foo, #3:Foo)
+C --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+
+Unifier 194
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo)
+C --> f(#3:Foo, #4:Foo, #4:Foo)
+
+Unifier 195
+X --> f(#1:Foo, #2:Foo)
+Y --> f(#3:Foo, #4:Foo)
+A --> f(#1:Foo, #1:Foo)
+B --> f(#2:Foo, #3:Foo)
+C --> f(#2:Foo, #4:Foo)
+
+Unifier 196
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> f(#3:Foo, #3:Foo)
+B --> f(#1:Foo, #2:Foo)
+C --> #2:Foo
+
+Unifier 197
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#3:Foo, #3:Foo)
+B --> #2:Foo
+C --> f(#1:Foo, #2:Foo, #4:Foo, #4:Foo)
+
+Unifier 198
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> f(#3:Foo, #3:Foo)
+B --> #2:Foo
+C --> f(#1:Foo, #2:Foo)
+
+Unifier 199
+X --> f(#2:Foo, #3:Foo)
+Y --> f(#1:Foo, #4:Foo)
+A --> f(#2:Foo, #2:Foo)
+B --> #1:Foo
+C --> f(#3:Foo, #3:Foo, #4:Foo)
+
+Unifier 200
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #2:Foo)
+B --> #1:Foo
+C --> f(#3:Foo, #3:Foo)
+
+Unifier 201
+X --> #1:Foo
+Y --> f(#2:Foo, #3:Foo)
+A --> f(#1:Foo, #1:Foo)
+B --> #2:Foo
+C --> #3:Foo
+
+Unifier 202
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo, #7:Foo)
+Y --> f(#3:Foo, #6:Foo, #8:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #4:Foo, #5:Foo, #6:Foo)
+C --> f(#2:Foo, #5:Foo, #7:Foo, #7:Foo, #8:Foo)
+
+Unifier 203
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo, #7:Foo)
+Y --> f(#3:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #4:Foo, #5:Foo, #6:Foo)
+C --> f(#2:Foo, #5:Foo, #7:Foo, #7:Foo)
+
+Unifier 204
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo)
+Y --> f(#3:Foo, #6:Foo, #7:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #4:Foo, #5:Foo, #6:Foo)
+C --> f(#2:Foo, #5:Foo, #7:Foo)
+
+Unifier 205
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo)
+Y --> f(#3:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #4:Foo, #5:Foo, #6:Foo)
+C --> f(#2:Foo, #5:Foo)
+
+Unifier 206
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> f(#3:Foo, #7:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#2:Foo, #5:Foo, #6:Foo, #6:Foo, #7:Foo)
+
+Unifier 207
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#3:Foo, #5:Foo, #6:Foo, #6:Foo)
+
+Unifier 208
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo)
+Y --> f(#3:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#2:Foo, #5:Foo, #6:Foo)
+
+Unifier 209
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#3:Foo, #5:Foo)
+
+Unifier 210
+X --> f(#1:Foo, #2:Foo, #4:Foo, #6:Foo)
+Y --> f(#3:Foo, #5:Foo, #7:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#2:Foo, #6:Foo, #6:Foo, #7:Foo)
+
+Unifier 211
+X --> f(#1:Foo, #2:Foo, #4:Foo, #6:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#2:Foo, #6:Foo, #6:Foo)
+
+Unifier 212
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#2:Foo, #6:Foo)
+
+Unifier 213
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> #1:Foo
+
+Unifier 214
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo)
+Y --> f(#3:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #4:Foo)
+C --> f(#2:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 215
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo, #5:Foo)
+
+Unifier 216
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #4:Foo)
+C --> f(#2:Foo, #5:Foo)
+
+Unifier 217
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#3:Foo, #4:Foo, #4:Foo)
+C --> #2:Foo
+
+Unifier 218
+X --> f(#1:Foo, #2:Foo, #4:Foo, #6:Foo)
+Y --> f(#3:Foo, #5:Foo, #7:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #5:Foo)
+C --> f(#2:Foo, #4:Foo, #6:Foo, #6:Foo, #7:Foo)
+
+Unifier 219
+X --> f(#1:Foo, #2:Foo, #4:Foo, #6:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #5:Foo)
+C --> f(#2:Foo, #4:Foo, #6:Foo, #6:Foo)
+
+Unifier 220
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #5:Foo)
+C --> f(#2:Foo, #4:Foo, #6:Foo)
+
+Unifier 221
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo, #5:Foo)
+C --> f(#2:Foo, #4:Foo)
+
+Unifier 222
+X --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo)
+Y --> f(#3:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo)
+C --> f(#2:Foo, #4:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 223
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo)
+C --> f(#3:Foo, #4:Foo, #5:Foo, #5:Foo)
+
+Unifier 224
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo)
+C --> f(#2:Foo, #4:Foo, #5:Foo)
+
+Unifier 225
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo)
+C --> f(#3:Foo, #4:Foo)
+
+Unifier 226
+X --> f(#1:Foo, #2:Foo, #5:Foo)
+Y --> f(#3:Foo, #4:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo)
+C --> f(#2:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 227
+X --> f(#1:Foo, #2:Foo, #5:Foo)
+Y --> f(#3:Foo, #4:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo)
+C --> f(#2:Foo, #5:Foo, #5:Foo)
+
+Unifier 228
+X --> f(#1:Foo, #2:Foo)
+Y --> f(#3:Foo, #4:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo)
+C --> f(#2:Foo, #5:Foo)
+
+Unifier 229
+X --> f(#1:Foo, #2:Foo)
+Y --> f(#3:Foo, #4:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo)
+C --> #1:Foo
+
+Unifier 230
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> #1:Foo
+C --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+
+Unifier 231
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> #2:Foo
+C --> f(#3:Foo, #4:Foo, #4:Foo)
+
+Unifier 232
+X --> f(#1:Foo, #2:Foo)
+Y --> f(#3:Foo, #4:Foo)
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> #1:Foo
+C --> f(#2:Foo, #4:Foo)
+
+Unifier 233
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo, #3:Foo)
+B --> #2:Foo
+C --> #3:Foo
+
+Unifier 234
+X --> f(#1:Foo, #2:Foo, #3:Foo, #4:Foo, #6:Foo)
+Y --> f(#5:Foo, #7:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo, #5:Foo)
+C --> f(#2:Foo, #4:Foo, #6:Foo, #6:Foo, #7:Foo)
+
+Unifier 235
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo)
+B --> f(#1:Foo, #2:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#3:Foo, #5:Foo, #6:Foo, #6:Foo)
+
+Unifier 236
+X --> f(#1:Foo, #2:Foo, #3:Foo, #4:Foo)
+Y --> f(#5:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo, #5:Foo)
+C --> f(#2:Foo, #4:Foo, #6:Foo)
+
+Unifier 237
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo)
+B --> f(#1:Foo, #2:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#3:Foo, #5:Foo)
+
+Unifier 238
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo, #6:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#1:Foo, #3:Foo, #5:Foo, #6:Foo, #6:Foo)
+
+Unifier 239
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> f(#1:Foo, #3:Foo, #5:Foo)
+
+Unifier 240
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo)
+Y --> f(#4:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo)
+C --> f(#2:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 241
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo)
+B --> f(#1:Foo, #2:Foo, #4:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo, #5:Foo)
+
+Unifier 242
+X --> f(#1:Foo, #2:Foo, #3:Foo)
+Y --> f(#4:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo)
+C --> f(#2:Foo, #5:Foo)
+
+Unifier 243
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo)
+B --> f(#1:Foo, #3:Foo, #4:Foo, #4:Foo)
+C --> #2:Foo
+
+Unifier 244
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo)
+C --> f(#1:Foo, #3:Foo, #5:Foo, #5:Foo)
+
+Unifier 245
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo)
+C --> f(#1:Foo, #3:Foo)
+
+Unifier 246
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo)
+Y --> f(#4:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo, #4:Foo)
+C --> f(#2:Foo, #3:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 247
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo)
+B --> f(#1:Foo, #2:Foo, #4:Foo)
+C --> f(#3:Foo, #4:Foo, #5:Foo, #5:Foo)
+
+Unifier 248
+X --> f(#1:Foo, #2:Foo, #3:Foo)
+Y --> f(#4:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo, #4:Foo)
+C --> f(#2:Foo, #3:Foo, #5:Foo)
+
+Unifier 249
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo)
+B --> f(#1:Foo, #2:Foo, #4:Foo)
+C --> f(#3:Foo, #4:Foo)
+
+Unifier 250
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo)
+C --> f(#1:Foo, #3:Foo, #4:Foo, #5:Foo, #5:Foo)
+
+Unifier 251
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo)
+C --> f(#1:Foo, #3:Foo, #4:Foo)
+
+Unifier 252
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo)
+C --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+
+Unifier 253
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo)
+B --> f(#1:Foo, #2:Foo)
+C --> f(#3:Foo, #4:Foo, #4:Foo)
+
+Unifier 254
+X --> f(#1:Foo, #2:Foo)
+Y --> f(#3:Foo, #4:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo)
+C --> f(#2:Foo, #4:Foo)
+
+Unifier 255
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo)
+B --> f(#1:Foo, #3:Foo)
+C --> #2:Foo
+
+Unifier 256
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo)
+B --> #2:Foo
+C --> f(#1:Foo, #3:Foo, #4:Foo, #4:Foo)
+
+Unifier 257
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> f(#2:Foo, #3:Foo)
+B --> #2:Foo
+C --> f(#1:Foo, #3:Foo)
+
+Unifier 258
+X --> f(#1:Foo, #3:Foo, #4:Foo, #6:Foo)
+Y --> f(#2:Foo, #5:Foo, #7:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo, #5:Foo)
+C --> f(#4:Foo, #6:Foo, #6:Foo, #7:Foo)
+
+Unifier 259
+X --> f(#1:Foo, #3:Foo, #4:Foo, #6:Foo)
+Y --> f(#2:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo, #5:Foo)
+C --> f(#4:Foo, #6:Foo, #6:Foo)
+
+Unifier 260
+X --> f(#1:Foo, #3:Foo, #4:Foo)
+Y --> f(#2:Foo, #5:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo, #5:Foo)
+C --> f(#4:Foo, #6:Foo)
+
+Unifier 261
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#2:Foo, #3:Foo)
+B --> f(#1:Foo, #2:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> #1:Foo
+
+Unifier 262
+X --> f(#1:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> f(#2:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo)
+C --> f(#4:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 263
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo)
+B --> f(#2:Foo, #3:Foo, #3:Foo, #4:Foo)
+C --> f(#4:Foo, #5:Foo, #5:Foo)
+
+Unifier 264
+X --> f(#1:Foo, #3:Foo, #4:Foo)
+Y --> f(#2:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo)
+C --> f(#4:Foo, #5:Foo)
+
+Unifier 265
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #3:Foo)
+B --> f(#2:Foo, #3:Foo, #4:Foo, #4:Foo)
+C --> #2:Foo
+
+Unifier 266
+X --> f(#1:Foo, #3:Foo, #5:Foo)
+Y --> f(#2:Foo, #4:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo)
+C --> f(#5:Foo, #5:Foo, #6:Foo)
+
+Unifier 267
+X --> f(#1:Foo, #3:Foo, #5:Foo)
+Y --> f(#2:Foo, #4:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo)
+C --> f(#5:Foo, #5:Foo)
+
+Unifier 268
+X --> f(#2:Foo, #4:Foo)
+Y --> f(#1:Foo, #3:Foo, #5:Foo)
+A --> f(#2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+C --> #1:Foo
+
+Unifier 269
+X --> f(#1:Foo, #3:Foo, #4:Foo)
+Y --> f(#2:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo, #3:Foo)
+C --> f(#4:Foo, #4:Foo, #5:Foo)
+
+Unifier 270
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo)
+B --> f(#2:Foo, #3:Foo, #3:Foo)
+C --> f(#4:Foo, #4:Foo)
+
+Unifier 271
+X --> f(#2:Foo, #4:Foo)
+Y --> f(#1:Foo, #3:Foo)
+A --> f(#2:Foo, #3:Foo)
+B --> f(#2:Foo, #4:Foo, #4:Foo)
+C --> #1:Foo
+
+Unifier 272
+X --> f(#1:Foo, #3:Foo, #5:Foo)
+Y --> f(#2:Foo, #4:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 273
+X --> f(#1:Foo, #3:Foo, #5:Foo)
+Y --> f(#2:Foo, #4:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo, #5:Foo)
+
+Unifier 274
+X --> f(#1:Foo, #3:Foo)
+Y --> f(#2:Foo, #4:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo)
+
+Unifier 275
+X --> f(#1:Foo, #2:Foo)
+Y --> f(#3:Foo, #4:Foo)
+A --> f(#2:Foo, #3:Foo)
+B --> f(#1:Foo, #2:Foo, #4:Foo)
+C --> #1:Foo
+
+Unifier 276
+X --> f(#1:Foo, #3:Foo, #4:Foo)
+Y --> f(#2:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo)
+C --> f(#3:Foo, #4:Foo, #4:Foo, #5:Foo)
+
+Unifier 277
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo)
+B --> f(#2:Foo, #3:Foo)
+C --> f(#3:Foo, #4:Foo, #4:Foo)
+
+Unifier 278
+X --> f(#1:Foo, #3:Foo)
+Y --> f(#2:Foo, #4:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo)
+C --> f(#3:Foo, #4:Foo)
+
+Unifier 279
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #3:Foo)
+B --> f(#2:Foo, #3:Foo)
+C --> #2:Foo
+
+Unifier 280
+X --> f(#1:Foo, #4:Foo)
+Y --> f(#2:Foo, #3:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo)
+C --> f(#4:Foo, #4:Foo, #5:Foo)
+
+Unifier 281
+X --> f(#1:Foo, #4:Foo)
+Y --> f(#2:Foo, #3:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#1:Foo, #3:Foo)
+C --> f(#4:Foo, #4:Foo)
+
+Unifier 282
+X --> #1:Foo
+Y --> f(#2:Foo, #3:Foo, #4:Foo)
+A --> f(#1:Foo, #3:Foo)
+B --> f(#1:Foo, #4:Foo)
+C --> #2:Foo
+
+Unifier 283
+X --> f(#1:Foo, #3:Foo)
+Y --> f(#2:Foo, #4:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> #1:Foo
+C --> f(#3:Foo, #3:Foo, #4:Foo)
+
+Unifier 284
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo)
+B --> #2:Foo
+C --> f(#3:Foo, #3:Foo)
+
+Unifier 285
+X --> #1:Foo
+Y --> f(#2:Foo, #3:Foo)
+A --> f(#1:Foo, #3:Foo)
+B --> #1:Foo
+C --> #2:Foo
+
+Unifier 286
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo)
+Y --> f(#4:Foo, #6:Foo)
+A --> #1:Foo
+B --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 287
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#1:Foo, #2:Foo, #3:Foo, #3:Foo, #4:Foo)
+C --> f(#4:Foo, #5:Foo, #5:Foo)
+
+Unifier 288
+X --> f(#1:Foo, #2:Foo, #3:Foo)
+Y --> f(#4:Foo, #5:Foo)
+A --> #1:Foo
+B --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo)
+
+Unifier 289
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#1:Foo, #2:Foo, #3:Foo, #4:Foo, #4:Foo)
+C --> #3:Foo
+
+Unifier 290
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#2:Foo, #3:Foo, #3:Foo, #4:Foo)
+C --> f(#1:Foo, #4:Foo, #5:Foo, #5:Foo)
+
+Unifier 291
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#2:Foo, #3:Foo, #3:Foo, #4:Foo)
+C --> f(#1:Foo, #4:Foo)
+
+Unifier 292
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> #1:Foo
+B --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo)
+C --> f(#4:Foo, #4:Foo, #5:Foo)
+
+Unifier 293
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#1:Foo, #2:Foo, #3:Foo, #3:Foo)
+C --> f(#4:Foo, #4:Foo)
+
+Unifier 294
+X --> f(#1:Foo, #3:Foo)
+Y --> f(#2:Foo, #4:Foo)
+A --> #1:Foo
+B --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo)
+C --> #2:Foo
+
+Unifier 295
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#2:Foo, #3:Foo, #3:Foo)
+C --> f(#1:Foo, #4:Foo, #4:Foo)
+
+Unifier 296
+X --> f(#1:Foo, #3:Foo)
+Y --> #2:Foo
+A --> #1:Foo
+B --> f(#1:Foo, #3:Foo, #3:Foo)
+C --> #2:Foo
+
+Unifier 297
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> #1:Foo
+B --> f(#1:Foo, #2:Foo, #3:Foo)
+C --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+
+Unifier 298
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#1:Foo, #2:Foo, #3:Foo)
+C --> f(#3:Foo, #4:Foo, #4:Foo)
+
+Unifier 299
+X --> f(#1:Foo, #2:Foo)
+Y --> f(#3:Foo, #4:Foo)
+A --> #1:Foo
+B --> f(#1:Foo, #2:Foo, #3:Foo)
+C --> f(#2:Foo, #4:Foo)
+
+Unifier 300
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#1:Foo, #2:Foo, #3:Foo)
+C --> #3:Foo
+
+Unifier 301
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#2:Foo, #3:Foo)
+C --> f(#1:Foo, #3:Foo, #4:Foo, #4:Foo)
+
+Unifier 302
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#2:Foo, #3:Foo)
+C --> f(#1:Foo, #3:Foo)
+
+Unifier 303
+X --> f(#1:Foo, #3:Foo)
+Y --> f(#2:Foo, #4:Foo)
+A --> #1:Foo
+B --> f(#1:Foo, #2:Foo)
+C --> f(#3:Foo, #3:Foo, #4:Foo)
+
+Unifier 304
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#1:Foo, #2:Foo)
+C --> f(#3:Foo, #3:Foo)
+
+Unifier 305
+X --> #1:Foo
+Y --> f(#2:Foo, #3:Foo)
+A --> #1:Foo
+B --> f(#1:Foo, #3:Foo)
+C --> #2:Foo
+
+Unifier 306
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> #2:Foo
+C --> f(#1:Foo, #3:Foo, #3:Foo)
+
+Unifier 307
+X --> #1:Foo
+Y --> #2:Foo
+A --> #1:Foo
+B --> #1:Foo
+C --> #2:Foo
+
+Unifier 308
+X --> f(#1:Foo, #3:Foo, #4:Foo, #6:Foo)
+Y --> f(#2:Foo, #5:Foo, #7:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo, #5:Foo)
+C --> f(#1:Foo, #4:Foo, #6:Foo, #6:Foo, #7:Foo)
+
+Unifier 309
+X --> f(#1:Foo, #3:Foo, #4:Foo, #6:Foo)
+Y --> f(#2:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo, #5:Foo)
+C --> f(#1:Foo, #4:Foo, #6:Foo, #6:Foo)
+
+Unifier 310
+X --> f(#1:Foo, #3:Foo, #4:Foo)
+Y --> f(#2:Foo, #5:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo, #5:Foo)
+C --> f(#1:Foo, #4:Foo, #6:Foo)
+
+Unifier 311
+X --> f(#1:Foo, #3:Foo, #4:Foo)
+Y --> f(#2:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo, #5:Foo)
+C --> f(#1:Foo, #4:Foo)
+
+Unifier 312
+X --> f(#1:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> f(#2:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> f(#1:Foo, #4:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 313
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> f(#2:Foo, #4:Foo, #5:Foo, #5:Foo)
+
+Unifier 314
+X --> f(#1:Foo, #3:Foo, #4:Foo)
+Y --> f(#2:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> f(#1:Foo, #4:Foo, #5:Foo)
+
+Unifier 315
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> f(#2:Foo, #4:Foo)
+
+Unifier 316
+X --> f(#1:Foo, #3:Foo, #5:Foo)
+Y --> f(#2:Foo, #4:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> f(#1:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 317
+X --> f(#1:Foo, #3:Foo, #5:Foo)
+Y --> f(#2:Foo, #4:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> f(#1:Foo, #5:Foo, #5:Foo)
+
+Unifier 318
+X --> f(#1:Foo, #3:Foo)
+Y --> f(#2:Foo, #4:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> f(#1:Foo, #5:Foo)
+
+Unifier 319
+X --> f(#1:Foo, #3:Foo)
+Y --> f(#2:Foo, #4:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> #1:Foo
+
+Unifier 320
+X --> f(#1:Foo, #3:Foo, #4:Foo)
+Y --> f(#2:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo)
+C --> f(#1:Foo, #4:Foo, #4:Foo, #5:Foo)
+
+Unifier 321
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo)
+C --> f(#2:Foo, #4:Foo, #4:Foo)
+
+Unifier 322
+X --> f(#1:Foo, #3:Foo)
+Y --> f(#2:Foo, #4:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo)
+C --> f(#1:Foo, #4:Foo)
+
+Unifier 323
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #3:Foo)
+C --> #2:Foo
+
+Unifier 324
+X --> f(#1:Foo, #3:Foo, #5:Foo)
+Y --> f(#2:Foo, #4:Foo, #6:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #4:Foo)
+C --> f(#1:Foo, #3:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 325
+X --> f(#1:Foo, #3:Foo, #5:Foo)
+Y --> f(#2:Foo, #4:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #4:Foo)
+C --> f(#1:Foo, #3:Foo, #5:Foo, #5:Foo)
+
+Unifier 326
+X --> f(#1:Foo, #3:Foo)
+Y --> f(#2:Foo, #4:Foo, #5:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #4:Foo)
+C --> f(#1:Foo, #3:Foo, #5:Foo)
+
+Unifier 327
+X --> f(#1:Foo, #3:Foo)
+Y --> f(#2:Foo, #4:Foo)
+A --> f(#1:Foo, #2:Foo)
+B --> f(#3:Foo, #4:Foo)
+C --> f(#1:Foo, #3:Foo)
+
+Unifier 328
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> f(#2:Foo, #3:Foo)
+B --> #1:Foo
+C --> f(#1:Foo, #2:Foo, #4:Foo, #4:Foo, #5:Foo)
+
+Unifier 329
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #3:Foo)
+B --> #2:Foo
+C --> f(#2:Foo, #3:Foo, #4:Foo, #4:Foo)
+
+Unifier 330
+X --> f(#1:Foo, #2:Foo)
+Y --> f(#3:Foo, #4:Foo)
+A --> f(#2:Foo, #3:Foo)
+B --> #1:Foo
+C --> f(#1:Foo, #2:Foo, #4:Foo)
+
+Unifier 331
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> f(#1:Foo, #3:Foo)
+B --> #2:Foo
+C --> f(#2:Foo, #3:Foo)
+
+Unifier 332
+X --> f(#2:Foo, #4:Foo)
+Y --> f(#1:Foo, #3:Foo, #5:Foo)
+A --> f(#2:Foo, #3:Foo)
+B --> #1:Foo
+C --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+
+Unifier 333
+X --> f(#2:Foo, #4:Foo)
+Y --> f(#1:Foo, #3:Foo)
+A --> f(#2:Foo, #3:Foo)
+B --> #1:Foo
+C --> f(#2:Foo, #4:Foo, #4:Foo)
+
+Unifier 334
+X --> #1:Foo
+Y --> f(#2:Foo, #3:Foo, #4:Foo)
+A --> f(#1:Foo, #3:Foo)
+B --> #2:Foo
+C --> f(#1:Foo, #4:Foo)
+
+Unifier 335
+X --> #2:Foo
+Y --> f(#1:Foo, #3:Foo)
+A --> f(#2:Foo, #3:Foo)
+B --> #1:Foo
+C --> #2:Foo
+
+Unifier 336
+X --> f(#1:Foo, #2:Foo, #3:Foo, #5:Foo)
+Y --> f(#4:Foo, #6:Foo)
+A --> #1:Foo
+B --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+C --> f(#1:Foo, #3:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 337
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo)
+C --> f(#2:Foo, #4:Foo, #5:Foo, #5:Foo)
+
+Unifier 338
+X --> f(#1:Foo, #2:Foo, #3:Foo)
+Y --> f(#4:Foo, #5:Foo)
+A --> #1:Foo
+B --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+C --> f(#1:Foo, #3:Foo, #5:Foo)
+
+Unifier 339
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo)
+C --> f(#2:Foo, #4:Foo)
+
+Unifier 340
+X --> f(#2:Foo, #3:Foo, #4:Foo, #5:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> f(#1:Foo, #2:Foo, #4:Foo, #5:Foo, #5:Foo)
+
+Unifier 341
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#3:Foo, #3:Foo, #4:Foo)
+C --> f(#1:Foo, #2:Foo, #4:Foo)
+
+Unifier 342
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> #1:Foo
+B --> f(#2:Foo, #2:Foo, #3:Foo)
+C --> f(#1:Foo, #4:Foo, #4:Foo, #5:Foo)
+
+Unifier 343
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#1:Foo, #3:Foo, #3:Foo)
+C --> f(#2:Foo, #4:Foo, #4:Foo)
+
+Unifier 344
+X --> f(#1:Foo, #2:Foo)
+Y --> f(#3:Foo, #4:Foo)
+A --> #1:Foo
+B --> f(#2:Foo, #2:Foo, #3:Foo)
+C --> f(#1:Foo, #4:Foo)
+
+Unifier 345
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#1:Foo, #3:Foo, #3:Foo)
+C --> #2:Foo
+
+Unifier 346
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#3:Foo, #3:Foo)
+C --> f(#1:Foo, #2:Foo, #4:Foo, #4:Foo)
+
+Unifier 347
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#3:Foo, #3:Foo)
+C --> f(#1:Foo, #2:Foo)
+
+Unifier 348
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+A --> #1:Foo
+B --> f(#2:Foo, #3:Foo)
+C --> f(#1:Foo, #2:Foo, #4:Foo, #4:Foo, #5:Foo)
+
+Unifier 349
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#1:Foo, #3:Foo)
+C --> f(#2:Foo, #3:Foo, #4:Foo, #4:Foo)
+
+Unifier 350
+X --> f(#1:Foo, #2:Foo)
+Y --> f(#3:Foo, #4:Foo)
+A --> #1:Foo
+B --> f(#2:Foo, #3:Foo)
+C --> f(#1:Foo, #2:Foo, #4:Foo)
+
+Unifier 351
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> f(#1:Foo, #3:Foo)
+C --> f(#2:Foo, #3:Foo)
+
+Unifier 352
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> #3:Foo
+C --> f(#1:Foo, #2:Foo, #3:Foo, #4:Foo, #4:Foo)
+
+Unifier 353
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> #2:Foo
+B --> #3:Foo
+C --> f(#1:Foo, #2:Foo, #3:Foo)
+
+Unifier 354
+X --> f(#1:Foo, #3:Foo)
+Y --> f(#2:Foo, #4:Foo)
+A --> #1:Foo
+B --> #2:Foo
+C --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo)
+
+Unifier 355
+X --> f(#1:Foo, #3:Foo)
+Y --> #2:Foo
+A --> #1:Foo
+B --> #2:Foo
+C --> f(#1:Foo, #3:Foo, #3:Foo)
+
+Unifier 356
+X --> #1:Foo
+Y --> f(#2:Foo, #3:Foo)
+A --> #1:Foo
+B --> #2:Foo
+C --> f(#1:Foo, #3:Foo)
+
+Unifier 357
+X --> #1:Foo
+Y --> #2:Foo
+A --> #1:Foo
+B --> #2:Foo
+C --> #1:Foo
+
+Unifier 358
+X --> f(#2:Foo, #3:Foo, #5:Foo)
+Y --> f(#1:Foo, #4:Foo, #6:Foo)
+A --> #1:Foo
+B --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo, #5:Foo, #6:Foo)
+
+Unifier 359
+X --> f(#2:Foo, #3:Foo, #5:Foo)
+Y --> f(#1:Foo, #4:Foo)
+A --> #1:Foo
+B --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo, #5:Foo)
+
+Unifier 360
+X --> f(#2:Foo, #3:Foo)
+Y --> f(#1:Foo, #4:Foo, #5:Foo)
+A --> #1:Foo
+B --> f(#2:Foo, #2:Foo, #3:Foo, #4:Foo)
+C --> f(#3:Foo, #5:Foo)
+
+Unifier 361
+X --> f(#2:Foo, #3:Foo)
+Y --> f(#1:Foo, #4:Foo)
+A --> #1:Foo
+B --> f(#2:Foo, #3:Foo, #3:Foo, #4:Foo)
+C --> #2:Foo
+
+Unifier 362
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> f(#1:Foo, #5:Foo)
+A --> #1:Foo
+B --> f(#2:Foo, #2:Foo, #3:Foo)
+C --> f(#3:Foo, #4:Foo, #4:Foo, #5:Foo)
+
+Unifier 363
+X --> f(#2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+A --> #1:Foo
+B --> f(#2:Foo, #2:Foo, #3:Foo)
+C --> f(#3:Foo, #4:Foo, #4:Foo)
+
+Unifier 364
+X --> f(#2:Foo, #3:Foo)
+Y --> f(#1:Foo, #4:Foo)
+A --> #1:Foo
+B --> f(#2:Foo, #2:Foo, #3:Foo)
+C --> f(#3:Foo, #4:Foo)
+
+Unifier 365
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> #1:Foo
+B --> f(#2:Foo, #3:Foo, #3:Foo)
+C --> #2:Foo
+
+Unifier 366
+X --> f(#2:Foo, #4:Foo)
+Y --> f(#1:Foo, #3:Foo, #5:Foo)
+A --> #1:Foo
+B --> f(#2:Foo, #2:Foo, #3:Foo)
+C --> f(#4:Foo, #4:Foo, #5:Foo)
+
+Unifier 367
+X --> f(#2:Foo, #4:Foo)
+Y --> f(#1:Foo, #3:Foo)
+A --> #1:Foo
+B --> f(#2:Foo, #2:Foo, #3:Foo)
+C --> f(#4:Foo, #4:Foo)
+
+Unifier 368
+X --> #1:Foo
+Y --> f(#2:Foo, #3:Foo, #4:Foo)
+A --> #2:Foo
+B --> f(#1:Foo, #1:Foo, #4:Foo)
+C --> #3:Foo
+
+Unifier 369
+X --> f(#2:Foo, #3:Foo)
+Y --> f(#1:Foo, #4:Foo)
+A --> #1:Foo
+B --> f(#2:Foo, #2:Foo)
+C --> f(#3:Foo, #3:Foo, #4:Foo)
+
+Unifier 370
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> #1:Foo
+B --> f(#2:Foo, #2:Foo)
+C --> f(#3:Foo, #3:Foo)
+
+Unifier 371
+X --> #1:Foo
+Y --> f(#2:Foo, #3:Foo)
+A --> #2:Foo
+B --> f(#1:Foo, #1:Foo)
+C --> #3:Foo
+
+Unifier 372
+X --> f(#2:Foo, #4:Foo)
+Y --> f(#1:Foo, #3:Foo, #5:Foo)
+A --> #1:Foo
+B --> f(#2:Foo, #3:Foo)
+C --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+
+Unifier 373
+X --> f(#2:Foo, #4:Foo)
+Y --> f(#1:Foo, #3:Foo)
+A --> #1:Foo
+B --> f(#2:Foo, #3:Foo)
+C --> f(#2:Foo, #4:Foo, #4:Foo)
+
+Unifier 374
+X --> #1:Foo
+Y --> f(#2:Foo, #3:Foo, #4:Foo)
+A --> #2:Foo
+B --> f(#1:Foo, #3:Foo)
+C --> f(#1:Foo, #4:Foo)
+
+Unifier 375
+X --> #2:Foo
+Y --> f(#1:Foo, #3:Foo)
+A --> #1:Foo
+B --> f(#2:Foo, #3:Foo)
+C --> #2:Foo
+
+Unifier 376
+X --> f(#2:Foo, #3:Foo)
+Y --> f(#1:Foo, #4:Foo)
+A --> #1:Foo
+B --> #2:Foo
+C --> f(#2:Foo, #3:Foo, #3:Foo, #4:Foo)
+
+Unifier 377
+X --> f(#2:Foo, #3:Foo)
+Y --> #1:Foo
+A --> #1:Foo
+B --> #2:Foo
+C --> f(#2:Foo, #3:Foo, #3:Foo)
+
+Unifier 378
+X --> #2:Foo
+Y --> f(#1:Foo, #3:Foo)
+A --> #1:Foo
+B --> #2:Foo
+C --> f(#2:Foo, #3:Foo)
+
+Unifier 379
+X --> #2:Foo
+Y --> #1:Foo
+A --> #1:Foo
+B --> #2:Foo
+C --> #2:Foo
+
+Unifier 380
+X --> #1:Foo
+Y --> f(#2:Foo, #3:Foo, #4:Foo)
+A --> #2:Foo
+B --> #3:Foo
+C --> f(#1:Foo, #1:Foo, #4:Foo)
+
+Unifier 381
+X --> #1:Foo
+Y --> f(#2:Foo, #3:Foo)
+A --> #2:Foo
+B --> #3:Foo
+C --> f(#1:Foo, #1:Foo)
+==========================================
+unify in AC : f(X, X, Y) =? f(a, B, C) .
+
+Unifier 1
+X --> f(a, #1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+B --> f(a, #1:Foo, #1:Foo, #2:Foo, #3:Foo)
+C --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+
+Unifier 2
+X --> f(a, #2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+B --> f(a, #1:Foo, #2:Foo, #2:Foo, #3:Foo)
+C --> f(#3:Foo, #4:Foo, #4:Foo)
+
+Unifier 3
+X --> f(a, #1:Foo, #2:Foo)
+Y --> f(#3:Foo, #4:Foo)
+B --> f(a, #1:Foo, #1:Foo, #2:Foo, #3:Foo)
+C --> f(#2:Foo, #4:Foo)
+
+Unifier 4
+X --> f(a, #2:Foo, #3:Foo)
+Y --> #1:Foo
+B --> f(a, #1:Foo, #2:Foo, #3:Foo, #3:Foo)
+C --> #2:Foo
+
+Unifier 5
+X --> f(a, #2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+B --> f(a, #2:Foo, #2:Foo, #3:Foo)
+C --> f(#1:Foo, #3:Foo, #4:Foo, #4:Foo)
+
+Unifier 6
+X --> f(a, #2:Foo, #3:Foo)
+Y --> #1:Foo
+B --> f(a, #2:Foo, #2:Foo, #3:Foo)
+C --> f(#1:Foo, #3:Foo)
+
+Unifier 7
+X --> f(a, #1:Foo, #3:Foo)
+Y --> f(#2:Foo, #4:Foo)
+B --> f(a, #1:Foo, #1:Foo, #2:Foo)
+C --> f(#3:Foo, #3:Foo, #4:Foo)
+
+Unifier 8
+X --> f(a, #2:Foo, #3:Foo)
+Y --> #1:Foo
+B --> f(a, #1:Foo, #2:Foo, #2:Foo)
+C --> f(#3:Foo, #3:Foo)
+
+Unifier 9
+X --> f(a, #2:Foo)
+Y --> f(#1:Foo, #3:Foo)
+B --> f(a, #2:Foo, #2:Foo, #3:Foo)
+C --> #1:Foo
+
+Unifier 10
+X --> f(a, #2:Foo, #3:Foo)
+Y --> #1:Foo
+B --> f(a, #2:Foo, #2:Foo)
+C --> f(#1:Foo, #3:Foo, #3:Foo)
+
+Unifier 11
+X --> f(a, #2:Foo)
+Y --> #1:Foo
+B --> f(a, #2:Foo, #2:Foo)
+C --> #1:Foo
+
+Unifier 12
+X --> f(a, #1:Foo, #3:Foo)
+Y --> f(#2:Foo, #4:Foo)
+B --> f(a, #1:Foo, #2:Foo)
+C --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo)
+
+Unifier 13
+X --> f(a, #2:Foo, #3:Foo)
+Y --> #1:Foo
+B --> f(a, #1:Foo, #2:Foo)
+C --> f(#2:Foo, #3:Foo, #3:Foo)
+
+Unifier 14
+X --> f(a, #1:Foo)
+Y --> f(#2:Foo, #3:Foo)
+B --> f(a, #1:Foo, #2:Foo)
+C --> f(#1:Foo, #3:Foo)
+
+Unifier 15
+X --> f(a, #2:Foo)
+Y --> #1:Foo
+B --> f(a, #1:Foo, #2:Foo)
+C --> #2:Foo
+
+Unifier 16
+X --> f(a, #2:Foo, #3:Foo)
+Y --> #1:Foo
+B --> f(a, #2:Foo)
+C --> f(#1:Foo, #2:Foo, #3:Foo, #3:Foo)
+
+Unifier 17
+X --> f(a, #2:Foo)
+Y --> #1:Foo
+B --> f(a, #2:Foo)
+C --> f(#1:Foo, #2:Foo)
+
+Unifier 18
+X --> f(a, #2:Foo)
+Y --> f(#1:Foo, #3:Foo)
+B --> f(a, #1:Foo)
+C --> f(#2:Foo, #2:Foo, #3:Foo)
+
+Unifier 19
+X --> f(a, #2:Foo)
+Y --> #1:Foo
+B --> f(a, #1:Foo)
+C --> f(#2:Foo, #2:Foo)
+
+Unifier 20
+X --> a
+Y --> f(#1:Foo, #2:Foo)
+B --> f(a, #2:Foo)
+C --> #1:Foo
+
+Unifier 21
+X --> f(a, #2:Foo)
+Y --> #1:Foo
+B --> a
+C --> f(#1:Foo, #2:Foo, #2:Foo)
+
+Unifier 22
+X --> a
+Y --> #1:Foo
+B --> a
+C --> #1:Foo
+
+Unifier 23
+X --> f(a, #1:Foo, #2:Foo, #4:Foo)
+Y --> f(#3:Foo, #5:Foo)
+B --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+C --> f(a, #2:Foo, #4:Foo, #4:Foo, #5:Foo)
+
+Unifier 24
+X --> f(a, #2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+B --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo)
+C --> f(a, #3:Foo, #4:Foo, #4:Foo)
+
+Unifier 25
+X --> f(a, #1:Foo, #2:Foo)
+Y --> f(#3:Foo, #4:Foo)
+B --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+C --> f(a, #2:Foo, #4:Foo)
+
+Unifier 26
+X --> f(a, #2:Foo, #3:Foo)
+Y --> #1:Foo
+B --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo)
+C --> f(a, #3:Foo)
+
+Unifier 27
+X --> f(a, #2:Foo, #3:Foo, #4:Foo)
+Y --> #1:Foo
+B --> f(#2:Foo, #2:Foo, #3:Foo)
+C --> f(a, #1:Foo, #3:Foo, #4:Foo, #4:Foo)
+
+Unifier 28
+X --> f(a, #2:Foo, #3:Foo)
+Y --> #1:Foo
+B --> f(#2:Foo, #2:Foo, #3:Foo)
+C --> f(a, #1:Foo, #3:Foo)
+
+Unifier 29
+X --> f(a, #1:Foo, #3:Foo)
+Y --> f(#2:Foo, #4:Foo)
+B --> f(#1:Foo, #1:Foo, #2:Foo)
+C --> f(a, #3:Foo, #3:Foo, #4:Foo)
+
+Unifier 30
+X --> f(a, #2:Foo, #3:Foo)
+Y --> #1:Foo
+B --> f(#1:Foo, #2:Foo, #2:Foo)
+C --> f(a, #3:Foo, #3:Foo)
+
+Unifier 31
+X --> f(a, #1:Foo)
+Y --> f(#2:Foo, #3:Foo)
+B --> f(#1:Foo, #1:Foo, #2:Foo)
+C --> f(a, #3:Foo)
+
+Unifier 32
+X --> f(a, #2:Foo)
+Y --> #1:Foo
+B --> f(#1:Foo, #2:Foo, #2:Foo)
+C --> a
+
+Unifier 33
+X --> f(a, #2:Foo, #3:Foo)
+Y --> #1:Foo
+B --> f(#2:Foo, #2:Foo)
+C --> f(a, #1:Foo, #3:Foo, #3:Foo)
+
+Unifier 34
+X --> f(a, #2:Foo)
+Y --> #1:Foo
+B --> f(#2:Foo, #2:Foo)
+C --> f(a, #1:Foo)
+
+Unifier 35
+X --> f(a, #1:Foo, #3:Foo)
+Y --> f(#2:Foo, #4:Foo)
+B --> f(#1:Foo, #2:Foo)
+C --> f(a, #1:Foo, #3:Foo, #3:Foo, #4:Foo)
+
+Unifier 36
+X --> f(a, #2:Foo, #3:Foo)
+Y --> #1:Foo
+B --> f(#1:Foo, #2:Foo)
+C --> f(a, #2:Foo, #3:Foo, #3:Foo)
+
+Unifier 37
+X --> f(a, #1:Foo)
+Y --> f(#2:Foo, #3:Foo)
+B --> f(#1:Foo, #2:Foo)
+C --> f(a, #1:Foo, #3:Foo)
+
+Unifier 38
+X --> f(a, #2:Foo)
+Y --> #1:Foo
+B --> f(#1:Foo, #2:Foo)
+C --> f(a, #2:Foo)
+
+Unifier 39
+X --> f(a, #2:Foo, #3:Foo)
+Y --> #1:Foo
+B --> #2:Foo
+C --> f(a, #1:Foo, #2:Foo, #3:Foo, #3:Foo)
+
+Unifier 40
+X --> f(a, #2:Foo)
+Y --> #1:Foo
+B --> #2:Foo
+C --> f(a, #1:Foo, #2:Foo)
+
+Unifier 41
+X --> f(a, #2:Foo)
+Y --> f(#1:Foo, #3:Foo)
+B --> #1:Foo
+C --> f(a, #2:Foo, #2:Foo, #3:Foo)
+
+Unifier 42
+X --> f(a, #2:Foo)
+Y --> #1:Foo
+B --> #1:Foo
+C --> f(a, #2:Foo, #2:Foo)
+
+Unifier 43
+X --> a
+Y --> f(#1:Foo, #2:Foo)
+B --> #1:Foo
+C --> f(a, #2:Foo)
+
+Unifier 44
+X --> a
+Y --> #1:Foo
+B --> #1:Foo
+C --> a
+
+Unifier 45
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(a, #3:Foo, #5:Foo)
+B --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+C --> f(#2:Foo, #4:Foo, #4:Foo, #5:Foo)
+
+Unifier 46
+X --> f(#1:Foo, #2:Foo, #4:Foo)
+Y --> f(a, #3:Foo)
+B --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+C --> f(#2:Foo, #4:Foo, #4:Foo)
+
+Unifier 47
+X --> f(#1:Foo, #2:Foo)
+Y --> f(a, #3:Foo, #4:Foo)
+B --> f(#1:Foo, #1:Foo, #2:Foo, #3:Foo)
+C --> f(#2:Foo, #4:Foo)
+
+Unifier 48
+X --> f(#1:Foo, #2:Foo)
+Y --> f(a, #3:Foo)
+B --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo)
+C --> #1:Foo
+
+Unifier 49
+X --> f(#1:Foo, #2:Foo, #3:Foo)
+Y --> f(a, #4:Foo)
+B --> f(#1:Foo, #1:Foo, #2:Foo)
+C --> f(#2:Foo, #3:Foo, #3:Foo, #4:Foo)
+
+Unifier 50
+X --> f(#1:Foo, #2:Foo, #3:Foo)
+Y --> a
+B --> f(#1:Foo, #1:Foo, #2:Foo)
+C --> f(#2:Foo, #3:Foo, #3:Foo)
+
+Unifier 51
+X --> f(#1:Foo, #2:Foo)
+Y --> f(a, #3:Foo)
+B --> f(#1:Foo, #1:Foo, #2:Foo)
+C --> f(#2:Foo, #3:Foo)
+
+Unifier 52
+X --> f(#1:Foo, #2:Foo)
+Y --> a
+B --> f(#1:Foo, #2:Foo, #2:Foo)
+C --> #1:Foo
+
+Unifier 53
+X --> f(#1:Foo, #3:Foo)
+Y --> f(a, #2:Foo, #4:Foo)
+B --> f(#1:Foo, #1:Foo, #2:Foo)
+C --> f(#3:Foo, #3:Foo, #4:Foo)
+
+Unifier 54
+X --> f(#1:Foo, #3:Foo)
+Y --> f(a, #2:Foo)
+B --> f(#1:Foo, #1:Foo, #2:Foo)
+C --> f(#3:Foo, #3:Foo)
+
+Unifier 55
+X --> #1:Foo
+Y --> f(a, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #1:Foo, #3:Foo)
+C --> #2:Foo
+
+Unifier 56
+X --> f(#1:Foo, #2:Foo)
+Y --> f(a, #3:Foo)
+B --> f(#1:Foo, #1:Foo)
+C --> f(#2:Foo, #2:Foo, #3:Foo)
+
+Unifier 57
+X --> f(#1:Foo, #2:Foo)
+Y --> a
+B --> f(#1:Foo, #1:Foo)
+C --> f(#2:Foo, #2:Foo)
+
+Unifier 58
+X --> #1:Foo
+Y --> f(a, #2:Foo)
+B --> f(#1:Foo, #1:Foo)
+C --> #2:Foo
+
+Unifier 59
+X --> f(#1:Foo, #3:Foo)
+Y --> f(a, #2:Foo, #4:Foo)
+B --> f(#1:Foo, #2:Foo)
+C --> f(#1:Foo, #3:Foo, #3:Foo, #4:Foo)
+
+Unifier 60
+X --> f(#1:Foo, #3:Foo)
+Y --> f(a, #2:Foo)
+B --> f(#1:Foo, #2:Foo)
+C --> f(#1:Foo, #3:Foo, #3:Foo)
+
+Unifier 61
+X --> #1:Foo
+Y --> f(a, #2:Foo, #3:Foo)
+B --> f(#1:Foo, #2:Foo)
+C --> f(#1:Foo, #3:Foo)
+
+Unifier 62
+X --> #1:Foo
+Y --> f(a, #2:Foo)
+B --> f(#1:Foo, #2:Foo)
+C --> #1:Foo
+
+Unifier 63
+X --> f(#1:Foo, #2:Foo)
+Y --> f(a, #3:Foo)
+B --> #1:Foo
+C --> f(#1:Foo, #2:Foo, #2:Foo, #3:Foo)
+
+Unifier 64
+X --> f(#1:Foo, #2:Foo)
+Y --> a
+B --> #1:Foo
+C --> f(#1:Foo, #2:Foo, #2:Foo)
+
+Unifier 65
+X --> #1:Foo
+Y --> f(a, #2:Foo)
+B --> #1:Foo
+C --> f(#1:Foo, #2:Foo)
+
+Unifier 66
+X --> #1:Foo
+Y --> a
+B --> #1:Foo
+C --> #1:Foo
+
+Unifier 67
+X --> #1:Foo
+Y --> f(a, #2:Foo, #3:Foo)
+B --> #2:Foo
+C --> f(#1:Foo, #1:Foo, #3:Foo)
+
+Unifier 68
+X --> #1:Foo
+Y --> f(a, #2:Foo)
+B --> #2:Foo
+C --> f(#1:Foo, #1:Foo)
+==========================================
+unify in AC : f(X, X, X) =? f(a, a) .
+No unifier.
+==========================================
+unify in AC : f(X, X, X, Y) =? f(a, a) .
+No unifier.
+==========================================
+unify in AC2 : f(A, B) =? f(C, D) .
+
+Unifier 1
+A --> #1:Elt
+B --> #2:Elt
+C --> #1:Elt
+D --> #2:Elt
+
+Unifier 2
+A --> #2:Elt
+B --> #1:Elt
+C --> #1:Elt
+D --> #2:Elt
+==========================================
+unify in AC2 : f(X, A) =? f(Y, B) .
+
+Unifier 1
+A --> #1:Elt
+X --> #2:Set
+B --> #1:Elt
+Y --> #2:Set
+
+Unifier 2
+A --> #1:Elt
+X --> f(#2:Elt, #3:Set)
+B --> #2:Elt
+Y --> f(#1:Elt, #3:Set)
+
+Unifier 3
+A --> #1:Elt
+X --> #2:Elt
+B --> #2:Elt
+Y --> #1:Elt
+==========================================
+unify in AC2 : f(g(X, Y), g(X, Z), U) =? f(g(Y, Z), V) .
+
+Unifier 1
+U --> f(#4:Set, g(#3:Set, #2:Set))
+X --> #1:Set
+Z --> #2:Set
+Y --> #3:Set
+V --> f(#4:Set, g(#1:Set, #2:Set), g(#1:Set, #3:Set))
+
+Unifier 2
+U --> #1:Set
+X --> #2:Set
+Z --> #2:Set
+Y --> #2:Set
+V --> f(#1:Set, g(#2:Set, #2:Set))
+
+Unifier 3
+U --> #1:Set
+X --> #3:Set
+Z --> #2:Set
+Y --> #3:Set
+V --> f(#1:Set, g(#3:Set, #3:Set))
+
+Unifier 4
+U --> g(#3:Set, #2:Set)
+X --> #1:Set
+Z --> #2:Set
+Y --> #3:Set
+V --> f(g(#1:Set, #2:Set), g(#1:Set, #3:Set))
+==========================================
+unify in AC2 : g(f(X, Y), f(X, U, Z)) =? g(f(U, V), f(W, A)) .
+
+Unifier 1
+X --> f(#3:Set, #4:Set)
+Y --> f(#5:Set, #6:Set)
+Z --> f(#1:Elt, #2:Set)
+U --> f(#3:Set, #5:Set)
+V --> f(#4:Set, #6:Set)
+A --> #1:Elt
+W --> f(#2:Set, #3:Set, #3:Set, #4:Set, #5:Set)
+
+Unifier 2
+X --> f(#2:Set, #5:Set)
+Y --> #1:Set
+Z --> f(#3:Elt, #4:Set)
+U --> f(#1:Set, #5:Set)
+V --> #2:Set
+A --> #3:Elt
+W --> f(#1:Set, #2:Set, #4:Set, #5:Set, #5:Set)
+
+Unifier 3
+X --> f(#2:Set, #5:Set)
+Y --> #1:Set
+Z --> f(#3:Elt, #4:Set)
+U --> #2:Set
+V --> f(#1:Set, #5:Set)
+A --> #3:Elt
+W --> f(#2:Set, #2:Set, #4:Set, #5:Set)
+
+Unifier 4
+X --> #1:Set
+Y --> f(#2:Set, #5:Set)
+Z --> f(#3:Elt, #4:Set)
+U --> f(#1:Set, #5:Set)
+V --> #2:Set
+A --> #3:Elt
+W --> f(#1:Set, #1:Set, #4:Set, #5:Set)
+
+Unifier 5
+X --> #1:Set
+Y --> #2:Set
+Z --> f(#3:Elt, #4:Set)
+U --> #1:Set
+V --> #2:Set
+A --> #3:Elt
+W --> f(#1:Set, #1:Set, #4:Set)
+
+Unifier 6
+X --> #1:Set
+Y --> f(#2:Set, #5:Set)
+Z --> f(#3:Elt, #4:Set)
+U --> #2:Set
+V --> f(#1:Set, #5:Set)
+A --> #3:Elt
+W --> f(#1:Set, #2:Set, #4:Set)
+
+Unifier 7
+X --> #1:Set
+Y --> #2:Set
+Z --> f(#3:Elt, #4:Set)
+U --> #2:Set
+V --> #1:Set
+A --> #3:Elt
+W --> f(#1:Set, #2:Set, #4:Set)
+
+Unifier 8
+X --> f(#2:Set, #3:Set)
+Y --> f(#4:Set, #5:Set)
+Z --> #1:Elt
+U --> f(#2:Set, #4:Set)
+V --> f(#3:Set, #5:Set)
+A --> #1:Elt
+W --> f(#2:Set, #2:Set, #3:Set, #4:Set)
+
+Unifier 9
+X --> f(#2:Set, #4:Set)
+Y --> #1:Set
+Z --> #3:Elt
+U --> f(#1:Set, #4:Set)
+V --> #2:Set
+A --> #3:Elt
+W --> f(#1:Set, #2:Set, #4:Set, #4:Set)
+
+Unifier 10
+X --> f(#2:Set, #4:Set)
+Y --> #1:Set
+Z --> #3:Elt
+U --> #2:Set
+V --> f(#1:Set, #4:Set)
+A --> #3:Elt
+W --> f(#2:Set, #2:Set, #4:Set)
+
+Unifier 11
+X --> #1:Set
+Y --> f(#2:Set, #4:Set)
+Z --> #3:Elt
+U --> f(#1:Set, #4:Set)
+V --> #2:Set
+A --> #3:Elt
+W --> f(#1:Set, #1:Set, #4:Set)
+
+Unifier 12
+X --> #1:Set
+Y --> #2:Set
+Z --> #3:Elt
+U --> #1:Set
+V --> #2:Set
+A --> #3:Elt
+W --> f(#1:Set, #1:Set)
+
+Unifier 13
+X --> #1:Set
+Y --> f(#2:Set, #4:Set)
+Z --> #3:Elt
+U --> #2:Set
+V --> f(#1:Set, #4:Set)
+A --> #3:Elt
+W --> f(#1:Set, #2:Set)
+
+Unifier 14
+X --> #1:Set
+Y --> #2:Set
+Z --> #3:Elt
+U --> #2:Set
+V --> #1:Set
+A --> #3:Elt
+W --> f(#1:Set, #2:Set)
+
+Unifier 15
+X --> f(#2:Elt, #3:Set, #4:Set)
+Y --> f(#5:Set, #6:Set)
+Z --> #1:Set
+U --> f(#2:Elt, #3:Set, #5:Set)
+V --> f(#4:Set, #6:Set)
+A --> #2:Elt
+W --> f(#2:Elt, #1:Set, #3:Set, #3:Set, #4:Set, #5:Set)
+
+Unifier 16
+X --> f(#4:Elt, #3:Set, #5:Set)
+Y --> #1:Set
+Z --> #2:Set
+U --> f(#4:Elt, #1:Set, #5:Set)
+V --> #3:Set
+A --> #4:Elt
+W --> f(#4:Elt, #1:Set, #2:Set, #3:Set, #5:Set, #5:Set)
+
+Unifier 17
+X --> f(#3:Elt, #4:Set, #5:Set)
+Y --> #1:Set
+Z --> #2:Set
+U --> f(#3:Elt, #4:Set)
+V --> f(#1:Set, #5:Set)
+A --> #3:Elt
+W --> f(#3:Elt, #2:Set, #4:Set, #4:Set, #5:Set)
+
+Unifier 18
+X --> f(#3:Elt, #4:Set)
+Y --> f(#2:Set, #5:Set)
+Z --> #1:Set
+U --> f(#3:Elt, #4:Set, #5:Set)
+V --> #2:Set
+A --> #3:Elt
+W --> f(#3:Elt, #1:Set, #4:Set, #4:Set, #5:Set)
+
+Unifier 19
+X --> f(#3:Elt, #4:Set)
+Y --> #2:Set
+Z --> #1:Set
+U --> f(#3:Elt, #4:Set)
+V --> #2:Set
+A --> #3:Elt
+W --> f(#3:Elt, #1:Set, #4:Set, #4:Set)
+
+Unifier 20
+X --> f(#2:Elt, #3:Set)
+Y --> f(#4:Set, #5:Set)
+Z --> #1:Set
+U --> f(#2:Elt, #4:Set)
+V --> f(#3:Set, #5:Set)
+A --> #2:Elt
+W --> f(#2:Elt, #1:Set, #3:Set, #4:Set)
+
+Unifier 21
+X --> f(#4:Elt, #3:Set)
+Y --> #1:Set
+Z --> #2:Set
+U --> f(#4:Elt, #1:Set)
+V --> #3:Set
+A --> #4:Elt
+W --> f(#4:Elt, #1:Set, #2:Set, #3:Set)
+
+Unifier 22
+X --> f(#3:Elt, #4:Set)
+Y --> #1:Set
+Z --> #2:Set
+U --> #3:Elt
+V --> f(#1:Set, #4:Set)
+A --> #3:Elt
+W --> f(#3:Elt, #2:Set, #4:Set)
+
+Unifier 23
+X --> #3:Elt
+Y --> f(#2:Set, #4:Set)
+Z --> #1:Set
+U --> f(#3:Elt, #4:Set)
+V --> #2:Set
+A --> #3:Elt
+W --> f(#3:Elt, #1:Set, #4:Set)
+
+Unifier 24
+X --> #3:Elt
+Y --> #2:Set
+Z --> #1:Set
+U --> #3:Elt
+V --> #2:Set
+A --> #3:Elt
+W --> f(#3:Elt, #1:Set)
+
+Unifier 25
+X --> f(#2:Elt, #3:Set, #4:Set)
+Y --> f(#5:Set, #6:Set)
+Z --> #1:Set
+U --> f(#3:Set, #5:Set)
+V --> f(#2:Elt, #4:Set, #6:Set)
+A --> #2:Elt
+W --> f(#1:Set, #3:Set, #3:Set, #4:Set, #5:Set)
+
+Unifier 26
+X --> f(#3:Elt, #4:Set, #5:Set)
+Y --> #1:Set
+Z --> #2:Set
+U --> f(#1:Set, #4:Set)
+V --> f(#3:Elt, #5:Set)
+A --> #3:Elt
+W --> f(#1:Set, #2:Set, #4:Set, #4:Set, #5:Set)
+
+Unifier 27
+X --> f(#4:Elt, #3:Set, #5:Set)
+Y --> #1:Set
+Z --> #2:Set
+U --> #3:Set
+V --> f(#4:Elt, #1:Set, #5:Set)
+A --> #4:Elt
+W --> f(#2:Set, #3:Set, #3:Set, #5:Set)
+
+Unifier 28
+X --> f(#2:Elt, #3:Set)
+Y --> f(#4:Set, #5:Set)
+Z --> #1:Set
+U --> f(#3:Set, #4:Set)
+V --> f(#2:Elt, #5:Set)
+A --> #2:Elt
+W --> f(#1:Set, #3:Set, #3:Set, #4:Set)
+
+Unifier 29
+X --> f(#3:Elt, #4:Set)
+Y --> #1:Set
+Z --> #2:Set
+U --> f(#1:Set, #4:Set)
+V --> #3:Elt
+A --> #3:Elt
+W --> f(#1:Set, #2:Set, #4:Set, #4:Set)
+
+Unifier 30
+X --> f(#4:Elt, #3:Set)
+Y --> #1:Set
+Z --> #2:Set
+U --> #3:Set
+V --> f(#4:Elt, #1:Set)
+A --> #4:Elt
+W --> f(#2:Set, #3:Set, #3:Set)
+
+Unifier 31
+X --> f(#3:Elt, #4:Set)
+Y --> f(#2:Set, #5:Set)
+Z --> #1:Set
+U --> #2:Set
+V --> f(#3:Elt, #4:Set, #5:Set)
+A --> #3:Elt
+W --> f(#1:Set, #2:Set, #4:Set)
+
+Unifier 32
+X --> f(#3:Elt, #4:Set)
+Y --> #2:Set
+Z --> #1:Set
+U --> #2:Set
+V --> f(#3:Elt, #4:Set)
+A --> #3:Elt
+W --> f(#1:Set, #2:Set, #4:Set)
+
+Unifier 33
+X --> #3:Elt
+Y --> f(#2:Set, #4:Set)
+Z --> #1:Set
+U --> #2:Set
+V --> f(#3:Elt, #4:Set)
+A --> #3:Elt
+W --> f(#1:Set, #2:Set)
+
+Unifier 34
+X --> #3:Elt
+Y --> #2:Set
+Z --> #1:Set
+U --> #2:Set
+V --> #3:Elt
+A --> #3:Elt
+W --> f(#1:Set, #2:Set)
+
+Unifier 35
+X --> f(#3:Set, #4:Set)
+Y --> f(#2:Elt, #5:Set, #6:Set)
+Z --> #1:Set
+U --> f(#2:Elt, #3:Set, #5:Set)
+V --> f(#4:Set, #6:Set)
+A --> #2:Elt
+W --> f(#1:Set, #3:Set, #3:Set, #4:Set, #5:Set)
+
+Unifier 36
+X --> f(#2:Set, #4:Set)
+Y --> f(#3:Elt, #5:Set)
+Z --> #1:Set
+U --> f(#3:Elt, #4:Set, #5:Set)
+V --> #2:Set
+A --> #3:Elt
+W --> f(#1:Set, #2:Set, #4:Set, #4:Set, #5:Set)
+
+Unifier 37
+X --> f(#3:Set, #4:Set)
+Y --> f(#2:Elt, #5:Set)
+Z --> #1:Set
+U --> f(#2:Elt, #3:Set)
+V --> f(#4:Set, #5:Set)
+A --> #2:Elt
+W --> f(#1:Set, #3:Set, #3:Set, #4:Set)
+
+Unifier 38
+X --> f(#2:Set, #4:Set)
+Y --> #3:Elt
+Z --> #1:Set
+U --> f(#3:Elt, #4:Set)
+V --> #2:Set
+A --> #3:Elt
+W --> f(#1:Set, #2:Set, #4:Set, #4:Set)
+
+Unifier 39
+X --> #1:Set
+Y --> f(#4:Elt, #3:Set, #5:Set)
+Z --> #2:Set
+U --> f(#4:Elt, #1:Set, #5:Set)
+V --> #3:Set
+A --> #4:Elt
+W --> f(#1:Set, #1:Set, #2:Set, #5:Set)
+
+Unifier 40
+X --> #1:Set
+Y --> f(#4:Elt, #3:Set)
+Z --> #2:Set
+U --> f(#4:Elt, #1:Set)
+V --> #3:Set
+A --> #4:Elt
+W --> f(#1:Set, #1:Set, #2:Set)
+
+Unifier 41
+X --> #1:Set
+Y --> f(#3:Elt, #4:Set, #5:Set)
+Z --> #2:Set
+U --> f(#3:Elt, #4:Set)
+V --> f(#1:Set, #5:Set)
+A --> #3:Elt
+W --> f(#1:Set, #2:Set, #4:Set)
+
+Unifier 42
+X --> #1:Set
+Y --> f(#3:Elt, #4:Set)
+Z --> #2:Set
+U --> f(#3:Elt, #4:Set)
+V --> #1:Set
+A --> #3:Elt
+W --> f(#1:Set, #2:Set, #4:Set)
+
+Unifier 43
+X --> #1:Set
+Y --> f(#3:Elt, #4:Set)
+Z --> #2:Set
+U --> #3:Elt
+V --> f(#1:Set, #4:Set)
+A --> #3:Elt
+W --> f(#1:Set, #2:Set)
+
+Unifier 44
+X --> #1:Set
+Y --> #3:Elt
+Z --> #2:Set
+U --> #3:Elt
+V --> #1:Set
+A --> #3:Elt
+W --> f(#1:Set, #2:Set)
+==========================================
+unify in AC+C : f(g(X, Y), g(X, Z), U) =? f(g(Y, Z), V) .
+
+Unifier 1
+U --> f(#4:Set, g(#1:Set, #3:Set))
+Z --> #1:Set
+X --> #2:Set
+Y --> #3:Set
+V --> f(#4:Set, g(#1:Set, #2:Set), g(#2:Set, #3:Set))
+
+Unifier 2
+U --> #1:Set
+Z --> #2:Set
+X --> #2:Set
+Y --> #3:Set
+V --> f(#1:Set, g(#2:Set, #2:Set))
+
+Unifier 3
+U --> #1:Set
+Z --> #2:Set
+X --> #3:Set
+Y --> #3:Set
+V --> f(#1:Set, g(#3:Set, #3:Set))
+
+Unifier 4
+U --> g(#1:Set, #3:Set)
+Z --> #1:Set
+X --> #2:Set
+Y --> #3:Set
+V --> f(g(#1:Set, #2:Set), g(#2:Set, #3:Set))
+==========================================
+unify in AC+C : g(f(X, Y), f(X, U, Z)) =? g(f(U, V), f(W, A)) .
+
+Unifier 1
+X --> f(#3:Set, #4:Set, #2:Elt)
+Y --> f(#5:Set, #6:Set)
+Z --> #1:Set
+U --> f(#3:Set, #5:Set, #2:Elt)
+V --> f(#4:Set, #6:Set)
+W --> f(#1:Set, #3:Set, #3:Set, #4:Set, #5:Set, #2:Elt)
+A --> #2:Elt
+
+Unifier 2
+X --> f(#3:Set, #5:Set, #4:Elt)
+Y --> #1:Set
+Z --> #2:Set
+U --> f(#1:Set, #5:Set, #4:Elt)
+V --> #3:Set
+W --> f(#1:Set, #2:Set, #3:Set, #5:Set, #5:Set, #4:Elt)
+A --> #4:Elt
+
+Unifier 3
+X --> f(#4:Set, #5:Set, #3:Elt)
+Y --> #1:Set
+Z --> #2:Set
+U --> f(#4:Set, #3:Elt)
+V --> f(#1:Set, #5:Set)
+W --> f(#2:Set, #4:Set, #4:Set, #5:Set, #3:Elt)
+A --> #3:Elt
+
+Unifier 4
+X --> f(#4:Set, #3:Elt)
+Y --> f(#2:Set, #5:Set)
+Z --> #1:Set
+U --> f(#4:Set, #5:Set, #3:Elt)
+V --> #2:Set
+W --> f(#1:Set, #4:Set, #4:Set, #5:Set, #3:Elt)
+A --> #3:Elt
+
+Unifier 5
+X --> f(#4:Set, #3:Elt)
+Y --> #2:Set
+Z --> #1:Set
+U --> f(#4:Set, #3:Elt)
+V --> #2:Set
+W --> f(#1:Set, #4:Set, #4:Set, #3:Elt)
+A --> #3:Elt
+
+Unifier 6
+X --> f(#3:Set, #4:Set)
+Y --> f(#5:Set, #6:Set)
+Z --> f(#2:Set, #1:Elt)
+U --> f(#3:Set, #5:Set)
+V --> f(#4:Set, #6:Set)
+W --> f(#2:Set, #3:Set, #3:Set, #4:Set, #5:Set)
+A --> #1:Elt
+
+Unifier 7
+X --> f(#2:Set, #5:Set)
+Y --> #1:Set
+Z --> f(#4:Set, #3:Elt)
+U --> f(#1:Set, #5:Set)
+V --> #2:Set
+W --> f(#1:Set, #2:Set, #4:Set, #5:Set, #5:Set)
+A --> #3:Elt
+
+Unifier 8
+X --> f(#3:Set, #4:Set, #2:Elt)
+Y --> f(#5:Set, #6:Set)
+Z --> #1:Set
+U --> f(#3:Set, #5:Set)
+V --> f(#4:Set, #6:Set, #2:Elt)
+W --> f(#1:Set, #3:Set, #3:Set, #4:Set, #5:Set)
+A --> #2:Elt
+
+Unifier 9
+X --> f(#4:Set, #5:Set, #3:Elt)
+Y --> #1:Set
+Z --> #2:Set
+U --> f(#1:Set, #4:Set)
+V --> f(#5:Set, #3:Elt)
+W --> f(#1:Set, #2:Set, #4:Set, #4:Set, #5:Set)
+A --> #3:Elt
+
+Unifier 10
+X --> f(#3:Set, #4:Set)
+Y --> f(#5:Set, #6:Set, #2:Elt)
+Z --> #1:Set
+U --> f(#3:Set, #5:Set, #2:Elt)
+V --> f(#4:Set, #6:Set)
+W --> f(#1:Set, #3:Set, #3:Set, #4:Set, #5:Set)
+A --> #2:Elt
+
+Unifier 11
+X --> f(#2:Set, #4:Set)
+Y --> f(#5:Set, #3:Elt)
+Z --> #1:Set
+U --> f(#4:Set, #5:Set, #3:Elt)
+V --> #2:Set
+W --> f(#1:Set, #2:Set, #4:Set, #4:Set, #5:Set)
+A --> #3:Elt
+
+Unifier 12
+X --> f(#2:Set, #5:Set)
+Y --> #1:Set
+Z --> f(#4:Set, #3:Elt)
+U --> #2:Set
+V --> f(#1:Set, #5:Set)
+W --> f(#2:Set, #2:Set, #4:Set, #5:Set)
+A --> #3:Elt
+
+Unifier 13
+X --> f(#3:Set, #5:Set, #4:Elt)
+Y --> #1:Set
+Z --> #2:Set
+U --> #3:Set
+V --> f(#1:Set, #5:Set, #4:Elt)
+W --> f(#2:Set, #3:Set, #3:Set, #5:Set)
+A --> #4:Elt
+
+Unifier 14
+X --> f(#3:Set, #4:Set)
+Y --> f(#5:Set, #2:Elt)
+Z --> #1:Set
+U --> f(#3:Set, #2:Elt)
+V --> f(#4:Set, #5:Set)
+W --> f(#1:Set, #3:Set, #3:Set, #4:Set)
+A --> #2:Elt
+
+Unifier 15
+X --> f(#2:Set, #4:Set)
+Y --> #3:Elt
+Z --> #1:Set
+U --> f(#4:Set, #3:Elt)
+V --> #2:Set
+W --> f(#1:Set, #2:Set, #4:Set, #4:Set)
+A --> #3:Elt
+
+Unifier 16
+X --> #1:Set
+Y --> f(#2:Set, #5:Set)
+Z --> f(#4:Set, #3:Elt)
+U --> f(#1:Set, #5:Set)
+V --> #2:Set
+W --> f(#1:Set, #1:Set, #4:Set, #5:Set)
+A --> #3:Elt
+
+Unifier 17
+X --> f(#3:Set, #2:Elt)
+Y --> f(#4:Set, #5:Set)
+Z --> #1:Set
+U --> f(#3:Set, #4:Set)
+V --> f(#5:Set, #2:Elt)
+W --> f(#1:Set, #3:Set, #3:Set, #4:Set)
+A --> #2:Elt
+
+Unifier 18
+X --> f(#4:Set, #3:Elt)
+Y --> #1:Set
+Z --> #2:Set
+U --> f(#1:Set, #4:Set)
+V --> #3:Elt
+W --> f(#1:Set, #2:Set, #4:Set, #4:Set)
+A --> #3:Elt
+
+Unifier 19
+X --> #1:Set
+Y --> f(#3:Set, #5:Set, #4:Elt)
+Z --> #2:Set
+U --> f(#1:Set, #5:Set, #4:Elt)
+V --> #3:Set
+W --> f(#1:Set, #1:Set, #2:Set, #5:Set)
+A --> #4:Elt
+
+Unifier 20
+X --> #1:Set
+Y --> #2:Set
+Z --> f(#4:Set, #3:Elt)
+U --> #1:Set
+V --> #2:Set
+W --> f(#1:Set, #1:Set, #4:Set)
+A --> #3:Elt
+
+Unifier 21
+X --> f(#3:Set, #4:Elt)
+Y --> #1:Set
+Z --> #2:Set
+U --> #3:Set
+V --> f(#1:Set, #4:Elt)
+W --> f(#2:Set, #3:Set, #3:Set)
+A --> #4:Elt
+
+Unifier 22
+X --> #1:Set
+Y --> f(#3:Set, #4:Elt)
+Z --> #2:Set
+U --> f(#1:Set, #4:Elt)
+V --> #3:Set
+W --> f(#1:Set, #1:Set, #2:Set)
+A --> #4:Elt
+
+Unifier 23
+X --> f(#3:Set, #2:Elt)
+Y --> f(#4:Set, #5:Set)
+Z --> #1:Set
+U --> f(#4:Set, #2:Elt)
+V --> f(#3:Set, #5:Set)
+W --> f(#1:Set, #3:Set, #4:Set, #2:Elt)
+A --> #2:Elt
+
+Unifier 24
+X --> f(#3:Set, #4:Elt)
+Y --> #1:Set
+Z --> #2:Set
+U --> f(#1:Set, #4:Elt)
+V --> #3:Set
+W --> f(#1:Set, #2:Set, #3:Set, #4:Elt)
+A --> #4:Elt
+
+Unifier 25
+X --> f(#4:Set, #3:Elt)
+Y --> #1:Set
+Z --> #2:Set
+U --> #3:Elt
+V --> f(#1:Set, #4:Set)
+W --> f(#2:Set, #4:Set, #3:Elt)
+A --> #3:Elt
+
+Unifier 26
+X --> #3:Elt
+Y --> f(#2:Set, #4:Set)
+Z --> #1:Set
+U --> f(#4:Set, #3:Elt)
+V --> #2:Set
+W --> f(#1:Set, #4:Set, #3:Elt)
+A --> #3:Elt
+
+Unifier 27
+X --> #3:Elt
+Y --> #2:Set
+Z --> #1:Set
+U --> #3:Elt
+V --> #2:Set
+W --> f(#1:Set, #3:Elt)
+A --> #3:Elt
+
+Unifier 28
+X --> #1:Set
+Y --> f(#2:Set, #5:Set)
+Z --> f(#4:Set, #3:Elt)
+U --> #2:Set
+V --> f(#1:Set, #5:Set)
+W --> f(#1:Set, #2:Set, #4:Set)
+A --> #3:Elt
+
+Unifier 29
+X --> #1:Set
+Y --> #2:Set
+Z --> f(#4:Set, #3:Elt)
+U --> #2:Set
+V --> #1:Set
+W --> f(#1:Set, #2:Set, #4:Set)
+A --> #3:Elt
+
+Unifier 30
+X --> f(#4:Set, #3:Elt)
+Y --> f(#2:Set, #5:Set)
+Z --> #1:Set
+U --> #2:Set
+V --> f(#4:Set, #5:Set, #3:Elt)
+W --> f(#1:Set, #2:Set, #4:Set)
+A --> #3:Elt
+
+Unifier 31
+X --> f(#4:Set, #3:Elt)
+Y --> #2:Set
+Z --> #1:Set
+U --> #2:Set
+V --> f(#4:Set, #3:Elt)
+W --> f(#1:Set, #2:Set, #4:Set)
+A --> #3:Elt
+
+Unifier 32
+X --> #1:Set
+Y --> f(#4:Set, #5:Set, #3:Elt)
+Z --> #2:Set
+U --> f(#4:Set, #3:Elt)
+V --> f(#1:Set, #5:Set)
+W --> f(#1:Set, #2:Set, #4:Set)
+A --> #3:Elt
+
+Unifier 33
+X --> #1:Set
+Y --> f(#4:Set, #3:Elt)
+Z --> #2:Set
+U --> f(#4:Set, #3:Elt)
+V --> #1:Set
+W --> f(#1:Set, #2:Set, #4:Set)
+A --> #3:Elt
+
+Unifier 34
+X --> #1:Set
+Y --> f(#4:Set, #3:Elt)
+Z --> #2:Set
+U --> #3:Elt
+V --> f(#1:Set, #4:Set)
+W --> f(#1:Set, #2:Set)
+A --> #3:Elt
+
+Unifier 35
+X --> #1:Set
+Y --> #3:Elt
+Z --> #2:Set
+U --> #3:Elt
+V --> #1:Set
+W --> f(#1:Set, #2:Set)
+A --> #3:Elt
+
+Unifier 36
+X --> #3:Elt
+Y --> f(#2:Set, #4:Set)
+Z --> #1:Set
+U --> #2:Set
+V --> f(#4:Set, #3:Elt)
+W --> f(#1:Set, #2:Set)
+A --> #3:Elt
+
+Unifier 37
+X --> #3:Elt
+Y --> #2:Set
+Z --> #1:Set
+U --> #2:Set
+V --> #3:Elt
+W --> f(#1:Set, #2:Set)
+A --> #3:Elt
+
+Unifier 38
+X --> f(#2:Set, #3:Set)
+Y --> f(#4:Set, #5:Set)
+Z --> #1:Elt
+U --> f(#2:Set, #4:Set)
+V --> f(#3:Set, #5:Set)
+W --> f(#2:Set, #2:Set, #3:Set, #4:Set)
+A --> #1:Elt
+
+Unifier 39
+X --> f(#2:Set, #4:Set)
+Y --> #1:Set
+Z --> #3:Elt
+U --> f(#1:Set, #4:Set)
+V --> #2:Set
+W --> f(#1:Set, #2:Set, #4:Set, #4:Set)
+A --> #3:Elt
+
+Unifier 40
+X --> f(#2:Set, #4:Set)
+Y --> #1:Set
+Z --> #3:Elt
+U --> #2:Set
+V --> f(#1:Set, #4:Set)
+W --> f(#2:Set, #2:Set, #4:Set)
+A --> #3:Elt
+
+Unifier 41
+X --> #1:Set
+Y --> f(#2:Set, #4:Set)
+Z --> #3:Elt
+U --> f(#1:Set, #4:Set)
+V --> #2:Set
+W --> f(#1:Set, #1:Set, #4:Set)
+A --> #3:Elt
+
+Unifier 42
+X --> #1:Set
+Y --> #2:Set
+Z --> #3:Elt
+U --> #1:Set
+V --> #2:Set
+W --> f(#1:Set, #1:Set)
+A --> #3:Elt
+
+Unifier 43
+X --> #1:Set
+Y --> f(#2:Set, #4:Set)
+Z --> #3:Elt
+U --> #2:Set
+V --> f(#1:Set, #4:Set)
+W --> f(#1:Set, #2:Set)
+A --> #3:Elt
+
+Unifier 44
+X --> #1:Set
+Y --> #2:Set
+Z --> #3:Elt
+U --> #2:Set
+V --> #1:Set
+W --> f(#1:Set, #2:Set)
+A --> #3:Elt
+
+Unifier 45
+X --> f(#5:Set, #4:Elt)
+Y --> #1:Set
+Z --> #2:Set
+U --> #3:Set
+V --> f(#2:Set, #5:Set, #4:Elt)
+W --> f(#1:Set, #5:Set)
+A --> #4:Elt
+
+Unifier 46
+X --> #1:Set
+Y --> f(#5:Set, #4:Elt)
+Z --> #2:Set
+U --> #3:Set
+V --> f(#1:Set, #2:Set)
+W --> f(#1:Set, #5:Set)
+A --> #4:Elt
+
+Unifier 47
+X --> #1:Set
+Y --> #4:Elt
+Z --> #2:Set
+U --> #3:Set
+V --> f(#1:Set, #2:Set)
+W --> #1:Set
+A --> #4:Elt
+
+Unifier 48
+X --> #4:Elt
+Y --> #3:Set
+Z --> #1:Set
+U --> #2:Set
+V --> f(#1:Set, #4:Elt)
+W --> #3:Set
+A --> #4:Elt
+==========================================
+unify in SIMULT : g(X:Foo) =? g(Y:Foo) /\ h(X:Foo) =? h(Z:Foo) .
+
+Unifier 1
+X:Foo --> #1:Foo
+Y:Foo --> #1:Foo
+Z:Foo --> #1:Foo
+==========================================
+unify in SIMULT : g(X:Foo) =? Y:Foo /\ h(X:Foo) =? h(Z:Foo) .
+
+Unifier 1
+X:Foo --> #1:Foo
+Y:Foo --> g(#1:Foo)
+Z:Foo --> #1:Foo
+==========================================
+unify in SIMULT : g(X:Foo) =? Y:Foo /\ h(X:Foo) =? h(Y:Foo) .
+No unifier.
+==========================================
+unify in SIMULT : g(X:Foo) =? Y:Foo /\ X:Foo =? h(Y:Foo) .
+No unifier.
+==========================================
+unify [1] in SIMULT : g(X:Foo) =? Y:Foo /\ h(X:Foo) =? h(Z:Foo) .
+
+Unifier 1
+X:Foo --> #1:Foo
+Y:Foo --> g(#1:Foo)
+Z:Foo --> #1:Foo
+Bye.
