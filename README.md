@@ -16,7 +16,7 @@ Everything in one line: `./MaudeRuntime/maude.linux64 maude-npa.maude EXAMPLE`, 
 If you want Maude to close at the end you need to make sure that at the end of the example there is a `q`.
 
 # BuildOurOwn MAUDE
-1. Go to makeMAUDE
+1. Go to `makeMAUDE`
 2. Run these commands in order ` ./configure --with-yices2=yes --with-cvc4=no` , `make` , `make check`
 3. The runtime is in `src/Main` named **maude**
 4. Copy it to a new name `maude.mycopy` and then run `strip maude.mycopy`
