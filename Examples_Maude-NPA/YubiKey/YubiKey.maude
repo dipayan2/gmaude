@@ -281,3 +281,5 @@ reduce summary((1).NzNat, 5) .
 reduce summary((1).NzNat, 6) .
 reduce summary((1).NzNat, 7) .
 
+q
+
