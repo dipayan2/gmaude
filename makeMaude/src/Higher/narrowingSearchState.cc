@@ -63,6 +63,7 @@ NarrowingSearchState::NarrowingSearchState(RewritingContext* context,
     odd(odd),
     label(label)
 {
+  printf("We are doing narrowing! \n");
   ruleIndex = -1;
 
   DagNode* target = context->root();
