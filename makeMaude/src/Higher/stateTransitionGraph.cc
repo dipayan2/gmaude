@@ -71,7 +71,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 //   printf("[GM]: Analyzing the DAG\n");
   State* n = seen[stateNr];
   int nrNextStates = n->nextStates.length();
-  printf("[GM]: Analyzing the DAG, next states count %d\n", nrNextStates);
+  printf("[GM]: Analyzing the DAG, initial states count %d\n", nrNextStates);
   if (index < nrNextStates)
     return n->nextStates[index];
   if (n->fullyExplored)
@@ -165,10 +165,11 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 		  seen.append(new State(hashConsIndex, stateNr));
 		}
 	    }
-	  printf("[GM]: Next state addition \n");
+	  
 	  n->nextStates.append(nextState);
 	  n->fwdArcs[nextState].insert(rule);
 	  ++nrNextStates;
+	  printf("[GM1]: Analyzing the DAG, loop states count %d\n", nrNextStates);
 	  //
 	  //	If we didn't do any equational rewriting we will not have had a chance to
 	  //	collect garbage.
