@@ -24,6 +24,6 @@ If you want Maude to close at the end you need to make sure that at the end of t
 
 # Run the resource stat script
 1. Go to the `gmaude` folder
-2. Run the script as `./runcmd <dumpfile> <your commands>`
+2. Run the script as `./runcmd.sh <dumpfile> <your commands>`
 3. Sample run of the script `./runcmd.sh TraceDennis taskset -c 0 MaudeRuntime/maude.linux64 maude-npa.maude Examples_Maude-NPA/Denning-Sacco/Denning-Sacco.maude`
 
