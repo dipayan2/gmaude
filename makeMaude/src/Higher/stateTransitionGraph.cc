@@ -67,6 +67,8 @@ StateTransitionGraph::~StateTransitionGraph()
 int
 StateTransitionGraph::getNextState(int stateNr, int index)
 {
+
+  printf("[GM]: Analyzing the DAG\n");
   State* n = seen[stateNr];
   int nrNextStates = n->nextStates.length();
   if (index < nrNextStates)
@@ -162,6 +164,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 		  seen.append(new State(hashConsIndex, stateNr));
 		}
 	    }
+	  printf("[GM]: Next state addition \n");
 	  n->nextStates.append(nextState);
 	  n->fwdArcs[nextState].insert(rule);
 	  ++nrNextStates;
