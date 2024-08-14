@@ -1,0 +1,310 @@
+top - 19:31:28 up  7:35,  2 users,  load average: 0.25, 0.08, 0.03
+Tasks: 380 total,   1 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu7  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu8  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu9  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu10 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu11 :  0.0 us,  6.2 sy,  0.0 ni
+%Cpu12 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu13 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu14 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu15 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu16 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu17 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu18 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu19 :  0.0 us,  0.0 sy,  0.0 ni
+MiB Mem :  31775.3 total,  28065.8 free,    796.2 used,   2913.3 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.  30522.1 avail Mem 
+
+--
+top - 19:31:29 up  7:35,  2 users,  load average: 0.25, 0.08, 0.03
+Tasks: 380 total,   1 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu7  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu8  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu9  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu10 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu11 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu12 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu13 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu14 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu15 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu16 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu17 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu18 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu19 :  0.0 us,  0.0 sy,  0.0 ni
+MiB Mem :  31775.3 total,  28065.8 free,    796.2 used,   2913.3 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.  30522.1 avail Mem 
+
+--
+top - 19:31:30 up  7:35,  2 users,  load average: 0.31, 0.10, 0.03
+Tasks: 381 total,   2 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu7  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu8  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu9  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu10 : 52.9 us,  2.0 sy,  0.0 ni, 45.1 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu11 :  0.0 us,  1.0 sy,  0.0 ni
+%Cpu12 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu13 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu14 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu15 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu16 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu17 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu18 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu19 :  0.0 us,  0.0 sy,  0.0 ni
+MiB Mem :  31775.3 total,  28065.8 free,    796.2 used,   2913.3 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.  30522.1 avail Mem 
+
+--
+top - 19:31:31 up  7:35,  2 users,  load average: 0.31, 0.10, 0.03
+Tasks: 381 total,   2 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  4.0 us,  0.0 sy,  0.0 ni, 96.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu7  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu8  : 95.0 us,  0.0 sy,  0.0 ni,  5.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu9  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu10 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu11 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu12 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu13 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu14 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu15 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu16 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu17 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu18 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu19 :  0.0 us,  0.0 sy,  0.0 ni
+MiB Mem :  31775.3 total,  27958.4 free,    903.6 used,   2913.3 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.  30414.6 avail Mem 
+
+--
+top - 19:31:32 up  7:35,  2 users,  load average: 0.31, 0.10, 0.03
+Tasks: 381 total,   2 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu7  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu8  :100.0 us,  0.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu9  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu10 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu11 :  1.0 us,  0.0 sy,  0.0 ni
+%Cpu12 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu13 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu14 :  1.0 us,  0.0 sy,  0.0 ni, 99.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu15 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu16 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu17 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu18 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu19 :  0.0 us,  0.0 sy,  0.0 ni
+MiB Mem :  31775.3 total,  27958.4 free,    903.6 used,   2913.3 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.  30414.6 avail Mem 
+
+--
+top - 19:31:33 up  7:35,  2 users,  load average: 0.31, 0.10, 0.03
+Tasks: 381 total,   2 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni, 98.0 id,  2.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu7  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu8  :100.0 us,  0.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu9  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu10 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu11 :  1.0 us,  0.0 sy,  0.0 ni
+%Cpu12 :  0.0 us,  0.0 sy,  0.0 ni, 95.0 id,  5.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu13 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu14 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu15 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu16 :  0.0 us,  0.0 sy,  0.0 ni, 96.0 id,  4.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu17 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu18 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu19 :  0.0 us,  0.0 sy,  0.0 ni
+MiB Mem :  31775.3 total,  27958.4 free,    903.6 used,   2913.3 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.  30414.6 avail Mem 
+
+--
+top - 19:31:34 up  7:35,  2 users,  load average: 0.31, 0.10, 0.03
+Tasks: 381 total,   2 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu7  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu8  : 99.0 us,  1.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu9  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu10 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu11 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu12 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu13 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu14 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu15 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu16 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu17 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu18 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu19 :  0.0 us,  0.0 sy,  0.0 ni
+MiB Mem :  31775.3 total,  27925.9 free,    936.0 used,   2913.3 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.  30382.2 avail Mem 
+
+--
+top - 19:31:35 up  7:35,  2 users,  load average: 0.36, 0.12, 0.04
+Tasks: 381 total,   2 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu7  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu8  : 99.0 us,  1.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu9  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu10 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu11 :  0.0 us,  1.0 sy,  0.0 ni
+%Cpu12 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu13 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu14 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu15 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu16 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu17 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu18 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu19 :  0.0 us,  0.0 sy,  0.0 ni
+MiB Mem :  31775.3 total,  27925.9 free,    936.0 used,   2913.3 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.  30382.2 avail Mem 
+
+--
+top - 19:31:36 up  7:35,  2 users,  load average: 0.36, 0.12, 0.04
+Tasks: 381 total,   2 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu7  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu8  :100.0 us,  0.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu9  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu10 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu11 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu12 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu13 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu14 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu15 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu16 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu17 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu18 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu19 :  0.0 us,  0.0 sy,  0.0 ni
+MiB Mem :  31775.3 total,  27925.9 free,    936.0 used,   2913.3 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.  30382.2 avail Mem 
+
+--
+top - 19:31:37 up  7:35,  2 users,  load average: 0.36, 0.12, 0.04
+Tasks: 381 total,   2 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu7  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu8  : 99.0 us,  1.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu9  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu10 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu11 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu12 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu13 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu14 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu15 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu16 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu17 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu18 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu19 :  0.0 us,  0.0 sy,  0.0 ni
+MiB Mem :  31775.3 total,  27903.7 free,    958.2 used,   2913.3 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.  30360.0 avail Mem 
+
+--
+top - 19:31:38 up  7:35,  2 users,  load average: 0.36, 0.12, 0.04
+Tasks: 381 total,   2 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu7  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu8  :100.0 us,  0.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu9  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu10 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu11 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu12 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu13 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu14 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu15 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu16 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu17 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu18 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu19 :  0.0 us,  0.0 sy,  0.0 ni
+MiB Mem :  31775.3 total,  27903.7 free,    958.2 used,   2913.3 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.  30360.0 avail Mem 
+
+--
+top - 19:31:39 up  7:35,  2 users,  load average: 0.36, 0.12, 0.04
+Tasks: 381 total,   2 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu7  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu8  :100.0 us,  0.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu9  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu10 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu11 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu12 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu13 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu14 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu15 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu16 :  0.0 us,  0.0 sy,  0.0 ni, 95.1 id,  4.9 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu17 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu18 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu19 :  0.0 us,  0.0 sy,  0.0 ni
+MiB Mem :  31775.3 total,  27903.7 free,    958.2 used,   2913.3 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.  30360.0 avail Mem 
+
+--
+top - 19:31:40 up  7:35,  2 users,  load average: 0.41, 0.13, 0.04
+Tasks: 381 total,   2 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu7  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu8  :100.0 us,  0.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu9  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu10 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu11 :  1.0 us,  0.0 sy,  0.0 ni
+%Cpu12 :  1.0 us,  0.0 sy,  0.0 ni, 99.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu13 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu14 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu15 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu16 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu17 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu18 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu19 :  0.0 us,  0.0 sy,  0.0 ni
+MiB Mem :  31775.3 total,  27902.5 free,    959.4 used,   2913.3 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.  30358.8 avail Mem 
+
+--
+top - 19:31:41 up  7:35,  2 users,  load average: 0.41, 0.13, 0.04
+Tasks: 381 total,   2 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu7  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu8  :100.0 us,  0.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu9  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu10 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu11 :  0.0 us,  1.0 sy,  0.0 ni
+%Cpu12 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu13 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu14 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu15 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu16 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu17 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu18 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu19 :  0.0 us,  0.0 sy,  0.0 ni
+MiB Mem :  31775.3 total,  27902.5 free,    959.4 used,   2913.3 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.  30358.8 avail Mem 
+
+--
+top - 19:31:42 up  7:35,  2 users,  load average: 0.41, 0.13, 0.04
+Tasks: 381 total,   2 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu7  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu8  :100.0 us,  0.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu9  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu10 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu11 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu12 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu13 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu14 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu15 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu16 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu17 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu18 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu19 :  0.0 us,  0.0 sy,  0.0 ni
+MiB Mem :  31775.3 total,  27902.5 free,    959.4 used,   2913.3 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.  30358.8 avail Mem 
+
+--
+top - 19:31:43 up  7:35,  2 users,  load average: 0.41, 0.13, 0.04
+Tasks: 381 total,   2 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu7  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu8  :100.0 us,  0.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu9  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu10 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu11 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu12 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu13 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu14 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu15 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu16 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu17 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu18 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu19 :  0.0 us,  0.0 sy,  0.0 ni
+MiB Mem :  31775.3 total,  27893.8 free,    968.1 used,   2913.4 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.  30350.1 avail Mem 
+
+--
+top - 19:31:44 up  7:35,  2 users,  load average: 0.41, 0.13, 0.04
+Tasks: 381 total,   2 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu7  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu8  :100.0 us,  0.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu9  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu10 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu11 :  0.0 us,  1.0 sy,  0.0 ni
+%Cpu12 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu13 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu14 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu15 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu16 :  0.0 us,  0.0 sy,  0.0 ni, 96.0 id,  4.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu17 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu18 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu19 :  0.0 us,  0.0 sy,  0.0 ni
+MiB Mem :  31775.3 total,  27893.8 free,    968.1 used,   2913.4 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.  30350.1 avail Mem 
+
+--
+top - 19:31:45 up  7:35,  2 users,  load average: 0.38, 0.13, 0.04
+Tasks: 380 total,   1 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu7  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu8  : 46.5 us,  1.0 sy,  0.0 ni, 52.5 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu9  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu10 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu11 :  1.0 us,  0.0 sy,  0.0 ni
+%Cpu12 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu13 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu14 :  1.0 us,  0.0 sy,  0.0 ni, 99.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu15 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu16 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu17 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu18 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu19 :  0.0 us,  0.0 sy,  0.0 ni
+MiB Mem :  31775.3 total,  27893.8 free,    968.1 used,   2913.4 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.  30350.1 avail Mem 
+
+--
+top - 19:31:46 up  7:35,  2 users,  load average: 0.38, 0.13, 0.04
+Tasks: 380 total,   1 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu7  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu8  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu9  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu10 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu11 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu12 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu13 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu14 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu15 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu16 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu17 :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu18 :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu19 :  0.0 us,  0.0 sy,  0.0 ni
+MiB Mem :  31775.3 total,  28069.7 free,    792.2 used,   2913.4 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.  30526.0 avail Mem 
+
+--
+top - 19:31:47 up  7:35,  2 users,  load average: 0.38, 0.13, 0.04
+Tasks: 380 total,   1 running, 379 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu1  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu3  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu4  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st     %Cpu5  :  0.0 us,  0.0 sy,  0.0 ni
+%Cpu6  :  0.0 us,  0.
