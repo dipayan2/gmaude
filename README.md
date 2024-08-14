@@ -21,3 +21,9 @@ If you want Maude to close at the end you need to make sure that at the end of t
 3. The runtime is in `src/Main` named **maude**
 4. Copy it to a new name `maude.mycopy` and then run `strip maude.mycopy`
 5. We can now look at some of the code flow and the file access
+
+# Run the resource stat script
+1. Go to the `gmaude` folder
+2. Run the script as `./runcmd <dumpfile> <your commands>`
+3. Sample run of the script `./runcmd.sh TraceDennis taskset -c 0 MaudeRuntime/maude.linux64 maude-npa.maude Examples_Maude-NPA/Denning-Sacco/Denning-Sacco.maude`
+
