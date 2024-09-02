@@ -1,0 +1,71 @@
+ 1017  git clone https://github.com/maude-lang/Maude.git
+ 1053  ./maude 
+ 1065  ./maude 
+ 1076  mv buildMaude/ gmaude/buildMaude/
+ 1077  cd gmaude/
+ 1118  rm -rf maude
+ 1126  ./maude 
+ 1143  cd gmaude/
+ 1170  ./maude 
+ 1171  cp maude maude.mycode
+ 1172  ./maude.mycode ../../../../PQC-in-Maude/bike/bike-test.maude 
+ 1173  ./maude.mycode ../../../../PQC-in-Maude/bike/bike-test.maude > ../../../OutputBike
+ 1194  strip maude.mycode 
+ 1195  ls -l maude.mycode 
+ 1196  ls -lf maude.mycode 
+ 1197  ls -lh maude.mycode 
+ 1198  ./maude.mycode ../../../../PQC-in-Maude/bike/bike-test.maudemaude 
+ 1199  ./maude.mycode ../../../../PQC-in-Maude/bike/bike-test.maude 
+ 1246  cd gmaude/
+ 1259  MaudeRuntime/maude.linux64 maude-npa.maude Examples_Maude-NPA/YubiKey/YubiKey.maude 
+ 1260  taskset -c 0 MaudeRuntime/maude.linux64 maude-npa.maude Examples_Maude-NPA/YubiKey/YubiKey.maude 
+ 1261  MaudeRuntime/maude.linux64 maude-npa.maude Examples_Maude-NPA/YubiKey/YubiKey.maude 
+ 1264  cd gmaude/
+ 1279  cd gmaude/
+ 1291  ./maude.mycode 
+ 1295  MaudeRuntime/maude.linux64 maude-npa.maude Examples_Maude-NPA/YubiKey/YubiKey.maude 
+ 1297  ./makeMaude/src/Main/maude.mycode maude-npa.maude Examples_Maude-NPA/YubiKey/YubiKey.maude 
+ 1306  cd gmaude/
+ 1307  time ./makeMaude/src/Main/maude.mycode maude-npa.maude Examples_Maude-NPA/YubiKey/YubiKey.maude 
+ 1420  cd gmaude/
+ 1447  cd gmaude/
+ 1540  cd gmaude/
+ 1590  cd gmaude/
+ 1614  cd gmaude/
+ 1620  vim Woo-Lam_Authentication.maude 
+ 1621  MaudeRuntime/maude.linux64 maude-npa.maude Woo-Lam_Authentication.maude 
+ 1622  vim Examples_Maude-NPA/Denning-Sacco/Denning-Sacco.maude 
+ 1623  MaudeRuntime/maude.linux64 maude-npa.maude Examples_Maude-NPA/Denning-Sacco/Denning-Sacco.maude 
+ 1631  taskset -c 0 MaudeRuntime/maude.linux64 maude-npa.maude Examples_Maude-NPA/YubiKey/YubiKey.maude 
+ 1637  ./runcmd.sh TraceYubi taskset -c 0 MaudeRuntime/maude.linux64 maude-npa.maude Examples_Maude-NPA/YubiKey/YubiKey.maude
+ 1640  ./runcmd.sh TraceYubi taskset -c 0 MaudeRuntime/maude.linux64 maude-npa.maude Examples_Maude-NPA/YubiKey/YubiKey.maude
+ 1648  cd gmaude/
+ 1667  ps aux | grep maude
+ 1672  ps aux | grep maude
+ 1682  vim Examples_Maude-NPA/YubiKey/YubiKey.maude 
+ 1685  cd gmaude/
+ 1689  ps aux | grep maude
+ 1691  ps aux | grep maude
+ 1697  ps aux | grep maude
+ 1699  ps aux | grep maude
+ 1705  ps aux | grep maude
+ 1709  cd gmaude/
+ 1792  cd gmaude/
+ 1810  cp maude maude.mycode 
+ 1811  ./maude.mycode 
+ 1820  ./makeMaude/src/Main/maude.mycode ../PQC-in-Maude/bike/bike-test.maude 
+ 1839  ./makeMaude/src/Main/maude ../PQC-in-Maude/bike/bike-test.maude 
+ 1857  ./makeMaude/src/Main/maude ../PQC-in-Maude/bike/bike-test.maude 
+ 1858  ./makeMaude/src/Main/maude maude-npa.maude Examples_Maude-NPA/YubiKey/YubiKey.maude 
+ 1866  ./makeMaude/src/Main/maude ../PQC-in-Maude/bike/bike-test.maude 
+ 1867  ./makeMaude/src/Main/maude maude-npa.maude Examples_Maude-NPA/YubiKey/YubiKey.maude 
+ 1876  ./runcmd.sh TraceDennis taskset -c 0 MaudeRuntime/maude.linux64 maude-npa.maude Examples_Maude-NPA/Denning-Sacco/Denning-Sacco.maude 
+ 1885  vim gmaude/
+ 1886  cd gmaude/
+ 1902  cp maude maude.mycode 
+ 1903  strip maude.mycode 
+ 1904  ls -lt | grep maude
+ 1905  ls -lh | grep maude
+ 2001  cd gmaude/
+ 2003  history | grep maude
+ 2005  history | grep maude > MAUDECmdLine
