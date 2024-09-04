@@ -1,0 +1,181 @@
+ \||||||||||||||||||/
+                   --- Welcome to Maude ---
+                     /||||||||||||||||||\
+             Maude alpha128a built: Jul  6 2020 22:35:19
+             Copyright 1997-2020 SRI International
+                   Thu Aug 27 09:58:31 2020
+
+            Maude-NPA Version: 3.1.5 (August 9th 2020)
+            with direct composition, irreducibility constraints and time
+            (To be run with Maude 3.0 or above)
+            Copyright (c) 2020, University of Illinois
+            All rights reserved.
+
+ Commands:
+ red unification? .           returns the unification algorithm to be used
+ red new-strands? .           returns the actual protocol strands
+ red displayGrammars .        for generating grammars
+ red run(X,Y).                for Y backwards analysis steps for attack pattern X
+ red debug(X,Y).              more information than run command
+ red digest(X,Y).             less information than run command
+ red summary(X,Y).            for summary of analysis steps
+ red ids(X,Y).                for set of state ids
+ red initials(X,Y).           for showing only initial steps
+==========================================
+reduce in MAUDE-NPA : summary(1, 0) .
+rewrites: 4594389 in 10864ms cpu (10866ms real) (422900 rewrites/second)
+result Summary: States>> 1 Solutions>> 0
+==========================================
+reduce in MAUDE-NPA : summary(1, 1) .
+rewrites: 775951 in 1992ms cpu (1990ms real) (389533 rewrites/second)
+result Summary: States>> 3 Solutions>> 0
+==========================================
+reduce in MAUDE-NPA : summary(1, 2) .
+rewrites: 2575288 in 7744ms cpu (7744ms real) (332552 rewrites/second)
+result Summary: States>> 7 Solutions>> 0
+==========================================
+reduce in MAUDE-NPA : summary(1, 3) .
+rewrites: 7231026 in 18472ms cpu (18470ms real) (391458 rewrites/second)
+result Summary: States>> 10 Solutions>> 0
+==========================================
+reduce in MAUDE-NPA : summary(1, 4) .
+rewrites: 16464476 in 40216ms cpu (40216ms real) (409401 rewrites/second)
+result Summary: States>> 10 Solutions>> 0
+==========================================
+reduce in MAUDE-NPA : summary(1, 5) .
+rewrites: 21599720 in 50824ms cpu (50824ms real) (424990 rewrites/second)
+result Summary: States>> 8 Solutions>> 0
+==========================================
+reduce in MAUDE-NPA : summary(1, 6) .
+rewrites: 20453942 in 51532ms cpu (51529ms real) (396917 rewrites/second)
+result Summary: States>> 5 Solutions>> 0
+==========================================
+reduce in MAUDE-NPA : summary(1, 7) .
+rewrites: 14486436 in 38056ms cpu (38055ms real) (380661 rewrites/second)
+result Summary: States>> 3 Solutions>> 0
+==========================================
+reduce in MAUDE-NPA : summary(1, 8) .
+rewrites: 5213587 in 17504ms cpu (17506ms real) (297851 rewrites/second)
+result Summary: States>> 1 Solutions>> 0
+==========================================
+reduce in MAUDE-NPA : summary(1, 9) .
+rewrites: 4410878 in 14480ms cpu (14479ms real) (304618 rewrites/second)
+result Summary: States>> 0 Solutions>> 0
+==========================================
+reduce in MAUDE-NPA : summary(2, 0) .
+rewrites: 231 in 10ms cpu (10ms real) (22440 rewrites/second)
+result Summary: States>> 1 Solutions>> 0
+==========================================
+reduce in MAUDE-NPA : summary(2, 1) .
+rewrites: 2830936 in 3461ms cpu (3488ms real) (817805 rewrites/second)
+result Summary: States>> 5 Solutions>> 0
+==========================================
+reduce in MAUDE-NPA : summary(2, 2) .
+rewrites: 13908969 in 21352ms cpu (21584ms real) (651411 rewrites/second)
+result Summary: States>> 10 Solutions>> 0
+==========================================
+reduce in MAUDE-NPA : summary(2, 3) .
+rewrites: 47400818 in 66900ms cpu (67558ms real) (708530 rewrites/second)
+result Summary: States>> 14 Solutions>> 0
+==========================================
+reduce in MAUDE-NPA : summary(2, 4) .
+rewrites: 107997710 in 143142ms cpu (144564ms real) (754479 rewrites/second)
+result Summary: States>> 18 Solutions>> 0
+==========================================
+reduce in MAUDE-NPA : summary(2, 5) .
+rewrites: 240182378 in 306572ms cpu (309778ms real) (783444 rewrites/second)
+result Summary: States>> 27 Solutions>> 0
+==========================================
+reduce in MAUDE-NPA : summary(2, 6) .
+rewrites: 641312317 in 777434ms cpu (784047ms real) (824908 rewrites/second)
+result Summary: States>> 41 Solutions>> 1
+==========================================
+reduce in MAUDE-NPA : run(2, 6) .
+rewrites: 1860 in 11ms cpu (11ms real) (166249 rewrites/second)
+result IdSystemSet: (< 1 . 1 . 1 . 3 . 1 . 3 . 1 > (
+:: nil ::
+[ nil | 
+   -(commit(n(a, #0:Fresh), s(a, #1:Fresh))
+      @ a : #2:Real -> b : #3:Real # i : #4:Real), (#4:Real === #2:Real +=+ d(a, i) and d(a, i) > 0/1), 
+   -(n(a, #0:Fresh)
+      @ a : #5:Real -> b : #6:Real # i : #7:Real), (#7:Real === #5:Real +=+ d(a, i) and d(a, i) > 0/1), 
+   -(n(a, #0:Fresh) * n(b, #8:Fresh)
+      @ b : #6:Real -> a : #9:Real # i : #10:Real), (#10:Real === #6:Real +=+ d(b, i) and d(b, i) > 0/1), 
+   -(s(a, #1:Fresh) ; mac(key(a, b), a ; b ; n(b, #8:Fresh) ; n(a, #0:Fresh))
+      @ a : #9:Real -> b : #10:Real # i : #11:Real), (#11:Real === #9:Real +=+ d(a, i) and d(a, i) > 0/1), 
+   +(s(a, #1:Fresh) ; mac(key(b, i), a ; b ; n(b, #8:Fresh) ; n(a, #0:Fresh))
+      @ i : #11:Real -> b : #12:Real), nil]  & 
+:: #1:Fresh,#0:Fresh ::
+[ nil | 
+   +(commit(n(a, #0:Fresh), s(a, #1:Fresh))
+      @ a : #2:Real -> b : #3:Real # i : #4:Real), 
+   -(commit(n(b, #8:Fresh), s(b, #13:Fresh))
+      @ b : #3:Real -> a : #5:Real # i : #14:Real), (#5:Real === #3:Real +=+ d(a, b) and d(a, b) > 0/1), 
+   +(n(a, #0:Fresh)
+      @ a : #5:Real -> b : #6:Real # i : #7:Real), 
+   -(n(a, #0:Fresh) * n(b, #8:Fresh)
+      @ b : #6:Real -> a : #9:Real # i : #10:Real), (#9:Real === #6:Real +=+ d(a, b) and d(a, b) > 0/1), ((#10:Real -=- #5:Real) <= (2/1 *=* #15:Real) and #15:Real > 0/1), 
+   +(s(a, #1:Fresh) ; mac(key(a, b), a ; b ; n(b, #8:Fresh) ; n(a, #0:Fresh))
+      @ a : #9:Real -> b : #10:Real # i : #11:Real), nil]  & 
+:: #8:Fresh,#13:Fresh ::
+[ nil | 
+   -(commit(n(a, #0:Fresh), s(a, #1:Fresh))
+      @ a : #2:Real -> b : #3:Real # i : #4:Real), (#3:Real === #2:Real +=+ d(a, b) and d(a, b) > 0/1), 
+   +(commit(n(b, #8:Fresh), s(b, #13:Fresh))
+      @ b : #3:Real -> a : #5:Real # i : #14:Real), 
+   -(n(a, #0:Fresh)
+      @ a : #5:Real -> b : #6:Real # i : #7:Real), (#6:Real === #5:Real +=+ d(a, b) and d(a, b) > 0/1), 
+   +(n(a, #0:Fresh) * n(b, #8:Fresh)
+      @ b : #6:Real -> a : #9:Real # i : #10:Real), 
+   -(s(a, #1:Fresh) ; mac(key(b, i), a ; b ; n(b, #8:Fresh) ; n(a, #0:Fresh))
+      @ i : #11:Real -> b : #12:Real), (#12:Real === #11:Real +=+ d(b, i) and d(b, i) > 0/1), 
+   yes eq yes, nil] )
+| 
+(n(a, #0:Fresh)
+ @ a : #5:Real -> b : #6:Real # i : #7:Real) !inI,
+(commit(n(a, #0:Fresh), s(a, #1:Fresh))
+ @ a : #2:Real -> b : #3:Real # i : #4:Real) !inI,
+(commit(n(b, #8:Fresh), s(b, #13:Fresh))
+ @ b : #3:Real -> a : #5:Real # i : #14:Real) !inI,
+(s(a, #1:Fresh) ; mac(key(a, b), a ; b ; n(b, #8:Fresh) ; n(a, #0:Fresh))
+ @ a : #9:Real -> b : #10:Real # i : #11:Real) !inI,
+(s(a, #1:Fresh) ; mac(key(b, i), a ; b ; n(b, #8:Fresh) ; n(a, #0:Fresh))
+ @ i : #11:Real -> b : #12:Real) !inI,
+(n(a, #0:Fresh) * n(b, #8:Fresh)
+ @ b : #6:Real -> a : #9:Real # i : #10:Real) !inI,
+smt(#3:Real === #2:Real +=+ d(a, b) and d(a, b) > 0/1 and (#5:Real === #3:Real +=+ d(a, b) and d(a, b) > 0/1 and (#6:Real === #5:Real +=+ d(a, b) and d(a, b) > 0/1 and (#9:Real === #6:Real +=+ d(a, b) and d(a, b) > 0/1 and ((#10:Real -=- #5:Real) <= (2/1 *=* #15:Real)
+    and #15:Real > 0/1 and (#4:Real === #2:Real +=+ d(a, i) and d(a, i) > 0/1 and (#7:Real === #5:Real +=+ d(a, i) and d(a, i) > 0/1 and (#10:Real === #6:Real +=+ d(b, i) and d(b, i) > 0/1 and (#11:Real === #9:Real +=+ d(a, i) and d(a, i) > 0/1 and (#12:Real ===
+    #11:Real +=+ d(b, i) and d(b, i) > 0/1))))))))))
+| 
++(commit(n(a, #0:Fresh), s(a, #1:Fresh))
+   @ a : #2:Real -> b : #3:Real # i : #4:Real), 
+-(commit(n(a, #0:Fresh), s(a, #1:Fresh))
+   @ a : #2:Real -> b : #3:Real # i : #4:Real), 
++(commit(n(b, #8:Fresh), s(b, #13:Fresh))
+   @ b : #3:Real -> a : #5:Real # i : #14:Real), 
+-(commit(n(b, #8:Fresh), s(b, #13:Fresh))
+   @ b : #3:Real -> a : #5:Real # i : #14:Real), 
++(n(a, #0:Fresh)
+   @ a : #5:Real -> b : #6:Real # i : #7:Real), 
+-(n(a, #0:Fresh)
+   @ a : #5:Real -> b : #6:Real # i : #7:Real), 
++(n(a, #0:Fresh) * n(b, #8:Fresh)
+   @ b : #6:Real -> a : #9:Real # i : #10:Real), 
+-(n(a, #0:Fresh) * n(b, #8:Fresh)
+   @ b : #6:Real -> a : #9:Real # i : #10:Real), 
++(s(a, #1:Fresh) ; mac(key(a, b), a ; b ; n(b, #8:Fresh) ; n(a, #0:Fresh))
+   @ a : #9:Real -> b : #10:Real # i : #11:Real), 
+-(commit(n(a, #0:Fresh), s(a, #1:Fresh))
+   @ a : #2:Real -> b : #3:Real # i : #4:Real), 
+-(n(a, #0:Fresh)
+   @ a : #5:Real -> b : #6:Real # i : #7:Real), 
+-(n(a, #0:Fresh) * n(b, #8:Fresh)
+   @ b : #6:Real -> a : #9:Real # i : #10:Real), 
+-(s(a, #1:Fresh) ; mac(key(a, b), a ; b ; n(b, #8:Fresh) ; n(a, #0:Fresh))
+   @ a : #9:Real -> b : #10:Real # i : #11:Real), 
++(s(a, #1:Fresh) ; mac(key(b, i), a ; b ; n(b, #8:Fresh) ; n(a, #0:Fresh))
+   @ i : #11:Real -> b : #12:Real), 
+-(s(a, #1:Fresh) ; mac(key(b, i), a ; b ; n(b, #8:Fresh) ; n(a, #0:Fresh))
+   @ i : #11:Real -> b : #12:Real)
+| 
+nil)
