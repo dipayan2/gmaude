@@ -72,7 +72,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
   State* n = seen[stateNr];
   int nrNextStates = n->nextStates.length();
   printf("[GM] (getNextState): Analyzing the DAG The stateNr %d, index: %d , initial states count %d\n",stateNr,index,nrNextStates);
-  print("[GM2] Check if we can access the seen graph status, seen size %d\n",seen.size);
+  printf("[GM2] Check if we can access the seen graph status, seen size %d\n",seen.size());
   if (index < nrNextStates){
 	printf("[GM]: Comparing index and  count of next states");
     return n->nextStates[index];
