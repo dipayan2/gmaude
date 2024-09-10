@@ -56,6 +56,7 @@ StateTransitionGraph::StateTransitionGraph(RewritingContext* initial)
 StateTransitionGraph::~StateTransitionGraph()
 {
   int nrStates = seen.length();
+  printf("[GM Delete] How many states am I deleting %d\n", nrStates);
   for (int i = 0; i < nrStates; i++)
     {
       delete seen[i]->rewriteState;
