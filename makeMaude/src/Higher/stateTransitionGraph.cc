@@ -46,7 +46,7 @@ StateTransitionGraph::StateTransitionGraph(RewritingContext* initial)
 {
   
   initial->reduce();
-  std::cout << "[GM Init] This is called at the initiation of a state Graph Hash Val : " << initial->root()->getHashValue << std::endl;
+  std::cout << "[GM Init] This is called at the initiation of a state Graph Hash Val : " << initial->root()->getHashValue() << std::endl;
   int hashConsIndex = hashConsSet.insert(initial->root());
   hashCons2seen.resize(hashConsIndex + 1);
   for (int i = 0; i < hashConsIndex; ++i)
