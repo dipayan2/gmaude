@@ -184,6 +184,7 @@ ModelCheckerSymbol::dump(const StateTransitionGraph& states, const list<int>& pa
 DagNode*
 ModelCheckerSymbol::makeTransition(const StateTransitionGraph& states, int stateNr, int targetNr)
 {
+  std::cout <<"[GM MC] This code will be called if the model checker is called" << std::endl;
   static Vector<DagNode*> args(2);
 
   args[0] = states.getStateDag(stateNr);
@@ -227,6 +228,7 @@ DagNode*
 ModelCheckerSymbol::makeCounterexample(const StateTransitionGraph& states,
 				       const ModelChecker2& mc)
 {
+  std::cout <<"[GM MC] This code will be called if the model counter example" << std::endl;
   Vector<DagNode*> args(2);
   int junction = mc.getCycle().front();
   args[0] = makeTransitionList(states, mc.getLeadIn(), junction);
@@ -237,6 +239,7 @@ ModelCheckerSymbol::makeCounterexample(const StateTransitionGraph& states,
 bool
 ModelCheckerSymbol::eqRewrite(DagNode* subject, RewritingContext& context)
 {
+  std::cout <<"[GM MC] This code will be called for equation rewrite" << std::endl;
   Assert(this == subject->symbol(), "bad symbol");
   //
   //	Compute normalization of negated formula.
