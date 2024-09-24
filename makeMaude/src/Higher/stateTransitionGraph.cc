@@ -117,7 +117,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 		return NONE;
 	    }
 	  DagNode* replacement = rewriteState->getReplacement();
-	  printf("[GM L] Created a new state with rules, P:%zu, C:%zu\n",initial->root()->getHashValue(), replacement->getHashValue());
+	  printf("[GM] Created a new state with rules, P:%zu, C:%zu\n",initial->root()->getHashValue(), replacement->getHashValue());
 	  RewriteSearchState::DagPair r = rewriteState->rebuildDag(replacement);
           RewritingContext* c = context->makeSubcontext(r.first);
 	  initial->incrementRlCount();
