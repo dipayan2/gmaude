@@ -46,7 +46,8 @@ StateTransitionGraph::StateTransitionGraph(RewritingContext* initial)
 {
   
   initial->reduce();
-  std::cout << "[GM Init] This is called at the initiation of a state Graph Hash Val : " << initial->root()->getHashValue() << std::endl;
+//   std::cout << "[GM Init] This is called at the initiation of a state Graph Hash Val : " << initial->root()->getHashValue() << std::endl;
+  printf("[GM] Hash This is called at the initiation of a state Graph Hash Val : %zu\n", initial->root()->getHashValue());
   int hashConsIndex = hashConsSet.insert(initial->root());
   hashCons2seen.resize(hashConsIndex + 1);
   for (int i = 0; i < hashConsIndex; ++i)
@@ -73,11 +74,12 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 
 //   printf("[GM]: Analyzing the DAG\n");
   State* n = seen[stateNr];
+//   size_t rootHash = initial->root()->getHashValue(); // Storing the hash of the initial state
   int nrNextStates = n->nextStates.length();
-  printf("[GM] (getNextState): Analyzing the DAG The stateNr %d, index: %d , initial states count %d\n",stateNr,index,nrNextStates);
+  printf("[GM 1] (getNextState): Analyzing the DAG The stateNr %d, index: %d , initial states count %d\n",stateNr,index,nrNextStates);
   printf("[GM2] Check if we can access the seen graph status, seen size %d\n",seen.size());
   if (index < nrNextStates){
-	printf("[GM]: Comparing index and  count of next states");
+	printf("[GM1]: Comparing index and  count of next states");
     return n->nextStates[index];
   }
   if (n->fullyExplored)
@@ -115,6 +117,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 		return NONE;
 	    }
 	  DagNode* replacement = rewriteState->getReplacement();
+	  printf("[GM L] Created a new state with rules, P:%zu, C:%zu\n",initial->root()->getHashValue(), replacement->getHashValue());
 	  RewriteSearchState::DagPair r = rewriteState->rebuildDag(replacement);
           RewritingContext* c = context->makeSubcontext(r.first);
 	  initial->incrementRlCount();
