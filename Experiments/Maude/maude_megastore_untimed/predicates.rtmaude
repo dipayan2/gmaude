@@ -1,0 +1,69 @@
+
+***(
+Things to verify:
+
+- Liveness: That the system keeps running
+
+- Safety: 
+
+  1] Given no failures, all sites will eventually contain the same entity state
+
+  2] Serializability: For any pair of transactions T1,T2 where T2
+  reads an entity E updated by T1 in EG: There is no other
+  transaction T3 who as updated E, and where T1 < T3 < T2 according to the transaction order of EG.
+
+***)
+
+***( Predicates ***)
+(omod PREDICATES-FOR-MODEL-CHECKING is
+  inc INIT-STATE .
+  inc MODEL-CHECKER .
+
+  subsort Configuration < State .
+ 
+  vars SID1 SID2 : SiteId .
+  var EG1 : EntityGroupId .
+  vars ES1 ES2 : EntitySet .
+  vars SYSTEM REST LOCALTRANS EGROUPS1 EGROUPS2 : Configuration .
+  var M : Msg .
+  vars TLOG1 TLOG2 : LogEntryList .
+  var TID : TransId .
+  var GRAPH : SerGraph .
+  var LP : LogPosition .
+  var EGLP : EntGroupLogPosPairSet .
+
+  op allTransFinished : -> Prop [ctor] .
+  eq initTransactions REST  |= allTransFinished = false .
+  eq < SID1 : Site | localTransactions : < TID : Transaction | > LOCALTRANS > REST  |= allTransFinished = false .
+  eq  M REST  |= allTransFinished = false .
+  eq  SYSTEM  |= allTransFinished = true [owise] .
+
+  op isConsistent : -> Prop [ctor] .
+  eq  < th : TransactionHistory | graph : GRAPH  > REST  |= isConsistent = not hasCycle(GRAPH) .
+
+  op entityGroupsEqualOrInvalid : -> Prop [ctor] .
+  ceq  < SID1 : Site | coordinator : eglp(EG1, LP) ; EGLP, entityGroups : < EG1 : EntityGroup | entitiesState : ES1 > EGROUPS1 >
+       < SID2 : Site | coordinator : eglp(EG1, LP) ; EGLP, entityGroups : < EG1 : EntityGroup | entitiesState : ES2 > EGROUPS2 > 
+       REST  |= entityGroupsEqual = false if ES1 =/= ES2 .
+  eq  SYSTEM  |= entityGroupsEqualOrInvalid = true [owise] .
+ 
+  op transLogsEqualOrInvalid : -> Prop [ctor] .
+  ceq  < SID1 : Site | coordinator : eglp(EG1, LP) ; EGLP, entityGroups : < EG1 : EntityGroup | transactionLog : TLOG1 > EGROUPS1 >
+       < SID2 : Site | coordinator : eglp(EG1, LP) ; EGLP, entityGroups : < EG1 : EntityGroup | transactionLog : TLOG2 > EGROUPS2 > 
+       REST  |= transLogsEqual = false if TLOG1 =/= TLOG2 .
+  eq  SYSTEM  |= transLogsEqualOrInvalid = true [owise] .
+
+  op entityGroupsEqual : -> Prop [ctor] .
+  ceq  < SID1 : Site | entityGroups : < EG1 : EntityGroup | entitiesState : ES1 > EGROUPS1 >
+       < SID2 : Site | entityGroups : < EG1 : EntityGroup | entitiesState : ES2 > EGROUPS2 > 
+       REST  |= entityGroupsEqual = false if ES1 =/= ES2 .
+  eq  SYSTEM  |= entityGroupsEqual = true [owise] .
+
+  op transLogsEqual : -> Prop [ctor] .
+  ceq  < SID1 : Site | entityGroups : < EG1 : EntityGroup | transactionLog : TLOG1 > EGROUPS1 >
+       < SID2 : Site | entityGroups : < EG1 : EntityGroup | transactionLog : TLOG2 > EGROUPS2 > 
+       REST  |= transLogsEqual = false if TLOG1 =/= TLOG2 .
+  eq  SYSTEM  |= transLogsEqual = true [owise] .
+
+endom)
+

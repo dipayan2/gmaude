@@ -1,0 +1,56 @@
+(omod CLIENT-FOR-MODEL-CHECKING is
+    inc CLIENT-INTERFACE .
+    inc TRANSACTION-HISTORY .
+   
+    var TID : TransId .
+    vars OL : OperationList .  
+    vars SID SID' : SiteId .
+    var LOCALTRANS : Configuration .
+    var READS : EntitySet .
+    var WRITES : OperationList .  
+    var EG : EntityGroupId .
+    var EVAL : EntityValue .
+    vars N N' : Nat .
+    vars LP LP' : LogPosition .
+    var EID : EntityId .
+    var ES : EntitySet .
+    var THIST : Configuration .
+    var TH : Oid .
+    var EGLP : EntGroupLogPosPairSet .
+
+    --- Receive transaction request
+    rl [newTrans] :
+      (newTrans(SID, TID, OL))
+      < SID : Site | localTransactions : LOCALTRANS >
+     =>
+      < SID : Site | localTransactions : createNewTrans(TID, OL) LOCALTRANS > .
+
+    --- For now: Ignore commit/abort-messages. At some point: Log commit history to search for inserializability
+    rl [notifyCommit] :
+      (notifyCommit(SID, TID, EGLP, READS, WRITES))
+      < TH : TransactionHistory | >
+    =>
+      updateHistoryReads(TID, READS, updateHistoryWrites(TID, EGLP, WRITES, < TH : TransactionHistory | >)) .
+
+    rl [notifyReadOnlyCommit] :
+      (notifyReadOnlyCommit(SID, TID, READS))
+      < TH : TransactionHistory | >
+    =>
+      updateHistoryReads(TID, READS, < TH : TransactionHistory | >) .
+
+    op updateHistoryReads : TransId EntitySet Configuration -> Configuration .
+    eq updateHistoryReads(TID, (EID |-> (LP' EVAL)) ; ES, THIST) = updateHistoryReads(TID, ES, addRead(TID, EID, LP', THIST)) .
+    eq updateHistoryReads(TID, emptyEntitySet, THIST) = THIST .
+    
+    op updateHistoryWrites : TransId EntGroupLogPosPairSet OperationList Configuration -> Configuration .
+    eq updateHistoryWrites(TID, eglp(EG, LP) ; EGLP, w(entity(EG,N), EVAL) :: OL, THIST) = updateHistoryWrites(TID, eglp(EG, LP) ; EGLP, OL, addWrite(TID, entity(EG,N), LP, THIST)) .
+    eq updateHistoryWrites(TID, EGLP, emptyOpList, THIST) = THIST .
+
+    rl [notifyConflictAbort] :
+      (notifyConflictAbort(SID, TID, READS, WRITES))
+      < SID : Site | >
+    =>
+      < SID : Site | > .
+
+endom)
+

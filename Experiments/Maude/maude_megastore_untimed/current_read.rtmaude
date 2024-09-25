@@ -1,0 +1,90 @@
+(omod CURRENT-READ is
+  inc MEGASTORE-SETUP .
+  inc MSG-WRAPPERS .
+
+  vars TID TID' : TransId . 
+  vars SID SID' THIS SENDER : SiteId .
+  var TS : TransStatus .
+  vars SIS SIS' : SiteIdSet .
+  var EGRS : EntityGroupReplicaSet .
+  var EID : EntityId .
+  var EGID : EntityGroupId .
+  vars CNT N N' N1 N2 : Nat .
+  var EGIS : EntityGroupIdSet .
+  var LOCALTRANS : Configuration .
+  vars OL OL' : OperationList .
+  vars ES BSTATE READS : EntitySet .
+  var EV : EntityVersion .
+  var DLP : DefLogPosition .
+  vars LP LP' : LogPosition .
+  vars VAL1 VAL2 : EntityValue .
+  vars EG EG' : EntityGroupId .
+  var CE : EntGroupLogPosPair .
+  var CES : EntGroupLogPosPairSet .
+  var EGROUPS : Configuration .
+  vars EVERSIONS EVERSIONS' : EntityVersionList .
+  var RSTATE : ReadStateSet .
+  var LEL : LogEntryList .
+  var SIL : SiteIdList .
+  vars OL1 OL2 : OperationList .
+
+  op readpos : EntityGroupId LogPosition -> ReadState [ctor] .
+
+  --- Proceed transaction locally
+  ---
+  ***(
+  ---  Current read: 
+  ---  * If local coordinator is up-to-date (e.g. an entry for the given entityid exists in the coordinator state): Read locally.
+  ---  * If local coordinator is not up-to-date, perfom a majority read to find the maximum logposition. Once a given logposition has been
+  ---    received from a majority of sites, the most responsive replica is elected for a "catchup". See MAJORITY-READ for details
+  )
+  --- In addition to the modelled delay for local access (representing the actual bigtable-lookup), we require the pending write queue to be empty
+  --- We store the most recent log entry upon start of the read - this LP is maintained throughout the transaction. Any conflict with concurrent
+  --- updates will then be detected upon commit.
+
+  *** A: Non-faulty scenario: Perform a local read
+  crl [CRA1-startCurrentLocalRead] :
+	< SID : Site |
+           coordinator : (eglp(EG, LP) ; CES),
+           entityGroups : <  EG : EntityGroup |
+             		    pendingWrites : emptyPWList > EGROUPS,
+           localTransactions : < TID : Transaction | operations : cr(entity(EG,N)) :: OL, status : idle > LOCALTRANS >
+   =>
+	< SID : Site |
+           localTransactions : < TID : Transaction | operations : cr(entity(EG,N)) :: OL, status : executing(LP) > LOCALTRANS >
+   if not (containsUpdate(entity(EG,N), OL) and inConflictWithRunning(EG, LOCALTRANS)) . 
+
+  op inConflictWithRunning : EntityGroupId Configuration -> Bool .
+  ceq inConflictWithRunning(EG, < TID : Transaction | 
+       status : TS, reads : READS, operations : OL1 :: w(entity(EG,N), VAL1) :: OL2 > LOCALTRANS) = true 
+	if not (TS == idle and filterReads(EG, READS) == emptyEntitySet) .
+  eq inConflictWithRunning(EG, < TID : Transaction | writes : OL1 :: w(entity(EG,N), VAL1) :: OL2 > LOCALTRANS) = true .
+  eq inConflictWithRunning(EG, LOCALTRANS) = false [owise] .
+
+  op filterReads : EntityGroupId EntitySet -> EntitySet .
+  eq filterReads(EG, (entity(EG,N) |-> EV) ; ES) = (entity(EG,N) |-> EV) ; filterReads(EG, ES) .
+  eq filterReads(EG, ES) = emptyEntitySet [owise] .
+
+  op containsUpdate : EntityId OperationList -> Bool .
+  eq containsUpdate(EID, OL1 :: w(EID, VAL1) :: OL2) = true .
+  eq containsUpdate(EID, OL) = false [owise] .
+
+  rl [CRA2-endCurrentLocalRead] :
+	< SID : Site |
+           entityGroups : <  EG : EntityGroup | entitiesState : (entity(EG,N) |-> EVERSIONS) ; BSTATE > EGROUPS,
+           localTransactions : < TID : Transaction | operations : cr(entity(EG,N)) :: OL, status : executing(LP), readState : RSTATE,
+						    reads : READS > LOCALTRANS >
+   =>
+	< SID : Site |
+           localTransactions : < TID : Transaction | operations : OL, status : idle, readState : readpos(EG, LP) ; RSTATE,
+						     reads : (entity(EG,N) |-> getVersion(LP, EVERSIONS)) ; READS > LOCALTRANS > .
+
+  op getVersion : LogPosition EntityVersionList -> EntityVersion .
+  ceq getVersion(lpos(N), EVERSIONS :: (lpos(N1) VAL1) :: (lpos(N2) VAL2) :: EVERSIONS') = (lpos(N1) VAL1) if (N1 < N /\ N < N2) .
+  ceq getVersion(lpos(N), EVERSIONS :: (lpos(N1) VAL1)) = (lpos(N1) VAL1) if (N1 <= N) .
+
+  op hasQuorum : Nat SiteIdSet -> Bool .
+  eq hasQuorum(N, SIS) = (N >= (size(SIS) quo 2 + 1)) .
+
+
+endom)

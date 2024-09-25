@@ -1,0 +1,7 @@
+in predicates.rtmaude
+
+
+(red modelCheck(initMegastore,  <> [] (allTransFinished /\ entityGroupsEqualOrInvalid /\ transLogsEqualOrInvalid /\ isConsistent)) .)
+
+
+quit

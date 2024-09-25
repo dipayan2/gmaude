@@ -1,0 +1,259 @@
+(omod MEGASTORE-SETUP is
+    pr NAT .
+    inc RANDOM .
+
+ var SID : SiteId .
+ var EGRS : EntityGroupReplicaSet .
+ var LP : LogPosition .
+ var TID : TransId .
+ vars N N' : Nat .
+ var SIL : SiteIdList .
+ vars OID O O' : Oid .
+ vars OS OIS OS1 OS2 : OidSet .
+ var CES : EntGroupLogPosPairSet .
+ var LP : LogPosition .
+ var EG : EntityGroupId .
+ var OL : OperationList .
+ var LOCALTRANS : Configuration .
+
+ ***( Mapping from entity group to log position  ***)
+ sorts EntGroupLogPosPair EntGroupLogPosPairSet .
+ subsort EntGroupLogPosPair < EntGroupLogPosPairSet .
+ op noEntGroupLogPosPair : -> EntGroupLogPosPairSet [ctor] .
+ op eglp : EntityGroupId LogPosition -> EntGroupLogPosPair [ctor] .
+ op _;_ : EntGroupLogPosPairSet EntGroupLogPosPairSet -> EntGroupLogPosPairSet [ctor assoc comm id: noEntGroupLogPosPair] .
+
+ --- Used for coordinator
+ op invalidCstate : EntityGroupId LogPosition -> EntGroupLogPosPair [ctor] .
+
+ op containsEntityGroupId : EntityGroupId EntGroupLogPosPairSet -> Bool .
+ eq containsEntityGroupId(EG, eglp(EG, LP) ; CES) = true .
+ eq containsEntityGroupId(EG, CES) = false [owise] .
+
+ ***( Sites )***
+ sort SiteId .
+ subsort SiteId < Oid .
+
+ class Site |
+    coordinator : EntGroupLogPosPairSet, 
+    entityGroups : Configuration,
+    localTransactions : Configuration .
+
+ ***( Transaction log )***
+ sorts LogPosition LogPositionList DefLogPosition .
+ subsort LogPosition < LogPositionList .
+ subsort LogPosition < DefLogPosition .
+ op noLogPosition : -> DefLogPosition [ctor] .
+ op emptyLPlist : -> LogPositionList [ctor] .
+ op lpos : Nat -> LogPosition [ctor] .
+ op _::_ : LogPositionList LogPositionList -> LogPositionList [ctor assoc id: emptyLPlist] .
+
+ op min : LogPosition DefLogPosition -> LogPosition .
+ eq min(lpos(N), lpos(N')) = if (N <= N') then lpos(N) else lpos(N') fi .
+ eq min(lpos(N), noLogPosition) = lpos(N) .
+
+ sorts LogEntry LogEntryList .
+ subsort LogEntry < LogEntryList .
+ op noEntries : -> LogEntryList [ctor] .
+ --- Usage: Transaction Logposition SiteId Leader-replica Updates
+ op ____ : TransId LogPosition SiteId OperationList -> LogEntry [ctor] .
+ op _::_ : LogEntryList LogEntryList -> LogEntryList [ctor assoc id: noEntries] .
+
+ ***( Entities )***
+ sorts EntityId EntityIdSet .
+ subsort EntityId < EntityIdSet .
+ op emptyEntityIdSet : -> EntityIdSet [ctor] .
+ op entity : EntityGroupId Nat -> EntityId [ctor] .
+ op _;_ : EntityIdSet EntityIdSet -> EntityIdSet [ctor assoc comm id: emptyEntityIdSet] .
+
+ sorts Entity EntitySet .
+ subsort Entity < EntitySet .
+ op emptyEntitySet : -> EntitySet [ctor] .
+ op _|->_ : EntityId EntityVersionList -> Entity [ctor] .
+ op _;_ : EntitySet EntitySet -> EntitySet [ctor assoc comm id: emptyEntitySet] .
+
+ sort EntityValue .
+ op v : Nat -> EntityValue [ctor] .
+
+ sorts EntityVersion EntityVersionList .
+ subsort EntityVersion < EntityVersionList .
+ op noEntityVersions : -> EntityVersionList [ctor] .
+ op __ : LogPosition EntityValue -> EntityVersion [ctor] .
+ op _::_ : EntityVersionList EntityVersionList -> EntityVersionList [ctor assoc id: noEntityVersions] .
+
+ ***( Transactions )***
+ sorts TransId .
+ subsort TransId < Oid .
+ op initTrans : -> TransId [ctor] .
+
+ sorts Operation OperationList .
+ subsort Operation < OperationList .
+ op cr :  EntityId -> Operation [ctor] .
+ op w :  EntityId EntityValue -> Operation [ctor] .
+ op emptyOpList : -> OperationList [ctor] .
+ op _::_ : OperationList OperationList -> OperationList [ctor assoc id: emptyOpList] .
+
+ sort TransStatus .
+ ops idle in-paxos committed : -> TransStatus [ctor] .
+ op executing : LogPosition -> TransStatus [ctor] .
+*** op transTimer : Time -> TransStatus [ctor] .
+
+
+ ***(
+   Coordination state represents a mapping to allow a running transaction to keep metadata per replica,
+   eg. while conducting a current read
+ ***)
+ --- Used to maintain the state of 
+ sorts ReadState ReadStateSet .
+ subsort ReadState < ReadStateSet .
+ op emptyReadState : -> ReadStateSet [ctor] .
+ op _;_ : ReadStateSet ReadStateSet -> ReadStateSet [ctor assoc comm id: emptyReadState] .
+
+ sorts PaxosState PaxosStateSet .
+ subsort PaxosState < PaxosStateSet .
+ op emptyPaxosState : -> PaxosStateSet [ctor] .
+ op _;_ : PaxosStateSet PaxosStateSet -> PaxosStateSet [ctor assoc comm id: emptyPaxosState] .
+
+ class Transaction |
+    operations : OperationList,
+    reads : EntitySet,
+    writes : OperationList,
+    status : TransStatus,
+    readState : ReadStateSet,
+    paxosState : PaxosStateSet .
+
+  op createNewTrans : TransId OperationList -> Object .
+  eq createNewTrans(TID, OL) =
+      < TID : Transaction | operations : OL, status : idle, 
+                            readState : emptyReadState,
+                            paxosState : emptyPaxosState,
+                            reads : emptyEntitySet, writes : emptyOpList > .
+
+	
+ ***( Applying updates ***)
+ sort PendingWriteState .
+ ops idle : -> PendingWriteState [ctor] .
+ op updating :  -> PendingWriteState [ctor] .
+
+ sorts PendingWrite PendingWriteList .
+ subsort PendingWrite < PendingWriteList .
+ op pw : LogPosition PendingWriteState OperationList -> PendingWrite [ctor] .
+ op emptyPWList : -> PendingWriteList [ctor] .
+ op _::_ : PendingWriteList PendingWriteList -> PendingWriteList [ctor assoc id: emptyPWList] .
+
+
+ ***( Update coordination ***)
+ sorts Propnum DefPropnum .
+ subsort Nat < Propnum .
+ subsort Propnum < DefPropnum .
+
+ op noPropnum : -> DefPropnum .
+
+ sorts PaxosProposal PaxosProposalSet .
+ subsort PaxosProposal < PaxosProposalSet .
+ op emptyProposalSet : -> PaxosProposalSet .
+ op proposal : SiteId TransId LogPosition OperationList Propnum -> PaxosProposal [ctor] .
+ op accepted : SiteId LogEntry Propnum -> PaxosProposal [ctor] .
+ op _;_ : PaxosProposalSet PaxosProposalSet -> PaxosProposalSet [ctor assoc comm id: emptyProposalSet] .
+
+
+ ***( Replicas with metadata ***)
+ sorts EntityGroupReplica EntityGroupReplicaSet .
+ subsort EntityGroupReplica < EntityGroupReplicaSet .
+ op egr : SiteId Nat LogPosition -> EntityGroupReplica [ctor] .
+ op noEGR : -> EntityGroupReplicaSet [ctor] .
+ op _;_ : EntityGroupReplicaSet EntityGroupReplicaSet -> EntityGroupReplicaSet [ctor comm assoc id: noEGR] .
+ 
+ op getSites : EntityGroupReplicaSet -> SiteIdSet .
+ eq getSites(egr(SID, N, LP) ; EGRS) = SID ; getSites(EGRS) .
+ eq getSites(noEGR) = emptyOidSet .
+
+ ***( EntityGroups ***)
+ sort EntityGroupId .
+ subsort EntityGroupId < Oid .
+
+ class EntityGroup |
+    entitiesState : EntitySet,
+    replicas : EntityGroupReplicaSet,
+    proposals : PaxosProposalSet,
+    pendingWrites : PendingWriteList,
+    transactionLog : LogEntryList .
+
+ *** ( Site id-lists ***)
+ sort SiteIdList .
+ subsort SiteId < SiteIdList .
+ op emptySiteIdList : -> SiteIdList [ctor] .
+ op _::_ : SiteIdList SiteIdList -> SiteIdList [ctor assoc id: emptySiteIdList] .
+ op length : SiteIdList -> Nat .
+ eq length(SID :: SIL) = 1 + length(SIL) .
+ eq length(emptySiteIdList) = 0 .
+
+
+ sorts EmptyOidSet SiteIdSet TransIdSet EntityGroupIdSet OidSet .
+ subsort EmptyOidSet < TransIdSet EntityGroupIdSet SiteIdSet < OidSet .
+ subsort TransId < TransIdSet .
+ subsort EntityGroupId < EntityGroupIdSet .
+ subsort SiteId < SiteIdSet .
+ subsort Oid < OidSet .
+ op emptyOidSet : -> EmptyOidSet [ctor] .
+ op _;_ : EmptyOidSet EmptyOidSet -> EmptyOidSet [ctor assoc comm id: emptyOidSet] .
+ op _;_ : TransIdSet TransIdSet -> TransIdSet [ctor ditto] .
+ op _;_ : EntityGroupIdSet EntityGroupIdSet -> EntityGroupIdSet [ctor ditto] .
+ op _;_ : SiteIdSet SiteIdSet -> SiteIdSet [ctor ditto] .
+ op _;_ : OidSet OidSet -> OidSet [ctor ditto] .
+
+ eq O ; O = O .  
+
+ op _setminus_ : OidSet OidSet -> OidSet [assoc] .
+ eq (OS1 ; O) setminus (OS2 ; O) = OS1 setminus (OS2 ; O) .
+ eq OS1 setminus OS2 = OS1 [owise] .
+
+ op _in_ : Oid OidSet -> Bool .
+ eq O in (O ; OS) = true .
+ eq O in OS = false [owise] .
+
+ *** ( Aggregates ***)
+ op size  : OidSet -> Nat .
+ eq size(OID ; OIS) = 1 + size(OIS setminus OID) .
+ eq size(emptyOidSet) = 0 .
+endom)
+
+(omod MSG-WRAPPERS is
+    inc MEGASTORE-SETUP .
+
+    var MC : MsgContent .
+    vars SID SID' : SiteId .
+    var SIS : SiteIdSet .
+    vars SYSTEM REST : Configuration .
+
+    sort MsgContent .
+    op msg_from_to_ : MsgContent SiteId SiteId -> Msg [ctor] .     --- msg to be read/rcvd
+    op uniCast_from_to_ : MsgContent SiteId SiteId -> Msg [ctor] . --- msg to be transmitted 
+    op multiCast_from_to_ : MsgContent SiteId SiteIdSet -> Configuration .
+
+    --- Sometimes we need to store the set of message contents received,
+    --- and we therefore define a sort for multisets of message contents:
+    sort MsgContentSet .
+    subsort MsgContent < MsgContentSet .
+    op noMsgContent : -> MsgContentSet [ctor] .
+    op __ : MsgContentSet MsgContentSet -> MsgContentSet [ctor assoc comm id: noMsgContent] .  
+
+    eq multiCast MC from SID to (SID' ; SIS) = 
+	(msg MC from SID to SID')     
+	(multiCast MC from SID to SIS) .
+    eq multiCast MC from SID to emptyOidSet = none .
+
+    eq  uniCast MC from SID to SID' = msg MC from SID to SID' .
+
+endom)
+
+(omod CLIENT-INTERFACE is
+   inc MEGASTORE-SETUP .
+
+   msg newTrans : SiteId TransId OperationList -> Msg .
+   msg notifyCommit : SiteId TransId EntGroupLogPosPairSet EntitySet OperationList -> Msg . 
+   msg notifyReadOnlyCommit : SiteId TransId EntitySet -> Msg . 
+   msg notifyConflictAbort : SiteId TransId EntitySet OperationList -> Msg . 
+   msg notifyAbort : SiteId TransId EntitySet OperationList -> Msg . 
+  
+endom)

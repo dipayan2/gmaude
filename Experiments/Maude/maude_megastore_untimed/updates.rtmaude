@@ -1,0 +1,404 @@
+(omod UPDATES is
+  inc CLIENT-INTERFACE .
+  inc CURRENT-READ .
+
+
+  var EID : EntityId .
+  var EIDSET : EntityGroupIdSet .
+  vars N N' N1 N2 : Nat .
+  vars PN PN' PROPNUM : Propnum .
+  var PXSID : Nat .
+  vars DPN SEEN-PROPNUM : DefPropnum .
+  vars EG EG' : EntityGroupId .
+  var EGROUPS : Configuration .
+  vars TID TID' TID1 TID2 TID3 : TransId .
+  vars SID SID' MSID1 MSID2 SENDER THIS : SiteId .
+  vars SIS SIS-FAILED REPLICAS : SiteIdSet .
+  var EGRS : EntityGroupReplicaSet .
+  var RSTATE : ReadStateSet .
+  vars PSTATE NEW-PAXOS-STATE : PaxosStateSet .
+  vars LOCALTRANS LTRANS1 LTRANS2 : Configuration .
+  vars WRITEOPS OL OL' OL1 OL2 : OperationList . 
+  var OP : Operation .
+  var PROPSET : PaxosProposalSet .
+  vars VAL VAL' : EntityValue . 
+  vars LEL LEL' : LogEntryList .
+  vars LE LE' NEW-LE NEXT-VALUE : LogEntry .
+  vars LP LP' : LogPosition .
+  var ES : EntitySet .
+  vars EVERSIONS EVERSIONS' : EntityVersionList .  
+  var PWL : PendingWriteList .
+  var CA : Bool .   
+  var RND : Oid .
+  var CE : EntGroupLogPosPair .
+  var CES : EntGroupLogPosPairSet .  
+  var READS : EntitySet .
+  var WRITES : OperationList .
+
+
+  ***( Messages ***)
+  op acceptLeaderReq : TransId EntityGroupId LogEntry -> MsgContent .
+  op acceptLeaderRsp : TransId EntityGroupId LogPosition -> MsgContent .
+  op signalConflict : TransId EntityGroupId LogPosition -> MsgContent .
+  op acceptAllReq : TransId EntityGroupId LogEntry Propnum -> MsgContent .
+  op acceptAllRsp : TransId EntityGroupId LogPosition Propnum -> MsgContent .
+  op applyReq : TransId EntityGroupId LogPosition Propnum -> MsgContent .
+
+  op acceptLeader : EntityGroupId LogEntry SiteId -> PaxosState [ctor] .
+  --- Propnum == proposal number, SiteIdSet1 == sites responded yes
+  op acceptAll : EntityGroupId LogEntry Propnum SiteIdSet  -> PaxosState [ctor] .
+  --- SiteIdSet == sites who did not accept
+  op acceptedPS : EntityGroupId LogEntry Propnum -> PaxosState [ctor] .
+
+  ***( Paxos-states involved in presence of errors, see UPDATE-FAULT-HANDLERS ***)
+  --- Propnum1 == proposal number, Propnum2 == seen proposal number, SiteIdSet == sites responded
+  op prepare : EntityGroupId LogEntry Propnum DefPropnum SiteIdSet -> PaxosState [ctor] .
+  op restartPrepare : EntityGroupId LogEntry -> PaxosState [ctor] .
+  --- SiteIdSet == sites who did not accept
+  op invalidating : EntityGroupId LogEntry Propnum SiteIdSet -> PaxosState [ctor] .
+
+
+
+  rl [bufferWriteOperation] :
+    < SID : Site |
+          localTransactions : < TID : Transaction | operations : w(EID, VAL) :: OL, writes : WRITEOPS, status : idle > LOCALTRANS
+    >
+   =>
+    < SID : Site |
+          localTransactions : < TID : Transaction | operations : OL, writes : WRITEOPS :: w(EID, VAL) > LOCALTRANS
+    > .
+
+
+  crl [initiateCommit] :
+    < SID : Site |
+          entityGroups : EGROUPS,
+          localTransactions : < TID : Transaction | operations : emptyOpList, writes : WRITEOPS,
+               readState : RSTATE, paxosState : PSTATE, status : idle > LOCALTRANS
+    >
+  => 
+    < SID : Site |
+          localTransactions : < TID : Transaction |
+               paxosState : NEW-PAXOS-STATE, status : in-paxos > LOCALTRANS
+    >
+    (createAcceptLeaderMessages(SID, NEW-PAXOS-STATE))
+   if EIDSET := getEntityGroupIds(WRITEOPS) /\
+      NEW-PAXOS-STATE := initiatePaxosState(EIDSET, TID, WRITEOPS, SID, RSTATE, EGROUPS) .   
+
+
+  op initiatePaxosState : EntityGroupIdSet TransId OperationList SiteId ReadStateSet Configuration -> PaxosStateSet .
+  eq initiatePaxosState(EG ; EIDSET, TID, WRITEOPS, SID, readpos(EG, lpos(N)) ; RSTATE,
+      < EG : EntityGroup | transactionLog : LEL :: (TID' lpos(N) MSID1 OL1) :: LEL' > EGROUPS) =
+    acceptLeader(EG, (TID lpos(s N) SID filterEGWrites(EG, WRITEOPS)), MSID1) 
+    ; initiatePaxosState(EIDSET, TID, WRITEOPS, SID, RSTATE, < EG : EntityGroup | > EGROUPS) .
+  eq initiatePaxosState(emptyOidSet, TID, WRITEOPS, SID, RSTATE, EGROUPS) = emptyPaxosState .
+
+  op getEntityGroupIds : OperationList -> EntityGroupIdSet .
+  eq getEntityGroupIds(w(entity(EG,N),VAL) :: OL) = EG ; getEntityGroupIds(OL) .
+  eq getEntityGroupIds(emptyOpList) = emptyOidSet .
+
+  op createAcceptLeaderMessages : SiteId PaxosStateSet -> Configuration .
+  eq createAcceptLeaderMessages(SID, acceptLeader(EG, (TID LP MSID2 OL), MSID1) ; PSTATE) =
+	(uniCast acceptLeaderReq(TID, EG, (TID LP MSID2 OL)) from SID to MSID1) createAcceptLeaderMessages(SID, PSTATE) .
+  eq createAcceptLeaderMessages(SID, PSTATE) = none [owise] .
+
+  op filterEGWrites : EntityGroupId OperationList -> OperationList .
+  eq filterEGWrites(EG, emptyOpList) = emptyOpList .
+  eq filterEGWrites(EG, w(entity(EG, N), VAL) :: OL) = w(entity(EG,N), VAL) :: filterEGWrites(EG, OL) .
+  eq filterEGWrites(EG, w(entity(EG', N), VAL) :: OL) = filterEGWrites(EG, OL) [owise] .
+
+
+  --- For read-only transactions, we remove the transaction and commit immediately
+  rl [initiateCommitReadOnly] :
+    < SID : Site |
+          localTransactions : < TID : Transaction | operations : emptyOpList, reads : READS, writes : emptyOpList > LOCALTRANS
+    >
+  => 
+    < SID : Site |
+          localTransactions : LOCALTRANS
+    > 
+    (notifyReadOnlyCommit(SID, TID, READS)) .
+
+
+
+  ***( Section 4.6.3 Accept Leader. Happy -day scenario: No conflicting proposal ***)
+
+  --- Note: In the "Fast write"-scenario, we do not run the explicit prepare step. But it appears
+  --- correct to regard the present proposal as proposal number 0 and store this at the leader
+  --- (if the original proposer then fails, there is a chance its value will "survive" due to 
+  --- this)
+  crl [L2successfulLeaderAccept] :
+    (msg acceptLeaderReq(TID, EG, (TID LP SID OL)) from SENDER to THIS)
+    < THIS : Site |
+      entityGroups : < EG : EntityGroup | proposals : PROPSET, transactionLog : LEL > EGROUPS
+    >
+  => 
+    < THIS : Site |
+      entityGroups :
+        < EG : EntityGroup |
+           proposals : accepted(SENDER, (TID LP SID OL), 0) ; PROPSET
+        >
+        EGROUPS
+    >
+    (uniCast acceptLeaderRsp(TID, EG, LP) from THIS to SENDER)
+   if not (containsLPos(LP, LEL) or conflictingProposal(TID, LP, 0, PROPSET)) .
+
+   op conflictingProposal : TransId LogPosition Propnum PaxosProposalSet -> Bool .
+   ceq conflictingProposal(TID, LP, PROPNUM, proposal(SID, TID', LP, OL, PN) ; PROPSET) =
+         true if (PN >= PROPNUM) .
+   ceq conflictingProposal(TID, LP, PROPNUM, accepted(SID, LE, PN) ; PROPSET) =
+         true if (PN >= PROPNUM) .
+   eq conflictingProposal(TID, LP, PROPNUM, PROPSET) = false [owise] .
+
+   op containsLPos : LogPosition LogEntryList -> Bool .
+   eq containsLPos(LP, LEL :: (TID LP SID OL) :: LEL') = true .
+   eq containsLPos(LP, LEL) = false [owise] .
+
+
+  ***( Section 4.6.3 Accept Leader/Invalidate. Paxos with conflicting proposals ***)
+  crl [LF1rcvAcceptLeaderReq] :
+    (msg acceptLeaderReq(TID, EG, (TID LP MSID1 OL1)) from SENDER to THIS)
+    < THIS : Site |
+      entityGroups : < EG : EntityGroup |
+           transactionLog : LEL,
+           proposals : PROPSET > EGROUPS
+    >
+  => 
+    < THIS : Site |
+      entityGroups : < EG : EntityGroup | > EGROUPS
+    >
+    (uniCast signalConflict(TID, EG, LP) from THIS to SENDER)
+ if (containsLPos(LP, LEL) or conflictingProposal(TID, LP, 0, PROPSET)) .
+
+  --- If we receive a conflict signal, we abort the transaction.
+  rl [UF2rcvDenyLeaderRsp] :
+    (msg signalConflict(TID, EG, LP) from SENDER to THIS)
+   < THIS : Site |
+           localTransactions : < TID : Transaction | reads : READS, writes : WRITES > LOCALTRANS
+   >
+  =>
+   < THIS : Site | localTransactions : LOCALTRANS >
+    (notifyConflictAbort(THIS, TID, READS, WRITES)) .
+
+  --- We ignore a conflict signal for an already missing transaction.
+  crl [UF2.1rcvDenyLeaderRsp] :
+    (msg signalConflict(TID, EG, LP) from SENDER to THIS)
+   < THIS : Site | localTransactions : LOCALTRANS >
+  =>
+   < THIS : Site | >
+  if not containsTrans(TID, LOCALTRANS) .
+
+  op containsTrans : TransId Configuration -> Bool .
+  eq containsTrans(TID, < TID : Transaction | > LOCALTRANS) = true .
+  eq containsTrans(TID, LOCALTRANS) = false [owise] .
+
+   --- If accept-leader message arrives delayed, ignore the message
+   crl [LF3rcvAcceptLeaderRspDelayed] :
+    (msg acceptLeaderRsp(TID, EG, LP) from SENDER to THIS)
+    < THIS : Site |
+           localTransactions : LOCALTRANS
+    >
+   => 
+    < THIS : Site |
+           localTransactions : LOCALTRANS
+    >
+  if (not acceptingLeader(TID, EG, LP, LOCALTRANS)) .
+
+  op acceptingLeader : TransId EntityGroupId LogPosition Configuration -> Bool .
+  eq acceptingLeader(TID, EG, LP,
+	  < TID : Transaction | paxosState : acceptLeader(EG, (TID LP SID OL), MSID1) ; PSTATE > LOCALTRANS) = true .
+  eq acceptingLeader(TID, EG, LP, LOCALTRANS) = false [owise] .
+
+
+  ***( Section 4.6.3 - Accept-step ***)
+
+  *** Common case: Received accept from leader, proceed with requesting accept from all
+   rl [A1rcvAcceptLeaderRsp] :
+    (msg acceptLeaderRsp(TID, EG, LP) from SENDER to THIS)
+    < THIS : Site |
+           localTransactions : < TID : Transaction | paxosState : acceptLeader(EG, (TID LP SID OL), SENDER) ; PSTATE,
+					             status : in-paxos, reads : READS, writes : WRITES > LOCALTRANS,
+           entityGroups : < EG : EntityGroup | proposals : PROPSET, replicas : EGRS > EGROUPS  >
+   => 
+    --- Note: We now have accept from leader + this (which might be the same site)
+   < THIS : Site | 
+       entityGroups : 
+         < EG : EntityGroup | proposals : (if (THIS =/= SENDER) then accepted(THIS, (TID LP SID OL), 0) else emptyProposalSet fi) ; PROPSET > EGROUPS,
+       localTransactions : LOCALTRANS
+       (if ((getSites(EGRS) setminus (SENDER ; THIS)) =/= emptyOidSet) then
+         < TID : Transaction |
+             paxosState : acceptAll(EG,(TID LP SID OL), 0, (THIS ; SENDER)) ; PSTATE,
+             status : in-paxos >
+        else
+	  none
+ 
+           --- With two replicas and the other being master, or only one and ourself being master, we're done now
+          (if allEGSAccepted(PSTATE) then none
+            else (
+               < TID : Transaction | paxosState : acceptedPS(EG, (TID LP SID OL), 0) ; PSTATE, 
+                 status : committed > )
+            fi)
+        fi)
+     >
+    (if ((getSites(EGRS) setminus (SENDER ; THIS)) =/= emptyOidSet) then
+      (multiCast acceptAllReq(TID, EG, (TID LP SID OL), 0) from THIS to getSites(EGRS) setminus (SENDER ; THIS))
+    else
+     (if allEGSAccepted(PSTATE) then (
+       createApplyMessages(THIS, < EG : EntityGroup | > EGROUPS, acceptedPS(EG, (TID LP SID OL), 0) ; PSTATE)
+       notifyCommit(THIS, TID, eglp(EG, LP) ; getEntGroupLogPosPair(PSTATE), READS, WRITES))
+      else none
+      fi)
+    fi) .
+
+
+  --- Common case: This is the first time we receive an accept for this log position
+  crl [A2rcvAcceptAllReq] :
+    (msg acceptAllReq(TID, EG, (TID' LP SID OL), PROPNUM) from SENDER to THIS)
+    < THIS : Site |
+      entityGroups : < EG : EntityGroup | proposals : PROPSET, transactionLog : LEL > EGROUPS
+    >
+  => 
+    < THIS : Site |
+      entityGroups : < EG : EntityGroup | proposals : accepted(SENDER, (TID' LP SID OL), PROPNUM) ; removeProposal(LP, PROPSET) > EGROUPS
+    >
+    (uniCast acceptAllRsp(TID, EG, LP, PROPNUM) from THIS to SENDER)
+  if not (containsLPos(LP, LEL) or hasAcceptedForPosition(LP, PROPSET)) .
+
+  op hasAcceptedForPosition : LogPosition PaxosProposalSet -> Bool .
+  eq hasAcceptedForPosition(LP, accepted(SID, (TID LP SID' OL'), PN) ; PROPSET) = true .
+  eq hasAcceptedForPosition(LP, PROPSET) = false [owise] .
+
+  op removeProposal : LogPosition PaxosProposalSet -> PaxosProposalSet .
+  eq removeProposal(LP, proposal(SID, TID, LP, OL, PN) ; PROPSET) = removeProposal(LP, PROPSET) .
+  eq removeProposal(LP, PROPSET) = PROPSET [owise] .
+
+  --- Log the accept-vote. If this was the last, proceed the transaction
+  rl [A4rcvAcceptAllRsp] : 
+    (msg acceptAllRsp(TID, EG, LP, PROPNUM) from SENDER to THIS)
+    < THIS : Site |
+           entityGroups : < EG : EntityGroup | replicas : EGRS > EGROUPS,
+           localTransactions : < TID : Transaction | paxosState : acceptAll(EG, (TID' LP SID OL), PROPNUM, SIS) ; PSTATE,
+                                                     reads : READS, writes : WRITES > LOCALTRANS
+    >
+   =>
+   < THIS : Site | localTransactions : 
+        LOCALTRANS
+        (if ((SENDER ; SIS) =/= getSites(EGRS)) then 
+           < TID : Transaction |
+               paxosState : acceptAll(EG, (TID' LP SID OL), PROPNUM, SIS ; SENDER) ; PSTATE >
+         else (
+           if allEGSAccepted(PSTATE) then none
+           else (
+              < TID : Transaction | paxosState : acceptedPS(EG, (TID' LP SID OL), PROPNUM) ; PSTATE, 
+                status : committed > )
+           fi)
+         fi)
+   >
+   (if ((SIS ; SENDER) == getSites(EGRS) and allEGSAccepted(PSTATE)) then (
+     createApplyMessages(THIS, < EG : EntityGroup | > EGROUPS, acceptedPS(EG, (TID' LP SID OL), PROPNUM) ; PSTATE)
+     (if (TID == TID') then (
+        notifyCommit(THIS, TID, eglp(EG, LP) ; getEntGroupLogPosPair(PSTATE), READS, WRITES))
+     else (notifyConflictAbort(THIS, TID, READS, WRITES))
+     fi))
+   else none
+   fi) .
+
+  op createApplyMessages : SiteId Configuration PaxosState -> Configuration .
+  eq createApplyMessages(SID, < EG : EntityGroup | replicas : EGRS > EGROUPS, acceptedPS(EG, (TID LP SID OL), PROPNUM) ; PSTATE) =
+    (multiCast applyReq(TID, EG, LP, PROPNUM) from SID to getSites(EGRS)) createApplyMessages(SID, EGROUPS, PSTATE) .
+  eq createApplyMessages(SID, EGROUPS, emptyPaxosState) = none  .
+
+  op getEntGroupLogPosPair : PaxosState -> EntGroupLogPosPairSet .
+  eq getEntGroupLogPosPair(acceptedPS(EG, (TID LP SID OL), PROPNUM) ; PSTATE) = eglp(EG, LP) ; getEntGroupLogPosPair(PSTATE) .
+  eq getEntGroupLogPosPair(emptyPaxosState) = noEntGroupLogPosPair .
+
+
+  ***( Section 4.6.3 - Apply step ***)
+
+  op allEGSAccepted : PaxosStateSet -> Bool .
+  eq allEGSAccepted(acceptedPS(EG, LE, N) ; PSTATE) = allEGSAccepted(PSTATE) .
+  eq allEGSAccepted(emptyPaxosState) = true .
+  eq allEGSAccepted(PSTATE) = false [owise] .
+
+  --- Apply at site which previously accepted a proposal
+  crl [APP3initUpdates] :
+    (msg applyReq(TID2, EG, lpos(N2), PN) from SENDER to THIS)
+    < THIS : Site |
+           coordinator : eglp(EG, lpos(N1)) ; CES,
+           entityGroups : < EG : EntityGroup | transactionLog : LEL :: (TID1 lpos(N1) MSID1 OL1),
+					       pendingWrites : PWL,
+					       proposals : accepted(SID, (TID3 lpos(N2) MSID2 OL2), PN') ; PROPSET > EGROUPS,
+           localTransactions : LOCALTRANS
+    >
+   => 
+    < THIS : Site |
+           coordinator : eglp(EG, lpos(N2)) ; CES,
+           entityGroups : < EG : EntityGroup | transactionLog : LEL :: (TID1 lpos(N1) MSID1 OL1) :: (TID3 lpos(N2) MSID2 OL2),
+					       pendingWrites : pw(lpos(N2), idle, OL2) :: PWL,
+                                               proposals : removeProposals(lpos(N2), PROPSET) > EGROUPS,
+           localTransactions : removeOthersForLogPosition(TID2, EG, lpos(N2), LOCALTRANS)
+    >
+    (sendNotifyAbort(THIS, LOCALTRANS, removeOthersForLogPosition(TID2, EG, lpos(N2), LOCALTRANS)))
+   if N2 == s N1 .
+
+  op removeOthersForLogPosition : TransId EntityGroupId LogPosition Configuration -> Configuration .
+  eq removeOthersForLogPosition(TID1, EG, LP, < TID1 : Transaction | > LOCALTRANS) = < TID1 : Transaction | > removeOthersForLogPosition(TID1, EG, LP, LOCALTRANS) .
+  ceq removeOthersForLogPosition(TID1, EG, LP, < TID2 : Transaction | paxosState : prepare(EG, (TID3 LP MSID1 OL), PN, PN', SIS) ; PSTATE > LOCALTRANS) =
+    removeOthersForLogPosition(TID1, EG, LP, LOCALTRANS) if TID1 =/= TID2 .
+  ceq removeOthersForLogPosition(TID1, EG, LP, < TID2 : Transaction | paxosState : restartPrepare(EG, (TID3 LP MSID1 OL)) ; PSTATE > LOCALTRANS) =
+    removeOthersForLogPosition(TID1, EG, LP, LOCALTRANS) if TID1 =/= TID2 .
+  ceq removeOthersForLogPosition(TID1, EG, LP, < TID2 : Transaction | paxosState : acceptAll(EG, (TID3 LP MSID1 OL), PN, SIS) ; PSTATE > LOCALTRANS) =
+    removeOthersForLogPosition(TID1, EG, LP, LOCALTRANS) if TID1 =/= TID2 .
+  ceq removeOthersForLogPosition(TID1, EG, LP, < TID2 : Transaction | paxosState : acceptLeader(EG, (TID3 LP MSID1 OL), MSID2) ; PSTATE > LOCALTRANS) =
+    removeOthersForLogPosition(TID1, EG, LP, LOCALTRANS) if TID1 =/= TID2 .
+  eq removeOthersForLogPosition(TID1, EG, LP, LOCALTRANS) = LOCALTRANS [owise] .
+
+
+  op removeProposals : LogPosition PaxosProposalSet -> PaxosProposalSet .
+  eq removeProposals(LP, accepted(SID, (TID LP MSID1 OL1), PN) ; PROPSET) = removeProposals(LP, PROPSET) .
+  eq removeProposals(LP, proposal(SID, TID, LP, OL, PN) ; PROPSET) = removeProposals(LP, PROPSET) .
+  eq removeProposals(LP, PROPSET) = PROPSET [owise] .
+
+
+  op sendNotifyAbort : SiteId Configuration Configuration -> Configuration .
+  eq sendNotifyAbort(SID, < TID : Transaction | > LTRANS1, < TID : Transaction | > LTRANS2) = sendNotifyAbort(SID, LTRANS1, LTRANS2)  .
+  eq sendNotifyAbort(SID, none, LTRANS1) = none .
+  eq sendNotifyAbort(SID, < TID : Transaction | reads : READS, writes : WRITES > LTRANS1, LTRANS2) =
+	(notifyConflictAbort(SID, TID, READS, WRITES)) sendNotifyAbort(SID, LTRANS1, LTRANS2) [owise] .
+
+
+  rl [APP4beginPendingWrite] :
+    < THIS : Site |
+           entityGroups : < EG : EntityGroup | pendingWrites : PWL :: pw(LP, idle, OL) > EGROUPS
+    >
+   =>
+    < THIS : Site |
+           entityGroups : < EG : EntityGroup | pendingWrites : PWL :: pw(LP, updating, OL) > EGROUPS
+    > .
+
+  rl [APP5endPendingWrite] :
+    < THIS : Site | entityGroups : < EG : EntityGroup | entitiesState : ES,
+						       pendingWrites : PWL :: pw(LP, updating, OL :: OP) > EGROUPS >
+   =>
+    < THIS : Site | entityGroups :
+		   < EG : EntityGroup | entitiesState : applyUpdates(OP, LP, ES),
+					pendingWrites : updatePWListUponComplete(LP, OL, PWL) > EGROUPS
+    > .
+ 
+  op updatePWListUponComplete : LogPosition OperationList PendingWriteList -> PendingWriteList .
+  eq updatePWListUponComplete(LP, emptyOpList, PWL) = PWL .
+  eq updatePWListUponComplete(LP, OL, PWL) = PWL :: pw(LP, idle, OL) [owise] .
+
+  op applyUpdates : OperationList LogPosition EntitySet -> EntitySet .
+  eq applyUpdates(w(EID,VAL) :: OL, LP, (EID |-> EVERSIONS) ; ES) = (EID |-> insertEntityValSorted((LP VAL), EVERSIONS)) ; ES .
+  eq applyUpdates(emptyOpList, LP, ES) = ES .
+    
+  op insertEntityValSorted : EntityVersion EntityVersionList -> EntityVersionList .
+  eq insertEntityValSorted((lpos(N) VAL), (lpos(N') VAL') :: EVERSIONS) =
+	if (N' < N) then
+	  ((lpos(N') VAL') :: insertEntityValSorted((lpos(N) VAL), EVERSIONS))
+        else
+	  ((lpos(N) VAL) :: (lpos(N') VAL') :: EVERSIONS)
+        fi .
+  eq insertEntityValSorted((lpos(N) VAL), noEntityVersions) = (lpos(N) VAL) .
+
+endom)

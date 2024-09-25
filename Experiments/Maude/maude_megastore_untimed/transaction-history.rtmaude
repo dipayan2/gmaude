@@ -1,0 +1,105 @@
+***( 
+   Semantics for a serialization graph:
+
+   There is a path from transaction T1 and T2 if and only if T1 and T2 are in conflict.
+
+   The basis definition of a conflict graph is:
+
+- Whenever transaction T2 reads an item I:
+  * create an edge from any previous updater of I
+- Whenever a transaction T1 writes an item I:
+  * create an edge from any previous updater TU of I to T1
+  * create an edge from any previous reader TR of to T1
+
+***)
+
+(omod TRANSACTION-HISTORY is
+  inc MEGASTORE-SETUP .
+
+   var EID : EntityId .
+   vars N N' : Nat .
+   vars SG SG' : SerGraph .
+   var LP : LogPosition .
+   vars TID TID' : TransId .
+   vars TIS1 TIS2 TIS3 : TransIdSet .
+   var TH : Oid .
+   vars TOPS READERS WRITERS : TransOpSet .
+   var E : Edge .
+
+   class TransactionHistory |
+     graph : SerGraph,
+     readers : TransOpSet,
+     writers : TransOpSet .
+
+
+   sort SerGraph .
+   sort Edge .
+   subsort Edge < SerGraph .
+   op <_;_> : TransId TransId -> Edge [ctor] .
+   op emptyGraph : -> SerGraph [ctor] .
+   op _;_ : SerGraph SerGraph -> SerGraph [ctor assoc comm id: emptyGraph] .
+   eq (SG ; E) ; (SG' ; E) = (SG ; E) ; SG' .
+
+   sorts TransOp TransOpSet .
+   subsort TransOp < TransOpSet .
+   op op : TransId EntityId LogPosition -> TransOp [ctor] .
+   op emptyTransOpSet : -> TransOpSet [ctor] .
+   op _;_ : TransOpSet TransOpSet -> TransOpSet [ctor comm assoc id: emptyTransOpSet] .
+
+   op predecessors : EntityId LogPosition TransOpSet -> TransIdSet .
+   ceq predecessors(EID, lpos(N), op(TID, EID, lpos(N')) ; TOPS) = TID ; predecessors(EID, lpos(N), TOPS) if N > N' .
+   ceq predecessors(EID, lpos(N), op(TID, EID, lpos(N')) ; TOPS) = predecessors(EID, lpos(N), TOPS) if N <= N' .
+   eq predecessors(EID, lpos(N), TOPS) = emptyOidSet [owise] .
+
+   op successors : EntityId LogPosition TransOpSet -> TransIdSet .
+   ceq successors(EID, lpos(N), op(TID, EID, lpos(N')) ; TOPS) = TID ; successors(EID, lpos(N), TOPS) if N < N' .
+   ceq successors(EID, lpos(N), op(TID, EID, lpos(N')) ; TOPS) = successors(EID, lpos(N), TOPS) if N >= N' .
+   eq successors(EID, lpos(N), TOPS) = emptyOidSet [owise] .
+
+   op getCreator : EntityId LogPosition TransOpSet -> TransId .
+   eq getCreator(EID, LP, op(TID, EID, LP) ; TOPS) = TID .
+
+   op addWrite : TransId EntityId LogPosition Object -> Object .
+   op addRead : TransId EntityId LogPosition Object -> Object .
+   eq addWrite(TID, EID, LP, < TH : TransactionHistory | graph : SG, readers : READERS, writers : WRITERS >) = 
+    < TH : TransactionHistory |
+	graph : addInEdges(TID, predecessors(EID, LP, READERS), addInEdges(TID, predecessors(EID, LP, WRITERS), SG)),
+        writers : op(TID, EID, LP) ; WRITERS > .
+   eq addRead(TID, EID, LP, < TH : TransactionHistory | graph : SG, readers : READERS, writers : WRITERS >) = 
+    < TH : TransactionHistory |
+	graph : addInEdges(TID, getCreator(EID, LP, WRITERS), addOutEdges(TID, successors(EID, LP, WRITERS), SG)),
+        readers : op(TID, EID, LP) ; READERS > .
+
+   op addInEdges : TransId TransIdSet SerGraph -> SerGraph .
+   ceq addInEdges(TID, TID' ; TIS1, SG) = < TID' ; TID > ; addInEdges(TID, TIS1, SG) if TID' =/= TID .
+   ceq addInEdges(TID, TID' ; TIS1, SG) = addInEdges(TID, TIS1, SG) if TID' == TID .
+   eq addInEdges(TID, emptyOidSet, SG) = SG .
+
+   op addOutEdges : TransId TransId SerGraph -> SerGraph .
+   ceq addOutEdges(TID, TID' ; TIS1, SG) = < TID ; TID' > ; addOutEdges(TID, TIS1, SG) if TID' =/= TID .
+   ceq addOutEdges(TID, TID' ; TIS1, SG) = addOutEdges(TID, TIS1, SG) if TID' == TID .
+   eq addOutEdges(TID, emptyOidSet, SG) = SG .
+
+
+   op hasCycle : SerGraph -> Bool .
+   eq hasCycle(SG) = hasCycle(getTransIds(SG), SG, emptyOidSet) .
+  
+   --- Usage: Awaiting  Graph Visited
+   op hasCycle : TransIdSet SerGraph TransIdSet -> Bool .
+   ceq hasCycle((TID ; TIS1), SG, TIS3) = true if (TID in TIS3) .
+   ceq hasCycle((TID ; TIS1), SG, TIS3) =
+	hasCycle(destNodes(TID, SG), SG, (TIS3 ; TID))
+      or
+	hasCycle(TIS1, SG, TIS3)
+      if (not (TID in TIS3)) .
+   eq hasCycle(emptyOidSet, SG, TIS3) = false .
+
+   op destNodes : TransId SerGraph -> TransIdSet .
+   eq destNodes(TID, < TID ; TID' > ; SG) = (TID' ; destNodes(TID, SG)) .
+   eq destNodes(TID, SG) = emptyOidSet [owise] .
+ 
+   op getTransIds : SerGraph -> TransIdSet .
+   eq getTransIds(< TID ; TID' > ; SG) = TID ; TID' ; getTransIds(SG) .
+   eq getTransIds(emptyGraph) = emptyOidSet .
+
+ endom)

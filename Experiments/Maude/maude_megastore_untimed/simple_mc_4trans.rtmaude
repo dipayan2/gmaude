@@ -1,0 +1,110 @@
+load ../../RTM23/real-time-maude
+--- load ~/Maude/maude/full-maude26
+--- load ~/Maude/maude/real-time-maude
+
+
+*** in timed_behavior.rtmaude
+in megastore_setup.rtmaude
+*** in network_model_mc.rtmaude
+in current_read.rtmaude
+in transaction-history.rtmaude
+in client_mc.rtmaude
+in updates.rtmaude
+*** in megastore_timing.rtmaude
+
+
+(omod INIT-STATE is
+    *** inc TIME-DOMAIN .
+    inc UPDATES .
+    inc TRANSACTION-HISTORY .
+    inc CLIENT-FOR-MODEL-CHECKING .
+    *** inc MEGASTORE-TIMING .
+    *** inc NETWORK-MODEL .
+
+
+    vars SID SID' : SiteId .
+
+    op value : Nat -> EntityValue [ctor] .
+    
+    ***( Entity group ids ***)
+    ops EG1 EG2 : -> EntityGroupId .
+
+    ops entitySetEG1-updated entitySetEG2-updated : -> EntitySet .
+    eq entitySetEG1-updated =
+	(entity(EG1,0) |-> (lpos(0) value(0))) ;
+	(entity(EG1,1) |-> (lpos(0) value(0))) .
+    eq entitySetEG2-updated =
+	(entity(EG2,0) |-> (lpos(0) value(0))) ;
+	(entity(EG2,1) |-> (lpos(0) value(0))) .
+
+
+    ***( Test transactions ***)
+    ops T1 T2 T-K T-L T-M T-N : -> TransId .
+
+    ***( Sites ***)
+    ops PARIS LONDON NEW-YORK : -> SiteId .
+
+    op allSites : -> EntityGroupReplicaSet .
+    eq allSites = (egr(LONDON, 0, lpos(0)) ; egr(PARIS, 1, lpos(0)) ; egr(NEW-YORK, 2, lpos(0))) .
+
+    ops entityGroupsLondon entityGroupsParis entityGroupsNewYork : -> Configuration .
+    eq entityGroupsLondon = 
+	< EG1 : EntityGroup | entitiesState : entitySetEG1-updated, replicas : allSites,
+			      proposals : emptyProposalSet,
+			      pendingWrites : emptyPWList,
+			      transactionLog : (initTrans lpos(0) PARIS emptyOpList) >
+	< EG2 : EntityGroup | entitiesState : entitySetEG2-updated, replicas : allSites,
+			      proposals : emptyProposalSet,
+			      pendingWrites : emptyPWList,
+			      transactionLog : (initTrans lpos(0) NEW-YORK emptyOpList) > .
+    eq entityGroupsParis = 
+	< EG1 : EntityGroup | entitiesState : entitySetEG1-updated, replicas : allSites,
+			      proposals : emptyProposalSet,
+			      pendingWrites : emptyPWList,
+			      transactionLog : (initTrans lpos(0) PARIS emptyOpList) >
+	< EG2 : EntityGroup | entitiesState : entitySetEG2-updated, replicas : allSites,
+			      proposals : emptyProposalSet,
+			      pendingWrites : emptyPWList,
+			      transactionLog : (initTrans lpos(0) NEW-YORK emptyOpList) > .
+    eq entityGroupsNewYork = 
+	< EG1 : EntityGroup | entitiesState : entitySetEG1-updated, replicas : allSites,
+			      proposals : emptyProposalSet,
+			      pendingWrites : emptyPWList,
+			      transactionLog : (initTrans lpos(0) PARIS emptyOpList) >
+	< EG2 : EntityGroup | entitiesState : entitySetEG2-updated,
+			      proposals : emptyProposalSet,
+			      pendingWrites : emptyPWList,
+			      replicas : allSites, transactionLog : (initTrans lpos(0) NEW-YORK emptyOpList) > .
+
+    op initTransactions : -> Configuration .
+
+  eq initTransactions
+     =
+	newTrans(PARIS, T-K, cr(entity(EG1,0)) :: w(entity(EG1,0),value(2)))
+        newTrans(LONDON, T-L, cr(entity(EG1,0)) :: w(entity(EG1,0),value(5)))
+	newTrans(NEW-YORK, T-M, cr(entity(EG2,0)) :: w(entity(EG2,0),value(4))) 
+	newTrans(NEW-YORK, T-N, cr(entity(EG2,1)) :: w(entity(EG2,1),value(7))) .
+
+    op th : -> Oid .
+    op initTransHist : -> Configuration .
+    eq initTransHist =  
+        < th : TransactionHistory | graph : emptyGraph,
+            readers : emptyTransOpSet,
+            writers : op(initTrans, entity(EG1,0), lpos(0)) ;
+                      op(initTrans, entity(EG1,1), lpos(0)) ;
+                      op(initTrans, entity(EG2,0), lpos(0)) ;
+                      op(initTrans, entity(EG2,1), lpos(0)) > .
+
+    op initSites : -> Configuration .
+    eq initSites =
+       < PARIS : Site | coordinator : (eglp(EG1, lpos(0)) ; eglp(EG2, lpos(0))),
+            entityGroups : entityGroupsParis, localTransactions : none >
+       < LONDON : Site | coordinator : (eglp(EG1, lpos(0)) ; eglp(EG2, lpos(0))),
+            entityGroups : entityGroupsLondon, localTransactions : none > 
+       < NEW-YORK : Site | coordinator : (eglp(EG1, lpos(0)) ; eglp(EG2, lpos(0))),
+            entityGroups : entityGroupsNewYork, localTransactions : none > .
+
+    op initMegastore : -> Configuration .
+    eq initMegastore = initSites    initTransactions   initTransHist .
+endom)
+
