@@ -118,5 +118,6 @@ RewriteSearchState::getRule() const
 DagNode*
 RewriteSearchState::getReplacement() const
 {
+  printf("[GM rewriteSearchState] this will log the order of replacement creation or rule application\n");
   return getRule()->getRhsBuilder().construct(*(getContext()));
 }

@@ -73,6 +73,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 {
 
 //   printf("[GM]: Analyzing the DAG\n");
+
   State* n = seen[stateNr];
 //   size_t rootHash = initial->root()->getHashValue(); // Storing the hash of the initial state
   int nrNextStates = n->nextStates.length();
@@ -87,7 +88,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
   if (n->rewriteState == 0)
     {
       DagNode* canonicalStateDag = hashConsSet.getCanonical(seen[stateNr]->hashConsIndex);
-      RewritingContext* newContext = initial->makeSubcontext(canonicalStateDag);
+      RewritingContext* newContext = initial->makeSubcontext(canonicalStateDag); // [Gmaude]]Get the has of this
       n->rewriteState = new RewriteSearchState(newContext,
 					       NONE,
 					       RewriteSearchState::GC_CONTEXT |
@@ -117,7 +118,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 		return NONE;
 	    }
 	  DagNode* replacement = rewriteState->getReplacement();
-	  printf("[GM] Created a new state with rules, P:%zu, C:%zu\n",initial->root()->getHashValue(), replacement->getHashValue());
+	  printf("[GM] Created a new state with rules, P:%zu, C:%zu\n",this->getStateDag()->getHashValue(), replacement->getHashValue());
 	  RewriteSearchState::DagPair r = rewriteState->rebuildDag(replacement);
           RewritingContext* c = context->makeSubcontext(r.first);
 	  initial->incrementRlCount();
