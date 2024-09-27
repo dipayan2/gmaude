@@ -185,10 +185,13 @@ rewrites: 13
 result List: 0 0 1 1 2 2 3 3
 ==========================================
 search in COUNTER-TEST4 : f(4) =>* L:List .
-[GM] (getNextState): Analyzing the DAG The stateNr 0, index: 0 , initial states count 0
+[GM] Hash This is called at the initiation of a state Graph Hash Val : 3532671126103885163
+[GM 1] (getNextState): Analyzing the DAG The stateNr 0, index: 0 , initial states count 0
+[GM2] Check if we can access the seen graph status, seen size 1
 
 No solution.
 states: 1  rewrites: 5
+[GM Delete] How many states am I deleting 1
 ==========================================
 reduce in META-LEVEL : metaRewrite(['COUNTER-TEST4], '__['counter.Nat,
     'counter.Nat], 2) .
