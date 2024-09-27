@@ -47,13 +47,14 @@ StateTransitionGraph::StateTransitionGraph(RewritingContext* initial)
   
   initial->reduce();
 //   std::cout << "[GM Init] This is called at the initiation of a state Graph Hash Val : " << initial->root()->getHashValue() << std::endl;
-  printf("[GM] Hash This is called at the initiation of a state Graph Hash Val : %zu\n", initial->root()->getHashValue());
+
   int hashConsIndex = hashConsSet.insert(initial->root());
   hashCons2seen.resize(hashConsIndex + 1);
   for (int i = 0; i < hashConsIndex; ++i)
     hashCons2seen[i] = NONE;
   hashCons2seen[hashConsIndex] = seen.size();
   seen.append(new State(hashConsIndex, NONE));
+  printf("[GM] Init %zu\n", this->getStateDag(seen.length()-1)->getHashValue());
 }
 
 StateTransitionGraph::~StateTransitionGraph()
@@ -73,7 +74,6 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 {
 
 //   printf("[GM]: Analyzing the DAG\n");
-
   State* n = seen[stateNr];
 //   size_t rootHash = initial->root()->getHashValue(); // Storing the hash of the initial state
   int nrNextStates = n->nextStates.length();
@@ -118,7 +118,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 		return NONE;
 	    }
 	  DagNode* replacement = rewriteState->getReplacement();
-	  printf("[GM] Created a new state with rules, P:%zu, C:%zu\n",this->getStateDag()->getHashValue(), replacement->getHashValue());
+	  printf("[GM] Created a new state with rules, P:%zu, C:%zu\n",this->getStateDag(stateNr)->getHashValue(), replacement->getHashValue());
 	  RewriteSearchState::DagPair r = rewriteState->rebuildDag(replacement);
           RewritingContext* c = context->makeSubcontext(r.first);
 	  initial->incrementRlCount();
