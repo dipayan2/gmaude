@@ -118,7 +118,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 		return NONE;
 	    }
 	  DagNode* replacement = rewriteState->getReplacement();
-	  printf("[GM] Created a new state with rules, P:%zu, C:%zu\n",this->getStateDag(stateNr)->getHashValue(), replacement->getHashValue());
+	  
 	  RewriteSearchState::DagPair r = rewriteState->rebuildDag(replacement);
           RewritingContext* c = context->makeSubcontext(r.first);
 	  initial->incrementRlCount();
@@ -144,6 +144,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 	  int hashConsIndex = hashConsSet.insert(r.first);
 	  int mapSize = hashCons2seen.size();
 	  //DebugAdvisory("replacement dag = " << r.first << "hashConsIndex = " << hashConsIndex);
+	  printf("[GM] Created a new state with rules, P:%zu, C:%zu\n",this->getStateDag(stateNr)->getHashValue(),(r.first)->getHashValue());
 	  if (hashConsIndex >= mapSize)
 	    {
 	      //
@@ -154,6 +155,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 		hashCons2seen[i] = NONE;
 	      nextState = seen.size();
 	      hashCons2seen[hashConsIndex] = nextState;
+
 	      seen.append(new State(hashConsIndex, stateNr));
 	      DebugAdvisory("new state dag = " << r.first <<
 			    " hashConsIndex = " << hashConsIndex <<
