@@ -60,8 +60,6 @@ mod BANK is inc BANK-EQ .
   eq init = < Alice | 50 | active > ; < Bob | 20 | active > ; < Charlie | 20 | active > ; < Daisy | 10 | active > ; debit(Alice, 30) ; transfer(Bob, Charlie, 60) ; credit(Alice, 10) ; credit(Daisy, 40) ; debit(Charlie, 50) ; debit(Daisy, 45) ; transfer(Alice, Charlie, 15) ; transfer(Alice, Bob, 10) ; transfer(Bob, Charlie, 4) ; transfer(Daisy, Bob, 30) .
 endm
 
-rew init .
-
 search init =>! GS:State . 
 
 q
