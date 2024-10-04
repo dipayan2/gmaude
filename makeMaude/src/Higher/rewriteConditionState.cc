@@ -105,6 +105,7 @@ RewriteConditionState::solve(bool findFirst, RewritingContext& solution)
 int
 RewriteConditionState::findNextState()
 {
+  printf("[GM]rewriteConditionState::findNextState()");
   if (explore == -1)  // special case - return initial state
     {
       explore = 0;

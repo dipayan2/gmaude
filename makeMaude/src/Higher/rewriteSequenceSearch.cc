@@ -72,6 +72,7 @@ RewriteSequenceSearch::~RewriteSequenceSearch()
 bool
 RewriteSequenceSearch::findNextMatch()
 {
+  printf("[GM] rewriteSequenceSearch::findNextMatch");
   if (matchState != 0)
     goto tryMatch;  // non-startup case
 
@@ -98,6 +99,7 @@ RewriteSequenceSearch::findNextMatch()
 int
 RewriteSequenceSearch::findNextInterestingState()
 {
+  printf("[GM] rewriteSequenceSearch::findNextInterestingState()");
   if (needToTryInitialState)
     {
       //
