@@ -102,8 +102,11 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 
   RewriteSearchState* rewriteState = n->rewriteState;
   RewritingContext *context = rewriteState->getContext();
+  // This is where we can parallelize the state finding, and then we can follow the state movement from there
   while (nrNextStates <= index)
     {
+
+	  std::chrono::time_point<std::chrono::high_resolution_clock> start = std::chrono::high_resolution_clock::now();
       bool success = rewriteState->findNextRewrite();
       rewriteState->transferCountTo(*initial);
       
@@ -144,7 +147,11 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 	  int hashConsIndex = hashConsSet.insert(r.first);
 	  int mapSize = hashCons2seen.size();
 	  //DebugAdvisory("replacement dag = " << r.first << "hashConsIndex = " << hashConsIndex);
-	  printf("[GM] Created a new state with rules, P:%zu, C:%zu\n",this->getStateDag(stateNr)->getHashValue(),(r.first)->getHashValue());
+	  
+	  std::chrono::time_point<std::chrono::high_resolution_clock> end = std::chrono::high_resolution_clock::now();
+	  std::chrono::nanoseconds::rep duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+
+	  printf("[GM] Created a new state with rules, P:%zu, C:%zu, TimeElapse:%lld\n",this->getStateDag(stateNr)->getHashValue(),(r.first)->getHashValue(),duration);
 	  if (hashConsIndex >= mapSize)
 	    {
 	      //
