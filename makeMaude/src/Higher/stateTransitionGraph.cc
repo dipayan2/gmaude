@@ -106,7 +106,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
   while (nrNextStates <= index)
     {
 
-	  std::chrono::time_point<std::chrono::steady_clock> start = std::chrono::steady_clock::now();
+	  std::chrono::time_point<std::chrono::high_resolution_clock> start = std::chrono::high_resolution_clock::now();
       bool success = rewriteState->findNextRewrite();
       rewriteState->transferCountTo(*initial);
       
@@ -148,8 +148,10 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 	  int mapSize = hashCons2seen.size();
 	  //DebugAdvisory("replacement dag = " << r.first << "hashConsIndex = " << hashConsIndex);
 	  
-	  std::chrono::duration<double> elapsed_seconds = std::chrono::steady_clock::now() - start;
-	  printf("[GM] Created a new state with rules, P:%zu, C:%zu, TimeElapse:%lf\n",this->getStateDag(stateNr)->getHashValue(),(r.first)->getHashValue(),elapsed_seconds);
+	  std::chrono::time_point<std::chrono::high_resolution_clock> end = std::chrono::high_resolution_clock::now();
+	  std::chrono::nanoseconds::rep duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+
+	  printf("[GM] Created a new state with rules, P:%zu, C:%zu, TimeElapse:%lld\n",this->getStateDag(stateNr)->getHashValue(),(r.first)->getHashValue(),duration);
 	  if (hashConsIndex >= mapSize)
 	    {
 	      //
