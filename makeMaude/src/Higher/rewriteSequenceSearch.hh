@@ -25,6 +25,9 @@
 //
 #ifndef _rewriteSequenceSearch_hh_
 #define _rewriteSequenceSearch_hh_
+#include <set>
+#include <map>
+#include <chrono>
 #include "sequenceSearch.hh"
 #include "stateTransitionGraph.hh"
 #include "matchSearchState.hh"

@@ -115,6 +115,7 @@ RewriteSequenceSearch::findNextInterestingState()
 
   for(;;)
     {
+      std::chrono::time_point<std::chrono::high_resolution_clock> seq_start = std::chrono::high_resolution_clock::now();
       //
       //	Get index of next state to explore.
       //
@@ -201,7 +202,9 @@ RewriteSequenceSearch::findNextInterestingState()
 	  nextArc = NONE;
 	  return explore;
 	}
-    printf("[GM] End of for loop.\n");
+    std::chrono::time_point<std::chrono::high_resolution_clock> seq_end = std::chrono::high_resolution_clock::now();
+	  std::chrono::nanoseconds::rep seq_duration = std::chrono::duration_cast<std::chrono::nanoseconds>(seq_end - seq_start).count();
+    printf("[GM] End of for loop. Time: %lld\n",seq_duration);
     iter++;
     }
   printf("[GM] rewriteSequenceSearch::findNextInterestingState - Number of iterations: %d \n" , iter);
