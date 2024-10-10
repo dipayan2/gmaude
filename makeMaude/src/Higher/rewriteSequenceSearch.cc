@@ -108,11 +108,11 @@ RewriteSequenceSearch::findNextInterestingState()
       needToTryInitialState = false;  // don't do this again
       return 0;
     }
-
+  int iter = 0;
   if (nextArc != NONE)
     goto exploreArcs;
 
-  int iter = 0;
+
   for(;;)
     {
       //
@@ -201,7 +201,7 @@ RewriteSequenceSearch::findNextInterestingState()
 	  nextArc = NONE;
 	  return explore;
 	}
-    printf("[GM] End of for loop.");
+    // printf("[GM] End of for loop.");
     iter++;
     }
   printf("[GM] rewriteSequenceSearch::findNextInterestingState - Number of iterations: %d " , iter);
