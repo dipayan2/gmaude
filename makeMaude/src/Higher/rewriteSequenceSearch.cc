@@ -109,13 +109,14 @@ RewriteSequenceSearch::findNextInterestingState()
       return 0;
     }
   int iter = 0;
+  std::chrono::time_point<std::chrono::high_resolution_clock> seq_start;
   if (nextArc != NONE)
     goto exploreArcs;
 
 
   for(;;)
     {
-      std::chrono::time_point<std::chrono::high_resolution_clock> seq_start = std::chrono::high_resolution_clock::now();
+    seq_start = std::chrono::high_resolution_clock::now();
       //
       //	Get index of next state to explore.
       //
@@ -156,6 +157,7 @@ RewriteSequenceSearch::findNextInterestingState()
       //	Explore the arcs of the current state.
       //
     exploreArcs:
+      seq_start = std::chrono::high_resolution_clock::now();
       int nrStates = getNrStates();
       int nextStateNr;
       while ((nextStateNr = getNextState(explore, nextArc)) != NONE)
