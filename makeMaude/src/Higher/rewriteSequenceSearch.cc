@@ -201,10 +201,10 @@ RewriteSequenceSearch::findNextInterestingState()
 	  nextArc = NONE;
 	  return explore;
 	}
-    // printf("[GM] End of for loop.");
+    printf("[GM] End of for loop.\n");
     iter++;
     }
-  printf("[GM] rewriteSequenceSearch::findNextInterestingState - Number of iterations: %d " , iter);
+  printf("[GM] rewriteSequenceSearch::findNextInterestingState - Number of iterations: %d \n" , iter);
   return NONE;
 }
 
