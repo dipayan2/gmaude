@@ -56,10 +56,14 @@ mod BANK is inc BANK-EQ .
   rl [transfer] : transfer(ID1, ID2, M) ; < ID1 | BAL1 | active > ; < ID2 | BAL2 | active > 
                 => updateStatus(< ID1 | BAL1 - M | active >) ; updateStatus(< ID2 | BAL2 + M | active >) .
 
-  op init : -> State .
-  eq init = < Alice | 50 | active > ; < Bob | 20 | active > ; < Charlie | 20 | active > ; < Daisy | 10 | active > ; debit(Alice, 30) ; transfer(Bob, Charlie, 60) ; credit(Alice, 10) ; credit(Daisy, 40) ; debit(Charlie, 50) ; debit(Daisy, 45) ; transfer(Alice, Charlie, 15) ; transfer(Alice, Bob, 10) ; transfer(Bob, Charlie, 4) ; transfer(Daisy, Bob, 30) .
+  op init1 : -> State .
+  eq init1 = < Alice | 50 | active > ; < Bob | 20 | active > ; < Charlie | 20 | active > ; < Daisy | 10 | active > ; debit(Alice, 30) ; transfer(Bob, Charlie, 60) ; credit(Alice, 10) ; credit(Daisy, 40) ; debit(Charlie, 50) ; debit(Daisy, 45) ; transfer(Alice, Charlie, 15) ; transfer(Alice, Bob, 10) ; transfer(Bob, Charlie, 4) ; transfer(Daisy, Bob, 30) .
+
+  op init2 : -> State .
+  eq init2 = < Alice | 50 | active > ; < Bob | 20 | active > ; < Charlie | 20 | active > ; < Daisy | 10 | active > ; debit(Alice, 30) ; transfer(Bob, Charlie, 60) ; credit(Alice, 10) ; credit(Daisy, 40) ; debit(Charlie, 50) ; debit(Daisy, 45) ; transfer(Alice, Charlie, 15) ; transfer(Alice, Bob, 10) ; transfer(Bob, Charlie, 4) .
 endm
 
-search init =>! GS:State . 
+---search init1 =>! GS:State . 
+search init2 =>! GS:State . 
 
 q
