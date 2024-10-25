@@ -1,0 +1,45 @@
+sload bank
+sload ../../../MaudeRuntime/model-checker
+
+mod BANK-PREDS is
+    protecting BANK .
+    including SATISFACTION .
+
+    *** Predicate an account is active
+    op active : Id -> Prop .
+
+    *** Predicate an account is blocked
+    op blocked : Id -> Prop .
+
+    *** Variables for the equations
+    vars ID : Id . var BAL : Int .
+    var S : State .
+    var P : Prop .
+
+    *** Equations for the state's predicates
+
+    *** Equation indicating an account is active
+    eq < ID | BAL | active > ; S |= active(ID) = true .
+
+    *** Equation indicating an account is blocked
+    eq < ID | BAL | blocked > ; S |= blocked(ID) = true .
+
+    *** Equation to include any other cases as false
+    eq S |= P = false [owise] .
+endm
+
+mod BANK-CHECK is
+    protecting BANK-PREDS .
+    including MODEL-CHECKER .
+    including LTL-SIMPLIFIER .
+
+    *** GlobalState constants
+    op init1 : -> State .
+
+    *** 3 participants and the necessary samples for 1 key exchange
+    eq init1 =  < Alice | 50 | active > ; < Bob | 20 | active > ; < Charlie | 20 | active > ; < Daisy | 10 | active > ; debit(Alice, 30) ; transfer(Bob, Charlie, 60) ; credit(Alice, 10) ; credit(Daisy, 40) ; debit(Charlie, 50) ; debit(Daisy, 45) ; transfer(Alice, Charlie, 15) ; transfer(Alice, Bob, 10) ; transfer(Bob, Charlie, 4) ; transfer(Daisy, Bob, 30) .
+endm
+
+*** Model checking properties
+*** With these formula we are checking that whenever an account is blocked it can not be active again
+red modelCheck(init1, blocked(ID:Id) -> ~ (<> (active(ID:Id)))) .
