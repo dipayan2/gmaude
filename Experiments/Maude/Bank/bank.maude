@@ -1,64 +1,66 @@
 fmod BANK-INT+ID is inc INT .
-  sort Id .
+    sort Id .
 endfm
 
 view Id from TRIV to BANK-INT+ID is
-  sort Elt to Id .
+    sort Elt to Id .
 endv
 
 fmod BANK-EQ is 
-  inc BANK-INT+ID . 
-  pr SET{Id} .
-  
-  sorts Account PremiumAccount Status Msg State .
-  subsort PremiumAccount < Account .
-  subsorts  Account Msg < State .
+	inc BANK-INT+ID . 
+    pr SET{Id} .
 
-  var ID : Id .            
-  var BAL : Int .         
-  var STS : Status .     
+    sorts Account PremiumAccount Status Msg State .
+    subsort PremiumAccount < Account .
+    subsorts  Account Msg < State .
 
-  op <_|_|_> : Id Int Status -> Account [ctor] .
-  
-  op active : -> Status [ctor] .
-  op blocked : -> Status [ctor] .
-  
-  op Alice : -> Id [ctor] .         
-  op Bob : -> Id [ctor] .
-  op Charlie : -> Id [ctor] .       
-  op Daisy : -> Id [ctor] .
-  
-  cmb < ID | BAL | STS > : PremiumAccount if ID in PreferredClients .
+    var ID : Id .            
+    var BAL : Int .         
+    var STS : Status .     
 
-  op PreferredClients : -> Set{Id} .
-  eq PreferredClients = Bob, Charlie . 
-  
-  op updateStatus : Account -> Account .
-  ceq updateStatus(< ID | BAL | active >) = < ID | BAL | blocked > if BAL < 0 .
-  eq updateStatus(< ID | BAL | STS >) = < ID | BAL | STS > [owise] .
+    op <_|_|_> : Id Int Status -> Account [ctor] .
+
+    op active : -> Status [ctor] .
+    op blocked : -> Status [ctor] .
+
+    op Alice : -> Id [ctor] .         
+    op Bob : -> Id [ctor] .
+    op Charlie : -> Id [ctor] .       
+    op Daisy : -> Id [ctor] .
+
+    cmb < ID | BAL | STS > : PremiumAccount if ID in PreferredClients .
+
+    op PreferredClients : -> Set{Id} .
+    eq PreferredClients = Bob, Charlie . 
+
+    op updateStatus : Account -> Account .
+    ceq updateStatus(< ID | BAL | active >) = < ID | BAL | blocked > if BAL < 0 .
+    eq updateStatus(< ID | BAL | STS >) = < ID | BAL | STS > [owise] .
 endfm
 
 mod BANK is inc BANK-EQ .
-  vars ID ID1 ID2 : Id .
-  vars BAL BAL1 BAL2 M : Int .
-   
-  op empty-state : -> State [ctor] .
-  op _;_ : State State -> State [ctor assoc comm id: empty-state] .
-  ops credit debit : Id Int -> Msg [ctor] .
-  op  transfer : Id Id Int -> Msg  [ctor] .
-  
-  rl [credit] : credit(ID, M) ; < ID | BAL | active > => 
-                updateStatus(< ID | BAL + M | active >) .
+    vars ID ID1 ID2 : Id .
+    vars BAL BAL1 BAL2 M : Int .
+    
+    op empty-state : -> State [ctor] .
+    op _;_ : State State -> State [ctor assoc comm id: empty-state] .
+    ops credit debit : Id Int -> Msg [ctor] .
+    op  transfer : Id Id Int -> Msg  [ctor] .
+    
+    rl [credit] : credit(ID, M) ; < ID | BAL | active > => 
+                  updateStatus(< ID | BAL + M | active >) .
 
-  rl [debit] : debit(ID, M) ; < ID | BAL | active > => 
-                updateStatus(< ID | BAL - M | active >) .
+    rl [debit] : debit(ID, M) ; < ID | BAL | active > => 
+                  updateStatus(< ID | BAL - M | active >) .
 
-  rl [transfer] : transfer(ID1, ID2, M) ; < ID1 | BAL1 | active > ; < ID2 | BAL2 | active > 
-                => updateStatus(< ID1 | BAL1 - M | active >) ; updateStatus(< ID2 | BAL2 + M | active >) .
+    rl [transfer] : transfer(ID1, ID2, M) ; < ID1 | BAL1 | active > ; < ID2 | BAL2 | active > 
+                  => updateStatus(< ID1 | BAL1 - M | active >) ; updateStatus(< ID2 | BAL2 + M | active >) .
 
-  op init1 : -> State .
-  eq init1 = < Alice | 50 | active > ; < Bob | 20 | active > ; < Charlie | 20 | active > ; < Daisy | 10 | active > ; debit(Alice, 30) ; transfer(Bob, Charlie, 60) ; credit(Alice, 10) ; credit(Daisy, 40) ; debit(Charlie, 50) ; debit(Daisy, 45) ; transfer(Alice, Charlie, 15) ; transfer(Alice, Bob, 10) ; transfer(Bob, Charlie, 4) ; transfer(Daisy, Bob, 30) .
+    ---rl [stuttering] : A:Account => A:Account .
 
-  op init2 : -> State .
-  eq init2 = < Alice | 50 | active > ; < Bob | 20 | active > ; < Charlie | 20 | active > ; < Daisy | 10 | active > ; debit(Alice, 30) ; transfer(Bob, Charlie, 60) ; credit(Alice, 10) ; credit(Daisy, 40) ; debit(Charlie, 50) ; debit(Daisy, 45) ; transfer(Alice, Charlie, 15) ; transfer(Alice, Bob, 10) ; transfer(Bob, Charlie, 4) .
+    op init1 : -> State .
+    eq init1 = < Alice | 50 | active > ; < Bob | 20 | active > ; < Charlie | 20 | active > ; < Daisy | 10 | active > ; debit(Alice, 30) ; transfer(Bob, Charlie, 60) ; credit(Alice, 10) ; credit(Daisy, 40) ; debit(Charlie, 50) ; debit(Daisy, 45) ; transfer(Alice, Charlie, 15) ; transfer(Alice, Bob, 10) ; transfer(Bob, Charlie, 4) ; transfer(Daisy, Bob, 30) .
+
+    op init2 : -> State .
+    eq init2 = < Alice | 50 | active > ; < Bob | 20 | active > ; < Charlie | 20 | active > ; < Daisy | 10 | active > ; debit(Alice, 30) ; transfer(Bob, Charlie, 60) ; credit(Alice, 10) ; credit(Daisy, 40) ; debit(Charlie, 50) ; debit(Daisy, 45) ; transfer(Alice, Charlie, 15) ; transfer(Alice, Bob, 10) ; transfer(Bob, Charlie, 4) .
 endm
