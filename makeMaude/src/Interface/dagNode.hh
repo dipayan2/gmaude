@@ -562,7 +562,7 @@ DagNode::setTheoryByte(Byte value)
 inline void
 DagNode::reduce(RewritingContext& context)
 {
-  printf("[GM dagNode.hh] Calling the reduce function\n");
+  // printf("[GM dagNode.hh] Calling the reduce function\n");
   while (!isReduced())
     {
       if (!(topSymbol->eqRewrite(this, context)))
