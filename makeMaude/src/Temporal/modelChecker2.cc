@@ -48,6 +48,7 @@ ModelChecker2::findCounterexample()
   intersectionStates.expandTo(1);
   const NatSet& initialStates = propertyAutomaton.getInitialStates();
   const NatSet::const_iterator e = initialStates.end();
+  std::cout<<"[GM modelChecker2] --length of the property state " << initialStates.size() << std::endl;
   for (NatSet::const_iterator i = initialStates.begin(); i != e; ++i)
     {
       if (dfs1PropertyTransitions(0, *i))
