@@ -42,5 +42,5 @@ endm
 
 *** Model checking properties
 *** With these formula we are checking that whenever an account is blocked it can not be active again
-red modelCheck(init1, ~ <> blocked(ID:Id)) .
+red modelCheck(init1, ~ <> blocked(ID:Id) \/ active(ID:Id)) .
 q
