@@ -245,7 +245,7 @@ ModelCheckerSymbol::eqRewrite(DagNode* subject, RewritingContext& context)
   //	Compute normalization of negated formula.
   //
   FreeDagNode* d = safeCastNonNull<FreeDagNode*>(subject);
-  RewritingContext* newContext = context.makeSubcontext(negate(d->getArgument(1)));
+  RewritingContext* newContext = context.makeSubcontext(negate(d->getArgument(1))); //[GM] It creates a newcontext, with the root node, I guess based on the symbols
   newContext->reduce();
 #ifdef TDEBUG
   cout << "Negated formula: " << newContext->root() << endl;
@@ -254,8 +254,8 @@ ModelCheckerSymbol::eqRewrite(DagNode* subject, RewritingContext& context)
   //	Convert Dag into a LogicFormula.
   //
   SystemAutomaton system;
-  LogicFormula formula;
-  int top = build(formula, system.propositions, newContext->root());
+  LogicFormula formula; // [GM] this has propery nr. Maybe this is also an DAG with hash and shadow states??
+  int top = build(formula, system.propositions, newContext->root()); //[GM] based on the system it builds the logical formula
   if (top == NONE)
     {
       IssueAdvisory("negated LTL formula " << QUOTE(newContext->root()) <<
@@ -274,7 +274,8 @@ ModelCheckerSymbol::eqRewrite(DagNode* subject, RewritingContext& context)
   system.parentContext = &context;
   system.trueTerm = trueTerm.getDag();
   RewritingContext* sysContext = context.makeSubcontext(d->getArgument(0));
-  system.systemStates = new StateTransitionGraph(sysContext);
+  std::cout<< "[GM eqRewrite] State Transition graph based on syscontext created"<<std::endl;
+  system.systemStates = new StateTransitionGraph(sysContext); // [GM] why don't we create a state transition graph for symbol
   ModelChecker2 mc(system, formula, top);
   bool result = mc.findCounterexample();
   int nrSystemStates = system.systemStates->getNrStates();

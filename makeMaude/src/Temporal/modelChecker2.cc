@@ -81,6 +81,7 @@ ModelChecker2::dfs1SystemTransitions(int systemStateNr, int propertyStateNr)
 bool
 ModelChecker2::dfs1PropertyTransitions(int systemStateNr, int propertyStateNr)
 {
+  std::cout<<"[GM modelChecker] dfs1PropertyTransitions --state: "<< systemStateNr <<" propertyState "<< propertyStateNr <<std::endl;
   const BuchiAutomaton2::TransitionMap& tMap =
     propertyAutomaton.getTransitions(propertyStateNr);
   BuchiAutomaton2::TransitionMap::const_iterator e = tMap.end();

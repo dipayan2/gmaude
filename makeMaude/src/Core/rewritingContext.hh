@@ -218,7 +218,7 @@ private:
 inline
 RewritingContext::RewritingContext(DagNode* root)
   : Substitution(root->symbol()->getModule()->getMinimumSubstitutionSize(), 0),
-    rootNode(root)
+    rootNode(root)   // [GM] what is the getModule of the symbol? We always get the topSymbol in that function
 {
   //cout << "sub size is " << root->symbol()->getModule()->getMinimumSubstitutionSize() << endl;
   Assert(root != 0, "null root");
