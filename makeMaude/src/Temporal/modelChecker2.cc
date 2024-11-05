@@ -64,6 +64,7 @@ ModelChecker2::findCounterexample()
 local_inline bool
 ModelChecker2::dfs1SystemTransitions(int systemStateNr, int propertyStateNr)
 {
+  std::cout << "[GM modelChecker2] dfs1SystemTransitions --state: "<< systemStateNr <<" propertyState "<<propertyStateNr << std::endl;
   intersectionStates[systemStateNr].dfs1Seen.insert(propertyStateNr);
   for (int i = 0;; i++)
     {
@@ -81,7 +82,7 @@ ModelChecker2::dfs1SystemTransitions(int systemStateNr, int propertyStateNr)
 bool
 ModelChecker2::dfs1PropertyTransitions(int systemStateNr, int propertyStateNr)
 {
-  std::cout<<"[GM modelChecker] dfs1PropertyTransitions --state: "<< systemStateNr <<" propertyState "<< propertyStateNr <<std::endl;
+  std::cout<<"[GM modelChecker2] dfs1PropertyTransitions --state: "<< systemStateNr <<" propertyState "<< propertyStateNr <<std::endl;
   const BuchiAutomaton2::TransitionMap& tMap =
     propertyAutomaton.getTransitions(propertyStateNr);
   BuchiAutomaton2::TransitionMap::const_iterator e = tMap.end();
@@ -119,7 +120,7 @@ ModelChecker2::dfs1PropertyTransitions(int systemStateNr, int propertyStateNr)
 local_inline bool
 ModelChecker2::dfs2PropertyTransitions(int systemStateNr, int propertyStateNr)
 {
-  
+  std::cout<<"[GM modelChecker2] dfs2PropertyTransitions --state: "<< systemStateNr <<" propertyState "<< propertyStateNr <<std::endl;
   const BuchiAutomaton2::TransitionMap& tMap =
     propertyAutomaton.getTransitions(propertyStateNr);
   BuchiAutomaton2::TransitionMap::const_iterator e = tMap.end();
@@ -151,6 +152,7 @@ ModelChecker2::dfs2PropertyTransitions(int systemStateNr, int propertyStateNr)
 bool
 ModelChecker2::dfs2SystemTransitions(int systemStateNr, int propertyStateNr)
 {
+  std::cout << "[GM modelChecker2] dfs2SystemTransitions --state: "<< systemStateNr <<" propertyState "<<propertyStateNr << std::endl;
   intersectionStates[systemStateNr].dfs2Seen.insert(propertyStateNr);
   for (int i = 0;; i++)
     {
