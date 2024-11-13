@@ -1,0 +1,5 @@
+sload bike
+
+search [,3] init1 =>* { CONT:Content } < P:Participant PS >net(M2:Msg) .
+
+q
