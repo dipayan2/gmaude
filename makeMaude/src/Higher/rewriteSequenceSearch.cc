@@ -113,7 +113,8 @@ RewriteSequenceSearch::findNextInterestingState()
   if (nextArc != NONE)
     goto exploreArcs;
 
-
+//[!!! PARALLEL] This is the code, which will search through all the states, or atleast that's the idea
+  printf("[GM] rewriteSequenceSearch::findNextInterestingState() .. starting the loop\n");
   for(;;)
     {
     seq_start = std::chrono::high_resolution_clock::now();
@@ -121,9 +122,12 @@ RewriteSequenceSearch::findNextInterestingState()
       //	Get index of next state to explore.
       //
       ++explore;
+      printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() Inside the for loop, exploring state: %d \n", explore);
       returnedStateAlready = false;  // needed for BRANCH search type
-      if (explore == getNrStates())
-	break;  // all states explored
+      if (explore == getNrStates()){
+        printf("[GMDip] ENDDDD the search of the for loop, the state number is: %d\n",explore);
+	      break;  // all states explored
+      }
       //
       //	Are we at the first node of the next level?
       //
@@ -162,6 +166,7 @@ RewriteSequenceSearch::findNextInterestingState()
       int nextStateNr;
       while ((nextStateNr = getNextState(explore, nextArc)) != NONE)
 	{
+    printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() the while loop, curr State:%d, the nextArc: %d\n",explore,nextArc);
 	  ++nextArc;
 	  if (normalFormNeeded)
 	    {
@@ -171,10 +176,10 @@ RewriteSequenceSearch::findNextInterestingState()
 	  else if (branchNeeded)
 	    {
 	      if (!returnedStateAlready && nextArc >= 2 && nextStateNr != getNextState(explore, 0))
-		{
-		  returnedStateAlready = true;  // so we don't return the state again if we see another distinct next state
-		  return explore;
-		}
+              {
+                returnedStateAlready = true;  // so we don't return the state again if we see another distinct next state
+                return explore;
+              }
 	    }
 	  else
 	    {
@@ -206,8 +211,8 @@ RewriteSequenceSearch::findNextInterestingState()
 	}
     std::chrono::time_point<std::chrono::high_resolution_clock> seq_end = std::chrono::high_resolution_clock::now();
 	  std::chrono::nanoseconds::rep seq_duration = std::chrono::duration_cast<std::chrono::nanoseconds>(seq_end - seq_start).count();
-    printf("[GM] End of for loop. Time: %lld\n",seq_duration);
     iter++;
+    printf("[GM] End of for loop. Iteration Count %d. Time: %lld\n",iter,seq_duration);
     }
   printf("[GM] rewriteSequenceSearch::findNextInterestingState - Number of iterations: %d \n" , iter);
   return NONE;
