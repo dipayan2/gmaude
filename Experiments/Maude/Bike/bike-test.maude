@@ -1,5 +1,6 @@
 sload bike
 
+*** Search looks till depth 3 for a state where there is a participant and a sent message in the global state.
 search [,3] init1 =>* { CONT:Content } < P:Participant PS >net(M2:Msg) .
 
 q
