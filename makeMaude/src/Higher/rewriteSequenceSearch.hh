@@ -27,6 +27,8 @@
 #define _rewriteSequenceSearch_hh_
 #include <set>
 #include <map>
+#include <vector>
+#include <omp.h> // To allow openMP to work with our code
 #include <chrono>
 #include "sequenceSearch.hh"
 #include "stateTransitionGraph.hh"
@@ -51,10 +53,14 @@ public:
   
 private:
   int findNextInterestingState();
+  int findNextInterestingStateP();
 
   Pattern* const goal;
   const int maxDepth;
   int explore;
+  std::vector<int> explored_vec; // [GM]
+  std::vector<int> to_explore; // [GM]
+  int interesting_state_idx; //[GM]
   int exploreDepth;
   int firstDeeperNodeNr;
   int nextArc;

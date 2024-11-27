@@ -160,10 +160,10 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 	      hashCons2seen.resize(hashConsIndex + 1);
 	      for (int i = mapSize; i < hashConsIndex; ++i)
 		hashCons2seen[i] = NONE;
-	      nextState = seen.size();
+	      nextState = seen.size(); // should br critical
 	      hashCons2seen[hashConsIndex] = nextState;
 
-	      seen.append(new State(hashConsIndex, stateNr));
+	      seen.append(new State(hashConsIndex, stateNr)); //should be critical 
 	      DebugAdvisory("new state dag = " << r.first <<
 			    " hashConsIndex = " << hashConsIndex <<
 			    " collisionCounter = " << hashConsSet.collisionCounter);
