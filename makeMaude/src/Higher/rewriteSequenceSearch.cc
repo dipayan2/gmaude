@@ -54,6 +54,7 @@ RewriteSequenceSearch::RewriteSequenceSearch(RewritingContext* initial,
   matchState = 0;
   explore = -1;
   to_explore.push_back(0); // [GM -- adding the first vector that will be explored]
+  explored_vec.push_back(0);
   interesting_state_idx = 0; // [GM]
   //explored_vec;
   exploreDepth = -1;
@@ -109,6 +110,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
       //	Special case: return the initial state.
       //
       needToTryInitialState = false;  // don't do this again
+      interesting_state_idx++;
       return 0;
     }
   listReturn:
@@ -164,7 +166,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
       //	Get index of next state to explore.
       //
 
-      explore = to_explore[exp]; // [GM] This is the value or the id of the graph that we will explore
+      explore = explored_vec[exp]; // [GM] This is the value or the id of the graph that we will explore
       printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() Inside the for loop, exploring state: %d \n", explore);
       nextArc = 0;
       //
