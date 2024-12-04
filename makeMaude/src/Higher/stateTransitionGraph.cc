@@ -144,10 +144,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 	  delete c;
 
 	  int nextState;
-	  int hashConsIndex = hashConsSet.insert(r.first);
-	  int mapSize;
-	  #pragma omp atomic write
-	  mapSize = hashCons2seen.size();
+
 	  //DebugAdvisory("replacement dag = " << r.first << "hashConsIndex = " << hashConsIndex);
 	  
 	  std::chrono::time_point<std::chrono::high_resolution_clock> end = std::chrono::high_resolution_clock::now();
@@ -156,6 +153,8 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 	  printf("[GM] Created a new state with rules, P:%zu, C:%zu, TimeElapse:%lld\n",this->getStateDag(stateNr)->getHashValue(),(r.first)->getHashValue(),duration);
 	  #pragma omp critical
 	  {
+		int hashConsIndex = hashConsSet.insert(r.first);
+	  int mapSize = hashCons2seen.size();
 	  if (hashConsIndex >= mapSize)
 	    {
 	      //
