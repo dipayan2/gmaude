@@ -152,6 +152,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
 	  //
 	  //	Next state generated (if there is one) will be the first node of the following level.
 	  //
+  printf("[GM] rewriteSequenceSearch::findNextInterestingState() .. just before\n");
 	firstDeeperNodeNr = getNrStates(); // we have not generated it yet, but this will be the state ID
   int nrStates = getNrStates(); // size of the graph currently
   // #pragma omp parallel for private(explore,nextArc)
