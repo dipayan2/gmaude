@@ -154,10 +154,10 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
 	  //
 	  //	Next state generated (if there is one) will be the first node of the following level.
 	  //
-  printf("[GM] rewriteSequenceSearch::findNextInterestingState() .. just before\n");
+  printf("[GM] rewriteSequenceSearch::findNextInterestingState() .. just before pragma\n");
 	firstDeeperNodeNr = getNrStates(); // we have not generated it yet, but this will be the state ID
   int nrStates = getNrStates(); // size of the graph currently
-  // #pragma omp parallel for private(explore,nextArc)
+  #pragma omp parallel for private(explore,nextArc,returnedStateAlready)
   for(int exp = 0; exp < explored_vec.size(); ++exp) // exp is the one for explore now
     {
     
@@ -194,21 +194,22 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
                 if (!returnedStateAlready && nextArc >= 2 && nextStateNr != getNextState(explore, 0)) // Need this node being sent out to explore
                       {
                         returnedStateAlready = true;  // so we don't return the state again if we see another distinct next state
-                        // add to to explore
-                        // #pragma omp critical
-                          // {
+                        //[GM] add to to explore, we should create a local thread vector, which will add the states, and we can push
+                        // all the vector addition to the end
+                        #pragma omp critical
+                          {
                               to_explore.push_back(explore);
-                          // }
+                          }
                         
                       }
               }
             else
               {
                 if (nextStateNr >= nrStates){
-                  // #pragma omp critical
-                      // {
+                  #pragma omp critical
+                      {
                           to_explore.push_back(nextStateNr);// we reached a new state so return it
-                      // }
+                      }
                 }
                     
                 //

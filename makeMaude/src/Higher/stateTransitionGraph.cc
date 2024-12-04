@@ -49,9 +49,9 @@ StateTransitionGraph::StateTransitionGraph(RewritingContext* initial)
 //   std::cout << "[GM Init] This is called at the initiation of a state Graph Hash Val : " << initial->root()->getHashValue() << std::endl;
 
   int hashConsIndex = hashConsSet.insert(initial->root());
-  hashCons2seen.resize(hashConsIndex + 1);
-  for (int i = 0; i < hashConsIndex; ++i)
-    hashCons2seen[i] = NONE;
+  hashCons2seen.resize(hashConsIndex + 1,NONE);
+//   for (int i = 0; i < hashConsIndex; ++i)
+//     hashCons2seen[i] = NONE;
   hashCons2seen[hashConsIndex] = seen.size();
   seen.append(new State(hashConsIndex, NONE));
   printf("[GM] Init %zu\n", this->getStateDag(seen.length()-1)->getHashValue());
@@ -145,6 +145,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 
 	  int nextState;
 	  int hashConsIndex = hashConsSet.insert(r.first);
+	  #pragma omp atomic
 	  int mapSize = hashCons2seen.size();
 	  //DebugAdvisory("replacement dag = " << r.first << "hashConsIndex = " << hashConsIndex);
 	  
@@ -152,14 +153,16 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 	  std::chrono::nanoseconds::rep duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
 
 	  printf("[GM] Created a new state with rules, P:%zu, C:%zu, TimeElapse:%lld\n",this->getStateDag(stateNr)->getHashValue(),(r.first)->getHashValue(),duration);
+	  #pragma omp critical
+	  {
 	  if (hashConsIndex >= mapSize)
 	    {
 	      //
 	      //	Definitely a new state.
 	      //
-	      hashCons2seen.resize(hashConsIndex + 1);
-	      for (int i = mapSize; i < hashConsIndex; ++i)
-		hashCons2seen[i] = NONE;
+	      hashCons2seen.resize(hashConsIndex + 1,NONE);
+	    //   for (int i = mapSize; i < hashConsIndex; ++i)
+		// hashCons2seen[i] = NONE;
 	      nextState = seen.size(); // should br critical
 	      hashCons2seen[hashConsIndex] = nextState;
 
@@ -184,7 +187,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 		  seen.append(new State(hashConsIndex, stateNr));
 		}
 	    }
-	  
+	}
 	  n->nextStates.append(nextState);
 	  n->fwdArcs[nextState].insert(rule);
 	  ++nrNextStates;

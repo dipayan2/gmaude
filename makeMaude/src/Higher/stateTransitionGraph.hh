@@ -27,6 +27,7 @@
 #define _stateTransitionGraph_hh_
 #include <set>
 #include <map>
+#include <omp.h>
 #include <chrono>
 #include "hashConsSet.hh"
 #include "rewritingContext.hh"

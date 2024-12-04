@@ -257,7 +257,7 @@ CTAGS = ctags
 CVC4_LIB = 
 CXX = g++
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -g -Wall -O2 -fomit-frame-pointer -fforce-addr -mpreferred-stack-boundary=4 
+CXXFLAGS = -g -Wall -fopenmp -O2 -fomit-frame-pointer -fforce-addr -mpreferred-stack-boundary=4 #[GM] adding openMP flag
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
