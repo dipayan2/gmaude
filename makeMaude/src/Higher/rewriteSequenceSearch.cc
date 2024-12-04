@@ -100,7 +100,7 @@ RewriteSequenceSearch::findNextMatch()
 }
 
 int
-RewriteSequenceSearch::findNextInterestingStateP(){ // this is my playground. I will use this function to play around, and ensure it doesn't break things
+RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I will use this function to play around, and ensure it doesn't break things
 
   printf("[GM] rewriteSequenceSearch::findNextInterestingState()\n");
   if (needToTryInitialState)
@@ -111,6 +111,7 @@ RewriteSequenceSearch::findNextInterestingStateP(){ // this is my playground. I 
       needToTryInitialState = false;  // don't do this again
       return 0;
     }
+  listReturn:
     if (interesting_state_idx < explored_vec.size()){ // We have states ready to be explored
       int state_id = explored_vec[interesting_state_idx];
       interesting_state_idx++;
@@ -127,32 +128,32 @@ RewriteSequenceSearch::findNextInterestingStateP(){ // this is my playground. I 
 //[!!! PARALLEL] This is the code, which will search through all the states, or atleast that's the idea
   printf("[GM] rewriteSequenceSearch::findNextInterestingState() .. starting the loop\n");
   // As we are exploring the next state, we do these house keeping stuff
-	  ++exploreDepth;
-	  if (normalFormNeeded || branchNeeded)
-	    {
-	      //
-	      //	If we're looking for a state that has a certain number of successors we need to
-	      //	search one level beyond maxDepth
-	      //
-	      if (maxDepth != NONE && exploreDepth > maxDepth){
-          return NONE;
-        }
-	    }
-	  else
-	    {
-	      //
-	      //	Otherwise we just search to maxDepth (which will never be true if maxDepth == NONE).
-	      //
-	      if (exploreDepth == maxDepth){
-          return NONE;
-        }
-	    }
+  ++exploreDepth;
+  if (normalFormNeeded || branchNeeded)
+    {
+      //
+      //	If we're looking for a state that has a certain number of successors we need to
+      //	search one level beyond maxDepth
+      //
+      if (maxDepth != NONE && exploreDepth > maxDepth){
+        return NONE;
+      }
+    }
+  else
+    {
+      //
+      //	Otherwise we just search to maxDepth (which will never be true if maxDepth == NONE).
+      //
+      if (exploreDepth == maxDepth){
+        return NONE;
+      }
+    }
 	  //
 	  //	Next state generated (if there is one) will be the first node of the following level.
 	  //
-	  firstDeeperNodeNr = getNrStates(); // we have not generated it yet, but this will be the state ID
-  int nrStates = getNrStates();
-  #pragma omp parallel for private(explore,nextArc)
+	firstDeeperNodeNr = getNrStates(); // we have not generated it yet, but this will be the state ID
+  int nrStates = getNrStates(); // size of the graph currently
+  // #pragma omp parallel for private(explore,nextArc)
   for(int exp = 0; exp < explored_vec.size(); ++ exp) // exp is the one for explore now
     {
     
@@ -172,79 +173,94 @@ RewriteSequenceSearch::findNextInterestingStateP(){ // this is my playground. I 
       // int nrStates = getNrStates();
       int nextStateNr; // 
       while ((nextStateNr = getNextState(explore, nextArc)) != NONE)
-	{
-    printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() the while loop, curr State:%d, the nextArc: %d\n",explore,nextArc);
-	  ++nextArc;
-	  if (normalFormNeeded)
-	    {
-	      if (exploreDepth == maxDepth){
-          // add nothing and be merry
-          	break;
-        }
-	  // no point looking for further arcs from this state
-	    }
-	  else if (branchNeeded)
-	    {
-	      if (!returnedStateAlready && nextArc >= 2 && nextStateNr != getNextState(explore, 0)) // Need this node being sent out to explore
+          {
+            returnedStateAlready = nextStateNr>=nrStates ? true:false;
+            printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() the while loop, curr State:%d, the nextArc: %d\n",explore,nextArc);
+            ++nextArc;
+            if (normalFormNeeded)
               {
-                returnedStateAlready = true;  // so we don't return the state again if we see another distinct next state
-                // add to to explore
-                #pragma omp critical
-                  {
-                      to_explore.push_back(explore);
-                  }
-                
+                if (exploreDepth == maxDepth){
+                  // add nothing and be merry
+                    break;
+                }
+            // no point looking for further arcs from this state
               }
-	    }
-	  else
-	    {
-	      if (nextStateNr >= nrStates){
-          #pragma omp critical
+            else if (branchNeeded)
               {
-                  to_explore.push_back(nextStateNr);// we reached a new state so return it
+                if (!returnedStateAlready && nextArc >= 2 && nextStateNr != getNextState(explore, 0)) // Need this node being sent out to explore
+                      {
+                        returnedStateAlready = true;  // so we don't return the state again if we see another distinct next state
+                        // add to to explore
+                        // #pragma omp critical
+                          // {
+                              to_explore.push_back(explore);
+                          // }
+                        
+                      }
               }
-        }
-		         
-	      //
-	      //	We reached a state that we already saw.
-	      //
-	      if (nextStateNr == 0 && reachingInitialStateOK)
-		{
-		  //
-		  //	We have arrived back at our initial state, but because
-		  //	we didn't try matching the initial state, we do it now.
-		  //
-        #pragma omp critical
-          {   
-                reachingInitialStateOK = false;
-              to_explore.push_back(0);// we reached a new state so return it
+            else
+              {
+                if (nextStateNr >= nrStates){
+                  // #pragma omp critical
+                      // {
+                          to_explore.push_back(nextStateNr);// we reached a new state so return it
+                      // }
+                }
+                    
+                //
+                //	We reached a state that we already saw.
+                //
+            //     if (nextStateNr == 0 && reachingInitialStateOK)
+            // {
+            //   //
+            //   //	We have arrived back at our initial state, but because
+            //   //	we didn't try matching the initial state, we do it now.
+            //   //
+            //     #pragma omp critical
+            //       {   
+            //           reachingInitialStateOK = false;
+            //           to_explore.push_back(0);// we reached a new state so return it
+            //       }
+            //     // don't do this again
+            // }
+              }
           }
-		    // don't do this again
-		}
-	    }
-	}
-  // [GM] We do not 
+  // //!!!!!!!!!![GM] We do not know if we need to use this may be problematic
   // if (getContext()->traceAbort())
 	// return NONE;
-      if (normalFormNeeded && nextArc == 0)
-	{
-	  //
-	  //	No next states so we can return the state we just explored as a normal form.
-	  //
-	  nextArc = NONE;
-	  return explore;
-	}
+
+  // !!!!!!!!!!!!  [This is state does not need exploring]
+  //     if (normalFormNeeded && nextArc == 0)
+	// {
+	//   //
+	//   //	No next states so we can return the state we just explored as a normal form.
+	//   //
+	//   nextArc = NONE;
+	//   return explore;
+	// }
     std::chrono::time_point<std::chrono::high_resolution_clock> seq_end = std::chrono::high_resolution_clock::now();
 	  std::chrono::nanoseconds::rep seq_duration = std::chrono::duration_cast<std::chrono::nanoseconds>(seq_end - seq_start).count();
     iter++;
     printf("[GM] End of for loop. Iteration Count %d. Time: %lld\n",iter,seq_duration);
     }
   printf("[GM] rewriteSequenceSearch::findNextInterestingState - Number of iterations: %d \n" , iter);
+
+  if(to_explore.size()==0){
+    return NONE; // can't find more states
+  }
+  //
+  // Do our thing
+  sort(to_explore.begin(),to_explore.end());
+  to_explore.erase(unique(to_explore.begin(),to_explore.end()),to_explore.end());
+  explored_vec = to_explore;
+  interesting_state_idx = 0;
+  goto listReturn;
+
   return NONE;
 }
 
 int
-RewriteSequenceSearch::findNextInterestingState()
+RewriteSequenceSearch::findNextInterestingStateP() // this is the original code
 {
   printf("[GM] rewriteSequenceSearch::findNextInterestingState()\n");
   if (needToTryInitialState)

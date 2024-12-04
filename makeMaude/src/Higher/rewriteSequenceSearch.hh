@@ -28,6 +28,7 @@
 #include <set>
 #include <map>
 #include <vector>
+#include <algorithm>
 #include <omp.h> // To allow openMP to work with our code
 #include <chrono>
 #include "sequenceSearch.hh"
