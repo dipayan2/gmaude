@@ -145,8 +145,9 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 
 	  int nextState;
 	  int hashConsIndex = hashConsSet.insert(r.first);
+	  int mapsize;
 	  #pragma omp atomic
-	  int mapSize = hashCons2seen.size();
+	  mapSize = hashCons2seen.size();
 	  //DebugAdvisory("replacement dag = " << r.first << "hashConsIndex = " << hashConsIndex);
 	  
 	  std::chrono::time_point<std::chrono::high_resolution_clock> end = std::chrono::high_resolution_clock::now();
