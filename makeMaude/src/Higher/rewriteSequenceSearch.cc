@@ -115,7 +115,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
     }
   listReturn:
     if (interesting_state_idx < explored_vec.size()){ // We have states ready to be explored
-      printf("[GM] rewriteSequenceSearch::findNextInterestingState() Inside the small loop\n");
+      printf("[GM] rewriteSequenceSearch::findNextInterestingState() Inside the small loop \n");
       int state_id = explored_vec[interesting_state_idx];
       interesting_state_idx++;
       return state_id;
