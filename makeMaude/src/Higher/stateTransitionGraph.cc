@@ -145,7 +145,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 
 	  int nextState;
 	  int hashConsIndex = hashConsSet.insert(r.first);
-	  int mapsize;
+	  int mapSize;
 	  #pragma omp atomic
 	  mapSize = hashCons2seen.size();
 	  //DebugAdvisory("replacement dag = " << r.first << "hashConsIndex = " << hashConsIndex);
