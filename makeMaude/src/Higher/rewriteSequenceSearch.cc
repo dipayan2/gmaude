@@ -158,7 +158,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
 	firstDeeperNodeNr = getNrStates(); // we have not generated it yet, but this will be the state ID
   int nrStates = getNrStates(); // size of the graph currently
   // #pragma omp parallel for private(explore,nextArc)
-  for(int exp = 0; exp < explored_vec.size(); ++ exp) // exp is the one for explore now
+  for(int exp = 0; exp < explored_vec.size(); ++exp) // exp is the one for explore now
     {
     
       seq_start = std::chrono::high_resolution_clock::now();
