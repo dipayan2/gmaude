@@ -49,9 +49,9 @@ StateTransitionGraph::StateTransitionGraph(RewritingContext* initial)
 //   std::cout << "[GM Init] This is called at the initiation of a state Graph Hash Val : " << initial->root()->getHashValue() << std::endl;
 
   int hashConsIndex = hashConsSet.insert(initial->root());
-  hashCons2seen.resize(hashConsIndex + 1,NONE);
-//   for (int i = 0; i < hashConsIndex; ++i)
-//     hashCons2seen[i] = NONE;
+  hashCons2seen.resize(hashConsIndex + 1);
+  for (int i = 0; i < hashConsIndex; ++i)
+    hashCons2seen[i] = NONE;
   hashCons2seen[hashConsIndex] = seen.size();
   seen.append(new State(hashConsIndex, NONE));
   printf("[GM] Init %zu\n", this->getStateDag(seen.length()-1)->getHashValue());
@@ -161,9 +161,11 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 	      //
 	      //	Definitely a new state.
 	      //
-	      hashCons2seen.resize(hashConsIndex + 1,NONE);
-	    //   for (int i = mapSize; i < hashConsIndex; ++i)
-		// hashCons2seen[i] = NONE;
+	      hashCons2seen.resize(hashConsIndex + 1);
+	      for (int i = mapSize; i < hashConsIndex; ++i){
+				hashCons2seen[i] = NONE;
+		  }
+
 	      nextState = seen.size(); // should br critical
 	      hashCons2seen[hashConsIndex] = nextState;
 
