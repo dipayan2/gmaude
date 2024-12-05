@@ -71,7 +71,7 @@ CopyRhsAutomaton::construct(Substitution& matcher)
 {
   DagNode* orig = matcher.value(originalIndex);
   DebugAdvisory("CopyRhsAutomaton::construct " << orig);
-  DagNode* n = orig->copyEagerUptoReduced();
+  DagNode* n = orig->copyEagerUptoReduced(); // [GM] why is this cause SIGSERV in the code?
   orig->clearCopyPointers();
   matcher.bind(copyIndex, n);
   return n;
