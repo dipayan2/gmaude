@@ -108,7 +108,11 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 
 	  std::chrono::time_point<std::chrono::high_resolution_clock> start = std::chrono::high_resolution_clock::now();
       bool success = rewriteState->findNextRewrite();
-      rewriteState->transferCountTo(*initial);
+	  #pragma omp critical
+	  {
+		rewriteState->transferCountTo(*initial); // [GM] Possible contention
+	  }
+      
       
       if (success)
 	{
@@ -124,7 +128,10 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 	  
 	  RewriteSearchState::DagPair r = rewriteState->rebuildDag(replacement);
           RewritingContext* c = context->makeSubcontext(r.first);
-	  initial->incrementRlCount();
+	#pragma omp critical
+	{
+	  initial->incrementRlCount(); // [GM] Possible contention
+	}
 	  if (trace)
 	    {
 	      c->tracePostRuleRewrite(r.second);
@@ -140,7 +147,11 @@ StateTransitionGraph::getNextState(int stateNr, int index)
               delete c;
               return NONE;
             }
-	  initial->addInCount(*c);
+	  #pragma omp critical
+	  {
+		initial->addInCount(*c); // GM possible contention
+	  }
+	  
 	  delete c;
 
 	  int nextState;
@@ -154,7 +165,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 	  #pragma omp critical
 	  {
 		int hashConsIndex = hashConsSet.insert(r.first);
-	  int mapSize = hashCons2seen.size();
+	  	int mapSize = hashCons2seen.size();
 	  if (hashConsIndex >= mapSize)
 	    {
 	      //
