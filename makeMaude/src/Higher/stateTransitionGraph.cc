@@ -75,9 +75,9 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 
 
   State* n = seen[stateNr];
+  bool flag = true;
 //   size_t rootHash = initial->root()->getHashValue(); // Storing the hash of the initial state
-#pragma omp critical 
-{
+
   int nrNextStates = n->nextStates.length();
   printf("[GM 1] (getNextState): Analyzing the DAG The stateNr %d, index: %d , initial states count %d\n",stateNr,index,nrNextStates);
   printf("[GM2] Check if we can access the seen graph status, seen size %lu\n",seen.size());
@@ -88,7 +88,8 @@ StateTransitionGraph::getNextState(int stateNr, int index)
   if (n->fullyExplored)
     return NONE;
 //   printf("[GM]: Analyzing the DAG\n");
-
+#pragma omp critical 
+{
   if (n->rewriteState == 0)
     {
 		
@@ -110,7 +111,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
   RewriteSearchState* rewriteState = n->rewriteState;
   RewritingContext *context = rewriteState->getContext();
   //[!! PARALLEL] This is where we can parallelize the state finding, and then we can follow the state movement from there
-  while (nrNextStates <= index)
+  while (nrNextStates <= index && flag)
     {
 
 	  std::chrono::time_point<std::chrono::high_resolution_clock> start = std::chrono::high_resolution_clock::now();
@@ -126,37 +127,44 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 
 	  Rule* rule = rewriteState->getRule();
 	  bool trace = RewritingContext::getTraceStatus();
-
-	  if (trace)
-	    {
-	      context->tracePreRuleRewrite(rewriteState->getDagNode(), rule);
-	      if (context->traceAbort())
-		return NONE;
-	    }
+	// [GM] Removing the trace part of the code to remove return conditions START
+	//   if (trace)
+	//     {
+	//       context->tracePreRuleRewrite(rewriteState->getDagNode(), rule);
+	//       if (context->traceAbort())
+	// 	return NONE;
+	//     }
+	//[GM] Removing the trace part of the code to remove return conditions END
 	  DagNode* replacement = rewriteState->getReplacement();
 	  
 	  RewriteSearchState::DagPair r = rewriteState->rebuildDag(replacement);
-          RewritingContext* c = context->makeSubcontext(r.first);
+      RewritingContext* c = context->makeSubcontext(r.first);
 	// #pragma omp critical
 	// {
 	  initial->incrementRlCount(); // [GM] Possible contention
 	// }
-	  if (trace)
-	    {
-	      c->tracePostRuleRewrite(r.second);
-	      if (c->traceAbort())
-		{
-		  delete c;
-		  return NONE;
-		}
-	    }
+
+	// [GM] Removing the trace part of the code to remove return conditions START
+	//   if (trace)
+	//     {
+	//       c->tracePostRuleRewrite(r.second);
+	//       if (c->traceAbort())
+	// 	{
+	// 	  delete c;
+	// 	  return NONE;
+	// 	}
+	//     }
+	// [GM] Removing the trace part of the code to remove return conditions END
 	  c->reduce();
-	  if (c->traceAbort())
-            {
-              delete c;
-              return NONE;
-            }
-	//   #pragma omp critical
+
+	// [GM] Removing the trace part of the code to remove return conditions START
+
+	//   if (c->traceAbort())
+    //         {
+    //           delete c;
+    //           return NONE;
+    //         }
+	// [GM] Removing the trace part of the code to remove return conditions END
 	//   {
 		initial->addInCount(*c); // GM possible contention
 	//   }
@@ -225,10 +233,14 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 	  delete rewriteState;
 	  n->fullyExplored = true;
 	  n->rewriteState = 0;
-	  return NONE;
+	  flag = false;
+	//   return NONE;
 	}
     }
 }
+  if(flag == false){
+	return NONE;
+  }
   return n->nextStates[index];
 
 }
