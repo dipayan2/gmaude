@@ -88,8 +88,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
   if (n->fullyExplored)
     return NONE;
 //   printf("[GM]: Analyzing the DAG\n");
-#pragma omp critical 
-{
+
   if (n->rewriteState == 0)
     {
 		
@@ -110,6 +109,8 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 
   RewriteSearchState* rewriteState = n->rewriteState;
   RewritingContext *context = rewriteState->getContext();
+  #pragma omp critical 
+{
   //[!! PARALLEL] This is where we can parallelize the state finding, and then we can follow the state movement from there
   while (nrNextStates <= index && flag)
     {
