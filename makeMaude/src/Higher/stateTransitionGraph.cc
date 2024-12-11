@@ -76,7 +76,8 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 
   State* n = seen[stateNr];
 //   size_t rootHash = initial->root()->getHashValue(); // Storing the hash of the initial state
-#pragma omp critical {
+#pragma omp critical 
+{
   int nrNextStates = n->nextStates.length();
   printf("[GM 1] (getNextState): Analyzing the DAG The stateNr %d, index: %d , initial states count %d\n",stateNr,index,nrNextStates);
   printf("[GM2] Check if we can access the seen graph status, seen size %lu\n",seen.size());
