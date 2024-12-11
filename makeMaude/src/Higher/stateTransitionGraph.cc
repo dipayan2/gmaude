@@ -165,6 +165,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
     //           return NONE;
     //         }
 	// [GM] Removing the trace part of the code to remove return conditions END
+	// [GM] Find the operations on initial and see if that can be done in parallel
 	//   {
 		initial->addInCount(*c); // GM possible contention
 	//   }
