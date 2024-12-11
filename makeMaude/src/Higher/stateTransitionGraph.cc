@@ -73,11 +73,10 @@ int
 StateTransitionGraph::getNextState(int stateNr, int index)
 {
 
-//   printf("[GM]: Analyzing the DAG\n");
-#pragma omp critical
-{
+
   State* n = seen[stateNr];
 //   size_t rootHash = initial->root()->getHashValue(); // Storing the hash of the initial state
+#pragma omp critical {
   int nrNextStates = n->nextStates.length();
   printf("[GM 1] (getNextState): Analyzing the DAG The stateNr %d, index: %d , initial states count %d\n",stateNr,index,nrNextStates);
   printf("[GM2] Check if we can access the seen graph status, seen size %lu\n",seen.size());
@@ -87,8 +86,12 @@ StateTransitionGraph::getNextState(int stateNr, int index)
   }
   if (n->fullyExplored)
     return NONE;
+//   printf("[GM]: Analyzing the DAG\n");
+
   if (n->rewriteState == 0)
     {
+		
+
       DagNode* canonicalStateDag = hashConsSet.getCanonical(seen[stateNr]->hashConsIndex);
       RewritingContext* newContext = initial->makeSubcontext(canonicalStateDag); // [Gmaude]]Get the has of this
       n->rewriteState = new RewriteSearchState(newContext,
@@ -100,6 +103,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 					       PositionState::RESPECT_UNSTACKABLE,
 					       0,
 					       UNBOUNDED);
+
     }
 
   RewriteSearchState* rewriteState = n->rewriteState;
@@ -109,17 +113,19 @@ StateTransitionGraph::getNextState(int stateNr, int index)
     {
 
 	  std::chrono::time_point<std::chrono::high_resolution_clock> start = std::chrono::high_resolution_clock::now();
-      bool success = rewriteState->findNextRewrite();
-	  #pragma omp critical
-	  {
+     
+
+		bool success = rewriteState->findNextRewrite();
 		rewriteState->transferCountTo(*initial); // [GM] Possible contention
-	  }
+
       
       
       if (success)
 	{
+
 	  Rule* rule = rewriteState->getRule();
 	  bool trace = RewritingContext::getTraceStatus();
+
 	  if (trace)
 	    {
 	      context->tracePreRuleRewrite(rewriteState->getDagNode(), rule);
@@ -221,6 +227,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 	  return NONE;
 	}
     }
-  return n->nextStates[index];
 }
+  return n->nextStates[index];
+
 }
