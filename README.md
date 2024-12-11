@@ -27,3 +27,11 @@ If you want Maude to close at the end you need to make sure that at the end of t
 2. Run the script as `./runcmd.sh <dumpfile> <your commands>`
 3. Sample run of the script `./runcmd.sh TraceDennis taskset -c 0 MaudeRuntime/maude.linux64 maude-npa.maude Examples_Maude-NPA/Denning-Sacco/Denning-Sacco.maude`
 
+# Testing
+
+1. Go to the `gmaude` folder.
+2. Run `gdb --args ./makeMaude/src/Main/maude Experiments/EXPERIMENT-FILE `, where `EXPERIMENT-FILE` is a maude file with commands (`Maude/Bike/bike-test.maude`, for example).
+3. Do multiple `run`.
+4. Whenever an error hapens backtrack with `bt`.
+5. Use `exit` to finish the debuggin session.
+
