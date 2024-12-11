@@ -119,7 +119,10 @@ StateTransitionGraph::getNextState(int stateNr, int index)
      
 
 		bool success = rewriteState->findNextRewrite();
+		#pragma omp critical
+		{
 		rewriteState->transferCountTo(*initial); // [GM] Possible contention
+		}
 
       
       
@@ -136,7 +139,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 	// 	return NONE;
 	//     }
 	//[GM] Removing the trace part of the code to remove return conditions END
-	  DagNode* replacement = rewriteState->getReplacement();
+	  DagNode* replacement = rewriteState->getReplacement(); //[GM] Issue with this code 
 	  
 	  RewriteSearchState::DagPair r = rewriteState->rebuildDag(replacement);
       RewritingContext* c = context->makeSubcontext(r.first);
@@ -156,7 +159,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 	// 	}
 	//     }
 	// [GM] Removing the trace part of the code to remove return conditions END
-	  c->reduce();
+	  c->reduce(); // [GM] This code has contention
 
 	// [GM] Removing the trace part of the code to remove return conditions START
 
