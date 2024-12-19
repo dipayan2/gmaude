@@ -184,7 +184,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 	  std::chrono::time_point<std::chrono::high_resolution_clock> end = std::chrono::high_resolution_clock::now();
 	  std::chrono::nanoseconds::rep duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
 
-	  printf("[GM] Created a new state with rules, P:%zu, C:%zu, TimeElapse:%lld\n",this->getStateDag(stateNr)->getHashValue(),(r.first)->getHashValue(),duration);
+	//   printf("[GM] Created a new state with rules, P:%zu, C:%zu, TimeElapse:%lld\n",this->getStateDag(stateNr)->getHashValue(),(r.first)->getHashValue(),duration);
 	  #pragma omp critical
 	  {
 		int hashConsIndex = hashConsSet.insert(r.first);
