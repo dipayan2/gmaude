@@ -67,3 +67,21 @@ mod BANK is inc BANK-EQ .
     op init3 : -> State .
     eq init3 = init2 ; debit(Alice, 45) ; transfer(Alice, Charlie, 125) ; credit(Alice, 10) ; credit(Daisy, 40) ; debit(Daisy, 45) ; transfer(Daisy, Bob, 10) ; debit(Charlie, 50) ; debit(Bob, 60) ; transfer(Bob, Charlie, 20) ; credit(Charlie, 110) ; debit(Charlie, 50) ; transfer(Daisy, Charlie, 4) ; transfer(Alice, Bob, 20) ; debit(Daisy, 15) ; transfer(Alice, Bob, 55) ; transfer(Alice, Bob, 10) .
 endm
+
+mod BANK-EXT is 
+    inc BANK .
+
+    vars ST ST' : State .
+    var A : Account .
+    var ID : Id . var BAL : Int .
+
+    op numberOfAccounts : State -> Nat .
+    eq numberOfAccounts(ST ; A ; ST') = s(numberOfAccounts(ST) + numberOfAccounts(ST')) .
+    eq numberOfAccounts(ST) = 0 [owise] .
+
+    *** Creates an account if the number of accounts is less than 10
+    crl [open-acc] : ST => < numberOfAccounts(ST) | 200 | active > ; ST if numberOfAccounts(ST) < 10 .
+
+    *** Closes a blocekd account if the balance is below a negative limit
+    ---crl [close-acc] : < ID | BAL | blocked > ; ST => ST if BAL < -200 .
+endm
