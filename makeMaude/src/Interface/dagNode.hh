@@ -565,7 +565,7 @@ DagNode::reduce(RewritingContext& context)
   // printf("[GM dagNode.hh] Calling the reduce function\n");
   while (!isReduced())
     {
-      if (!(topSymbol->eqRewrite(this, context)))
+      if (!(topSymbol->eqRewrite(this, context))) // [GM] This code causes seg fault !! 
 	{
 	  setReduced();
 	  topSymbol->fastComputeTrueSort(this, context);

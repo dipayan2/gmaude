@@ -251,7 +251,7 @@ RewritingContext::~RewritingContext()
 inline void
 RewritingContext::reduce()
 {
-  rootNode->reduce(*this);
+  rootNode->reduce(*this); // [GM] To look for contention
 }
 
 inline DagNode*
