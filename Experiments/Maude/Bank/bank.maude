@@ -79,6 +79,8 @@ mod BANK-EXT is
     eq numberOfAccounts(ST ; A ; ST') = s(numberOfAccounts(ST) + numberOfAccounts(ST')) .
     eq numberOfAccounts(ST) = 0 [owise] .
 
+    subsort Nat < Id .
+
     *** Creates an account if the number of accounts is less than 10
     crl [open-acc] : ST => < numberOfAccounts(ST) | 200 | active > ; ST if numberOfAccounts(ST) < 10 .
 
