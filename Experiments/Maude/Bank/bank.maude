@@ -62,4 +62,8 @@ mod BANK is inc BANK-EQ .
     *** State with more combinations for branching than init1
     op init2 : -> State .
     eq init2 = init1 ; debit(Bob, 60) ; transfer(Bob, Charlie, 20) ; credit(Charlie, 110) ; credit(Daisy, 20) ; debit(Alice, 45) ; transfer(Alice, Charlie, 125) ; transfer(Alice, Bob, 130) ; transfer(Bob, Alice, 60) ; credit(Bob, 200) .
+
+    *** State with even more combinations for brnaching than init2
+    op init3 : -> State .
+    eq init3 = init2 ; debit(Alice, 45) ; transfer(Alice, Charlie, 125) ; credit(Alice, 10) ; credit(Daisy, 40) ; debit(Daisy, 45) ; transfer(Daisy, Bob, 10) ; debit(Charlie, 50) ; debit(Bob, 60) ; transfer(Bob, Charlie, 20) ; credit(Charlie, 110) ; debit(Charlie, 50) ; transfer(Daisy, Charlie, 4) ; transfer(Alice, Bob, 20) ; debit(Daisy, 15) ; transfer(Alice, Bob, 55) ; transfer(Alice, Bob, 10) .
 endm

@@ -1,0 +1,5 @@
+sload bank.maude
+
+search in BANK : init3 =>! GS:State . 
+
+q
