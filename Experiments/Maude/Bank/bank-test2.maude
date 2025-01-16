@@ -1,5 +1,5 @@
 sload bank.maude
 
-search init2 =>! GS:State . 
+search in BANK : init2 =>! GS:State . 
 
 q
