@@ -249,7 +249,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
     printf("[GM] End of for loop. Iteration Count %d. Time: %lld\n",iter,seq_duration);
     }
   printf("[GM] rewriteSequenceSearch::findNextInterestingState - Number of iterations: %d \n" , iter);
-
+  print("[GM] ewriteSequenceSearch::findNextInterestingState Length of to_explore - %d \n",to_explore.size());
   if(to_explore.size()==0){
     return NONE; // can't find more states
   }
