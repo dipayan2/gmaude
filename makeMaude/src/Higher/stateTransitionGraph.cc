@@ -143,10 +143,10 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 	  
 	  RewriteSearchState::DagPair r = rewriteState->rebuildDag(replacement);
       RewritingContext* c = context->makeSubcontext(r.first);
-	#pragma omp critical
-	{
+	// #pragma omp critical
+	// {
 	  initial->incrementRlCount(); // [GM] Possible contention
-	}
+	// }
 
 	// [GM] Removing the trace part of the code to remove return conditions START
 	//   if (trace)
@@ -170,10 +170,10 @@ StateTransitionGraph::getNextState(int stateNr, int index)
     //         }
 	// [GM] Removing the trace part of the code to remove return conditions END
 	// [GM] Find the operations on initial and see if that can be done in parallel
-	#pragma omp critical
-	  {
+	// #pragma omp critical
+	//   {
 		initial->addInCount(*c); // GM possible contention
-	  }
+	//   }
 	  
 	  delete c;
 
@@ -185,8 +185,8 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 	  std::chrono::nanoseconds::rep duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
 
 	//   printf("[GM] Created a new state with rules, P:%zu, C:%zu, TimeElapse:%lld\n",this->getStateDag(stateNr)->getHashValue(),(r.first)->getHashValue(),duration);
-	  #pragma omp critical
-	  {
+	//   #pragma omp critical
+	//   {
 		int hashConsIndex = hashConsSet.insert(r.first);
 	  	int mapSize = hashCons2seen.size();
 	  if (hashConsIndex >= mapSize)
@@ -223,7 +223,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 		  seen.append(new State(hashConsIndex, stateNr));
 		}
 	    }
-	  }
+	//   }
 	// }
 	  n->nextStates.append(nextState);
 	  n->fwdArcs[nextState].insert(rule);

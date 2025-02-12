@@ -157,7 +157,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
   printf("[GM] rewriteSequenceSearch::findNextInterestingState() .. just before pragma\n");
 	firstDeeperNodeNr = getNrStates(); // we have not generated it yet, but this will be the state ID
   int nrStates = getNrStates(); // size of the graph currently
-  #pragma omp parallel for private(explore,nextArc,returnedStateAlready)
+  // #pragma omp parallel for private(explore,nextArc,returnedStateAlready)
   for(int exp = 0; exp < explored_vec.size(); ++exp) // exp is the one for explore now
     {
     
@@ -196,20 +196,20 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
                         returnedStateAlready = true;  // so we don't return the state again if we see another distinct next state
                         //[GM] add to to explore, we should create a local thread vector, which will add the states, and we can push
                         // all the vector addition to the end
-                        #pragma omp critical
-                          {
+                        // #pragma omp critical
+                        //   {
                               to_explore.push_back(explore);
-                          }
+                          // }
                         
                       }
               }
             else
               {
                 if (nextStateNr >= nrStates){
-                  #pragma omp critical
-                      {
+                  // #pragma omp critical
+                  //     {
                           to_explore.push_back(nextStateNr);// we reached a new state so return it
-                      }
+                      // }
                 }
                     
                 //
