@@ -180,6 +180,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
           {
             returnedStateAlready = nextStateNr>=nrStates ? true:false;
             printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() the while loop, curr State:%d, the nextArc: %d\n",explore,nextArc);
+            printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() the while loop, nextStateNr : %d , nrState: %d \n",nextStateNr,nrStates);
             ++nextArc;
             if (normalFormNeeded)
               {
