@@ -187,7 +187,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
             printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() the while loop, nextStateNr : %d , nrState: %d \n",nextStateNr,nrStates);
             printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() the while loop, normalFormNeeded : %d , branchNeeded: %d \n",normalFormNeeded,branchNeeded);
             
-            if(nextStateNr > nrStates){
+            if(nextStateNr >= nrStates){
               to_explore.push_back(nextStateNr);
             }
 
