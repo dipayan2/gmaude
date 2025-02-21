@@ -182,6 +182,11 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
             printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() the while loop, curr State:%d, the nextArc: %d\n",explore,nextArc);
             printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() the while loop, nextStateNr : %d , nrState: %d \n",nextStateNr,nrStates);
             printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() the while loop, normalFormNeeded : %d , branchNeeded: %d \n",normalFormNeeded,branchNeeded);
+            
+            if(nextStateNr >= nrStates){
+              to_explore.push_back(nextStateNr)
+            }
+
             ++nextArc;
             if (normalFormNeeded)
               {
@@ -201,7 +206,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
                         // all the vector addition to the end
                         // #pragma omp critical
                         //   {
-                              to_explore.push_back(explore);
+                              // to_explore.push_back(explore);
                           // }
                         
                       }
@@ -211,7 +216,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
                 if (nextStateNr >= nrStates){
                   // #pragma omp critical
                   //     {
-                          to_explore.push_back(nextStateNr);// we reached a new state so return it
+                          // to_explore.push_back(nextStateNr);// we reached a new state so return it
                       // }
                 }
                     
