@@ -265,7 +265,8 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
   // Do our thing
   sort(to_explore.begin(),to_explore.end());
   to_explore.erase(unique(to_explore.begin(),to_explore.end()),to_explore.end());
-  explored_vec = to_explore;
+  explored_vec.clear();
+  explored_vec.assign(to_explore.begin(),to_explore.end());
   interesting_state_idx = 0;
   goto listReturn;
 
