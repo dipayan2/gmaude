@@ -61,7 +61,7 @@ private:
   int explore;
   std::vector<int> explored_vec; // [GM]
   std::vector<int> to_explore; // [GM]
-  std::unordered_set<int> exploredSet // GM
+  std::unordered_set<int> exploredSet; // GM
   int interesting_state_idx; //[GM]
   int exploreDepth;
   int firstDeeperNodeNr;
