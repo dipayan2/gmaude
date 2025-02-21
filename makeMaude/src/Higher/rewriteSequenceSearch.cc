@@ -184,7 +184,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
             printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() the while loop, normalFormNeeded : %d , branchNeeded: %d \n",normalFormNeeded,branchNeeded);
             
             if(nextStateNr >= nrStates){
-              to_explore.push_back(nextStateNr)
+              to_explore.push_back(nextStateNr);
             }
 
             ++nextArc;
