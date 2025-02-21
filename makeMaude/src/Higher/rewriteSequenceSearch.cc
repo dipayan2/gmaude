@@ -167,6 +167,10 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
       //
 
       explore = explored_vec[exp]; // [GM] This is the value or the id of the graph that we will explore
+      if (exploredSet.find(explore) != exploredSet.end()){
+        continue;
+      }
+      exploredSet.insert(explore);
       printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() Inside the for loop, exploring state: %d \n", explore);
       nextArc = 0;
       //

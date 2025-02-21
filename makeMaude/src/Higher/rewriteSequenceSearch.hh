@@ -34,7 +34,7 @@
 #include "sequenceSearch.hh"
 #include "stateTransitionGraph.hh"
 #include "matchSearchState.hh"
-
+#include <unordered_set>
 class RewriteSequenceSearch : public SequenceSearch, public StateTransitionGraph
 {
   NO_COPYING(RewriteSequenceSearch);
@@ -61,6 +61,7 @@ private:
   int explore;
   std::vector<int> explored_vec; // [GM]
   std::vector<int> to_explore; // [GM]
+  std::unordered_set<int> exploredSet // GM
   int interesting_state_idx; //[GM]
   int exploreDepth;
   int firstDeeperNodeNr;
