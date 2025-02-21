@@ -187,6 +187,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
               {
                 if (exploreDepth == maxDepth){
                   // add nothing and be merry
+                    to_explore.push_back(explore); // will this help the normalForm issue?
                     break;
                 }
             // no point looking for further arcs from this state
@@ -237,14 +238,14 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
 	// return NONE;
 
   // !!!!!!!!!!!!  [This is state does not need exploring]
-  //     if (normalFormNeeded && nextArc == 0)
-	// {
-	//   //
-	//   //	No next states so we can return the state we just explored as a normal form.
-	//   //
-	//   nextArc = NONE;
-	//   return explore;
-	// }
+      if (normalFormNeeded && nextArc == 0)
+	{
+	  //
+	  //	No next states so we can return the state we just explored as a normal form.
+	  //
+	  nextArc = NONE;
+	  return explore;
+	}
     std::chrono::time_point<std::chrono::high_resolution_clock> seq_end = std::chrono::high_resolution_clock::now();
 	  std::chrono::nanoseconds::rep seq_duration = std::chrono::duration_cast<std::chrono::nanoseconds>(seq_end - seq_start).count();
     iter++;
