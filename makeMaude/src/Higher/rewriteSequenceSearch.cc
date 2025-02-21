@@ -89,9 +89,9 @@ RewriteSequenceSearch::findNextMatch()
 					  goal,
 					  MatchSearchState::GC_CONTEXT);
     tryMatch:
-      bool foundMatch = matchState->findNextMatch();
+      bool foundMatch = matchState->findNextMatch();// This is a solution for code
       matchState->transferCountTo(*(getContext()));
-      if (foundMatch)
+      if (foundMatch) 
 	return true;
       delete matchState;
     }
@@ -101,7 +101,7 @@ RewriteSequenceSearch::findNextMatch()
 }
 
 int
-RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I will use this function to play around, and ensure it doesn't break things
+RewriteSequenceSearch::findNextInterestingStateP(){ // this is my playground. I will use this function to play around, and ensure it doesn't break things
 
   printf("[GM] rewriteSequenceSearch::findNextInterestingState()\n");
   if (needToTryInitialState)
@@ -278,7 +278,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
 }
 
 int
-RewriteSequenceSearch::findNextInterestingStateP() // this is the original code
+RewriteSequenceSearch::findNextInterestingState() // this is the original code
 {
   printf("[GM] rewriteSequenceSearch::findNextInterestingState()\n");
   if (needToTryInitialState)
