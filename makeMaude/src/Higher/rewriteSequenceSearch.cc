@@ -192,7 +192,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
               {
                 if (exploreDepth == maxDepth){
                   // add nothing and be merry
-                    to_explore.push_back(explore); // will this help the normalForm issue?
+                    // to_explore.push_back(explore); // will this help the normalForm issue?
                     break;
                 }
             // no point looking for further arcs from this state
