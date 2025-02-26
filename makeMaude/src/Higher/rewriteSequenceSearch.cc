@@ -115,8 +115,12 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
       interesting_state_idx++;
       return 0;
     }
+    if (normalFormNeeded){
+      result_vec.pop_back()
+    }
   listReturn:
     // Condition for normal form
+
     if (interesting_state_idx < result_vec.size()) { // We have states ready to be explored
       printf("[GM] rewriteSequenceSearch::findNextInterestingState() Inside the small loop \n");
       int state_id = result_vec[interesting_state_idx];
