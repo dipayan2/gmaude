@@ -55,6 +55,8 @@ RewriteSequenceSearch::RewriteSequenceSearch(RewritingContext* initial,
   explore = -1;
   to_explore.push_back(0); // [GM -- adding the first vector that will be explored]
   explored_vec.push_back(0);
+  // normal_vec.push_back(0);
+  result_vec.push_back(0);
   interesting_state_idx = 0; // [GM]
   //explored_vec;
   exploreDepth = -1;
@@ -114,12 +116,18 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
       return 0;
     }
   listReturn:
-    if (interesting_state_idx < explored_vec.size()){ // We have states ready to be explored
+    // Condition for normal form
+    if (interesting_state_idx < result_vec.size()) { // We have states ready to be explored
       printf("[GM] rewriteSequenceSearch::findNextInterestingState() Inside the small loop \n");
-      int state_id = explored_vec[interesting_state_idx];
+      int state_id = result_vec[interesting_state_idx];
       interesting_state_idx++;
       return state_id;
     }
+    else if (interesting_state_idx > 1){
+      return NONE;
+    }
+
+  loopReturn:
   // this is the else condition
   to_explore.clear(); // cleaned that stuff, we will add our values to this vector
     // [This above bit is not used any more]
@@ -215,32 +223,6 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
                         
                       }
               }
-            else
-              {
-                if (nextStateNr >= nrStates){
-                  // #pragma omp critical
-                  //     {
-                          // to_explore.push_back(nextStateNr);// we reached a new state so return it
-                      // }
-                }
-                    
-                //
-                //	We reached a state that we already saw.
-                //
-            //     if (nextStateNr == 0 && reachingInitialStateOK)
-            // {
-            //   //
-            //   //	We have arrived back at our initial state, but because
-            //   //	we didn't try matching the initial state, we do it now.
-            //   //
-            //     #pragma omp critical
-            //       {   
-            //           reachingInitialStateOK = false;
-            //           to_explore.push_back(0);// we reached a new state so return it
-            //       }
-            //     // don't do this again
-            // }
-              }
           }
   // //!!!!!!!!!![GM] We do not know if we need to use this may be problematic
   // if (getContext()->traceAbort())
@@ -253,7 +235,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
 	  //	No next states so we can return the state we just explored as a normal form.
 	  //
 	  nextArc = NONE;
-	  return explore;
+	  result_vec.push_back(explore);
 	}
     std::chrono::time_point<std::chrono::high_resolution_clock> seq_end = std::chrono::high_resolution_clock::now();
 	  std::chrono::nanoseconds::rep seq_duration = std::chrono::duration_cast<std::chrono::nanoseconds>(seq_end - seq_start).count();
@@ -263,7 +245,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
   printf("[GM] rewriteSequenceSearch::findNextInterestingState - Number of iterations: %d \n" , iter);
   printf("[GM] ewriteSequenceSearch::findNextInterestingState Length of to_explore - %d \n",to_explore.size());
   if(to_explore.size()==0){
-    return NONE; // can't find more states
+    goto loopReturn;
   }
   //
   // Do our thing
@@ -271,7 +253,11 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
   to_explore.erase(unique(to_explore.begin(),to_explore.end()),to_explore.end());
   explored_vec.clear();
   explored_vec.assign(to_explore.begin(),to_explore.end());
-  interesting_state_idx = 0;
+  if(normalFormNeeded==false){
+    result_vec.insert(result_vec.end(),explored_vec.begin(),explored_vec.end());
+  }
+
+  // interesting_state_idx = 0;
   goto listReturn;
 
   return NONE;
