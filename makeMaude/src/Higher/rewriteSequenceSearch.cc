@@ -112,11 +112,9 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
       //	Special case: return the initial state.
       //
       needToTryInitialState = false;  // don't do this again
+      result_vec.pop_back();
       interesting_state_idx++;
       return 0;
-    }
-    if (normalFormNeeded){
-      result_vec.pop_back();
     }
   listReturn:
     // Condition for normal form
