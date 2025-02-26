@@ -229,14 +229,13 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
 	// return NONE;
 
   // !!!!!!!!!!!!  [This is state does not need exploring]
-      if (normalFormNeeded && nextArc == 0)
-	{
+      if (normalFormNeeded && nextArc == 0){
 	  //
 	  //	No next states so we can return the state we just explored as a normal form.
 	  //
-	  nextArc = NONE;
-	  result_vec.push_back(explore);
-	}
+            nextArc = NONE;
+            result_vec.push_back(explore);
+	      }
     std::chrono::time_point<std::chrono::high_resolution_clock> seq_end = std::chrono::high_resolution_clock::now();
 	  std::chrono::nanoseconds::rep seq_duration = std::chrono::duration_cast<std::chrono::nanoseconds>(seq_end - seq_start).count();
     iter++;
@@ -245,7 +244,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
   printf("[GM] rewriteSequenceSearch::findNextInterestingState - Number of iterations: %d \n" , iter);
   printf("[GM] ewriteSequenceSearch::findNextInterestingState Length of to_explore - %d \n",to_explore.size());
   if(to_explore.size()==0){
-    goto loopReturn;
+    goto listReturn;
   }
   //
   // Do our thing
@@ -258,7 +257,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
   }
 
   // interesting_state_idx = 0;
-  goto listReturn;
+  goto loopReturn;
 
   return NONE;
 }
