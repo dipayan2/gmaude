@@ -4,4 +4,6 @@ sload bike
 search [,3] init1 =>* { CONT:Content } < P:Participant PS >net(M2:Msg) .
 ---search [,3] init1 =>! { CONT:Content } < P:Participant PS >net(M2:Msg) .
 
+search in BIKE : init1 =># GS:GlobalState . 
+
 q
