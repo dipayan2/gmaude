@@ -293,7 +293,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
 
 
 int
-RewriteSequenceSearch::findNextInterestingStateOP(){ // this is my playground. I will use this function to play around, and ensure it doesn't break things
+RewriteSequenceSearch::findNextInterestingStateP(){ // this is my playground. I will use this function to play around, and ensure it doesn't break things
 
   printf("[GM] rewriteSequenceSearch::findNextInterestingState()\n");
   if (needToTryInitialState)

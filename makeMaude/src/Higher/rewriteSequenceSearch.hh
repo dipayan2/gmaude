@@ -55,6 +55,7 @@ public:
 private:
   int findNextInterestingState();
   int findNextInterestingStateP();
+   int findNextInterestingStateOG();
 
   Pattern* const goal;
   const int maxDepth;
