@@ -203,7 +203,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
       }
       thread_local_explored_sets[thread_id].insert(explore);
       
-      printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() Inside the for loop, exploring state: %d \n", explore);
+      printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() Inside the for loop in thread %d, exploring state: %d \n", thread_id,explore);
       nextArc = 0;
       //
       //	Explore the arcs of the current state.
