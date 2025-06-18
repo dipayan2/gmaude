@@ -78,13 +78,14 @@ RewriteSequenceSearch::~RewriteSequenceSearch()
 bool
 RewriteSequenceSearch::findNextMatch()
 {
-  printf("[GM] rewriteSequenceSearch::findNextMatch\n");
+  // printf("[GM] rewriteSequenceSearch::findNextMatch\n");
   if (matchState != 0)
     goto tryMatch;  // non-startup case
 
   for(;;)
     {
 	stateNr = findNextInterestingState();
+  printf("[GM] rewriteSequenceSearch::findNextMatch, Interesting state : %d \n", stateNr);
 	if (stateNr == NONE)
 	  break;
 	matchState = new MatchSearchState(getContext()->makeSubcontext(getStateDag(stateNr)),
@@ -93,8 +94,11 @@ RewriteSequenceSearch::findNextMatch()
     tryMatch:
       bool foundMatch = matchState->findNextMatch();// This is a solution for code
       matchState->transferCountTo(*(getContext()));
-      if (foundMatch) 
-	return true;
+      if (foundMatch){
+        print("[GM] rewriteSequenceSearch::findNextMatch, solution found in %d \n", stateNr);
+	      return true;
+      }
+
       delete matchState;
     }
 
