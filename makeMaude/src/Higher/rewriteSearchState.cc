@@ -66,18 +66,21 @@ bool
 RewriteSearchState::findNextRewrite()
 {
   bool rewriteSeenAtCurrentPosition;
-  if (ruleIndex > -1)
+  if (ruleIndex > -1) // Already applied rules
     {
-      if (findNextSolution())
-	return true;
+      if (findNextSolution()){
+          return true;
+      }
       rewriteSeenAtCurrentPosition = true;
     }
-  else
+  else // No ruleles applied
     {
-      if (!findNextPosition())
+      if (!findNextPosition()) // Explore
 	return false;
       rewriteSeenAtCurrentPosition = false;
     }
+    // If the context of a state changes, we might not need to apply the next rule, as we will return before ruleIndex++
+
   ++ruleIndex;
   bool allowNonexec = getFlags() & ALLOW_NONEXEC;
   do

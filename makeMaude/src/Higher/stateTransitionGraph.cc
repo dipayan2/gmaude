@@ -95,6 +95,7 @@ StateTransitionGraph::getNextState(int stateNr, int index)
 
       DagNode* canonicalStateDag = hashConsSet.getCanonical(seen[stateNr]->hashConsIndex);
       RewritingContext* newContext = initial->makeSubcontext(canonicalStateDag); // [Gmaude]]Get the has of this
+	  // This above will change the context where rule is applied
       n->rewriteState = new RewriteSearchState(newContext,
 					       NONE,
 					       RewriteSearchState::GC_CONTEXT |

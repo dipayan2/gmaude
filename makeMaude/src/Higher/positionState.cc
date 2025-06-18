@@ -102,7 +102,7 @@ PositionState::exploreNextPosition()
 }
 
 bool
-PositionState::findNextPosition()
+PositionState::findNextPosition() // [GM] This is critical to the next postion, and rewrite for the states
 {
   do
     {
