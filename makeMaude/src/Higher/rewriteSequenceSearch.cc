@@ -128,11 +128,11 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
     }
     else if (interesting_state_idx > 1){  
       // Verify the condition for this state
-      print("[GM] Does it always end here?\n");
+      printf("[GM] Does it always end here?\n");
       return NONE;
     }
 
-  print("[GM] Does it come here?\n");
+  printf("[GM] Does it come here?\n");
   loopReturn:
   // this is the else condition
   to_explore.clear(); // cleaned that stuff, we will add our values to this vector
