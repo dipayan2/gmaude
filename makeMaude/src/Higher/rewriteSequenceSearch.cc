@@ -95,7 +95,7 @@ RewriteSequenceSearch::findNextMatch()
       bool foundMatch = matchState->findNextMatch();// This is a solution for code
       matchState->transferCountTo(*(getContext()));
       if (foundMatch){
-        printf("[GM] rewriteSequenceSearch::findNextMatch, solution found in %d \n", stateNr);
+        // printf("[GM] rewriteSequenceSearch::findNextMatch, solution found in %d \n", stateNr);
 	      return true;
       }
 
