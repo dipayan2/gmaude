@@ -113,7 +113,7 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
       //	Special case: return the initial state.
       //
       needToTryInitialState = false;  // don't do this again
-      result_vec.pop_back();
+      result_vec.pop_back(); // returns 0
       interesting_state_idx++;
       return 0;
     }
@@ -126,10 +126,13 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
       interesting_state_idx++;
       return state_id;
     }
-    else if (interesting_state_idx > 1){
+    else if (interesting_state_idx > 1){  
+      // Verify the condition for this state
+      print("[GM] Does it always end here?\n");
       return NONE;
     }
 
+  print("[GM] Does it come here?\n");
   loopReturn:
   // this is the else condition
   to_explore.clear(); // cleaned that stuff, we will add our values to this vector
@@ -255,7 +258,8 @@ RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I w
       
       printf("[GM] End of for loop. Iteration Count %d. Time: %lld\n",0,seq_duration);
     }
-  } // End of parallel region
+  } 
+  // The code is at barrier here --- we shall wait for the threads to finish
   
   // Merge thread-local results back to shared data structures
   to_explore.clear();
