@@ -60,6 +60,7 @@ RewriteSequenceSearch::RewriteSequenceSearch(RewritingContext* initial,
   interesting_state_idx = 0; // [GM]
   //explored_vec;
   exploreDepth = -1;
+  lastDepth = false;
   firstDeeperNodeNr = 0;
   returnedStateAlready = false;
   needToTryInitialState = (searchType == ANY_STEPS);
@@ -108,196 +109,222 @@ RewriteSequenceSearch::findNextMatch()
 
 
 int
-RewriteSequenceSearch::findNextInterestingState(){ // this is my playground. I will use this function to play around, and ensure it doesn't break things
+RewriteSequenceSearch::findNextInterestingState(){
 
-  printf("[GM] rewriteSequenceSearch::findNextInterestingState()\n");
-  if (needToTryInitialState)
-    {
-      //
-      //	Special case: return the initial state.
-      //
-      needToTryInitialState = false;  // don't do this again
-      result_vec.pop_back(); // returns 0
-      interesting_state_idx++;
-      return 0;
-    }
-  listReturn:
-    // Condition for normal form
+	 printf("[GM] rewriteSequenceSearch::findNextInterestingState()\n"); 
+	 if(needToTryInitialState){
+	 	// Checks the initial state
+	 	needToTryInitialState = false; // Don't run this twice
+	 	int last_val = result_vec.back(); // We initialized the result_vec with 0, so cleaning it our
+	 	result_vec.pop_back();
+	 	interesting_state_idx++;
+	 	return last_val; // Since the value is always 0, though we should be more carefule, maybe use a value
+	 }
 
-    if (interesting_state_idx < result_vec.size()) { // We have states ready to be explored
-      printf("[GM] rewriteSequenceSearch::findNextInterestingState() Inside the small loop \n");
-      int state_id = result_vec[interesting_state_idx];
-      interesting_state_idx++;
-      return state_id;
-    }
-    else if (interesting_state_idx > 1){  
-      // Verify the condition for this state
-      printf("[GM] Does it always end here?\n");
-      return NONE;
-    }
 
-  printf("[GM] Does it come here?\n");
-  loopReturn:
-  // this is the else condition
-  to_explore.clear(); // cleaned that stuff, we will add our values to this vector
-    // [This above bit is not used any more]
-  int iter = 0;
-  std::chrono::time_point<std::chrono::high_resolution_clock> seq_start;
-  // if (nextArc != NONE)
-  //   goto exploreArcs;
+	 // To return the standard output, we expect the interesting state idx would have been set to 0
+	 BFSlevelComplete:
 
-//[!!! PARALLEL] This is the code, which will search through all the states, or atleast that's the idea
-  printf("[GM] rewriteSequenceSearch::findNextInterestingState() .. starting the loop\n");
-  // As we are exploring the next state, we do these house keeping stuff
-  ++exploreDepth;
-  if (normalFormNeeded || branchNeeded)
-    {
-      //
-      //	If we're looking for a state that has a certain number of successors we need to
-      //	search one level beyond maxDepth
-      //
-      if (maxDepth != NONE && exploreDepth > maxDepth){
-        return NONE;
-      }
-    }
-  else
-    {
-      //
-      //	Otherwise we just search to maxDepth (which will never be true if maxDepth == NONE).
-      //
-      if (exploreDepth == maxDepth){
-        return NONE;
-      }
-    }
-	  //
-	  //	Next state generated (if there is one) will be the first node of the following level.
-	  //
-  printf("[GM] rewriteSequenceSearch::findNextInterestingState() .. just before pragma\n");
-	firstDeeperNodeNr = getNrStates(); // we have not generated it yet, but this will be the state ID
-  int nrStates = getNrStates(); // size of the graph currently, common for all threads
-  
-  // Thread-local storage for collecting results
-  std::vector<std::vector<int>> thread_local_to_explore;
-  std::vector<std::vector<int>> thread_local_result_vec;
-  std::vector<std::set<int>> thread_local_explored_sets;
-  
-  // Initialize thread-local storage
-  int num_threads = omp_get_max_threads();
-  thread_local_to_explore.resize(num_threads);
-  thread_local_result_vec.resize(num_threads);
-  thread_local_explored_sets.resize(num_threads);
-  
-  #pragma omp parallel private(explore,nextArc,returnedStateAlready,seq_start)
-  {
-    int thread_id = omp_get_thread_num();
-    
-    #pragma omp for
-    for(int exp = 0; exp < explored_vec.size(); ++exp) // exp is the one for explore now
-    {
-      seq_start = std::chrono::high_resolution_clock::now();
-      //
-      //	Get index of next state to explore.
-      //
+	 if(!(normalFormNeeded || branchNeeded)){
+		 if(interesting_state_idx < explored_vec.size()){ // This go on till this set is empty
+		 	int state_id = explored_vec[interesting_state_idx];
+		 	interesting_state_idx++;
+		 	return state_id;
+		 }
+	}
+	else{
 
-      explore = explored_vec[exp]; // [GM] This is the value or the id of the graph that we will explore
-      
-      // Check if already explored using thread-local set
-      if (thread_local_explored_sets[thread_id].find(explore) != thread_local_explored_sets[thread_id].end()){
-        continue;
-      }
-      thread_local_explored_sets[thread_id].insert(explore);
-      
-      printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() Inside the for loop in thread %d, exploring state: %d \n", thread_id,explore);
-      nextArc = 0;
-      //
-      //	Explore the arcs of the current state.
-      //
-      int nextStateNr; // 
-      while ((nextStateNr = getNextState(explore, nextArc)) != NONE)
-          {
-            returnedStateAlready = nextStateNr>=nrStates ? true:false;
-            printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() the while loop, curr State:%d, the nextArc: %d\n",explore,nextArc);
-            printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() the while loop, nextStateNr : %d , nrState: %d \n",nextStateNr,nrStates);
-            printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() the while loop, normalFormNeeded : %d , branchNeeded: %d \n",normalFormNeeded,branchNeeded);
-            
-            if(nextStateNr >= nrStates){
-              thread_local_to_explore[thread_id].push_back(nextStateNr);
-            }
+		 if(interesting_state_idx < result_vec.size()){ // This go on till this set is empty
+		 	int state_id = result_vec[interesting_state_idx];
+		 	interesting_state_idx++;
+		 	return state_id;
+		 }
+		 else if(lastDepth == true){
+		 	return NONE;
+		 }
+	}
 
-            ++nextArc;
-            if (normalFormNeeded)
-              {
-                if (exploreDepth == maxDepth){
-                  // add nothing and be merry
-                    // to_explore.push_back(explore); // will this help the normalForm issue?
-                    break;
-                }
-            // no point looking for further arcs from this state
-              }
-            else if (branchNeeded)
-              {
-                if (!returnedStateAlready && nextArc >= 2 && nextStateNr != getNextState(explore, 0)) // Need this node being sent out to explore
-                      {
-                        returnedStateAlready = true;  // so we don't return the state again if we see another distinct next state
-                        // Store in thread-local storage instead of shared to_explore
-                        thread_local_to_explore[thread_id].push_back(explore);
-                      }
-              }
-          }
+	 /*
+		The thread specific values will handle the to_explore case, we do not need to ensure anything here
+	 */
 
-      // !!!!!!!!!!!!  [This is state does not need exploring]
-      if (normalFormNeeded && nextArc == 0){
-        //
-        //	No next states so we can return the state we just explored as a normal form.
-        //
-        nextArc = NONE;
-        thread_local_result_vec[thread_id].push_back(explore);
-      }
-      
-      std::chrono::time_point<std::chrono::high_resolution_clock> seq_end = std::chrono::high_resolution_clock::now();
-      std::chrono::nanoseconds::rep seq_duration = std::chrono::duration_cast<std::chrono::nanoseconds>(seq_end - seq_start).count();
-      
-      // #pragma omp atomic
-      // iter++;
-      
-      printf("[GM] End of for loop. Iteration Count %d. Time: %lld\n",0,seq_duration);
-    }
-  } 
-  // The code is at barrier here --- we shall wait for the threads to finish
-  
-  // Merge thread-local results back to shared data structures
-  to_explore.clear();
-  for(int i = 0; i < num_threads; i++) {
-    to_explore.insert(to_explore.end(), thread_local_to_explore[i].begin(), thread_local_to_explore[i].end());
-    result_vec.insert(result_vec.end(), thread_local_result_vec[i].begin(), thread_local_result_vec[i].end());
-    
-    // Merge explored sets
-    for(const int& state : thread_local_explored_sets[i]) {
-      exploredSet.insert(state);
-    }
-  }
-  
-  printf("[GM] rewriteSequenceSearch::findNextInterestingState - Number of iterations: %d \n" , iter);
-  printf("[GM] ewriteSequenceSearch::findNextInterestingState Length of to_explore - %d \n",to_explore.size());
-  if(to_explore.size()==0){
-    goto listReturn;
-  }
-  //
-  // Do our thing
-  sort(to_explore.begin(),to_explore.end());
-  to_explore.erase(unique(to_explore.begin(),to_explore.end()),to_explore.end());
-  explored_vec.clear();
-  explored_vec.assign(to_explore.begin(),to_explore.end());
-  if(normalFormNeeded==false){
-    result_vec.insert(result_vec.end(),explored_vec.begin(),explored_vec.end());
-  }
+	 // to_explore.clear(); // Cleaning the to_explore bit to test out start fresh
 
-  // interesting_state_idx = 0;
-  goto loopReturn;
 
-  return NONE;
+	 /*
+		Starting the timer to check out how long it takes to run each iteration
+	 */
+
+	 std::chrono::time_point<std::chrono::high_resolution_clock> seq_start;
+
+	 /*
+		This is previous code to test, if we should explore the graph
+	 */
+
+	 ++exploreDepth;
+	 if (normalFormNeeded || branchNeeded)
+	    {
+	      /*
+	      	If we're looking for a state that has a certain number of successors we need to
+	      	search one level beyond maxDepth
+	      */
+	      if (maxDepth != NONE && exploreDepth > maxDepth){
+	      	return NONE;
+	      }
+	    }
+	 else
+	    {
+	      /*
+	      	Otherwise we just search to maxDepth (which will never be true if maxDepth == NONE).
+	      */
+	      if (exploreDepth == maxDepth){
+	        return NONE;
+	      }
+	    }
+
+
+	  printf("[GM] rewriteSequenceSearch::findNextInterestingState() .. just before pragma\n");
+
+	  /*
+		nrState: the number of current state in the graph -- used to check if new states are being created
+		firstDeeperNodeNr is the first nodeID of the next level, that ID node has not been created yet
+	  */
+
+	  firstDeeperNodeNr = getNrStates();
+	  int nrStates = getNrStates();
+
+	  /*Creating the data structure*/
+	  std::vector<std::vector<int>> thread_local_to_explore;
+  	  std::vector<std::vector<int>> thread_local_result_vec;
+
+	  /*
+		Initializing the local level thread storage
+		Note: This can be done in the constructor
+	  */
+
+	  int num_threads = omp_get_max_threads();
+	  thread_local_to_explore.resize(num_threads);
+	  thread_local_result_vec.resize(num_threads);
+
+	  /*
+		Pragma Code begins here
+	  */
+
+	   #pragma omp parallel private(explore,nextArc,returnedStateAlready,seq_start)
+	  {
+	  		int thread_id = omp_get_thread_num();
+
+	  		#pragma omp for 
+	  		for(int exp = 0; exp < explored_vec.size(); ++exp)
+	  		{
+	  			 seq_start = std::chrono::high_resolution_clock::now();
+
+	  			 /*
+	  			 	Node that we are exploring in the tree
+	  			 */
+
+	  			 explore = explored_vec[exp];
+
+	  			 printf("[GMDip] rewriteSequenceSearch::findNextInterestingState() Inside the for loop of thread_d: %d, exploring state: %d \n", thread_id,explore);
+
+	  			 nextArc = 0; // We set this to 0, and it will be incremented in the while loop
+
+	  			 int nextStateNr; // Store the ID of the next state 
+
+	  			 while ((nextStateNr = getNextState(explore, nextArc)) != NONE){
+
+	  			 	/*
+	  			 	This loop explores the node explore, and if we find new nodes it is added to the tree
+	  			 	*/
+	  			 	++nextArc; 
+
+	  			 	returnedStateAlready = nextStateNr >= nrStates ? false:true; // If its larger we have not returned the state
+
+	  			 	/*
+						thread_local_to_explore[] adds the next layer of state that has not been observed before. For the standard form, this will be returned.
+
+	  			 	*/
+	  			 	if(nextStateNr >= nrStates){
+	  			 		thread_local_to_explore[thread_id].push_back(nextStateNr);
+	  			 	}
+
+
+	  			 	if (normalFormNeeded){
+
+			                if (exploreDepth == maxDepth){
+			                	break;
+			                }
+		              }
+		            else if (branchNeeded){
+		            	if (!returnedStateAlready && nextArc >= 2 && nextStateNr != getNextState(explore, 0)) // Need this node being sent out to explore
+		                      {
+		                        returnedStateAlready = true;  // so we don't return the state again if we see another distinct next state
+		                        /*
+		                        We will add the values from the branch form and the normal form in result_vec, we should put everything to the result_vec
+		                        */
+		                        thread_local_result_vec[thread_id].push_back(explore);
+		                      }
+			            }
+
+	  			 }
+
+	  			 /*
+	  			 The while node exploration (while) loop ends here. 
+	  			 Now we will check if we were able to explore anything, especially for the normal form
+	  			 */
+	  			 if(normalFormNeeded && nextArc == 0){
+	  			 	nextArc = NONE;
+	  			 	thread_local_result_vec[thread_id].push_back(explore);
+	  			 }
+
+	  			 /*
+					Get the time of a single node exploration. This should not be impacted by threading.
+	  			 */
+	  			 std::chrono::time_point<std::chrono::high_resolution_clock> seq_end = std::chrono::high_resolution_clock::now();
+      			 std::chrono::nanoseconds::rep seq_duration = std::chrono::duration_cast<std::chrono::nanoseconds>(seq_end - seq_start).count();
+
+      			 printf("[GM] End of the exploration of state %d . Thread ID %d. Time: %lld\n",explore,thread_id,seq_duration);
+	  		} // for loop
+
+	  } // pragma
+
+	  /*
+		We end the pragma here. So this is a natural barrier to the code
+	  */
+
+	 explored_vec.clear();
+	 result_vec.clear();
+	 for(int i = 0; i < num_threads; i++) {
+
+		    explored_vec.insert(explored_vec.end(), thread_local_to_explore[i].begin(), thread_local_to_explore[i].end());
+		    result_vec.insert(result_vec.end(), thread_local_result_vec[i].begin(), thread_local_result_vec[i].end());	    
+		}
+
+	//Get the unique values
+	sort(explored_vec.begin(), explored_vec.end());
+	explored_vec.erase(unique(explored_vec.begin(),explored_vec.end()),explored_vec.end());
+	sort(result_vec.begin(), result_vec.end());
+	result_vec.erase(unique(result_vec.begin(),result_vec.end()),result_vec.end());
+
+	
+	if(explored_vec.size() == 0){
+		
+		if(!(normalFormNeeded ||branchNeeded)){
+			return NONE;
+		}
+		else{
+			interesting_state_idx = 0;
+			lastDepth = true;
+			goto BFSlevelComplete;
+		}
+	 }
+	else{
+		interesting_state_idx = 0;
+		goto BFSlevelComplete;
+	}
+
+	return NONE;
 }
-
 
 
 int

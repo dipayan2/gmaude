@@ -74,6 +74,7 @@ private:
   bool reachingInitialStateOK;
   bool normalFormNeeded;
   bool branchNeeded;
+  bool lastDepth;
   MatchSearchState* matchState;
   int stateNr;
 };
