@@ -1,0 +1,31 @@
+fmod BIT is
+    sort Bit .
+    ops 0 1 : -> Bit [ctor] .
+endfm
+
+view Bit from TRIV to BIT is
+    sort Elt to Bit .
+endv
+
+mod BIT-NUMBER is
+    protecting LIST{Bit} * (sort List{Bit} to BitWord, sort NeList{Bit} to NeBitWord) .
+
+    *** This is the initial word, all zeros
+    op init : -> NeBitWord .
+    eq init = (0 0 0 0 0) .
+
+    *** BitWord builder, gien a number N returns a bitword of N zeros
+    op zeros : Nat -> NeBitWord .
+    var N : Nat .
+    eq zeros(0) = nil .
+    eq zeros(s(N)) = zeros(N) 0 .
+
+    vars LB1 LB2 : BitWord .
+    rl [0-2-1] : LB1 0 LB2 => LB1 1 LB2 .
+    rl [1-2-0] : LB1 1 LB2 => LB1 0 LB2 .
+endm
+
+*** Search all possible numbers with 4 bits
+search zeros(4) =>* B:BitWord .
+*** Seatch all possible numbers with 32 bits
+search zeros(32) =>* B:BitWord .
