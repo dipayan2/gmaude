@@ -1,0 +1,294 @@
+*** Specification of the MQTT protocol
+*** Author: Víctor García Valero <vicgarval@upv.es> <vicgarv2@illinois.edu>
+
+*** Support views & modules
+
+view Oid from TRIV to CONFIGURATION is
+    sort Elt to Oid .
+endv
+
+fmod MAYBE{X :: TRIV} is
+    sort Maybe{X} .
+    subsort X$Elt < Maybe{X} .
+    op nothing : -> Maybe{X} [ctor] .
+endfm
+
+fmod MQTT-CMD{D :: TRIV} is
+    including SET{String} .
+    including QID .
+    
+    ***
+    *** Commands
+    ***
+
+    *** CONNECT
+    op connect : Qid -> D$Elt [ctor] .
+
+    *** CONNACK
+    op connack : -> D$Elt [ctor] .
+
+    *** SUBSCRIBE
+    op subscribe : Set{String} -> D$Elt [ctor] .
+
+    *** SUBACK
+    op suback : String -> D$Elt [ctor] .
+
+    *** UNSUBSCRIBE (topics)
+    op unsubscribe : Set{String} -> D$Elt [ctor] .
+
+    *** UNSUBACK
+    op unsuback : String -> D$Elt [ctor] .
+
+    *** PUBLISH (topic, msg)
+    op publish : String String -> D$Elt [ctor] .
+
+    *** PUBACK (topic)
+    op puback : String -> D$Elt [ctor] .
+
+    *** DISCONNECT
+    op disconnect : -> D$Elt [ctor] .
+endfm
+
+omod MQTT-BASE{D :: TRIV} is
+    including MQTT-CMD{D} .
+    including MAYBE{String} .
+    including SET{Oid} .
+    including SET{Nat} .
+    including LIST{Nat} .
+    including COUNTER .
+    including QID .
+
+    sort Payload .
+    subsort D$Elt < Payload .
+
+    *** We set all Qids to be Oids
+    subsort Qid < Oid .
+
+    *** Message definition
+    msg to_from_:_ : Oid Oid Payload -> Msg .
+endom
+
+omod MQTT-BROKER{D :: TRIV} is
+    extending MQTT-BASE{D} .
+    including MAP{String, Set{Oid}} * (op _|->_ to _|->>_) .
+
+    class MqttBroker | peers : Set{Oid}, subscribers : Map{String,Set{Oid}} .
+
+    var Me O : Oid . var Atrs : AttributeSet .
+    var M : Msg . 
+    vars Ms Ms' : Msg .
+    var Ps Psub : Set{Oid} . 
+    vars IdC : String .
+    var Subs : Map{String, Set{Oid}} . vars T V : String . var Ts : Set{String} .
+    var Body : String .
+
+    *** Constructor of brokers
+    op newMqttBroker : Oid -> Object .
+    eq newMqttBroker(Me) =
+        < Me : MqttBroker |
+            peers : empty,
+            subscribers : empty > .
+
+    rl [mqtt/B/accept-connect] : 
+        < Me : MqttBroker | peers : Ps, Atrs > (to Me from O : connect(Me)) 
+        =>
+        < Me : MqttBroker | peers : insert(O, Ps), Atrs > (to O from Me : connack) .
+
+    rl [mqtt/B/accept-subscribe] : 
+        < Me : MqttBroker | peers : (O, Ps), subscribers : Subs, Atrs > (to Me from O : subscribe(Ts))
+        =>
+        < Me : MqttBroker | peers : (O, Ps), subscribers : $registerSub(Ts, O, Subs), Atrs > $suback(Me,O,Ts) .
+
+    *** Function to register a subscriber to a set of topic. If there is no existing
+    *** entry in the map then insert into map, otherwise first insert the Oid to the set 
+    *** of Oids existing in the map and then insert into map. When no more topics return map.
+    op $registerSub : Set{String} Oid Map{String, Set{Oid}} -> Map{String, Set{Oid}} .
+    eq $registerSub((T,Ts),O,Subs) =    if Subs[T] == undefined 
+                                        then $registerSub(Ts,O,insert(T,O,Subs))
+                                        else $registerSub(Ts,O,insert(T,insert(O,Subs[T]),Subs)) fi .
+    eq $registerSub(empty,O,Subs) = Subs .
+
+    *** Function to create suback to O from Me with the subscribed topics
+    op $suback : Oid Oid Set{String} -> Configuration .
+    eq $suback(Me,O,(T,Ts)) = (to O from Me : suback(T)) $suback(Me,O,Ts) .
+    eq $suback(Me,O,empty) = none .
+
+    rl [mqtt/B/accept-unsubscribe] : 
+        < Me : MqttBroker | peers : (O, Ps), subscribers : Subs, Atrs > (to Me from O : unsubscribe(Ts))
+        =>
+        < Me : MqttBroker | peers : (O, Ps), subscribers : $unregisterSub(Ts, O, Subs), Atrs > $unsuback(Me,O,Ts) .
+
+    *** Function to delete a subscirber of a set of topics.
+    op $unregisterSub : Set{String} Oid Map{String, Set{Oid}} -> Map{String, Set{Oid}} .
+    eq $unregisterSub((T,Ts),O,Subs) =  if Subs[T] == undefined 
+                                        then $unregisterSub(Ts,O,Subs)
+                                        else $unregisterSub(Ts,O,insert(T,delete(O,Subs[T]),Subs)) fi .
+    eq $unregisterSub(empty,O,Subs) = Subs .
+
+    *** Function to create unsuback to O from Me with the unsubscribed topics
+    op $unsuback : Oid Oid Set{String} -> Configuration .
+    eq $unsuback(Me,O,(T,Ts)) = (to O from Me : unsuback(T)) $unsuback(Me,O,Ts) .
+    eq $unsuback(Me,O,empty) = none .
+
+    *** Publish fromm a conncected client
+    rl [mqtt/B/publish] :
+        < Me : MqttBroker | peers : (O,Ps), subscribers : ((T |->> Psub),Subs), Atrs > (to Me from O : publish(T,V))
+        =>
+        < Me : MqttBroker | peers : (O,Ps), subscribers : ((T |->> Psub),Subs), Atrs > $broadcast(Me,Psub,T,V) (to O from Me : puback(T)) .
+
+    *** Broadcast publish messages to Psub from Me on topic T with body V
+    op $broadcast : Oid Set{Oid} String String -> Configuration .
+    eq $broadcast(Me,(O,Psub),T,V) = (to O from Me : publish(T,V)) $broadcast(Me,Psub,T,V) .
+    eq $broadcast(Me,empty,T,V) = none .
+
+    *** Disconnect to a broker
+    rl [mqtt/B/disconnect] :
+        < Me : MqttBroker | peers : (O, Ps), subscribers : Subs, Atrs > (to Me from O : disconnect)
+        =>
+        < Me : MqttBroker | peers : Ps, subscribers : $purge(O,Subs), Atrs > .
+
+    *** Remove the Oid from all entries in the topic to set of Oids map
+    op $purge : Oid Map{String,Set{Oid}} -> Map{String,Set{Oid}} .
+    eq $purge(O,((T |->> Ps), Subs)) = (T |->> delete(O,Ps), $purge(O,Subs)) .
+    eq $purge(O, empty) = empty .
+endom
+
+omod MQTT-CLIENT{D :: TRIV} is
+    extending MQTT-BASE{D} .
+    including MAYBE{Oid} .
+    including MAP{String, String} .
+    protecting LIST{D} * (sort List{D} to CommandList, op nil to skip, op __ to _;_) .
+
+    *** Class definition for Clients in MQTT.
+    *** Peer: Oid of the broker the client is connected to.
+    *** cmdList: list of commands to send to the broker.
+    *** lastRecv: map that stores the last received value of a topic.
+    class MqttClient | peer : Maybe{Oid}, cmdList : CommandList, lastRecv : Map{String,String} .
+
+    vars Me O B P : Oid . 
+    var Atrs : AttributeSet .
+    vars M Ms Ms' : Msg . 
+    var CMD : D$Elt . var CMDL : CommandList .
+    vars T V : String . var Ts : Set{String} . var L : Map{String, String} .
+    var Body : String .
+
+    *** Constructor of clients
+    op newMqttClient : Oid Oid CommandList -> Object .
+    eq newMqttClient(Me, B, CMDL) =
+        < Me : MqttClient |
+            peer : nothing,
+            cmdList : (connect(B) ; CMDL),
+            lastRecv : empty > .
+
+    *** Send connect
+    rl [mqtt/C/send-connect] :
+        < Me : MqttClient | peer : nothing, cmdList : connect(B) ; CMDL, Atrs >
+        =>
+        < Me : MqttClient | peer : nothing, cmdList : CMDL, Atrs > (to B from Me : connect(B)) .
+
+    *** Receive connack
+    rl [mqtt/C/recv-connack] : 
+        < Me : MqttClient | peer : nothing, Atrs > (to Me from O : connack)
+        =>
+        < Me : MqttClient | peer : O, Atrs > .
+
+    *** Apply command
+    crl [mqtt/C/apply-cmd] :
+        < Me : MqttClient | peer : O, cmdList : (CMD ; CMDL), Atrs >
+        =>
+        < Me : MqttClient | peer : O, cmdList : CMDL, Atrs > (to O from Me : CMD)
+        if O =/= nothing /\ CMD =/= disconnect .
+    
+    *** Receive suback
+    *** NOTE: Ideally we would set to udnefined the value of the key since no last message has been received.
+    *** In case of generalizing we must place a default element of the expected value type
+    rl [mqtt/C/recv-suback] : 
+        < Me : MqttClient | peer : O, lastRecv : L, Atrs > (to Me from O : suback(T))
+        =>
+        < Me : MqttClient | peer : O, lastRecv : insert(T,"",L), Atrs > .
+
+    *** Receive unsuback
+    rl [mqtt/C/recv-unsuback] : 
+        < Me : MqttClient | peer : O, lastRecv : (T |-> V,L), Atrs > (to Me from O : unsuback(T))
+        =>
+        < Me : MqttClient | peer : O, lastRecv : L, Atrs > .
+
+    *** Receive publish of a topic
+    rl [mqtt/C/recv-publish] :
+        < Me : MqttClient | peer : O, lastRecv : L, Atrs > (to Me from O : publish(T,V))
+        =>
+        < Me : MqttClient | peer : O, lastRecv : insert(T,V,L), Atrs > .
+
+    *** Recieve publish acknowledgment on a topic
+    rl [mqtt/C/recv-puback] :
+        < Me : MqttClient | peer : O, Atrs > (to Me from O : puback(T))
+        =>
+        < Me : MqttClient | peer : O, Atrs > .
+
+    *** Apply command disconnect
+    crl [mqtt/C/disconnect] : 
+        < Me : MqttClient | peer : O, cmdList : (CMD ; CMDL), Atrs >
+        =>
+        < Me : MqttClient | peer : nothing, cmdList : CMDL, Atrs > (to O from Me : CMD)
+        if O =/= nothing /\ CMD == disconnect .
+endom
+
+omod SENSOR{D :: TRIV} is
+    protecting MQTT-BASE{D} .
+    protecting RANDOM .
+    protecting CONVERSION .
+
+    class MqttSensor | broker : Oid, time : NzNat, period : NzNat, topic : String, count : Nat .
+
+    vars Me BR : Oid .
+    vars T P : NzNat .
+    var N : Nat .
+    var TPC : String .
+    var Atts : AttributeSet .
+
+    *** Constructor
+    op newMqttSensor : Oid Oid Nat String -> Object .
+    eq newMqttSensor(Me, BR, T, TPC) = < Me : MqttSensor | broker : BR, time : T, period : T, topic : TPC, count : 0 > (to BR from Me : connect(BR)) .
+
+    *** Rule to decrease time
+    rl  < Me : MqttSensor | period : s(P), Atts >
+        =>
+        < Me : MqttSensor | period : P, Atts > .
+
+    *** Periodic rule to publish
+    rl  < Me : MqttSensor | broker : BR, count : N, time : T, period : 1, topic : TPC >
+        =>
+        < Me : MqttSensor | broker : BR, count : s(N), time : T, period : T, topic : TPC > (to BR from Me : publish(TPC, string((random(N) rem 51), 10))) .
+
+    *** Clean messages
+    rl  < Me : MqttSensor | Atts > (to Me from BR : C:D$Elt)
+        =>
+        < Me : MqttSensor | Atts > .
+endom
+
+omod MQTT{D :: TRIV} is
+    protecting MQTT-BROKER{D} .
+    protecting MQTT-CLIENT{D} .
+    protecting SENSOR{D} .
+endom
+
+*** Module for testing purposes
+mod MAIN is
+    protecting MQTT{String} .
+endm
+
+*** Look for states where temperature is abnormaly high (>100ºC)
+search [,40] newMqttClient('c1,'b,subscribe("temp")) 
+        newMqttBroker('b) 
+        newMqttSensor('s,'b,5,"temp")
+        newMqttClient('c2,'b,subscribe(("speed")) ; publish("temp","34") ; unsubscribe(("speed")))
+        =>*
+        C:Configuration < 'c1 : MqttClient | lastRecv : "temp" |-> Te:String, Atts:AttributeSet > 
+        such that (rat(Te:String,10) > 100) .
+
+eof 
+
+frew    newMqttClient('c1,'b,subscribe("temp")) 
+        newMqttBroker('b) 
+        newMqttSensor('s,'b,5,"temp")
+        newMqttClient('c2,'b,subscribe(("speed")) ; publish("temp","34") ; unsubscribe(("speed"))) .
