@@ -1,0 +1,14 @@
+{
+    "files.watcherExclude": {
+        "**/target": true
+    },
+    "files.associations": {
+        "ostream": "cpp",
+        "vector": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "string": "cpp",
+        "array": "cpp"
+    }
+}

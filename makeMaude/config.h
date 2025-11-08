@@ -8,13 +8,13 @@
 /* #undef COMPILER */
 
 /* enable Darwin specific fixes */
-/* #undef DARWIN */
+#define DARWIN /**/
 
 /* include dump code */
 /* #undef DUMP */
 
 /* have conditional move instruction */
-#define HAVE_CMOV /**/
+/* #undef HAVE_CMOV */
 
 /* Define to 1 if you have the <ctype.h> header file. */
 #define HAVE_CTYPE_H 1
@@ -44,7 +44,7 @@
 /* #undef HAVE_OSTREAM_H */
 
 /* use ppoll() */
-#define HAVE_PPOLL /**/
+/* #undef HAVE_PPOLL */
 
 /* Define to 1 if you have the <stddef.h> header file. */
 #define HAVE_STDDEF_H 1
