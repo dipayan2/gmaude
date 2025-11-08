@@ -25,7 +25,7 @@ mod BIT-NUMBER is
     rl [1-2-0] : LB1 1 LB2 => LB1 0 LB2 .
 endm
 
-*** Search all possible numbers with 4 bits
-search zeros(4) =>* B:BitWord .
+*** Search all possible numbers with 12 bits
+search zeros(12) =>* B:BitWord .
 *** Seatch all possible numbers with 32 bits
-search zeros(32) =>* B:BitWord .
+***search zeros(32) =>* B:BitWord .
