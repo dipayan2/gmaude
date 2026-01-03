@@ -137,10 +137,10 @@
 /* #undef USE_CVC4 */
 
 /* use libsigsegv to handle segmentation faults */
-#define USE_LIBSIGSEGV /**/
+/* #undef USE_LIBSIGSEGV */
 
 /* use Tecla command line editing library */
-#define USE_TECLA /**/
+/* #undef USE_TECLA */
 
 /* use Yices2 SMT solver library */
 #define USE_YICES2 /**/

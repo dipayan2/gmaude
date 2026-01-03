@@ -19,33 +19,33 @@ Grammar
     8     | command
     9     | CHANGE_FILE
 
-   10 $@1: ε
+   10 $@1: %empty
 
    11 directive: KW_IN $@1 FILE_NAME_STRING
 
-   12 $@2: ε
+   12 $@2: %empty
 
    13 directive: KW_LOAD $@2 FILE_NAME_STRING
 
-   14 $@3: ε
+   14 $@3: %empty
 
    15 directive: KW_SLOAD $@3 FILE_NAME_STRING
    16          | KW_PWD
 
-   17 $@4: ε
+   17 $@4: %empty
 
    18 directive: KW_CD $@4 FILE_NAME_STRING
 
-   19 $@5: ε
+   19 $@5: %empty
 
    20 directive: KW_PUSHD $@5 FILE_NAME_STRING
    21          | KW_POPD
 
-   22 $@6: ε
+   22 $@6: %empty
 
    23 directive: KW_LS $@6 UNINTERPRETED_STRING
 
-   24 $@7: ε
+   24 $@7: %empty
 
    25 directive: KW_LL $@7 UNINTERPRETED_STRING
    26          | KW_QUIT
@@ -82,9 +82,9 @@ Grammar
    48 instantArgs: instantArgs ',' viewExpr
    49            | viewExpr
 
-   50 $@8: ε
+   50 $@8: %empty
 
-   51 $@9: ε
+   51 $@9: %empty
 
    52 renaming: '(' $@8 renaming2 $@9 ')'
 
@@ -97,42 +97,42 @@ Grammar
    57 mapping: KW_SORT sortName KW_TO sortName
    58        | KW_LABEL token KW_TO token
 
-   59 $@10: ε
+   59 $@10: %empty
 
-   60 $@11: ε
+   60 $@11: %empty
 
    61 mapping: KW_OP $@10 fromSpec KW_TO $@11 toAttributes
 
-   62 $@12: ε
+   62 $@12: %empty
 
    63 mapping: KW_STRAT stratName $@12 fromStratSpec KW_TO stratName
    64        | KW_CLASS sortName KW_TO sortName
 
-   65 $@13: ε
+   65 $@13: %empty
 
    66 mapping: KW_ATTR token $@13 fromAttrSpec KW_TO token
 
-   67 $@14: ε
+   67 $@14: %empty
 
-   68 $@15: ε
+   68 $@15: %empty
 
    69 mapping: KW_MSG $@14 fromSpec KW_TO $@15 toAttributes
 
-   70 $@16: ε
+   70 $@16: %empty
 
    71 fromSpec: ':' $@16 typeList arrow typeName
-   72         | ε
+   72         | %empty
 
    73 fromAttrSpec: ':' typeName1
-   74             | ε
+   74             | %empty
 
    75 fromStratSpec: stratSignature
-   76              | ε
+   76              | %empty
 
-   77 $@17: ε
+   77 $@17: %empty
 
    78 toAttributes: '[' $@17 toAttributeList ']'
-   79             | ε
+   79             | %empty
 
    80 toAttributeList: toAttributeList toAttribute
    81                | toAttribute
@@ -140,47 +140,47 @@ Grammar
    82 toAttribute: KW_PREC IDENTIFIER
    83            | KW_PREC
 
-   84 $@18: ε
+   84 $@18: %empty
 
    85 toAttribute: KW_GATHER '(' $@18 idList ')'
    86            | KW_GATHER
 
-   87 $@19: ε
+   87 $@19: %empty
 
    88 toAttribute: KW_FORMAT '(' $@19 idList ')'
    89            | KW_FORMAT
 
-   90 $@20: ε
+   90 $@20: %empty
 
    91 toAttribute: KW_LATEX '(' $@20 LATEX_STRING ')'
    92            | KW_LATEX
 
-   93 $@21: ε
+   93 $@21: %empty
 
-   94 $@22: ε
+   94 $@22: %empty
 
    95 view: KW_VIEW $@21 token $@22 parameters KW_FROM moduleExpr KW_TO moduleExpr expectedIs viewDecList KW_ENDV
 
    96 viewDecList: viewDecList viewDeclaration
-   97            | ε
+   97            | %empty
 
    98 skipStrayArrow: KW_ARROW
-   99               | ε
+   99               | %empty
 
   100 viewDeclaration: KW_SORT sortName KW_TO sortDot
   101                | KW_VAR varNameList ':' skipStrayArrow typeDot
 
-  102 $@23: ε
+  102 $@23: %empty
 
   103 viewDeclaration: KW_OP $@23 viewEndOpMap
   104                | KW_STRAT viewStratMap
   105                | KW_CLASS sortName KW_TO sortDot
 
-  106 $@24: ε
+  106 $@24: %empty
 
   107 viewDeclaration: KW_ATTR token $@24 fromAttrSpec KW_TO token expectedDot
 
-  108 $@25: ε
+  108 $@25: %empty
 
   109 viewDeclaration: KW_MSG $@25 endMsgMap
   110                | error '.'
@@ -190,50 +190,50 @@ Grammar
   113 sortDot: sortName expectedDot
   114        | tokenDot
 
-  115 $@26: ε
+  115 $@26: %empty
 
-  116 $@27: ε
+  116 $@27: %empty
 
   117 viewEndOpMap: ':' $@26 typeList arrow typeName KW_TO $@27 endBubble
 
-  118 $@28: ε
+  118 $@28: %empty
 
   119 viewEndOpMap: KW_TO $@28 endBubble
 
-  120 $@29: ε
+  120 $@29: %empty
 
-  121 $@30: ε
+  121 $@30: %empty
 
   122 endMsgMap: ':' $@29 typeList arrow typeName KW_TO $@30 endBubble
 
-  123 $@31: ε
+  123 $@31: %empty
 
   124 endMsgMap: KW_TO $@31 endBubble
 
   125 strategyCall: stratName
 
-  126 $@32: ε
+  126 $@32: %empty
 
   127 strategyCall: stratName '(' $@32 ')'
 
-  128 $@33: ε
+  128 $@33: %empty
 
   129 viewStratMap: stratName $@33 stratSignature KW_TO stratName '.'
 
-  130 $@34: ε
+  130 $@34: %empty
 
   131 viewStratMap: strategyCall KW_TO $@34 endBubble
 
   132 endBubble: '.'
   133          | tokenDot
 
-  134 $@35: ε
+  134 $@35: %empty
 
   135 parenBubble: '(' $@35 ')'
 
-  136 $@36: ε
+  136 $@36: %empty
 
-  137 $@37: ε
+  137 $@37: %empty
 
   138 module: KW_MOD $@36 token $@37 parameters expectedIs decList KW_ENDM
 
@@ -241,7 +241,7 @@ Grammar
   140    | tokenDot
 
   141 parameters: '{' parameterList '}'
-  142           | ε
+  142           | %empty
 
   143 parameterList: parameterList ',' parameter
   144              | parameter
@@ -257,102 +257,102 @@ Grammar
   150        | badType
 
   151 decList: decList declaration
-  152        | ε
+  152        | %empty
 
   153 declaration: KW_IMPORT moduleExprDot
 
-  154 $@38: ε
+  154 $@38: %empty
 
   155 declaration: KW_SORT $@38 endSortNameList
 
-  156 $@39: ε
+  156 $@39: %empty
 
   157 declaration: KW_SUBSORT $@39 endSubsortList
 
-  158 $@40: ε
+  158 $@40: %empty
 
-  159 $@41: ε
+  159 $@41: %empty
 
   160 declaration: KW_OP $@40 ':' $@41 domainRangeAttr
   161            | KW_OPS opNameList ':' domainRangeAttr
   162            | KW_VAR varNameList ':' skipStrayArrow typeDot
 
-  163 $@42: ε
+  163 $@42: %empty
 
-  164 $@43: ε
+  164 $@43: %empty
 
   165 declaration: KW_MB $@42 ':' $@43 endBubble
 
-  166 $@44: ε
+  166 $@44: %empty
 
-  167 $@45: ε
+  167 $@45: %empty
 
-  168 $@46: ε
+  168 $@46: %empty
 
   169 declaration: KW_CMB $@44 ':' $@45 KW_IF $@46 endBubble
 
-  170 $@47: ε
+  170 $@47: %empty
 
-  171 $@48: ε
+  171 $@48: %empty
 
   172 declaration: KW_EQ $@47 '=' $@48 endBubble
 
-  173 $@49: ε
+  173 $@49: %empty
 
-  174 $@50: ε
+  174 $@50: %empty
 
-  175 $@51: ε
+  175 $@51: %empty
 
   176 declaration: KW_CEQ $@49 '=' $@50 KW_IF $@51 endBubble
 
-  177 $@52: ε
+  177 $@52: %empty
 
-  178 $@53: ε
+  178 $@53: %empty
 
   179 declaration: KW_RL $@52 KW_ARROW2 $@53 endBubble
 
-  180 $@54: ε
+  180 $@54: %empty
 
-  181 $@55: ε
+  181 $@55: %empty
 
-  182 $@56: ε
+  182 $@56: %empty
 
   183 declaration: KW_CRL $@54 KW_ARROW2 $@55 KW_IF $@56 endBubble
 
-  184 $@57: ε
+  184 $@57: %empty
 
-  185 $@58: ε
+  185 $@58: %empty
 
   186 declaration: KW_SD $@57 KW_ASSIGN $@58 endBubble
 
-  187 $@59: ε
+  187 $@59: %empty
 
-  188 $@60: ε
+  188 $@60: %empty
 
-  189 $@61: ε
+  189 $@61: %empty
 
   190 declaration: KW_CSD $@59 KW_ASSIGN $@60 KW_IF $@61 endBubble
 
-  191 $@62: ε
+  191 $@62: %empty
 
   192 declaration: stratDeclKeyword $@62 stratIdList stratSignature stratAttributes dot
 
-  193 $@63: ε
+  193 $@63: %empty
 
-  194 $@64: ε
+  194 $@64: %empty
 
   195 declaration: KW_MSG $@63 ':' $@64 domainRangeAttr
   196            | KW_MSGS opNameList ':' domainRangeAttr
   197            | KW_CLASS classDecl
 
-  198 $@65: ε
+  198 $@65: %empty
 
   199 declaration: KW_SUBCLASS $@65 endSubsortList
   200            | error '.'
   201            | error END_OF_INPUT
   202            | error CHANGE_FILE
 
-  203 $@66: ε
+  203 $@66: %empty
 
   204 classDecl: sortName $@66 classDef
   205          | tokenDot
@@ -364,7 +364,7 @@ Grammar
   209          | attributeName typeName1Dot
 
   210 cPairList: cPairList cPair ','
-  211          | ε
+  211          | %empty
 
   212 cPair: attributeName ':' typeName1
   213      | attributeName typeName1
@@ -394,12 +394,12 @@ Grammar
   229               | ':' typeList '@' typeName
 
   230 stratAttributes: '[' stratAttrList ']'
-  231                | ε
+  231                | %empty
 
   232 stratAttrList: KW_METADATA IDENTIFIER
 
   233 skipStrayColon: ':'
-  234               | ε
+  234               | %empty
 
   235 dra2: skipStrayColon rangeAttr
   236     | '.'
@@ -414,7 +414,7 @@ Grammar
   242      | KW_PARTIAL
 
   243 typeList: typeList typeName
-  244         | ε
+  244         | %empty
 
   245 typeName1: sortName
   246          | kind
@@ -423,13 +423,13 @@ Grammar
   248             | tokenDot
   249             | kind expectedDot
 
-  250 $@67: ε
+  250 $@67: %empty
 
   251 kind: '[' $@67 sortNames ']'
 
   252 typeName: sortName
 
-  253 $@68: ε
+  253 $@68: %empty
 
   254 typeName: '[' $@68 sortNames ']'
 
@@ -437,7 +437,7 @@ Grammar
   256          | sortName
 
   257 attributes: '[' attributeList ']'
-  258           | ε
+  258           | %empty
 
   259 attributeList: attributeList attribute
   260              | attribute
@@ -449,7 +449,7 @@ Grammar
   264 attribute: KW_ASSOC
   265          | KW_COMM
 
-  266 $@69: ε
+  266 $@69: %empty
 
   267 attribute: idKeyword $@69 identity
   268          | KW_IDEM
@@ -457,27 +457,27 @@ Grammar
   270          | KW_PREC IDENTIFIER
   271          | KW_PREC
 
-  272 $@70: ε
+  272 $@70: %empty
 
   273 attribute: KW_GATHER '(' $@70 idList ')'
   274          | KW_GATHER
 
-  275 $@71: ε
+  275 $@71: %empty
 
   276 attribute: KW_FORMAT '(' $@71 idList ')'
   277          | KW_FORMAT
 
-  278 $@72: ε
+  278 $@72: %empty
 
   279 attribute: KW_STRAT '(' $@72 idList ')'
   280          | KW_STRAT
 
-  281 $@73: ε
+  281 $@73: %empty
 
   282 attribute: KW_ASTRAT '(' $@73 idList ')'
   283          | KW_ASTRAT
 
-  284 $@74: ε
+  284 $@74: %empty
 
   285 attribute: KW_POLY '(' $@74 idList ')'
   286          | KW_POLY
@@ -485,7 +485,7 @@ Grammar
   288          | KW_CTOR
   289          | KW_FROZEN
 
-  290 $@75: ε
+  290 $@75: %empty
 
   291 attribute: KW_FROZEN '(' $@75 idList ')'
   292          | KW_CONFIG
@@ -494,7 +494,7 @@ Grammar
   295          | KW_PORTAL
   296          | KW_METADATA IDENTIFIER
 
-  297 $@76: ε
+  297 $@76: %empty
 
   298 attribute: KW_LATEX '(' $@76 LATEX_STRING ')'
   299          | KW_LATEX
@@ -503,7 +503,7 @@ Grammar
   302          | KW_PCONST
 
   303 identity: FORCE_LOOKAHEAD
-  304         | ε
+  304         | %empty
 
   305 idList: idList IDENTIFIER
   306       | IDENTIFIER
@@ -517,10 +517,10 @@ Grammar
   312     | KW_TERM_HOOK token parenBubble
 
   313 expectedIs: KW_IS
-  314           | ε
+  314           | %empty
 
   315 expectedDot: '.'
-  316            | ε
+  316            | %empty
 
   317 sortNameList: sortNameList sortName
   318             | sortName
@@ -537,11 +537,11 @@ Grammar
 
   325 sortNameFrag: sortToken
 
-  326 $@77: ε
+  326 $@77: %empty
 
   327 sortNameFrag: sortNameFrag '{' $@77 sortNameFrags '}'
 
-  328 $@78: ε
+  328 $@78: %empty
 
   329 sortNameFrags: sortNameFrags ',' $@78 sortNameFrag
   330              | sortNameFrag
@@ -685,175 +685,175 @@ Grammar
   460 endsInDot: '.'
   461          | ENDS_IN_DOT
 
-  462 $@79: ε
+  462 $@79: %empty
 
   463 command: KW_SELECT $@79 endBubble
 
-  464 $@80: ε
+  464 $@80: %empty
 
   465 command: KW_DUMP $@80 endBubble
 
-  466 $@81: ε
+  466 $@81: %empty
 
   467 command: KW_PARSE $@81 moduleAndTerm
 
-  468 $@82: ε
+  468 $@82: %empty
 
   469 command: KW_CREDUCE $@82 moduleAndTerm
 
-  470 $@83: ε
+  470 $@83: %empty
 
   471 command: KW_SREDUCE $@83 moduleAndTerm
 
-  472 $@84: ε
+  472 $@84: %empty
 
   473 command: optDebug KW_REDUCE $@84 moduleAndTerm
 
-  474 $@85: ε
+  474 $@85: %empty
 
   475 command: optDebug KW_REWRITE $@85 numberModuleTerm
 
-  476 $@86: ε
+  476 $@86: %empty
 
   477 command: optDebug KW_EREWRITE $@86 numbersModuleTerm
 
-  478 $@87: ε
+  478 $@87: %empty
 
   479 command: optDebug KW_FREWRITE $@87 numbersModuleTerm
 
-  480 $@88: ε
+  480 $@88: %empty
 
   481 command: optDebug KW_SREWRITE $@88 numberModuleTerm
 
-  482 $@89: ε
+  482 $@89: %empty
 
   483 command: optDebug KW_DSREWRITE $@89 numberModuleTerm
 
-  484 $@90: ε
+  484 $@90: %empty
 
   485 command: KW_CHECK $@90 moduleAndTerm
 
-  486 $@91: ε
+  486 $@91: %empty
 
   487 command: optDebug search $@91 numbersModuleTerm
 
-  488 $@92: ε
+  488 $@92: %empty
 
   489 command: optDebug optOptions KW_VU_NARROW $@92 optionsNumbersModuleTerm
 
-  490 $@93: ε
+  490 $@93: %empty
 
   491 command: match $@93 numberModuleTerm
 
-  492 $@94: ε
+  492 $@94: %empty
 
   493 command: optIrredundant KW_UNIFY $@94 numberModuleTerm
 
-  494 $@95: ε
+  494 $@95: %empty
 
   495 command: optDebug KW_VARIANT KW_UNIFY $@95 numberModuleTerm
 
-  496 $@96: ε
+  496 $@96: %empty
 
   497 command: optDebug KW_FILTERED KW_VARIANT KW_UNIFY $@96 numberModuleTerm
 
-  498 $@97: ε
+  498 $@97: %empty
 
   499 command: optDebug KW_VARIANT KW_MATCH $@97 numberModuleTerm
 
-  500 $@98: ε
+  500 $@98: %empty
 
   501 command: optDebug KW_GET optIrredundant KW_VARIANTS $@98 numberModuleTerm
   502        | optDebug KW_CONTINUE optNumber '.'
 
-  503 $@99: ε
+  503 $@99: %empty
 
   504 command: KW_TEST $@99 moduleAndTerm
 
-  505 $@100: ε
+  505 $@100: %empty
 
   506 command: KW_LOOP $@100 moduleAndTerm
   507        | parenBubble
 
-  508 $@101: ε
+  508 $@101: %empty
 
   509 command: KW_TRACE select $@101 opSelect
 
-  510 $@102: ε
+  510 $@102: %empty
 
   511 command: KW_TRACE exclude $@102 opSelect
 
-  512 $@103: ε
+  512 $@103: %empty
 
   513 command: KW_BREAK select $@103 opSelect
 
-  514 $@104: ε
+  514 $@104: %empty
 
   515 command: KW_PRINT conceal $@104 opSelect
 
-  516 $@105: ε
+  516 $@105: %empty
 
   517 command: KW_DO KW_CLEAR KW_MEMO $@105 endBubble
 
-  518 $@106: ε
+  518 $@106: %empty
 
   519 command: KW_SHOW kw_module $@106 endBubble
 
-  520 $@107: ε
+  520 $@107: %empty
 
   521 command: KW_SHOW KW_ALL $@107 endBubble
 
-  522 $@108: ε
+  522 $@108: %empty
 
   523 command: KW_SHOW KW_DESUGARED $@108 endBubble
 
-  524 $@109: ε
+  524 $@109: %empty
 
   525 command: KW_SHOW KW_VIEW $@109 endBubble
 
-  526 $@110: ε
+  526 $@110: %empty
 
   527 command: KW_SHOW KW_PROCESSED KW_VIEW $@110 endBubble
   528        | KW_SHOW KW_MODULES '.'
   529        | KW_SHOW KW_VIEWS '.'
 
-  530 $@111: ε
+  530 $@111: %empty
 
   531 command: KW_SHOW KW_SORTS $@111 endBubble
 
-  532 $@112: ε
+  532 $@112: %empty
 
   533 command: KW_SHOW KW_OPS2 $@112 endBubble
 
-  534 $@113: ε
+  534 $@113: %empty
 
   535 command: KW_SHOW KW_VARS $@113 endBubble
 
-  536 $@114: ε
+  536 $@114: %empty
 
   537 command: KW_SHOW KW_MBS $@114 endBubble
 
-  538 $@115: ε
+  538 $@115: %empty
 
   539 command: KW_SHOW KW_EQS $@115 endBubble
 
-  540 $@116: ε
+  540 $@116: %empty
 
   541 command: KW_SHOW KW_RLS $@116 endBubble
 
-  542 $@117: ε
+  542 $@117: %empty
 
   543 command: KW_SHOW KW_STRATS $@117 endBubble
 
-  544 $@118: ε
+  544 $@118: %empty
 
   545 command: KW_SHOW KW_SDS $@118 endBubble
 
-  546 $@119: ε
+  546 $@119: %empty
 
   547 command: KW_SHOW KW_SUMMARY $@119 endBubble
 
-  548 $@120: ε
+  548 $@120: %empty
 
   549 command: KW_SHOW KW_KINDS $@120 endBubble
   550        | KW_SHOW KW_PATH SIMPLE_NUMBER '.'
@@ -861,7 +861,7 @@ Grammar
   552        | KW_SHOW KW_PATH KW_LABEL SIMPLE_NUMBER '.'
   553        | KW_SHOW KW_SEARCH KW_GRAPH '.'
 
-  554 $@121: ε
+  554 $@121: %empty
 
   555 command: KW_SHOW KW_PROFILE $@121 endBubble
   556        | KW_SHOW KW_FRONTIER KW_STATE '.'
@@ -881,15 +881,15 @@ Grammar
   570        | KW_SET KW_TRACE traceOption polarityDot
   571        | KW_SET KW_BREAK polarityDot
 
-  572 $@122: ε
+  572 $@122: %empty
 
-  573 $@123: ε
+  573 $@123: %empty
 
   574 command: KW_SET importMode $@122 cSimpleTokenBarDot $@123 polarityDot
 
-  575 $@124: ε
+  575 $@124: %empty
 
-  576 $@125: ε
+  576 $@125: %empty
 
   577 command: KW_SET KW_OO KW_INCLUDE $@124 cSimpleTokenBarDot $@125 polarityDot
   578        | KW_SET KW_VERBOSE polarityDot
@@ -907,7 +907,7 @@ Grammar
   590        | KW_SET KW_GC KW_SHOW polarityDot
   591        | KW_SET KW_STATS polarityDot
 
-  592 $@126: ε
+  592 $@126: %empty
 
   593 command: error $@126 '.'
 
@@ -930,7 +930,7 @@ Grammar
   609            | KW_COMBINE KW_VARS
   610            | KW_LATEX
 
-  611 traceOption: ε
+  611 traceOption: %empty
   612            | KW_CONDITION
   613            | KW_WHOLE
   614            | KW_SUBSTITUTION
@@ -967,16 +967,16 @@ Grammar
   639      | KW_MATCH
 
   640 optDebug: KW_DEBUG
-  641         | ε
+  641         | %empty
 
   642 optIrredundant: KW_IRREDUNDANT
-  643               | ε
+  643               | %empty
 
   644 optNumber: SIMPLE_NUMBER
-  645          | ε
+  645          | %empty
 
   646 optOptions: '{' optionsList '}'
-  647           | ε
+  647           | %empty
 
   648 optionsList: option
   649            | optionsList ',' option
@@ -992,160 +992,160 @@ Grammar
 
   657 moduleAndTerm: initialEndBubble
 
-  658 $@127: ε
+  658 $@127: %empty
 
   659 moduleAndTerm: cTokenBarIn $@127 endBubble
 
-  660 $@128: ε
+  660 $@128: %empty
 
   661 inEnd: ':' $@128 endBubble
   662      | endBubble
 
-  663 $@129: ε
+  663 $@129: %empty
 
   664 numberModuleTerm: '[' $@129 numberModuleTerm1
   665                 | initialEndBubble
 
-  666 $@130: ε
+  666 $@130: %empty
 
   667 numberModuleTerm: cTokenBarLeftIn $@130 endBubble
 
-  668 $@131: ε
+  668 $@131: %empty
 
   669 numberModuleTerm1: NUMERIC_ID $@131 numberModuleTerm2
 
-  670 $@132: ε
+  670 $@132: %empty
 
   671 numberModuleTerm1: cTokenBarDotNumber $@132 endBubble
   672                  | miscEndBubble
 
-  673 $@133: ε
+  673 $@133: %empty
 
   674 numberModuleTerm2: ']' $@133 moduleAndTerm
 
-  675 $@134: ε
+  675 $@134: %empty
 
   676 numberModuleTerm2: cTokenBarDotRight $@134 endBubble
   677                  | miscEndBubble
 
-  678 $@135: ε
+  678 $@135: %empty
 
   679 optionsNumbersModuleTerm: '{' $@135 optionsNumbersModuleTerm1
 
-  680 $@136: ε
+  680 $@136: %empty
 
   681 optionsNumbersModuleTerm: '[' $@136 numbersModuleTerm1
   682                         | initialEndBubble
 
-  683 $@137: ε
+  683 $@137: %empty
 
   684 optionsNumbersModuleTerm: cTokenBarOpenLeftIn $@137 endBubble
 
-  685 $@138: ε
+  685 $@138: %empty
 
   686 optionsNumbersModuleTerm1: KW_FILTER $@138 optionsNumbersModuleTerm2
 
-  687 $@139: ε
+  687 $@139: %empty
 
   688 optionsNumbersModuleTerm1: KW_DELAY $@139 optionsNumbersModuleTerm2
 
-  689 $@140: ε
+  689 $@140: %empty
 
   690 optionsNumbersModuleTerm1: cTokenBarDotOptionToken $@140 endBubble
   691                          | miscEndBubble
 
   692 optionsNumbersModuleTerm2: '}' numbersModuleTerm
 
-  693 $@141: ε
+  693 $@141: %empty
 
   694 optionsNumbersModuleTerm2: ',' $@141 optionsNumbersModuleTerm1
 
-  695 $@142: ε
+  695 $@142: %empty
 
   696 optionsNumbersModuleTerm2: cTokenBarDotCommaClose $@142 endBubble
   697                          | miscEndBubble
 
-  698 $@143: ε
+  698 $@143: %empty
 
   699 numbersModuleTerm: '[' $@143 numbersModuleTerm1
   700                  | initialEndBubble
 
-  701 $@144: ε
+  701 $@144: %empty
 
   702 numbersModuleTerm: cTokenBarLeftIn $@144 endBubble
 
-  703 $@145: ε
+  703 $@145: %empty
 
   704 numbersModuleTerm1: NUMERIC_ID $@145 numbersModuleTerm2
 
-  705 $@146: ε
+  705 $@146: %empty
 
   706 numbersModuleTerm1: ',' $@146 numbersModuleTerm5
 
-  707 $@147: ε
+  707 $@147: %empty
 
   708 numbersModuleTerm1: cTokenBarDotCommaNumber $@147 endBubble
   709                   | miscEndBubble
 
-  710 $@148: ε
+  710 $@148: %empty
 
   711 numbersModuleTerm2: ']' $@148 moduleAndTerm
 
-  712 $@149: ε
+  712 $@149: %empty
 
   713 numbersModuleTerm2: ',' $@149 numbersModuleTerm3
 
-  714 $@150: ε
+  714 $@150: %empty
 
   715 numbersModuleTerm2: cTokenBarDotCommaRight $@150 endBubble
   716                   | miscEndBubble
 
-  717 $@151: ε
+  717 $@151: %empty
 
   718 numbersModuleTerm3: NUMERIC_ID $@151 numbersModuleTerm4
 
-  719 $@152: ε
+  719 $@152: %empty
 
   720 numbersModuleTerm3: cTokenBarDotNumber $@152 endBubble
   721                   | miscEndBubble
 
-  722 $@153: ε
+  722 $@153: %empty
 
   723 numbersModuleTerm4: ']' $@153 moduleAndTerm
 
-  724 $@154: ε
+  724 $@154: %empty
 
   725 numbersModuleTerm4: cTokenBarDotRight $@154 endBubble
   726                   | miscEndBubble
 
-  727 $@155: ε
+  727 $@155: %empty
 
   728 numbersModuleTerm5: NUMERIC_ID $@155 numbersModuleTerm6
 
-  729 $@156: ε
+  729 $@156: %empty
 
   730 numbersModuleTerm5: cTokenBarDotNumber $@156 endBubble
   731                   | miscEndBubble
 
-  732 $@157: ε
+  732 $@157: %empty
 
   733 numbersModuleTerm6: ']' $@157 moduleAndTerm
 
-  734 $@158: ε
+  734 $@158: %empty
 
   735 numbersModuleTerm6: cTokenBarDotRight $@158 endBubble
   736                   | miscEndBubble
 
-  737 $@159: ε
+  737 $@159: %empty
 
   738 miscEndBubble: '(' $@159 endBubble
   739              | endBubble
 
-  740 $@160: ε
+  740 $@160: %empty
 
   741 initialEndBubble: '(' $@160 endBubble
 
-  742 $@161: ε
+  742 $@161: %empty
 
   743 initialEndBubble: KW_IN $@161 inEnd
   744                 | ENDS_IN_DOT

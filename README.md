@@ -22,6 +22,30 @@ If you want Maude to close at the end you need to make sure that at the end of t
 4. Copy it to a new name `maude.mycopy` and then run `strip maude.mycopy`
 5. We can now look at some of the code flow and the file access
 
+# Build on Mac
+./configure \
+  CC=clang \
+  CXX=clang++ \
+  CXXFLAGS="-g -O0 -std=c++14 -Xpreprocessor -fopenmp" \
+  CFLAGS="-g -O0" \
+  CPPFLAGS="-I/opt/homebrew/include \
+            -I/usr/local/opt/libomp/include \
+            -I/usr/local/opt/libtecla/include \
+            -I/usr/local/opt/libsigsegv/include" \
+  LDFLAGS="-L/opt/homebrew/lib \
+           -L/usr/local/opt/libomp/lib \
+           -L/usr/local/opt/libtecla/lib \
+           -L/usr/local/opt/libsigsegv/lib \
+           -lomp" \
+  --with-gmp=/opt/homebrew \
+  --with-readline=/opt/homebrew \
+  --with-bdw-gc=/opt/homebrew \
+  --with-bdd=/opt/homebrew \
+  --with-tecla=/usr/local/opt/libtecla \
+  --with-libsigsegv=/usr/local/opt/libsigsegv \
+  --with-yices=/opt/homebrew
+
+
 # Run the resource stat script
 1. Go to the `gmaude` folder
 2. Run the script as `./runcmd.sh <dumpfile> <your commands>`

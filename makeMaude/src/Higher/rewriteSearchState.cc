@@ -73,7 +73,7 @@ RewriteSearchState::findNextRewrite()
       }
       rewriteSeenAtCurrentPosition = true;
     }
-  else // No ruleles applied
+  else // No rules applied
     {
       if (!findNextPosition()) // Explore
 	return false;

@@ -1,0 +1,4 @@
+unsat
+false
+sat
+(error "No model interpolant. The context is satisfiable")

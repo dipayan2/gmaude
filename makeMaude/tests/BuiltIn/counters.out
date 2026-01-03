@@ -185,9 +185,16 @@ rewrites: 13
 result List: 0 0 1 1 2 2 3 3
 ==========================================
 search in COUNTER-TEST4 : f(4) =>* L:List .
-[GM] Hash This is called at the initiation of a state Graph Hash Val : 3532671126103885163
+[GM] Init 3532671126103885163
+[GM] rewriteSequenceSearch::findNextInterestingState()
+[GM] rewriteSequenceSearch::findNextMatch, Interesting state : 0 
+[GM] rewriteSequenceSearch::findNextInterestingState()
+[GM] rewriteSequenceSearch::findNextInterestingState() .. just before pragma
+[GMDip] rewriteSequenceSearch::findNextInterestingState() Inside the for loop of thread_d: 0, exploring state: 0 
 [GM 1] (getNextState): Analyzing the DAG The stateNr 0, index: 0 , initial states count 0
 [GM2] Check if we can access the seen graph status, seen size 1
+[GM] End of the exploration of state 0 . Thread ID 0. Time: 18875
+[GM] rewriteSequenceSearch::findNextMatch, Interesting state : -1 
 
 No solution.
 states: 1  rewrites: 5
